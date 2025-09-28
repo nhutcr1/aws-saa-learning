@@ -1,0 +1,12 @@
+[
+{{- range $index, $page := .Pages -}}
+  {{- if $index}},{{end -}}
+  {
+    "id": {{ $page.File.BaseFileName | jsonify }},
+    "title": {{ $page.Title | jsonify }},
+    "question": {{ $page.Params.question | jsonify }},
+    "options": {{ $page.Params.options | jsonify }},
+    "answer": {{ $page.Params.answer }}
+  }
+{{- end -}}
+]
