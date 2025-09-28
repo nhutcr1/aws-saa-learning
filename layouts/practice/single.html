@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Practice Test</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h2>Practice Test</h2>
+  <div id="exam-container"></div>
+  <div id="progress"></div>
+  <button onclick="nextQuestion()">Next</button>
+
+  <script>
+  let examQuestions = [];
+  let currentIndex = 0;
+  let score = 0;
+
+  async function loadExam() {
+    let res = await fetch("/questions/index.json");
+    let questions = await res.json();
+
+    // Random 150 câu
+    let shuffled = questions.sort(() => 0.5 - Math.random());
+    examQuestions = shuffled.slice(0, 150);
+
+    showQuestion();
+  }
+
+  function showQuestion() {
+    if (currentIndex >= examQuestions.length) {
+      document.getElementById("exam-container").innerHTML =
+        `<h3>Kết quả: ${score} / ${examQuestions.length}</h3>`;
+      document.getElementById("progress").innerHTML = "";
+      return;
+    }
+
+    let q = examQuestions[currentIndex];
+    let html = `<h3>Câu ${currentIndex+1} / ${examQuestions.length}</h3>
+                <p>${q.question}</p>`;
+    q.options.forEach((opt, i) => {
+      html += `<label>
+        <input type="radio" name="ans" value="${i}"> ${opt}
+      </label><br>`;
+    });
+    document.getElementById("exam-container").innerHTML = html;
+    document.getElementById("progress").innerHTML =
+      `Tiến độ: ${currentIndex+1} / ${examQuestions.length}`;
+  }
+
+  function nextQuestion() {
+    let selected = document.querySelector('input[name="ans"]:checked');
+    if (!selected) {
+      alert("Bạn phải chọn đáp án trước khi tiếp tục!");
+      return;
+    }
+    if (parseInt(selected.value) === examQuestions[currentIndex].answer) {
+      score++;
+    }
+    currentIndex++;
+    showQuestion();
+  }
+
+  // Khởi động bài thi khi load trang
+  loadExam();
+  </script>
+</body>
+</html>
