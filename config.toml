@@ -1,7 +1,7 @@
 baseURL = "https://aws-saa-learning.pages.dev/"   # thay bằng domain Cloudflare Pages
 languageCode = "en-us"
 title = "My LMS Hugo"
-theme = ""  # nếu dùng theme ngoài thì điền tên ở đây
+# theme = ""
 
 # cho phép tạo JSON output cho questions
 [outputs]
