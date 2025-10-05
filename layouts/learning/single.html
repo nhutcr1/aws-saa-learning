@@ -11,6 +11,7 @@
   <button onclick="loadRandom()">Next Question</button>
 
   <script>
+  loadRandom();
   async function loadRandom() {
     let res = await fetch("/questions/index.json");
     let questions = await res.json();
