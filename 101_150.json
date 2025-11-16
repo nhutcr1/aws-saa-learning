@@ -1,0 +1,1144 @@
+[
+  {
+    "id": 1101,
+    "q": "What is the maximum write throughput I can provision for a single Dynamic DB table?",
+    "o": [
+      {
+        "c": "1,000 write capacity units.",
+        "a": "no"
+      },
+      {
+        "c": "100,000 write capacity units.",
+        "a": "no"
+      },
+      {
+        "c": "Dynamic DB is designed to scale without limits, but if you go beyond 10,000 you have to contact AWS first.",
+        "a": "yes"
+      },
+      {
+        "c": "10,000 write capacity units.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Dynamic DB is designed to scale without limits, but if you go beyond 10,000 you have to contact AWS first.\". Explanation: This option is correct because DynamoDB is a managed, horizontally scalable NoSQL database; write throughput can scale virtually without hard limits. AWS recommends contacting support if you need to provision very high capacity (>10,000 WCU) to coordinate partitioning and capacity planning. Incorrect option: \"1,000 write capacity units.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"100,000 write capacity units.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"10,000 write capacity units.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1102,
+    "q": "Do Amazon EBS volumes persist independently from the running life of an Amazon EC2 instance?",
+    "o": [
+      {
+        "c": "Yes, they do but only if they are detached from the instance.",
+        "a": "no"
+      },
+      {
+        "c": "No, you cannot attach EBS volumes to an instance.",
+        "a": "no"
+      },
+      {
+        "c": "No, they are dependent.",
+        "a": "no"
+      },
+      {
+        "c": "Yes, they do.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"Yes, they do.\". Explanation: This option is correct because EBS volumes are network-attached block storage that persist independently of the EC2 instance lifecycle when not deleted on termination. Incorrect option: \"Yes, they do but only if they are detached from the instance.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"No, you cannot attach EBS volumes to an instance.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"No, they are dependent.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1103,
+    "q": "What is a Security Group?",
+    "o": [
+      {
+        "c": "None of these.",
+        "a": "no"
+      },
+      {
+        "c": "A list of users that can access Amazon EC2 instances.",
+        "a": "no"
+      },
+      {
+        "c": "An Access Control List (ACL) for AWS resources.",
+        "a": "no"
+      },
+      {
+        "c": "A firewall for inbound traffic, built-in around every Amazon EC2 instance.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"A firewall for inbound traffic, built-in around every Amazon EC2 instance.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"None of these.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"A list of users that can access Amazon EC2 instances.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"An Access Control List (ACL) for AWS resources.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1104,
+    "q": "You need to set up a high level of security for an Amazon Relational Database Service (RDS) you have just built in order to protect the confidential information stored in it. What are all the possible security groups that RDS uses?",
+    "o": [
+      {
+        "c": "DB security groups, VPC security groups, and EC2 security groups.",
+        "a": "yes"
+      },
+      {
+        "c": "DB security groups only.",
+        "a": "no"
+      },
+      {
+        "c": "EC2 security groups only.",
+        "a": "no"
+      },
+      {
+        "c": "VPC security groups, and EC2 security groups.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"DB security groups, VPC security groups, and EC2 security groups.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"DB security groups only.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"EC2 security groups only.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"VPC security groups, and EC2 security groups.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1105,
+    "q": "In the 'Detailed' monitoring data available for your Amazon EBS volumes, Provisioned IOPS volumes automatically send [...] minute metrics to Amazon CloudWatch.",
+    "o": [
+      {
+        "c": "3.",
+        "a": "no"
+      },
+      {
+        "c": "1.",
+        "a": "yes"
+      },
+      {
+        "c": "5.",
+        "a": "no"
+      },
+      {
+        "c": "2.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"1.\". Explanation: This option is correct because CloudWatch aggregates basic metrics at a one-minute minimum interval by default; detailed monitoring can provide faster intervals. Incorrect option: \"3.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"5.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"2.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1106,
+    "q": "You are looking at ways to improve some existing infrastructure as it seems a lot of engineering resources are being taken up with basic management and monitoring tasks and the costs seem to be excessive. You are thinking of deploying Amazon ElasticCache to help. Which of the following statements is true in regards to ElasticCache?",
+    "o": [
+      {
+        "c": "You can improve load and response times to user actions and queries however the cost associated with scaling web applications will be more.",
+        "a": "no"
+      },
+      {
+        "c": "You can't improve load and response times to user actions and queries but you can reduce the cost associated with scaling web applications.",
+        "a": "no"
+      },
+      {
+        "c": "You can improve load and response times to user actions and queries however the cost associated with scaling web applications will remain the same.",
+        "a": "no"
+      },
+      {
+        "c": "You can improve load and response times to user actions and queries and also reduce the cost associated with scaling web applications.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"You can improve load and response times to user actions and queries and also reduce the cost associated with scaling web applications.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"You can improve load and response times to user actions and queries however the cost associated with scaling web applications will be more.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"You can't improve load and response times to user actions and queries but you can reduce the cost associated with scaling web applications.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"You can improve load and response times to user actions and queries however the cost associated with scaling web applications will remain the same.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1107,
+    "q": "A customer needs corporate IT governance and cost oversight of all AWS resources consumed by its divisions. The divisions want to maintain administrative control of the discrete AWS resources they consume and keep those resources separate from the resources of other divisions. Which of the following options, when used together will support the autonomy/control of divisions while enabling corporate IT to maintain governance and cost oversight? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Use AWS Consolidated Billing and disable AWS root account access for the child accounts.",
+        "a": "no"
+      },
+      {
+        "c": "Enable IAM cross-account access for all corporate IT administrators in each child account.",
+        "a": "no"
+      },
+      {
+        "c": "Create separate VPCs for each division within the corporate IT AWS account.",
+        "a": "no"
+      },
+      {
+        "c": "Use AWS Consolidated Billing to link the divisions' accounts to a parent corporate account.",
+        "a": "yes"
+      },
+      {
+        "c": "Write all child AWS CloudTrail and Amazon CloudWatch logs to each child account's Amazon S3 'Log' bucket.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"Use AWS Consolidated Billing to link the divisions' accounts to a parent corporate account.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Correct answer: \"Write all child AWS CloudTrail and Amazon CloudWatch logs to each child account's Amazon S3 'Log' bucket.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Use AWS Consolidated Billing and disable AWS root account access for the child accounts.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Enable IAM cross-account access for all corporate IT administrators in each child account.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Create separate VPCs for each division within the corporate IT AWS account.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1108,
+    "q": "After creating a new IAM user which of the following must be done before they can successfully make API calls?",
+    "o": [
+      {
+        "c": "Add a password to the user.",
+        "a": "no"
+      },
+      {
+        "c": "Enable Multi-Factor Authentication for the user.",
+        "a": "no"
+      },
+      {
+        "c": "Assign a Password Policy to the user.",
+        "a": "no"
+      },
+      {
+        "c": "Create a set of Access Keys for the user.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"Create a set of Access Keys for the user.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Add a password to the user.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Enable Multi-Factor Authentication for the user.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Assign a Password Policy to the user.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1109,
+    "q": "A friend wants you to set up a small BitTorrent storage area for him on Amazon S3. You tell him it is highly unlikely that AWS would allow such a thing in their infrastructure. However you decide to investigate. Which of the following statements best describes using BitTorrent with Amazon S3?",
+    "o": [
+      {
+        "c": "Amazon S3 does not support the BitTorrent protocol because it is used for pirated software.",
+        "a": "no"
+      },
+      {
+        "c": "You can use the BitTorrent protocol but only for objects that are less than 100 GB in size.",
+        "a": "no"
+      },
+      {
+        "c": "You can use the BitTorrent protocol but you need to ask AWS for specific permissions first.",
+        "a": "no"
+      },
+      {
+        "c": "You can use the BitTorrent protocol but only for objects that are less than 5 GB in size.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"You can use the BitTorrent protocol but only for objects that are less than 5 GB in size.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Amazon S3 does not support the BitTorrent protocol because it is used for pirated software.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"You can use the BitTorrent protocol but only for objects that are less than 100 GB in size.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"You can use the BitTorrent protocol but you need to ask AWS for specific permissions first.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1110,
+    "q": "IAM's Policy Evaluation Logic always starts with a default [...] for every request, except for those that use the AWS account's root security credentials?",
+    "o": [
+      {
+        "c": "Permit.",
+        "a": "no"
+      },
+      {
+        "c": "Deny.",
+        "a": "yes"
+      },
+      {
+        "c": "Cancel.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Deny.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Permit.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Cancel.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1111,
+    "q": "You have been given a scope to deploy some AWS infrastructure for a large organization. The requirements are that you will have a lot of EC2 instances but may need to add more when the average utilization of your Amazon EC2 fleet is high and conversely remove them when CPU utilization is low. Which AWS services would be best to use to accomplish this?",
+    "o": [
+      {
+        "c": "Auto Scaling, Amazon CloudWatch and AWS Elastic Beanstalk.",
+        "a": "no"
+      },
+      {
+        "c": "Auto Scaling, Amazon CloudWatch and Elastic Load Balancing.",
+        "a": "yes"
+      },
+      {
+        "c": "Amazon CloudFront, Amazon CloudWatch and Elastic Load Balancing.",
+        "a": "no"
+      },
+      {
+        "c": "AWS Elastic Beanstalk, Amazon CloudWatch and Elastic Load Balancing.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Auto Scaling, Amazon CloudWatch and Elastic Load Balancing.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Auto Scaling, Amazon CloudWatch and AWS Elastic Beanstalk.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Amazon CloudFront, Amazon CloudWatch and Elastic Load Balancing.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"AWS Elastic Beanstalk, Amazon CloudWatch and Elastic Load Balancing.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1112,
+    "q": "When does the billing of an Amazon EC2 system begin?",
+    "o": [
+      {
+        "c": "It starts when the Status column for your distribution changes from Creating to Deployed.",
+        "a": "no"
+      },
+      {
+        "c": "It starts as soon as you click the create instance option on the main EC2 console.",
+        "a": "no"
+      },
+      {
+        "c": "It starts when your instance reaches 720 instance hours.",
+        "a": "no"
+      },
+      {
+        "c": "It starts when Amazon EC2 initiates the boot sequence of an AMI instance.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"It starts when Amazon EC2 initiates the boot sequence of an AMI instance.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"It starts when the Status column for your distribution changes from Creating to Deployed.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"It starts as soon as you click the create instance option on the main EC2 console.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"It starts when your instance reaches 720 instance hours.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1113,
+    "q": "A user is storing a large number of objects on AWS S3. The user wants to implement the search functionality among the objects. How can the user achieve this?",
+    "o": [
+      {
+        "c": "Use the indexing feature of S3.",
+        "a": "no"
+      },
+      {
+        "c": "Tag the objects with the metadata to search on that.",
+        "a": "no"
+      },
+      {
+        "c": "Use the query functionality of S3.",
+        "a": "no"
+      },
+      {
+        "c": "Make your own DB system which stores the S3 metadata for the search functionality.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"Make your own DB system which stores the S3 metadata for the search functionality.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Use the indexing feature of S3.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Tag the objects with the metadata to search on that.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use the query functionality of S3.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1114,
+    "q": "A corporate web application is deployed within an Amazon Virtual Private Cloud (VPC) and is connected to the corporate data center via an IPsec VPN. The application must authenticate against the on-premises LDAP server. After authentication, each logged-in user can only access an Amazon Simple Storage Space (S3) keyspace specific to that user. Which two approaches can satisfy these objectives? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Develop an identity broker that authenticates against IAM security Token service to assume an IAM role in order to get temporary AWS security credentials. The application calls the identity broker to get AWS temporary security credentials with access to the appropriate S3 bucket.",
+        "a": "no"
+      },
+      {
+        "c": "The application authenticates against LDAP and retrieves the name of an IAM role associated with the user. The application then calls the IAM Security Token Service to assume that IAM role. The application can use the temporary credentials to access the appropriate S3 bucket.",
+        "a": "yes"
+      },
+      {
+        "c": "Develop an identity broker that authenticates against LDAP and then calls IAM Security Token Service to get IAM federated user credentials. The application calls the identity broker to get IAM federated user credentials with access to the appropriate S3 bucket.",
+        "a": "yes"
+      },
+      {
+        "c": "The application authenticates against LDAP. The application then calls the AWS identity and Access Management (IAM) Security service to log in to IAM using the LDAP credentials. The application can use the IAM temporary credentials to access the appropriate S3 bucket.",
+        "a": "no"
+      },
+      {
+        "c": "The application authenticates against IAM Security Token Service using the LDAP credentials. The application uses those temporary AWS security credentials to access the appropriate S3 bucket.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"The application authenticates against LDAP and retrieves the name of an IAM role associated with the user. The application then calls the IAM Security Token Service to assume that IAM role. The application can use the temporary credentials to access the appropriate S3 bucket.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Correct answer: \"Develop an identity broker that authenticates against LDAP and then calls IAM Security Token Service to get IAM federated user credentials. The application calls the identity broker to get IAM federated user credentials with access to the appropriate S3 bucket.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Develop an identity broker that authenticates against IAM security Token service to assume an IAM role in order to get temporary AWS security credentials. The application calls the identity broker to get AWS temporary security credentials with access to the appropriate S3 bucket.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"The application authenticates against LDAP. The application then calls the AWS identity and Access Management (IAM) Security service to log in to IAM using the LDAP credentials. The application can use the IAM temporary credentials to access the appropriate S3 bucket.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"The application authenticates against IAM Security Token Service using the LDAP credentials. The application uses those temporary AWS security credentials to access the appropriate S3 bucket.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1115,
+    "q": "A group can contain many users. Can a user belong to multiple groups?",
+    "o": [
+      {
+        "c": "Yes always.",
+        "a": "yes"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      },
+      {
+        "c": "Yes but only if they are using two factor authentication.",
+        "a": "no"
+      },
+      {
+        "c": "Yes but only in VPC.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Yes always.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"No.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Yes but only if they are using two factor authentication.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Yes but only in VPC.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1116,
+    "q": "Does Dynamo DB support in-place atomic updates?",
+    "o": [
+      {
+        "c": "It is not defined.",
+        "a": "no"
+      },
+      {
+        "c": "Yes.",
+        "a": "yes"
+      },
+      {
+        "c": "It does support in-place non-atomic updates.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Yes.\". Explanation: This option is correct because DynamoDB is a managed, horizontally scalable NoSQL database; write throughput can scale virtually without hard limits. AWS recommends contacting support if you need to provision very high capacity (>10,000 WCU) to coordinate partitioning and capacity planning. Incorrect option: \"It is not defined.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"It does support in-place non-atomic updates.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1117,
+    "q": "Can you move a Reserved Instance from one Availability Zone to another?",
+    "o": [
+      {
+        "c": "Yes, but each Reserved Instance is associated with a specific Region that cannot be changed.",
+        "a": "yes"
+      },
+      {
+        "c": "Yes, only in US-West-2.",
+        "a": "no"
+      },
+      {
+        "c": "Yes, only in US-East-1.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Yes, but each Reserved Instance is associated with a specific Region that cannot be changed.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Yes, only in US-West-2.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Yes, only in US-East-1.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"No.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1118,
+    "q": "You want to establish a dedicated network connection from your premises to AWS in order to save money by transferring data directly to AWS rather than through your internet service provider. You are sure there must be some other benefits beyond cost savings. Which of the following statements would be the best choice to put your client's mind at rest?",
+    "o": [
+      {
+        "c": "Different instances running on the same physical machine are isolated from each other via a 256-bit Advanced Encryption Standard (AES-256).",
+        "a": "no"
+      },
+      {
+        "c": "Different instances running on the same physical machine are isolated from each other via the Xen hypervisor and via a 256-bit Advanced Encryption Standard (AES-256).",
+        "a": "no"
+      },
+      {
+        "c": "Different instances running on the same physical machine are isolated from each other via the Xen hypervisor.",
+        "a": "yes"
+      },
+      {
+        "c": "Different instances running on the same physical machine are isolated from each other via IAM permissions.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Different instances running on the same physical machine are isolated from each other via the Xen hypervisor.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Different instances running on the same physical machine are isolated from each other via a 256-bit Advanced Encryption Standard (AES-256).\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Different instances running on the same physical machine are isolated from each other via the Xen hypervisor and via a 256-bit Advanced Encryption Standard (AES-256).\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Different instances running on the same physical machine are isolated from each other via IAM permissions.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1119,
+    "q": "Can I detach the primary (ethO) network interface when the instance is running or stopped?",
+    "o": [
+      {
+        "c": "Yes, You can.",
+        "a": "no"
+      },
+      {
+        "c": "No. You cannot.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"No. You cannot.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Yes, You can.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1120,
+    "q": "You have launched an Amazon Elastic Compute Cloud (EC2) instance into a public subnet with a primary private I P address assigned, an internet gateway is attached to the VPC, and the public route table is configured to send all Internet-based traffic to the Internet gateway. The instance security group is set to allow all outbound traffic but cannot access the internet. Why is the Internet unreachable from this instance?",
+    "o": [
+      {
+        "c": "The instance does not have a public IP address.",
+        "a": "yes"
+      },
+      {
+        "c": "The internet gateway security group must allow all outbound traffic.",
+        "a": "no"
+      },
+      {
+        "c": "The instance security group must allow all inbound traffic.",
+        "a": "no"
+      },
+      {
+        "c": "The instance 'Source/Destination check' property must be enabled.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"The instance does not have a public IP address.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"The internet gateway security group must allow all outbound traffic.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"The instance security group must allow all inbound traffic.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"The instance 'Source/Destination check' property must be enabled.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1121,
+    "q": "Which of the following statements best describes the differences between Elastic Beanstalk and CloudFormation?",
+    "o": [
+      {
+        "c": "Elastic Beanstalk uses Elastic load balancing and CloudFormation doesn't.",
+        "a": "no"
+      },
+      {
+        "c": "CloudFormation is faster in deploying applications than Elastic Beanstalk.",
+        "a": "no"
+      },
+      {
+        "c": "Elastic Beanstalk is faster in deploying applications than CloudFormation.",
+        "a": "no"
+      },
+      {
+        "c": "CloudFormation is much more powerful than Elastic Beanstalk, because you can actually design and script custom resources.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"CloudFormation is much more powerful than Elastic Beanstalk, because you can actually design and script custom resources.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Elastic Beanstalk uses Elastic load balancing and CloudFormation doesn't.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"CloudFormation is faster in deploying applications than Elastic Beanstalk.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Elastic Beanstalk is faster in deploying applications than CloudFormation.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1122,
+    "q": "It is advised that you watch the Amazon CloudWatch [...] metric (available via the AWS Management Console or Amazon Cloud Watch APIs) carefully and recreate the Read Replica should it fall behind due to replication errors.",
+    "o": [
+      {
+        "c": "Write Lag.",
+        "a": "no"
+      },
+      {
+        "c": "Read Replica.",
+        "a": "no"
+      },
+      {
+        "c": "Replica Lag.",
+        "a": "yes"
+      },
+      {
+        "c": "Single Replica.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Replica Lag.\". Explanation: This option is correct because CloudWatch aggregates basic metrics at a one-minute minimum interval by default; detailed monitoring can provide faster intervals. Incorrect option: \"Write Lag.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Read Replica.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Single Replica.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1123,
+    "q": "Your application provides data transformation services. Files containing data to be transformed are first uploaded to Amazon S3 and then transformed by a fleet of spot EC2 instances. Fi les submitted by your premium customers must be transformed with the highest priority. How should you implement such a system?",
+    "o": [
+      {
+        "c": "Use a DynamoDB table with an attribute defining the priority level. Transformation instances will scan the table for tasks, sorting the results by priority level.",
+        "a": "no"
+      },
+      {
+        "c": "Use Route 53 latency based-routing to send high priority tasks to the closest transformation instances.",
+        "a": "no"
+      },
+      {
+        "c": "Use two SQS queues, one for high priority messages, the other for default priority. Transformation instances first poll the high priority queue; if there is no message, they poll the default priority queue.",
+        "a": "yes"
+      },
+      {
+        "c": "Use a single SQS queue. Each message contains the priority level. Transformation instances poll high-priority messages first.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Use two SQS queues, one for high priority messages, the other for default priority. Transformation instances first poll the high priority queue; if there is no message, they poll the default priority queue.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Use a DynamoDB table with an attribute defining the priority level. Transformation instances will scan the table for tasks, sorting the results by priority level.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use Route 53 latency based-routing to send high priority tasks to the closest transformation instances.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use a single SQS queue. Each message contains the priority level. Transformation instances poll high-priority messages first.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1124,
+    "q": "True or False: When you view the block device mapping for your instance, you can see only the EBS volumes, not the instance store volumes.",
+    "o": [
+      {
+        "c": "Depends on the instance type.",
+        "a": "no"
+      },
+      {
+        "c": "False.",
+        "a": "no"
+      },
+      {
+        "c": "Depends on whether you use API call.",
+        "a": "no"
+      },
+      {
+        "c": "True.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"True.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Depends on the instance type.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"False.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Depends on whether you use API call.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1125,
+    "q": "Does AWS CloudFormation support Amazon EC2 tagging?",
+    "o": [
+      {
+        "c": "Yes, AWS CloudFormation supports Amazon EC2 tagging.",
+        "a": "yes"
+      },
+      {
+        "c": "No, CloudFormation doesn't support any tagging.",
+        "a": "no"
+      },
+      {
+        "c": "No, it doesn't support Amazon EC2 tagging.",
+        "a": "no"
+      },
+      {
+        "c": "It depends if the Amazon EC2 tagging has been defined in the template.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Yes, AWS CloudFormation supports Amazon EC2 tagging.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"No, CloudFormation doesn't support any tagging.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"No, it doesn't support Amazon EC2 tagging.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"It depends if the Amazon EC2 tagging has been defined in the template.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1126,
+    "q": "If I modify a DB Instance or the DB parameter group associated with the instance, should I reboot the instance for the changes to take effect?",
+    "o": [
+      {
+        "c": "Yes.",
+        "a": "yes"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Yes.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"No.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1127,
+    "q": "If you are using Amazon RDS Provisioned IOPS storage with MySQL and Oracle database engines, you can scale the throughput of your database Instance by specifying the IOPS rate from [...].",
+    "o": [
+      {
+        "c": "1,000 to 100,000.",
+        "a": "no"
+      },
+      {
+        "c": "100 to 1,000.",
+        "a": "no"
+      },
+      {
+        "c": "10,000 to 100,000.",
+        "a": "no"
+      },
+      {
+        "c": "1,000 to 10,000.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"1,000 to 10,000.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"1,000 to 100,000.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"100 to 1,000.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"10,000 to 100,000.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1128,
+    "q": "To specify a resource in a policy statement, in Amazon EC2, can you use its Amazon Resource Name (ARN)?",
+    "o": [
+      {
+        "c": "Yes, you can.",
+        "a": "yes"
+      },
+      {
+        "c": "No, you can't because EC2 is not related to AR",
+        "a": "no"
+      },
+      {
+        "c": "No, you can't because you can't specify a particular Amazon EC2 resource in an IAM policy.",
+        "a": "no"
+      },
+      {
+        "c": "Yes, you can but only for the resources that are not affected by the action.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Yes, you can.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"No, you can't because EC2 is not related to AR\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"No, you can't because you can't specify a particular Amazon EC2 resource in an IAM policy.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Yes, you can but only for the resources that are not affected by the action.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1129,
+    "q": "An enterprise wants to use a third-party SaaS application. The SaaS application needs to have access to issue several API commands to discover Amazon EC2 resources running within the enterprise's account The enterprise has internal security policies that require any outside access to their environment must conform to the principles of least privilege and there must be controls in place to ensure that the credentials used by the 5aa5 vendor cannot be used by any other third party. Which of the following would meet all of these conditions?",
+    "o": [
+      {
+        "c": "From the AWS Management Console, navigate to the Security Credentials page and retrieve the access and secret key for your account.",
+        "a": "no"
+      },
+      {
+        "c": "Create an IAM user within the enterprise account assign a user policy to the IAM user that allows only the actions required by the SaaS application create a new access and secret key for the user and provide these credentials to the 5aa5 provider.",
+        "a": "no"
+      },
+      {
+        "c": "Create an IAM role for cross-account access allows the SaaS provider's account to assume the role and assign it a policy that allows only the actions required by the SaaS application.",
+        "a": "yes"
+      },
+      {
+        "c": "Create an IAM role for EC2 instances, assign it a policy that allows only the actions required for the SaaS application to work. Provide the role ARN to the SaaS provider to use when launching their application instances.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Create an IAM role for cross-account access allows the SaaS provider's account to assume the role and assign it a policy that allows only the actions required by the SaaS application.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"From the AWS Management Console, navigate to the Security Credentials page and retrieve the access and secret key for your account.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Create an IAM user within the enterprise account assign a user policy to the IAM user that allows only the actions required by the SaaS application create a new access and secret key for the user and provide these credentials to the 5aa5 provider.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Create an IAM role for EC2 instances, assign it a policy that allows only the actions required for the SaaS application to work. Provide the role ARN to the SaaS provider to use when launching their application instances.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1130,
+    "q": "By default what are ENIs that are automatically created and attached to instances using the EC2 console set to do when the attached instance terminates?",
+    "o": [
+      {
+        "c": "Remain as is.",
+        "a": "no"
+      },
+      {
+        "c": "Terminate.",
+        "a": "yes"
+      },
+      {
+        "c": "Hibernate.",
+        "a": "no"
+      },
+      {
+        "c": "Pause.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Terminate.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Remain as is.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Hibernate.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Pause.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1131,
+    "q": "In EC2, what happens to the data in an instance store if an instance reboots (either intentionally or unintentionally)?",
+    "o": [
+      {
+        "c": "Data is deleted from the instance store for security reasons.",
+        "a": "no"
+      },
+      {
+        "c": "Data persists in the instance store.",
+        "a": "yes"
+      },
+      {
+        "c": "Data is partially present in the instance store.",
+        "a": "no"
+      },
+      {
+        "c": "Data in the instance store will be lost.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Data persists in the instance store.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Data is deleted from the instance store for security reasons.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Data is partially present in the instance store.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Data in the instance store will be lost.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1132,
+    "q": "You are designing a social media site and are considering how to mitigate distributed denial-of service (DDoS) attacks. Which of the below are viable mitigation techniques? (Choose 3 answers)",
+    "o": [
+      {
+        "c": "Add multiple elastic network interfaces (ENis) to each EC2 instance to increase the network bandwidth.",
+        "a": "no"
+      },
+      {
+        "c": "Use dedicated instances to ensure that each instance has the maximum performance possible.",
+        "a": "no"
+      },
+      {
+        "c": "Use an Amazon CloudFront distribution for both static and dynamic content.",
+        "a": "yes"
+      },
+      {
+        "c": "Use an Elastic Load Balancer with auto scaling groups at the web. App and Amazon Relational Database Service (RDS) tiers.",
+        "a": "yes"
+      },
+      {
+        "c": "Add alert Amazon CloudWatch to look for high Network in and CPU utilization.",
+        "a": "yes"
+      },
+      {
+        "c": "Create processes and capabilities to quickly add and remove rules to the instance OS firewall.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Use an Amazon CloudFront distribution for both static and dynamic content.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Correct answer: \"Use an Elastic Load Balancer with auto scaling groups at the web. App and Amazon Relational Database Service (RDS) tiers.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Correct answer: \"Add alert Amazon CloudWatch to look for high Network in and CPU utilization.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Add multiple elastic network interfaces (ENis) to each EC2 instance to increase the network bandwidth.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use dedicated instances to ensure that each instance has the maximum performance possible.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Create processes and capabilities to quickly add and remove rules to the instance OS firewall.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1133,
+    "q": "In Amazon CloudFront, if you use Amazon EC2 instances and other custom origins with CloudFront, it is recommended to [...].",
+    "o": [
+      {
+        "c": "not use Elastic Load Balancing.",
+        "a": "no"
+      },
+      {
+        "c": "restrict Internet communication to private instances while allowing outgoing traffic.",
+        "a": "no"
+      },
+      {
+        "c": "enable access key rotation for CloudWatch metrics.",
+        "a": "no"
+      },
+      {
+        "c": "specify the URL of the load balancer for the domain name of your origin server.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"specify the URL of the load balancer for the domain name of your origin server.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"not use Elastic Load Balancing.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"restrict Internet communication to private instances while allowing outgoing traffic.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"enable access key rotation for CloudWatch metrics.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1134,
+    "q": "Which of the following statements is true regarding attaching network interfaces to your instances in your VPC?",
+    "o": [
+      {
+        "c": "You can attach 5 ENIs per instance type.",
+        "a": "no"
+      },
+      {
+        "c": "You can attach as many ENIs as you want.",
+        "a": "no"
+      },
+      {
+        "c": "The number of ENIs you can attach varies by instance type.",
+        "a": "yes"
+      },
+      {
+        "c": "You can attach 100 ENIs total regardless of instance type.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"The number of ENIs you can attach varies by instance type.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"You can attach 5 ENIs per instance type.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"You can attach as many ENIs as you want.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"You can attach 100 ENIs total regardless of instance type.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1135,
+    "q": "What is the reason for this?",
+    "o": [
+      {
+        "c": "For security reasons.",
+        "a": "no"
+      },
+      {
+        "c": "Hardware restrictions.",
+        "a": "no"
+      },
+      {
+        "c": "Public (IPV4) internet addresses are a scarce resource.",
+        "a": "yes"
+      },
+      {
+        "c": "There are only 5 network interfaces per instance.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Public (IPV4) internet addresses are a scarce resource.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"For security reasons.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Hardware restrictions.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"There are only 5 network interfaces per instance.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1136,
+    "q": "Can a 'user' be associated with multiple AWS accounts?",
+    "o": [
+      {
+        "c": "Yes.",
+        "a": "yes"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Yes.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"No.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1137,
+    "q": "You have an application running on an Amazon Elastic Compute Cloud instance, that uploads 5 GB video objects to Amazon Simple Storage Service (S3). Video uploads are taking longer than expected, resulting in poor application performance. Which method will help improve performance of your application?",
+    "o": [
+      {
+        "c": "Enable enhanced networking.",
+        "a": "no"
+      },
+      {
+        "c": "Use Amazon S3 multipart upload.",
+        "a": "yes"
+      },
+      {
+        "c": "Leveraging Amazon CloudFront, use the HTTP POST method to reduce latency.",
+        "a": "no"
+      },
+      {
+        "c": "Use Amazon Elastic Block Store Provisioned IOPs and use an Amazon EBS-optimized instance.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Use Amazon S3 multipart upload.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Enable enhanced networking.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Leveraging Amazon CloudFront, use the HTTP POST method to reduce latency.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use Amazon Elastic Block Store Provisioned IOPs and use an Amazon EBS-optimized instance.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1138,
+    "q": "You have been given a scope to set up an AWS Media Sharing Framework for a new start up photo sharing company similar to flickr. The first thing that comes to mind about this is that it will obviously need a huge amount of persistent data storage for this framework. Which of the following storage options would be appropriate for persistent storage?",
+    "o": [
+      {
+        "c": "Amazon Glacier or Amazon S3.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Glacier or AWS Import/Export.",
+        "a": "no"
+      },
+      {
+        "c": "AWS Import/Export or Amazon CloudFront.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon EBS volumes or Amazon S3.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"Amazon EBS volumes or Amazon S3.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Amazon Glacier or Amazon S3.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Amazon Glacier or AWS Import/Export.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"AWS Import/Export or Amazon CloudFront.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1139,
+    "q": "You need a persistent and durable storage to trace call activity of an IVR (Interactive Voice Response) system. Call duration is mostly in the 2-3 minutes timeframe. Each traced call can be either active or terminated. An external application needs to know each minute the list of currently active calls, which are usually a few calls/second. Put once per month there is a periodic peak up to 1000 calls/second for a few hours. The system is open 24/7 and any downtime should be avoided. Historical data is periodically archived to files. Cost saving is a priority for this project. What database implementation would better fit this scenario, keeping costs as low as possible?",
+    "o": [
+      {
+        "c": "Use RDS Multi-AZ with two tables, one for 'Active calls' and one for 'Terminated calls'. in this way the 'Active calls' table is always small and effective to access.",
+        "a": "yes"
+      },
+      {
+        "c": "Use DynamoDB with a 'Calls' table and a Global Secondary Index on a 'lsActive' attribute that is present for active calls only in this way the Global Secondary index is sparse and more effective.",
+        "a": "no"
+      },
+      {
+        "c": "Use DynamoDB with a 'Calls' table and a Global secondary index on a 'State' attribute that can equal to 'active' or 'terminated' in this way the Global Secondary index can be used for all Items in the table.",
+        "a": "no"
+      },
+      {
+        "c": "Use RDS Multi-AZ with a 'CALLS' table and an Indexed 'STATE* field that can be equal to 'ACTIVE' or 'TERMINATED' in this way the SOL query Is optimized by the use of the Index.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Use RDS Multi-AZ with two tables, one for 'Active calls' and one for 'Terminated calls'. in this way the 'Active calls' table is always small and effective to access.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Use DynamoDB with a 'Calls' table and a Global Secondary Index on a 'lsActive' attribute that is present for active calls only in this way the Global Secondary index is sparse and more effective.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use DynamoDB with a 'Calls' table and a Global secondary index on a 'State' attribute that can equal to 'active' or 'terminated' in this way the Global Secondary index can be used for all Items in the table.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use RDS Multi-AZ with a 'CALLS' table and an Indexed 'STATE* field that can be equal to 'ACTIVE' or 'TERMINATED' in this way the SOL query Is optimized by the use of the Index.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1140,
+    "q": "If you have chosen Multi-AZ deployment, in the event of a planned or unplanned outage of your primary DB Instance, Amazon RDS automatically switches to the standby replica. The automatic failover mechanism simply changes the record of the main DB Instance to point to the standby DB Instance.",
+    "o": [
+      {
+        "c": "DNAME.",
+        "a": "no"
+      },
+      {
+        "c": "CNAME.",
+        "a": "yes"
+      },
+      {
+        "c": "TXT.",
+        "a": "no"
+      },
+      {
+        "c": "MX.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"CNAME.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"DNAME.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"TXT.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"MX.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1141,
+    "q": "All Amazon EC2 instances are assigned two IP addresses at launch. Which are those?",
+    "o": [
+      {
+        "c": "2 Elastic IP addresses.",
+        "a": "no"
+      },
+      {
+        "c": "A private IP address and an Elastic IP address.",
+        "a": "no"
+      },
+      {
+        "c": "A public IP address and an Elastic IP address.",
+        "a": "no"
+      },
+      {
+        "c": "A private IP address and a public IP address.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Correct answer: \"A private IP address and a public IP address.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"2 Elastic IP addresses.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"A private IP address and an Elastic IP address.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"A public IP address and an Elastic IP address.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1142,
+    "q": "You need to pass a custom script to new Amazon Linux instances created in your Auto Scaling group. Which feature allows you to accomplish this?",
+    "o": [
+      {
+        "c": "User data.",
+        "a": "yes"
+      },
+      {
+        "c": "EC2Config service.",
+        "a": "no"
+      },
+      {
+        "c": "IAM roles.",
+        "a": "no"
+      },
+      {
+        "c": "AWS Config.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"User data.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"EC2Config service.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"IAM roles.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"AWS Config.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1143,
+    "q": "A customer wants to track access to their Amazon Simple Storage Service (S3) buckets and also use this information for their internal security and access audits. Which of the following will meet the Customer requirement?",
+    "o": [
+      {
+        "c": "Enable AWS CloudTrail to audit all Amazon S3 bucket access.",
+        "a": "yes"
+      },
+      {
+        "c": "Enable server access logging for all required Amazon S3 buckets.",
+        "a": "no"
+      },
+      {
+        "c": "Enable the Requester Pays option to track access via AWS Billing.",
+        "a": "no"
+      },
+      {
+        "c": "Enable Amazon S3 event notifications for Put and Post.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Enable AWS CloudTrail to audit all Amazon S3 bucket access.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Enable server access logging for all required Amazon S3 buckets.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Enable the Requester Pays option to track access via AWS Billing.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Enable Amazon S3 event notifications for Put and Post.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1144,
+    "q": "Which DNS name can only be resolved within Amazon EC2?",
+    "o": [
+      {
+        "c": "Public DNS name.",
+        "a": "no"
+      },
+      {
+        "c": "Internal DNS name.",
+        "a": "yes"
+      },
+      {
+        "c": "External DNS name.",
+        "a": "no"
+      },
+      {
+        "c": "Global DNS name.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Internal DNS name.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Public DNS name.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"External DNS name.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Global DNS name.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1145,
+    "q": "An AWS customer is deploying an application that is composed of an AutoScaling group of EC2 Instances. The customers security policy requires that every outbound connection from these instances to any other service within the customers Virtual Private Cloud must be authenticated using a unique x 509 certificate that contains the specific instance-id. In addition an x 509 certificates must be designed by the customer's Key management service in order to be trusted for authentication. Which of the following configurations will support these requirements?",
+    "o": [
+      {
+        "c": "Configure an IAM Role that grants access to an Amazon S3 object containing a signed certificate and configure the Auto Scaling group to launch instances with this role Have the instances bootstrap get the certificate from Amazon S3 upon first boot.",
+        "a": "no"
+      },
+      {
+        "c": "Embed a certificate into the Amazon Machine Image that is used by the Auto Scaling group Have the launched instances generate a certificate signature request with the instance's assigned instance- id to the Key management service for signature.",
+        "a": "no"
+      },
+      {
+        "c": "Configure the Auto Scaling group to send an SNS notification of the launch of a new instance to the trusted key management service. Have the Key management service generate a signed certificate and send it directly to the newly launched instance.",
+        "a": "yes"
+      },
+      {
+        "c": "Configure the launched instances to generate a new certificate upon first boot Have the Key management service poll the AutoScaling group for associated instances and send new instances a certificate signature that contains the specific instance-id.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Configure the Auto Scaling group to send an SNS notification of the launch of a new instance to the trusted key management service. Have the Key management service generate a signed certificate and send it directly to the newly launched instance.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Configure an IAM Role that grants access to an Amazon S3 object containing a signed certificate and configure the Auto Scaling group to launch instances with this role Have the instances bootstrap get the certificate from Amazon S3 upon first boot.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Embed a certificate into the Amazon Machine Image that is used by the Auto Scaling group Have the launched instances generate a certificate signature request with the instance's assigned instance- id to the Key management service for signature.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Configure the launched instances to generate a new certificate upon first boot Have the Key management service poll the AutoScaling group for associated instances and send new instances a certificate signature that contains the specific instance-id.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1146,
+    "q": "A company is storing data on Amazon Simple Storage Service (S3). The company's security policy mandates that data is encrypted at rest. Which of the following methods can achieve this? (Choose 3 answers)",
+    "o": [
+      {
+        "c": "Use Amazon S3 server-side encryption with AWS Key Management Service managed keys.",
+        "a": "yes"
+      },
+      {
+        "c": "Use Amazon S3 server-side encryption with customer-provided keys.",
+        "a": "yes"
+      },
+      {
+        "c": "Use Amazon S3 server-side encryption with EC2 key pair.",
+        "a": "no"
+      },
+      {
+        "c": "Use Amazon S3 bucket policies to restrict access to the data at rest.",
+        "a": "no"
+      },
+      {
+        "c": "Encrypt the data on the client-side before ingesting to Amazon S3 using their own master key.",
+        "a": "yes"
+      },
+      {
+        "c": "Use SSL to encrypt the data while in transit to Amazon S3.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Use Amazon S3 server-side encryption with AWS Key Management Service managed keys.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Correct answer: \"Use Amazon S3 server-side encryption with customer-provided keys.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Correct answer: \"Encrypt the data on the client-side before ingesting to Amazon S3 using their own master key.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Use Amazon S3 server-side encryption with EC2 key pair.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use Amazon S3 bucket policies to restrict access to the data at rest.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use SSL to encrypt the data while in transit to Amazon S3.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1147,
+    "q": "In Amazon EC2, you are billed instance-hours when [...].",
+    "o": [
+      {
+        "c": "your EC2 instance is in a running state.",
+        "a": "yes"
+      },
+      {
+        "c": "the instance exits from Amazon S3 console.",
+        "a": "no"
+      },
+      {
+        "c": "your instance still exits the EC2 console.",
+        "a": "no"
+      },
+      {
+        "c": "EC2 instances stop.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"your EC2 instance is in a running state.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"the instance exits from Amazon S3 console.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"your instance still exits the EC2 console.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"EC2 instances stop.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1148,
+    "q": "Which of the below mentioned options is a possible solution to avoid any security threat?",
+    "o": [
+      {
+        "c": "Use the IAM based single sign between the AWS resources and the organization application.",
+        "a": "no"
+      },
+      {
+        "c": "Use the IAM role and assign it to the instance.",
+        "a": "yes"
+      },
+      {
+        "c": "Since the application is hosted on EC2, it does not need credentials to access S3.",
+        "a": "no"
+      },
+      {
+        "c": "Use the 509 certificates instead of the access and the secret access keys.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Use the IAM role and assign it to the instance.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Use the IAM based single sign between the AWS resources and the organization application.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Since the application is hosted on EC2, it does not need credentials to access S3.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Use the 509 certificates instead of the access and the secret access keys.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1149,
+    "q": "In Amazon EC2 Container Service components, what is the name of a logical grouping of container instances on which you can place tasks?",
+    "o": [
+      {
+        "c": "A cluster.",
+        "a": "yes"
+      },
+      {
+        "c": "A container instance.",
+        "a": "no"
+      },
+      {
+        "c": "A container.",
+        "a": "no"
+      },
+      {
+        "c": "A task definition.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"A cluster.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"A container instance.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"A container.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"A task definition.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  },
+  {
+    "id": 1150,
+    "q": "You are looking to migrate your Development (Dev) and Test environments to AWS. You have decided to use separate AWS accounts to host each environment. You plan to link each accounts bill to a Master AWS account using Consolidated Billing. To make sure you Keep within budget you would like to implement a way for administrators in the Master account to have access to stop, delete and/or terminate resources in both the Dev and Test accounts. Identify which option will allow you to achieve this goal.",
+    "o": [
+      {
+        "c": "Create IAM users in the Master account with full Admin permissions. Create cross-account roles in the Dev and Test accounts that grant the Master account access to the resources in the account by inheriting permissions from the Master account.",
+        "a": "no"
+      },
+      {
+        "c": "Create IAM users and a cross-account role in the Master account that grants full Admin permissions to the Dev and Test accounts.",
+        "a": "no"
+      },
+      {
+        "c": "Create IAM users in the Master account Create cross-account roles in the Dev and Test accounts that have full Admin permissions and grant the Master.",
+        "a": "yes"
+      },
+      {
+        "c": "Link the accounts using Consolidated Billing. This will give IAM users in the Master account access to resources in the Dev and Test accounts.",
+        "a": "no"
+      }
+    ],
+    "nt": "Correct answer: \"Create IAM users in the Master account Create cross-account roles in the Dev and Test accounts that have full Admin permissions and grant the Master.\". Explanation: This option is correct because it matches the AWS service behavior or limitation described in official documentation and is the best fit among the options. Incorrect option: \"Create IAM users in the Master account with full Admin permissions. Create cross-account roles in the Dev and Test accounts that grant the Master account access to the resources in the account by inheriting permissions from the Master account.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Create IAM users and a cross-account role in the Master account that grants full Admin permissions to the Dev and Test accounts.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case. Incorrect option: \"Link the accounts using Consolidated Billing. This will give IAM users in the Master account access to resources in the Dev and Test accounts.\" — this is not correct because it does not align with AWS documented behavior or is less appropriate for the described use case."
+  }
+]

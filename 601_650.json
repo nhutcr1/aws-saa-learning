@@ -1,0 +1,1168 @@
+[
+{
+  "id": 1601,
+  "q": "Is it possible to access your EBS snapshots?",
+  "o": [
+    {
+      "c": "Yes, through the Amazon S3 APIs.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, through the Amazon EC2 APIs.",
+      "a": "yes"
+    },
+    {
+      "c": "No, EBS snapshots cannot be accessed; they can only be used to create a new EBS volume.",
+      "a": "no"
+    },
+    {
+      "c": "EBS doesn't provide snapshots.",
+      "a": "no"
+    }
+  ],
+  "nt": "EBS snapshots are managed through the Amazon EC2 API. You can use the EC2 API (via the AWS CLI, SDKs, or Console) to create, describe, copy, delete, and share snapshots. While snapshots are stored in Amazon S3, the storage is proprietary and not directly accessible via the standard S3 APIs. The primary interface for managing EBS snapshots is the EC2 service."
+},
+{
+  "id": 1602,
+  "q": "How many types of block devices does Amazon EC2 support?",
+  "o": [
+    {
+      "c": "4.",
+      "a": "no"
+    },
+    {
+      "c": "5.",
+      "a": "no"
+    },
+    {
+      "c": "2.",
+      "a": "yes"
+    },
+    {
+      "c": "1.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon EC2 supports two main types of block-level storage for instances: Amazon Elastic Block Store (EBS) volumes and instance store volumes. EBS volumes are persistent, network-attached storage that can be detached and reattached to different instances (within the same Availability Zone). Instance store volumes are physically attached to the host computer and provide temporary, high-performance block storage. The data on instance store volumes is lost if the instance is stopped or terminated."
+},
+{
+  "id": 1603,
+  "q": "SQL Server [...] store log ins and passwords in the master database.",
+  "o": [
+    {
+      "c": "can be configured to but by default does not.",
+      "a": "no"
+    },
+    {
+      "c": "doesn't.",
+      "a": "no"
+    },
+    {
+      "c": "does.",
+      "a": "yes"
+    }
+  ],
+  "nt": "SQL Server, by default, stores login information (including password hashes for SQL Server authenticated logins) within the master database. This is a core part of its authentication system architecture."
+},
+{
+  "id": 1604,
+  "q": "You are using an m1.small EC2 Instance with one 300GB EBS volume to host a relational database. You determined that write throughput to the database needs to be increased. Which of the following approaches can help achieve this? (Choose 2 answers)",
+  "o": [
+    {
+      "c": "Use an array of EBS volumes.",
+      "a": "yes"
+    },
+    {
+      "c": "Enable Multi-AZ mode.",
+      "a": "no"
+    },
+    {
+      "c": "Place the instance in an Auto Scaling Groups.",
+      "a": "no"
+    },
+    {
+      "c": "Add an EBS volume and place into RAID 5.",
+      "a": "no"
+    },
+    {
+      "c": "Increase the size of the EC2 Instance.",
+      "a": "yes"
+    },
+    {
+      "c": "Put the database behind an Elastic Load Balancer.",
+      "a": "no"
+    }
+  ],
+  "nt": "Using an array of EBS volumes (e.g., in a RAID 0 configuration) can stripe I/O across multiple volumes, aggregating their IOPS and throughput limits, thus increasing overall write performance. Increasing the size of the EC2 instance can provide more network bandwidth, which is crucial for EBS performance, as EBS traffic uses the instance's network interface. Larger instance types generally have higher dedicated EBS bandwidth, allowing for greater data transfer rates to and from EBS volumes."
+},
+{
+  "id": 1605,
+  "q": "A user is hosting a website in the US West-1 region. The website has the highest client base from the Asia-Pacific (Singapore / Japan) region. The application is accessing data from S3 before serving it to client. Which of the below mentioned regions gives a better performance for S3 objects?",
+  "o": [
+    {
+      "c": "Japan.",
+      "a": "no"
+    },
+    {
+      "c": "Singapore.",
+      "a": "no"
+    },
+    {
+      "c": "US East.",
+      "a": "no"
+    },
+    {
+      "c": "US West-1.",
+      "a": "yes"
+    }
+  ],
+  "nt": "For optimal performance, the S3 bucket should be in the same AWS Region as the EC2 instances that are accessing it. This minimizes latency because the data transfer occurs within the same regional AWS network rather than traversing the public internet across continents. Since the application servers are in US West-1, placing the S3 bucket in US West-1 provides the lowest latency access for those servers, which directly impacts the performance of the website for all end-users, regardless of their location."
+},
+{
+  "id": 1606,
+  "q": "You need to set up security for your VPC and you know that Amazon VPC provides two features that you can use to increase security for your VPC: Security groups and network access control lists (ACLs). You start to look into security groups first. Which statement below is incorrect in relation to security groups?",
+  "o": [
+    {
+      "c": "Are stateful: Return traffic is automatically allowed, regardless of any rules.",
+      "a": "no"
+    },
+    {
+      "c": "Evaluate all rules before deciding whether to allow traffic.",
+      "a": "no"
+    },
+    {
+      "c": "Support allow rules and deny rules.",
+      "a": "yes"
+    },
+    {
+      "c": "Operate at the instance level (first layer of defense).",
+      "a": "no"
+    }
+  ],
+  "nt": "Security groups only support allow rules; they do not have an explicit deny rule capability. All traffic is implicitly denied by default, and you add rules to explicitly allow specific traffic. This is a fundamental difference from Network ACLs, which do support both allow and deny rules."
+},
+{
+  "id": 1607,
+  "q": "Can a single EBS volume be attached to multiple EC2 instances at the same time?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "yes"
+    },
+    {
+      "c": "Only for high-performance EBS volumes.",
+      "a": "no"
+    },
+    {
+      "c": "Only when the instances are located in the US regions.",
+      "a": "no"
+    }
+  ],
+  "nt": "A standard Amazon EBS volume can only be attached to a single EC2 instance at any given time. This is to prevent data corruption that could occur from multiple systems trying to control the same block storage device simultaneously. However, AWS does offer a feature called 'Multi-Attach' for specific Provisioned IOPS SSD (io1/io2) volumes, allowing them to be attached to up to 16 Nitro-based instances in the same Availability Zone. The question and correct answer refer to the general, default behavior for most EBS volume types."
+},
+{
+  "id": 1608,
+  "q": "You are planning and configuring some EBS volumes for an application. In order to get the most performance out of your EBS volumes, you should attach them to an instance with enough [...] to support your volumes.",
+  "o": [
+    {
+      "c": "redundancy.",
+      "a": "no"
+    },
+    {
+      "c": "storage.",
+      "a": "no"
+    },
+    {
+      "c": "bandwidth.",
+      "a": "yes"
+    },
+    {
+      "c": "memory.",
+      "a": "no"
+    }
+  ],
+  "nt": "EBS volumes are network-attached storage. Their performance is limited by the network bandwidth allocated to the EC2 instance they are attached to. Larger instance types have dedicated EBS-optimized bandwidth, which ensures that the network connection does not become a bottleneck for the I/O operations between the instance and its EBS volumes. Without sufficient instance bandwidth, even the highest-performing EBS volume (like Provisioned IOPS SSD) cannot reach its full potential."
+},
+{
+  "id": 1609,
+  "q": "An organization has three separate AWS accounts, one each for development, testing, and production. The organization wants the testing team to have access to certain AWS resources in the production account. How can the organization achieve this?",
+  "o": [
+    {
+      "c": "It is not possible to access resources of one account with another account.",
+      "a": "no"
+    },
+    {
+      "c": "Create the IAM roles with cross account access.",
+      "a": "yes"
+    },
+    {
+      "c": "Create the IAM user in a test account, and allow it access to the production environment with the IAM policy.",
+      "a": "no"
+    },
+    {
+      "c": "Create the IAM users with cross account access.",
+      "a": "no"
+    }
+  ],
+  "nt": "The recommended and secure way to grant cross-account access is by using IAM roles. You create an IAM role in the production account (the trusting account) that defines what permissions the testing team should have. This role includes a 'trust policy' that specifies the testing (trusted) account as a principal. Then, users in the testing account are given permission (via an IAM policy in their own account) to assume that role in the production account. This allows them to temporarily switch identities and gain the permissions defined by the role in the production account without having permanent credentials or IAM users created directly in the production account."
+},
+{
+  "id": 1610,
+  "q": "A benefits enrollment company is hosting a 3-tier web application running in a VPC on AWS which includes a NAT (Network Address Translation) instance in the public Web tier. There is enough provisioned capacity for the expected workload for the new fiscal year benefit enrollment period plus some extra overhead. Enrollment proceeds nicely for two days and then the web tier becomes unresponsive. Upon investigation using CloudWatch and other monitoring tools it is discovered that there is an extremely large and unanticipated amount of inbound traffic coming from a set of 15 specific IP addresses over port 80 from a country where the benefits company has no customers. The web tier instances are so overloaded that benefit enrollment administrators cannot even SSH into them. Which activity would be useful in defending against this attack?",
+  "o": [
+    {
+      "c": "Create a custom route table associated with the web tier and block the attacking IP addresses from the IGW (Internet Gateway).",
+      "a": "no"
+    },
+    {
+      "c": "Change the EIP (Elastic IP Address) of the NAT instance in the web tier subnet and update the Main Route Table with the new EIP.",
+      "a": "no"
+    },
+    {
+      "c": "Create 15 Security Group rules to block the attacking IP addresses over port 80.",
+      "a": "no"
+    },
+    {
+      "c": "Create an inbound NACL (Network Access control list) associated with the web tier subnet with deny rules to block the attacking IP addresses.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Network ACLs (NACLs) are stateless and operate at the subnet level. They can be used to create explicit DENY rules for specific IP addresses. This is effective for quickly blocking a large-scale DDoS attack originating from a known set of IPs at the subnet boundary, before the traffic even reaches the instances. NACL rules are processed in order, and a deny rule with a lower rule number than the allow rules can effectively block the malicious traffic. While Security Groups can also block IPs, they are stateful and applied at the instance level. If the instances are already overwhelmed and unresponsive, modifying Security Groups might not be as immediate or effective as blocking the traffic at the subnet level with a NACL."
+},
+{
+  "id": 1611,
+  "q": "You launch an Amazon EC2 instance without an assigned AWS identity and Access Management (IAM) role. Later, you decide that the instance should be running with an IAM role. Which action must you take in order to have a running Amazon EC2 instance with an IAM role assigned to it?",
+  "o": [
+    {
+      "c": "Create an image of the instance, and register the image with an IAM role assigned and an Amazon EBS volume mapping.",
+      "a": "no"
+    },
+    {
+      "c": "Create a new IAM role with the same permissions as an existing IAM role, and assign it to the running instance.",
+      "a": "no"
+    },
+    {
+      "c": "Create an image of the instance, add a new IAM role with the same permissions as the desired IAM role, and deregister the image with the new role assigned.",
+      "a": "no"
+    },
+    {
+      "c": "Create an image of the instance, and use this image to launch a new instance with the desired IAM role assigned.",
+      "a": "yes"
+    }
+  ],
+  "nt": "An IAM role can only be associated with an EC2 instance during its launch. It is not possible to directly assign an IAM role to a running instance. The correct procedure is to create an Amazon Machine Image (AMI) from the existing instance, and then use that AMI to launch a *new* EC2 instance. During the launch process of the new instance, you can specify the desired IAM role."
+},
+{
+  "id": 1612,
+  "q": "Does AWS Direct Connect allow you access to all Availability Zones within a Region?",
+  "o": [
+    {
+      "c": "Depends on the type of connection.",
+      "a": "yes"
+    },
+    {
+      "c": "Yes.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "Only when there's just one Availability Zone in a region. If there are more than one, only one availability zone can be accessed directly.",
+      "a": "no"
+    }
+  ],
+  "nt": "The scope of access depends on the Direct Connect connection type. A Dedicated Connection provides a physical Ethernet port, and the Virtual Interface (VIF) created on it can be configured to access public resources (public VIF) or a specific VPC via a Direct Connect Gateway (private VIF), which can then provide access to all Availability Zones in that VPC's region. A Hosted Connection, purchased from an AWS Direct Connect Partner, can be provisioned at specific capacities (e.g., 50Mbps, 500Mbps) and its capabilities, including regional access, depend on the offering from the partner. Therefore, the ability to access all AZs is not universal and depends on the specific connection setup."
+},
+{
+  "id": 1613,
+  "q": "What is the durability of S3 RRS?",
+  "o": [
+    {
+      "c": "99.99%.",
+      "a": "yes"
+    },
+    {
+      "c": "99.95%.",
+      "a": "no"
+    },
+    {
+      "c": "99.995%.",
+      "a": "no"
+    },
+    {
+      "c": "99.999999999%.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon S3 Reduced Redundancy Storage (RRS) is a storage class designed for non-critical, reproducible data. It provides 99.99% durability of objects over a given year. This is lower than the 99.999999999% (11 nines) durability offered by S3 Standard, S3 Standard-IA, and S3 Glacier storage classes. RRS is less frequently used today with the advent of other cost-effective options like S3 One Zone-IA."
+},
+{
+  "id": 1614,
+  "q": "Your organization is in the business of architecting complex transactional databases. For a variety of reasons, this has been done on EBS. What is AWS's recommendation for customers who have architected databases using EBS for backups?",
+  "o": [
+    {
+      "c": "Backups to Amazon S3 be performed through the database management system.",
+      "a": "yes"
+    },
+    {
+      "c": "Backups to AWS Storage Gateway be performed through the database management system.",
+      "a": "no"
+    },
+    {
+      "c": "If you take regular snapshots no further backups are required.",
+      "a": "no"
+    },
+    {
+      "c": "Backups to Amazon Glacier be performed through the database management system.",
+      "a": "no"
+    }
+  ],
+  "nt": "For databases running on EC2 instances with EBS volumes, AWS recommends a multi-layered backup strategy. While EBS snapshots are a crucial part of this strategy, they are block-level. For logical consistency and point-in-time recovery, it is also recommended to use the native database backup tools (e.g., `mysqldump`, `pg_dump`, Oracle RMAN). These native backups can then be stored in Amazon S3, which offers high durability and is a cost-effective storage service for backup files. This approach provides both a physical backup (EBS snapshot) and a logical backup (database dump file), increasing recovery options."
+},
+{
+  "id": 1615,
+  "q": "You need to create a load balancer in a VPC network that you are building. You can make your load balancer internal (private) or internet-facing (public). When you make your load balancer internal, a DNS name will be created, and it will contain the private IP address of the load balancer. An internal load balancer is not exposed to the internet. When you make your load balancer internet-facing, a DNS name will be created with the public IP address. If you want the Internet-facing load balancer to be connected to the Internet, where must this load balancer reside?",
+  "o": [
+    {
+      "c": "The load balancer must reside in a subnet that is connected to the internet using the internet gateway.",
+      "a": "yes"
+    },
+    {
+      "c": "The load balancer must reside in a subnet that is not connected to the internet.",
+      "a": "no"
+    },
+    {
+      "c": "The load balancer must not reside in a subnet that is connected to the internet.",
+      "a": "no"
+    },
+    {
+      "c": "The load balancer must be completely outside of your IP.",
+      "a": "no"
+    }
+  ],
+  "nt": "An internet-facing load balancer is designed to route traffic from the public internet to the backend instances. To achieve this, the load balancer nodes themselves must have a public IP address and a route to the internet. This is accomplished by deploying the load balancer in subnets that have a route table entry directing internet-bound traffic (0.0.0.0/0) to an Internet Gateway (IGW)."
+},
+{
+  "id": 1616,
+  "q": "In the Amazon CloudWatch, which metric should I be checking to ensure that your DB Instance has enough free storage space?",
+  "o": [
+    {
+      "c": "Free Storage.",
+      "a": "no"
+    },
+    {
+      "c": "Free Storage Space.",
+      "a": "yes"
+    },
+    {
+      "c": "Free Storage Volume.",
+      "a": "no"
+    },
+    {
+      "c": "Free DB Storage Space.",
+      "a": "no"
+    }
+  ],
+  "nt": "The specific CloudWatch metric for Amazon RDS that reports the amount of available storage space in bytes is called 'FreeStorageSpace'. You can set up CloudWatch alarms on this metric to receive notifications when the free space falls below a threshold you define, allowing you to proactively scale your storage before running out of space."
+},
+{
+  "id": 1617,
+  "q": "A web-startup runs its very successful social news application on Amazon EC2 with an Elastic Load Balancer, an Auto-Scaling group of Java/Tomcat application-servers, and DynamoDB as data store. The main web-application best runs on m2 x large instances since it is highly memory- bound Each new deployment requires semi-automated creation and testing of a new AMI for the application servers which takes quite a while and is therefore only done once per week. Recently, a new chat feature has been implemented in nodejs and waits to be integrated in the architecture. First tests show that the new component is CPU bound Because the company has some experience with using Chef, they decided to streamline the deployment process and use AWS OpsWorks as an application life cycle tool to simplify management of the application and reduce the deployment cycles. What configuration in AWS OpsWorks is necessary to integrate the new chat module in the most cost-efficient and flexible way?",
+  "o": [
+    {
+      "c": "Create one AWS OpsWorks stack, create one AWS OpsWorks layer, create one custom recipe.",
+      "a": "no"
+    },
+    {
+      "c": "Create one AWS OpsWorks stack create two AWS OpsWorks layers create one custom recipe.",
+      "a": "no"
+    },
+    {
+      "c": "Create two AWS OpsWorks stacks create two AWS OpsWorks layers create one custom recipe.",
+      "a": "yes"
+    },
+    {
+      "c": "Create two AWS OpsWorks stacks create two AWS OpsWorks layers create two custom recipe.",
+      "a": "no"
+    }
+  ],
+  "nt": "The existing Java/Tomcat application is memory-bound and runs on m2.xlarge instances, while the new Node.js chat feature is CPU-bound. To be cost-efficient, they should run on different instance types optimized for their specific workloads. In OpsWorks, a 'stack' is a container for AWS resources. A 'layer' defines how to configure a set of instances for a specific purpose (e.g., a Java App Server layer, a Node.js App Server layer). By creating two separate layers within the same stack, you can assign different instance types, Auto Scaling configurations, and lifecycle recipes to each layer. This allows the memory-bound Java layer to use m2.xlarge instances and the CPU-bound Node.js layer to use a more appropriate instance type (like a C-family instance), all managed within a single OpsWorks stack. One custom recipe might suffice if the configuration differences are minimal, but the core of the solution is having two distinct layers for the two different application components."
+},
+{
+  "id": 1618,
+  "q": "A client needs you to import some existing infrastructure from a dedicated hosting provider to AWS to try and save on the cost of running his current website. He also needs an automated process that manages backups, software patching, automatic failure detection, and recovery. You are aware that his existing set up currently uses an Oracle database. Which of the following AWS databases would be best for accomplishing this task?",
+  "o": [
+    {
+      "c": "Amazon RDS.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Redshift.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon SimpleDB.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon ElastiCache.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS (Relational Database Service) is a managed database service that handles routine database tasks such as provisioning, patching, backup, recovery, failure detection, and repair. It supports several database engines, including Oracle. By migrating the Oracle database to Amazon RDS for Oracle, the client offloads the administrative overhead of database management, which aligns perfectly with the requirement for an automated process managing backups, patching, and recovery."
+},
+{
+  "id": 1619,
+  "q": "A user is currently building a website which will require a large number of instances in six months, when a demonstration of the new site will be given upon launch. Which of the below mentioned options allows the user to procure the resources beforehand so that they need not worry about infrastructure availability during the demonstration?",
+  "o": [
+    {
+      "c": "Procure all the instances as reserved instances beforehand.",
+      "a": "yes"
+    },
+    {
+      "c": "Launch all the instances as part of the cluster group to ensure resource availability.",
+      "a": "no"
+    },
+    {
+      "c": "Pre-warm all the instances one month prior to ensure resource availability.",
+      "a": "no"
+    },
+    {
+      "c": "Ask AWS now to procure the dedicated instances in 6 months.",
+      "a": "no"
+    }
+  ],
+  "nt": "Reserved Instances (RIs) are a billing construct that provide a significant discount (up to 75%) compared to On-Demand pricing, in exchange for a one-time, upfront payment and a commitment to a one- or three-year term. More importantly for this scenario, purchasing RIs for a specific instance type in a specific Availability Zone also provides *capacity reservation*. This ensures that whenever you launch an instance matching the RI's attributes, the capacity is available for you, which is crucial for a planned, high-scale event like a launch demonstration. This addresses the concern about infrastructure availability."
+},
+{
+  "id": 1620,
+  "q": "Amazon RDS creates an SSL certificate and installs the certificate on the DB Instance when Amazon RDS provisions the instance. These certificates are signed by a certificate authority. The [...] is stored at <https://rds.amazonaws.com/doc/rds-ssl-ca-cert.pem>.",
+  "o": [
+    {
+      "c": "private key.",
+      "a": "no"
+    },
+    {
+      "c": "foreign key.",
+      "a": "no"
+    },
+    {
+      "c": "public key.",
+      "a": "yes"
+    },
+    {
+      "c": "protected key.",
+      "a": "no"
+    }
+  ],
+  "nt": "The file hosted at the provided URL (`rds-ssl-ca-cert.pem`) contains the public key of the Certificate Authority (CA) that signs the SSL certificates for RDS instances. To verify the SSL certificate presented by an RDS DB instance, a client application needs the CA's public key. By downloading this public key, the client can establish a trusted SSL/TLS connection to the RDS instance, ensuring the communication is encrypted and the server's identity is validated."
+},
+{
+  "id": 1621,
+  "q": "What happens to data on an ephemeral volume of an EBS-backed EC2 instance if it is terminated or if it fails?",
+  "o": [
+    {
+      "c": "Data is automatically copied to another volume.",
+      "a": "no"
+    },
+    {
+      "c": "The volume snapshot is saved in S3.",
+      "a": "no"
+    },
+    {
+      "c": "Data persists.",
+      "a": "no"
+    },
+    {
+      "c": "Data is deleted.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Ephemeral storage (also known as instance store) is physically attached to the host computer. The data on an instance store volume persists only during the life of the instance it is attached to. If the instance is stopped, terminated, or if the underlying hardware fails, all data on the instance store volumes is lost. This is true even for EBS-backed instances that have instance store volumes attached."
+},
+{
+  "id": 1622,
+  "q": "You manually launch a NAT AMI in a public subnet. The network is properly configured. Security groups and network access control lists are properly configured. Instances in a private subnet can access the NAT. The NAT can access the Internet. However, private instances cannot access the Internet. What additional step is required to allow access from the private instances?",
+  "o": [
+    {
+      "c": "Enable Source/Destination Check on the private Instances.",
+      "a": "no"
+    },
+    {
+      "c": "Enable Source/Destination Check on the NAT instance.",
+      "a": "no"
+    },
+    {
+      "c": "Disable Source/Destination Check on the private instances.",
+      "a": "no"
+    },
+    {
+      "c": "Disable Source/Destination Check on the NAT instance.",
+      "a": "yes"
+    }
+  ],
+  "nt": "By default, EC2 instances perform a 'source/destination check', meaning they must be the source or destination of any traffic they send or receive. A NAT instance, however, needs to handle traffic on behalf of other instances (those in the private subnet). Therefore, it must be able to send and receive traffic when it is not the source or destination. Disabling the source/destination check on the NAT instance is a mandatory step for it to function correctly as a network address translator."
+},
+{
+  "id": 1623,
+  "q": "You have just discovered that you can upload your objects to Amazon S3 using Multipart Upload API. You start to test it out but are unsure of the benefits that it would provide. Which of the following is not a benefit of using multipart uploads?",
+  "o": [
+    {
+      "c": "You can begin an upload before you know the final object size.",
+      "a": "no"
+    },
+    {
+      "c": "Quick recovery from any network issues.",
+      "a": "no"
+    },
+    {
+      "c": "Pause and resume object uploads.",
+      "a": "no"
+    },
+    {
+      "c": "It's more secure than normal upload.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Multipart uploads are designed for improving throughput and resiliency when uploading large objects. They allow parallel upload of parts, beginning an upload without knowing the total size, and resuming only failed parts instead of the entire object. However, they do not inherently provide additional security compared to a single PUT request. Security for S3 uploads is managed through access controls (IAM policies, bucket policies), encryption (SSE-S3, SSE-KMS, SSE-C), and using HTTPS, which apply to both single-part and multipart uploads."
+},
+{
+  "id": 1624,
+  "q": "To help you manage your Amazon EC2 instances, images, and other Amazon EC2 resources, you can assign your own metadata to each resource in the form of [...].",
+  "o": [
+    {
+      "c": "special filters.",
+      "a": "no"
+    },
+    {
+      "c": "functions.",
+      "a": "no"
+    },
+    {
+      "c": "tags.",
+      "a": "yes"
+    },
+    {
+      "c": "wildcards.",
+      "a": "no"
+    }
+  ],
+  "nt": "Tags are key-value pairs that you can assign to AWS resources. They are the primary mechanism for adding user-defined metadata to resources like EC2 instances, EBS volumes, and AMIs. Tags are used for various purposes, including cost allocation, resource grouping, automation, and access control."
+},
+{
+  "id": 1625,
+  "q": "Do the Amazon EBS volumes persist independently from the running life of an Amazon EC2 instance?",
+  "o": [
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "Only if instructed to when created.",
+      "a": "no"
+    },
+    {
+      "c": "Yes.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Amazon EBS volumes are persistent, network-attached block storage. Their lifecycle is independent of any EC2 instance. By default, the root EBS volume is deleted when the instance is terminated, but this behavior can be changed. Any additional (non-root) EBS volumes persist by default after an instance is stopped or terminated. The data on an EBS volume remains until the volume is explicitly deleted, regardless of the state of the instance it was attached to."
+},
+{
+  "id": 1626,
+  "q": "If I write the below command, what does it do? ec2-run ami-e3a5408a -n 20 -g appserver",
+  "o": [
+    {
+      "c": "Start twenty instances as members of appserver group.",
+      "a": "yes"
+    },
+    {
+      "c": "Creates 20 rules in the security group named appserver.",
+      "a": "no"
+    },
+    {
+      "c": "Terminate twenty instances as members of appserver group.",
+      "a": "no"
+    },
+    {
+      "c": "Start 20 security groups.",
+      "a": "no"
+    }
+  ],
+  "nt": "The `ec2-run` command (an older CLI command, now replaced by `aws ec2 run-instances`) is used to launch EC2 instances. The `-n 20` flag specifies the number of instances to launch (20). The `-g appserver` flag specifies the security group (`appserver`) that the launched instances will be associated with. Therefore, the command launches twenty EC2 instances from the AMI ID `ami-e3a5408a` and places them all in the 'appserver' security group."
+},
+{
+  "id": 1627,
+  "q": "A company is deploying a new two-tier web application in AWS. The architecture consists of an internet-facing Application Load Balancer (ALB) and a web tier that is hosted on Amazon EC2 instances in private subnets. The application tier with the business logic runs on EC2 instances in private subnets. The database tier consists of Microsoft SQL Server that runs on EC2 instances in private subnets. Security is a high priority for the company. Which combination of security group configurations should the solutions architect use? (Choose three.)",
+  "o": [
+    {
+      "c": "Configure the security group for the web tier to allow inbound HTTPS traffic from the security group for the ALB.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the security group for the web tier to allow outbound HTTPS traffic to 0.0.0.0/0.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the security group for the database tier to allow inbound Microsoft SQL Server traffic from the security group for the application tier.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the security group for the database tier to allow outbound HTTPS traffic and Microsoft SQL Server trac to the security group for the web tier.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the security group for the application tier to allow inbound HTTPS traffic from the security group for the web tier.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the security group for the application tier to allow outbound HTTPS traffic and Microsoft SQL Server traffic to the security group for the web tier.",
+      "a": "no"
+    }
+  ],
+  "nt": "This configuration follows the principle of least privilege by referencing security groups rather than IP ranges. The ALB's security group is the only source allowed to send HTTPS traffic to the web tier. The web tier's security group is the only source allowed to send traffic (likely HTTP/HTTPS) to the application tier. The application tier's security group is the only source allowed to send Microsoft SQL Server traffic (port 1433) to the database tier. This creates a tightly controlled chain of trust where each tier only accepts traffic from the tier directly in front of it."
+},
+{
+  "id": 1628,
+  "q": "In order to optimize performance for a compute cluster that requires low inter-node latency, which of the following feature should you use?",
+  "o": [
+    {
+      "c": "Multiple Availability Zones.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Direct Connect.",
+      "a": "no"
+    },
+    {
+      "c": "EC2 Dedicated Instances.",
+      "a": "no"
+    },
+    {
+      "c": "Placement Groups.",
+      "a": "yes"
+    },
+    {
+      "c": "VPC private subnets.",
+      "a": "no"
+    }
+  ],
+  "nt": "Placement Groups are a logical grouping of instances within a single Availability Zone. The 'Cluster' placement group strategy packs instances close together inside an Availability Zone. This positioning enables applications to achieve the low-latency, high-bandwidth network performance required for tightly coupled node-to-node communication that is typical in high-performance computing (HPC) applications or compute clusters."
+},
+{
+  "id": 1629,
+  "q": "Regarding the attaching of ENI to an instance, what does 'warm attach' refer to?",
+  "o": [
+    {
+      "c": "Attaching an ENI to an instance when it is stopped.",
+      "a": "yes"
+    },
+    {
+      "c": "This question doesn't make sense.",
+      "a": "no"
+    },
+    {
+      "c": "Attaching an ENI to an instance when it is running.",
+      "a": "no"
+    },
+    {
+      "c": "Attaching an ENI to an instance during the launch process.",
+      "a": "no"
+    }
+  ],
+  "nt": "Attaching an Elastic Network Interface (ENI) to an instance has different terms based on the instance state. A 'warm attach' is when you attach an ENI to a *stopped* instance. A 'hot attach' is when you attach an ENI to a *running* instance. A 'cold attach' is when you specify an ENI in the instance's network configuration during the initial launch."
+},
+{
+  "id": 1630,
+  "q": "Can I attach more than one policy to a particular entity?",
+  "o": [
+    {
+      "c": "Yes always.",
+      "a": "yes"
+    },
+    {
+      "c": "Only if within GovCloud.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "Only if within VPC.",
+      "a": "no"
+    }
+  ],
+  "nt": "In AWS Identity and Access Management (IAM), you can attach multiple policies (both managed and inline) to a single IAM user, group, or role. The effective permissions for that entity are the sum of all permissions granted by all attached policies. This allows for flexible and modular permission management."
+},
+{
+  "id": 1631,
+  "q": "By default, when an EBS volume is attached to a Windows instance, it may show up as any drive letter on the instance. You can change the settings of the [...] Service to set the drive letters of the EBS volumes per your specifications.",
+  "o": [
+    {
+      "c": "EBS Config Service.",
+      "a": "no"
+    },
+    {
+      "c": "AMI Config Service.",
+      "a": "no"
+    },
+    {
+      "c": "EC2 Config Service.",
+      "a": "yes"
+    },
+    {
+      "c": "EC2-AMI Config Service.",
+      "a": "no"
+    }
+  ],
+  "nt": "The EC2 Config Service (often referred to as `EC2Config`) was a Windows service responsible for initializing and configuring EC2 Windows instances during boot. In newer Windows AMIs, this has been largely replaced by the EC2Launch service. These services handle tasks like setting the computer name, administering user passwords, and dynamic drive letter assignment for EBS volumes. You can configure these services to assign specific drive letters to EBS volumes based on their volume ID or other attributes."
+},
+{
+  "id": 1632,
+  "q": "Select the correct set of steps for exposing the snapshot only to specific AWS accounts.",
+  "o": [
+    {
+      "c": "Select public for all the accounts and check mark t hose accounts with whom you want to expose the snapshots and cl ick save.",
+      "a": "no"
+    },
+    {
+      "c": "Select Private, enter the IDs of t hose AWS accounts, and click Save.",
+      "a": "yes"
+    },
+    {
+      "c": "Select Public, enter the IDs of those AWS accounts, and click Save.",
+      "a": "no"
+    },
+    {
+      "c": "Select Public, mark the IDs of those AWS accounts as private, and click Save.",
+      "a": "no"
+    }
+  ],
+  "nt": "To share an EBS snapshot with specific AWS accounts, you modify the snapshot's permissions. The default setting is 'Private'. To share it, you keep the main setting as 'Private' and then explicitly add the AWS account IDs of the accounts you want to grant access to in the provided field. This ensures the snapshot is not publicly accessible but is available to the specified accounts."
+},
+{
+  "id": 1633,
+  "q": "How can you apply more than 100 rules to an Amazon EC2-Classic?",
+  "o": [
+    {
+      "c": "By adding more security groups.",
+      "a": "no"
+    },
+    {
+      "c": "You need to create a default security group specifying your required rules if you need to use more than 100 rules per security group.",
+      "a": "no"
+    },
+    {
+      "c": "By default the Amazon EC2 security groups support 500 rules.",
+      "a": "no"
+    },
+    {
+      "c": "You can't add more than 100 rules to security groups for an Amazon EC2 instance.",
+      "a": "yes"
+    }
+  ],
+  "nt": "In EC2-Classic, each instance can be a member of up to 500 security groups, but the *total* number of rules that can be applied to an instance is limited. The hard limit is the number of rules, not the number of groups. The maximum number of rules that can be applied to a single instance in EC2-Classic is 100. This is a fixed limit and cannot be increased. (Note: This question refers to the legacy EC2-Classic platform, which is no longer available for new accounts. In EC2-VPC, the rules-per-security-group limit is higher, and an instance's effective rules are the union of all rules from all attached security groups.)"
+},
+{
+  "id": 1634,
+  "q": "A user is hosting a website in the US West-1 region. The website has the highest client base from the Asia-Pacific (Singapore / Japan) region. The application is accessing data from S3 before serving it to client. Which of the below mentioned regions gives a better performance for S3 objects?",
+  "o": [
+    {
+      "c": "Japan.",
+      "a": "no"
+    },
+    {
+      "c": "Singapore.",
+      "a": "no"
+    },
+    {
+      "c": "US East.",
+      "a": "no"
+    },
+    {
+      "c": "US West-1.",
+      "a": "yes"
+    }
+  ],
+  "nt": "For optimal performance, the S3 bucket should be in the same AWS Region as the EC2 instances that are accessing it. This minimizes latency because the data transfer occurs within the same regional AWS network rather than traversing the public internet across continents. Since the application servers are in US West-1, placing the S3 bucket in US West-1 provides the lowest latency access for those servers, which directly impacts the performance of the website for all end-users, regardless of their location."
+},
+{
+  "id": 1635,
+  "q": "A user has created an ELB with Auto Scaling. Which of the below mentioned offerings from ELB helps the user to stop sending new requests traffic from the load balancer to the EC2 instance when the instance is being deregistered while continuing in-flight requests?",
+  "o": [
+    {
+      "c": "ELB sticky session.",
+      "a": "no"
+    },
+    {
+      "c": "ELB deregistration check.",
+      "a": "no"
+    },
+    {
+      "c": "ELB auto registration Off.",
+      "a": "no"
+    },
+    {
+      "c": "ELB connection draining.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Connection Draining (for Classic Load Balancers) or Deregistration Delay (for Application and Network Load Balancers) is a feature that allows the load balancer to complete in-flight requests sent to an instance that is de-registering or unhealthy. When enabled, the load balancer stops sending new requests to the draining instance but allows existing requests to complete (up to a specified timeout period). This ensures that active user sessions are not abruptly terminated during scaling-in events or deployment updates."
+},
+{
+  "id": 1636,
+  "q": "What can I access by visiting the URL: http://status.aws.amazon.com/?",
+  "o": [
+    {
+      "c": "Amazon Cloud Watch.",
+      "a": "no"
+    },
+    {
+      "c": "Status of the Amazon RDS DB.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Service Health Dashboard.",
+      "a": "yes"
+    },
+    {
+      "c": "AWS Cloud Monitor.",
+      "a": "no"
+    }
+  ],
+  "nt": "The URL `http://status.aws.amazon.com/` is the official AWS Service Health Dashboard. It provides real-time and historical information about the status of all AWS services across all regions. Users can check this page to see if there are any ongoing issues or outages affecting the services they are using."
+},
+{
+  "id": 1637,
+  "q": "In Route 53, what does a Hosted Zone refer to?",
+  "o": [
+    {
+      "c": "A hosted zone is a collection of geographical load balancing rules for Route 53.",
+      "a": "no"
+    },
+    {
+      "c": "A hosted zone is a collection of resource record sets hosted by Route 53.",
+      "a": "yes"
+    },
+    {
+      "c": "A hosted zone is a selection of specific resource record sets hosted by CloudFront for distribution to Route 53.",
+      "a": "no"
+    },
+    {
+      "c": "A hosted zone is the Edge Location that hosts the Route 53 records for a user.",
+      "a": "no"
+    }
+  ],
+  "nt": "In Amazon Route 53, a hosted zone is a container for records that define how to route traffic for a specific domain (e.g., example.com) and its subdomains. It contains a collection of resource record sets (such as A, AAAA, CNAME, MX records) that specify where to direct traffic for each domain name or subdomain."
+},
+{
+  "id": 1638,
+  "q": "A user is launching an EC2 instance in the US East region. Which of the below mentioned options is recommended by AWS with respect to the selection of the Availability Zone?",
+  "o": [
+    {
+      "c": "Always select the AZ while launching an instance.",
+      "a": "no"
+    },
+    {
+      "c": "Always select the US-East-1-a zone for HA.",
+      "a": "no"
+    },
+    {
+      "c": "Do not select the AZ; instead let AWS select the AZ.",
+      "a": "yes"
+    },
+    {
+      "c": "The user can never select the Availability Zone while launching an instance.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS best practice for high availability is to distribute instances across multiple Availability Zones. If you manually select a specific AZ for every launch, you might inadvertently concentrate all your instances in a single AZ. By not specifying an AZ (i.e., leaving it as 'No Preference'), you allow AWS Auto Scaling or your launch configuration to distribute instances across AZs, which improves fault tolerance. For specific placement needs, like using Placement Groups, you would select an AZ, but for general high availability, letting AWS choose is recommended."
+},
+{
+  "id": 1639,
+  "q": "ec2-revoke RevokeSecurityGroup Ingress",
+  "o": [
+    {
+      "c": "Removes one or more security groups from a rule.",
+      "a": "no"
+    },
+    {
+      "c": "Removes one or more security groups from an Amazon EC2 instance.",
+      "a": "no"
+    },
+    {
+      "c": "Removes one or more rules from a security group.",
+      "a": "yes"
+    },
+    {
+      "c": "Removes a security group from our account.",
+      "a": "no"
+    }
+  ],
+  "nt": "The `ec2-revoke` command (older CLI, now `aws ec2 revoke-security-group-ingress`) is used to remove one or more inbound rules from a specified security group. The `RevokeSecurityGroupIngress` is the API action it performs. It does not delete the security group itself, just the specific ingress (inbound) rules you specify."
+},
+{
+  "id": 1640,
+  "q": "Select the correct statement.",
+  "o": [
+    {
+      "c": "You don't need not specify the resource identifier while stopping a resource.",
+      "a": "no"
+    },
+    {
+      "c": "You can terminate, stop, or delete a resource based solely on its tags.",
+      "a": "no"
+    },
+    {
+      "c": "You can't terminate, stop, or delete a resource based solely on its tags.",
+      "a": "yes"
+    },
+    {
+      "c": "You don't need to specify the resource identifier while terminating a resource.",
+      "a": "no"
+    }
+  ],
+  "nt": "While tags are extremely useful for organizing, searching, and cost-tracking, most AWS resource management actions (like stopping an EC2 instance, terminating it, or deleting an EBS volume) require you to specify the unique resource identifier (e.g., instance-id, volume-id). You cannot perform these actions by only referencing the resource's tags. However, you can use tags in conjunction with services like AWS Systems Manager or scripting to identify resources and then perform actions on them using their IDs."
+},
+{
+  "id": 1641,
+  "q": "What is the time period with which metric data is sent to CloudWatch when detailed monitoring is enabled on an Amazon EC2 instance?",
+  "o": [
+    {
+      "c": "15 minutes.",
+      "a": "no"
+    },
+    {
+      "c": "5 minutes.",
+      "a": "no"
+    },
+    {
+      "c": "1 minute.",
+      "a": "yes"
+    },
+    {
+      "c": "45 seconds.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon EC2 instances send metric data to CloudWatch by default at 5-minute intervals. When you enable 'Detailed Monitoring' (for an additional cost), the instance sends metric data to CloudWatch at 1-minute intervals. This provides a higher-resolution view of the instance's performance, which is useful for more granular monitoring and alerting."
+},
+{
+  "id": 1642,
+  "q": "A large real-estate brokerage is exploring the option of adding a cost-effective location based alert to their existing mobile application. The application backend infrastructure currently runs on AWS. Users who opt in to this service will receive alerts on their mobile device regarding real-estate offers in proximity to their location. For the alerts to be relevant delivery time needs to be in the low minute count. The existing mobile app has 5 million users across the US. Which one of the following architectural suggestions would you make to the customer?",
+  "o": [
+    {
+      "c": "The mobile application will submit its location to a web service endpoint utilizing Elastic Load Balancing and EC2 instances. DynamoDB will be used to store and retrieve relevant offers. EC2 instances will communicate with mobile carriers/device providers to push alerts back to mobile application.",
+      "a": "no"
+    },
+    {
+      "c": "Use AWS DirectConnect or VPN to establish connectivity with mobile carriers. EC2 instances will receive the mobile applications' location through carrier connection. RDS will be used to store and relevant offers. EC2 instances will communicate with mobile carriers to push alerts back to the mobile application.",
+      "a": "no"
+    },
+    {
+      "c": "The mobile application will send device location using SQS. EC2 instances will retrieve the relevant offers from DynamoDB. AWS Mobile Push will be used to send offers to the mobile application.",
+      "a": "yes"
+    },
+    {
+      "c": "The mobile application will send device location using AWS Mobile Push. EC2 instances will retrieve the relevant offers from DynamoDB. EC2 instances will communicate with mobile carriers/device providers to push alerts back to the mobile application.",
+      "a": "no"
+    }
+  ],
+  "nt": "This architecture effectively uses decoupling and managed services. Amazon SQS can buffer location update messages from millions of users, allowing backend EC2 instances to process them asynchronously and scale as needed. DynamoDB provides a fast, scalable NoSQL database to store and query location-based offers with low latency. Amazon Simple Notification Service (SNS) with Mobile Push is the key service for sending push notifications directly to mobile devices (iOS, Android, etc.) at scale, which is far more efficient and reliable than trying to manage direct connections to mobile carriers. This combination of SQS, DynamoDB, and SNS Mobile Push creates a scalable, cost-effective, and low-latency solution for location-based alerts."
+},
+{
+  "id": 1643,
+  "q": "You are running PostgreSQL on Amazon RDS and it seems to be all running smoothly deployed in one Availability Zone. A database administrator asks you if DB instances running PostgreSQL support Multi-AZ deployments. What would be a correct response to this question?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "Yes but only for small db instances.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "Yes but you need to request the service from AWS.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS supports Multi-AZ deployments for several database engines, including PostgreSQL. A Multi-AZ deployment provides high availability and automatic failover by maintaining a synchronous standby replica in a different Availability Zone. This is a standard feature of RDS and does not require a special request; it can be enabled during or after DB instance creation."
+},
+{
+  "id": 1644,
+  "q": "What is the data model of DynamoDB?",
+  "o": [
+    {
+      "c": "Since DynamoDB is schema-less, there is no data model.",
+      "a": "no"
+    },
+    {
+      "c": "'Items', with Keys and one or more Attribute; and 'Attribute', with Name and Value.",
+      "a": "no"
+    },
+    {
+      "c": "'Table', a collection of Items; 'Items', with Keys and one or more Attribute; and 'Attribute', with Name and Value.",
+      "a": "yes"
+    },
+    {
+      "c": "'Database', which is a set of 'Tables', which is a set of 'Items', which is a set of 'Attributes'.",
+      "a": "no"
+    }
+  ],
+  "nt": "DynamoDB's core data model consists of three main components: 1. **Tables**: A collection of items, analogous to a table in a relational database. 2. **Items**: A single data record in a table. Each item is uniquely identified by a primary key. 3. **Attributes**: A fundamental data element within an item, similar to a column in a relational database. Each attribute has a name and a value. While DynamoDB is schema-less (you don't define attributes upfront except for the key), this hierarchy of Table -> Item -> Attribute defines its data model structure."
+},
+{
+  "id": 1645,
+  "q": "What is a placement group in Amazon EC2?",
+  "o": [
+    {
+      "c": "It is a group of EC2 instances within a single Availability Zone.",
+      "a": "yes"
+    },
+    {
+      "c": "It the edge location of your web content.",
+      "a": "no"
+    },
+    {
+      "c": "It is the AWS region where you run the EC2 instance of your web content.",
+      "a": "no"
+    },
+    {
+      "c": "It is a group used to span multiple Availability Zones.",
+      "a": "no"
+    }
+  ],
+  "nt": "A placement group is a logical grouping of instances within a *single Availability Zone*. Placement groups are used to influence the placement of instances relative to each other to achieve low-latency network performance (Cluster placement group) or to reduce the risk of simultaneous hardware failure (Spread placement group). They cannot span multiple Availability Zones."
+},
+{
+  "id": 1646,
+  "q": "A company is running an SMB file server in its data center. The file server stores large files that are accessed frequently for the first few days after the files are created. After 7 days the files are rarely accessed. The total data size is increasing and is close to the company's total storage capacity. A solutions architect must increase the company's available storage space without losing low-latency access to the most recently accessed files. The solutions architect must also provide file lifecycle management to avoid future storage issues. Which solution will meet these requirements?",
+  "o": [
+    {
+      "c": "Use AWS DataSync to copy data that is older than 7 days from the SMB file server to AWS.",
+      "a": "no"
+    },
+    {
+      "c": "Create an Amazon S3 File Gateway to extend the company's storage space. Create an S3 Lifecycle policy to transition the data to S3 Glacier Deep Archive after 7 days.",
+      "a": "no"
+    },
+    {
+      "c": "Create an Amazon FSx for Windows File Server file system to extend the company's storage space.",
+      "a": "no"
+    },
+    {
+      "c": "Install a utility on each user's computer to access Amazon S3. Create an S3 Lifecycle policy to transition the data to S3 Glacier Flexible Retrieval after 7 days.",
+      "a": "no"
+    }
+  ],
+  "nt": "This scenario describes a perfect use case for AWS Storage Gateway in 'File Gateway' mode. The File Gateway presents a Network File System (NFS) or Server Message Block (SMB) mount point to the on-premises environment, which appears as a local file share. Frequently accessed files are cached locally on the gateway appliance for low-latency access, while all data is durably stored in Amazon S3. This effectively extends the company's storage capacity into the cloud. Furthermore, because the data resides in S3, you can apply S3 Lifecycle policies to automatically transition infrequently accessed data (files older than 7 days) to a cheaper storage class like S3 Standard-Infrequent Access (S3 Standard-IA) or S3 Glacier Flexible Retrieval, providing the required lifecycle management. The other options either don't provide a seamless local file share interface (direct S3 access) or are more complex/more expensive full migrations (FSx, DataSync for full copy)."
+},
+{
+  "id": 1647,
+  "q": "A large company wants to provide its globally located developers separate, limited size, managed PostgreSQL databases for development purposes. The databases will be low volume. The developers need the databases only when they are actively working. The company wants to cover the most services with the fewest savings plans. Which combination of savings plans will meet these requirements? (Choose two.)",
+  "o": [
+    {
+      "c": "Purchase an EC2 Instance Savings Plan for Amazon EC2 and SageMaker.",
+      "a": "no"
+    },
+    {
+      "c": "Purchase a Compute Savings Plan for Amazon EC2, Lambda, and SageMaker.",
+      "a": "no"
+    },
+    {
+      "c": "Purchase a SageMaker Savings Plan.",
+      "a": "no"
+    },
+    {
+      "c": "Purchase a Compute Savings Plan for Lambda, Fargate, and Amazon EC2.",
+      "a": "no"
+    },
+    {
+      "c": "Purchase an EC2 Instance Savings Plan for Amazon EC2 and Fargate.",
+      "a": "no"
+    }
+  ],
+  "nt": "This question's correct answer was not among the provided options in the snippet. Based on the scenario, the most suitable solution would be to use **Amazon Aurora Serverless (v2)**. Aurora Serverless automatically starts up, scales capacity, and shuts down based on application demand. This is ideal for development databases that are only used during working hours, as it eliminates costs when the databases are idle. Developers could be granted access via a service like AWS Service Catalog to launch their own databases within a central Aurora cluster with predefined size limits. This is more cost-effective and operationally efficient for this specific use case than managing individual RDS instances and purchasing Savings Plans."
+},
+{
+  "id": 1648,
+  "q": "A company is building a web application that serves a content management system. The content management system runs on Amazon EC2 instances behind an Application Load Balancer (ALB). The EC2 instances run in an Auto Scaling group across multiple Availability Zones. Users are constantly adding and updating files, blogs, and other website assets in the content management system. A solutions architect must implement a solution in which all the EC2 instances share up-to-date website content with the least possible lag time. Which solution meets these requirements?",
+  "o": [
+    {
+      "c": "Update the EC2 user data in the Auto Scaling group lifecycle policy to copy the website assets from the EC2 instance that was launched most recently. Configure the ALB to make changes to the website assets only in the newest EC2 instance.",
+      "a": "no"
+    },
+    {
+      "c": "Copy the website assets to an Amazon Elastic File System (Amazon EFS) file system. Configure each EC2 instance to mount the EFS file system locally. Configure the website hosting application to reference the website assets that are stored in the EFS file system.",
+      "a": "yes"
+    },
+    {
+      "c": "Copy the website assets to an Amazon S3 bucket. Ensure that each EC2 instance downloads the website assets from the S3 bucket to the attached Amazon Elastic Block Store (Amazon EBS) volume. Run the S3 sync command once each hour to keep files up to date.",
+      "a": "no"
+    },
+    {
+      "c": "Restore an Amazon Elastic Block Store (Amazon EBS) snapshot with the website assets. Attach the EBS snapshot as a secondary EBS volume when a new EC2 instance is launched. Configure the website hosting application to reference the website assets that are stored in the secondary EBS volume.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon EFS provides a scalable, shared network file system that can be concurrently mounted by multiple EC2 instances across multiple Availability Zones. When an asset is added or updated by a user on one EC2 instance, it is immediately written to the shared EFS file system. All other EC2 instances that have the EFS file system mounted will see the change almost instantly. This provides a single, consistent source of truth for the website assets with minimal lag, making it ideal for a shared content repository in a scalable web application. The other options involve copying or syncing data, which introduces latency and potential for inconsistency."
+},
+{
+  "id": 1649,
+  "q": "A company's web application consists of multiple Amazon EC2 instances that run behind an Application Load Balancer in a VPC. An Amazon RDS for MySQL DB instance contains the data. The company needs the ability to automatically detect and respond to suspicious or unexpected behavior in its AWS environment. The company already has added AWS WAF to its architecture. What should a solutions architect do next to protect against threats?",
+  "o": [
+    {
+      "c": "Use Amazon GuardDuty to perform threat detection. Configure Amazon EventBridge (Amazon CloudWatch Events) to filter for GuardDuty findings and to invoke an AWS Lambda function to adjust the AWS WAF rules.",
+      "a": "yes"
+    },
+    {
+      "c": "Use AWS Firewall Manager to perform threat detection. Configure Amazon EventBridge (Amazon CloudWatch Events) to filter for Firewall Manager findings and to invoke an AWS Lambda function to adjust the AWS WAF web ACL.",
+      "a": "no"
+    },
+    {
+      "c": "Use Amazon Inspector to perform threat detection and to update the AWS WAF rules. Create a VPC network ACL to limit access to the web application.",
+      "a": "no"
+    },
+    {
+      "c": "Use Amazon Macie to perform threat detection and to update the AWS WAF rules. Create a VPC network ACL to limit access to the web application.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon GuardDuty is a threat detection service that continuously monitors for malicious activity and unauthorized behavior by analyzing AWS CloudTrail event logs, VPC Flow Logs, and DNS logs. It can identify threats like reconnaissance, instance compromise, and account compromise. By integrating GuardDuty findings with Amazon EventBridge (CloudWatch Events), you can automatically trigger remediation actions. A common remediation is to invoke an AWS Lambda function that dynamically updates AWS WAF rules to block the IP addresses identified as malicious by GuardDuty, providing an intelligent, automated response to threats. AWS Firewall Manager is for policy management across accounts, Amazon Inspector is for assessing EC2 instances for vulnerabilities, and Amazon Macie is for discovering and protecting sensitive data in S3."
+},
+{
+  "id": 1650,
+  "q": "A company is planning to run a group of Amazon EC2 instances that connect to an Amazon Aurora database. The company has built an AWS CloudFormation template to deploy the EC2 instances and the Aurora DB cluster. The company wants to allow the instances to authenticate to the database in a secure way. The company does not want to maintain static database credentials. Which solution meets these requirements with the LEAST operational effort?",
+  "o": [
+    {
+      "c": "Create a database user with a user name and password. Add parameters for the database user name and password to the CloudFormation template. Pass the parameters to the EC2 instances when the instances are launched.",
+      "a": "no"
+    },
+    {
+      "c": "Create a database user with a user name and password. Store the user name and password in AWS Systems Manager Parameter Store. Configure the EC2 instances to retrieve the database credentials from Parameter Store.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the DB cluster to use IAM database authentication. Create a database user to use with IAM authentication. Associate a role with the EC2 instances to allow applications on the instances to access the database.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the DB cluster to use IAM database authentication with an IAM user. Create a database user that has a name that matches the IAM user. Associate the IAM user with the EC2 instances to allow applications on the instances to access the database.",
+      "a": "no"
+    }
+  ],
+  "nt": "IAM database authentication for Amazon Aurora uses authentication tokens instead of traditional passwords. An authentication token is a unique string that is generated using the Signature Version 4 signing process and includes information about the requester, service, region, timestamp, and expiration. The EC2 instances assume an IAM role that has permission to connect to the database. The application running on the EC2 instance uses the AWS SDK to generate this temporary token, which is valid for 15 minutes. This eliminates the need to store and manage static database credentials, provides automatic credential rotation, and leverages IAM for centralized access control."
+}
+]

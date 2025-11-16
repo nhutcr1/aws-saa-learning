@@ -1,0 +1,1160 @@
+[
+{
+  "id": 1251,
+  "q": "Resources that are created in AWS are identified by a unique identifier called an",
+  "o": [
+    {
+      "c": "Amazon Resource Number",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Resource Nametag",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Resource Name",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Resource Namespace",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Resource Name (ARN) is the unique identifier used across AWS services to identify specific resources. ARNs follow a standard format that includes the AWS service, region, account ID, and resource type and name, providing a universal way to reference AWS resources in policies, APIs, and CLI commands."
+},
+{
+  "id": 1252,
+  "q": "What are the two types of licensing options available for using Amazon RDS for Oracle?",
+  "o": [
+    {
+      "c": "BYOL and Enterprise License",
+      "a": "no"
+    },
+    {
+      "c": "BYOL and License Included",
+      "a": "yes"
+    },
+    {
+      "c": "Enterprise License and License Included",
+      "a": "no"
+    },
+    {
+      "c": "Role based License and License Included",
+      "a": "no"
+    }
+  ],
+  "nt": "BYOL (Bring Your Own License) allows customers to use their existing Oracle licenses with RDS, while License Included means the Oracle license is included in the RDS pricing. BYOL is typically more cost-effective for organizations with existing Oracle license investments, while License Included simplifies licensing management for new deployments."
+},
+{
+  "id": 1253,
+  "q": "In AWS, which security aspects are the customer's responsibility? (Choose 4 answers)",
+  "o": [
+    {
+      "c": "Security Group and ACL (Access Control List) settings",
+      "a": "yes"
+    },
+    {
+      "c": "Decommissioning storage devices",
+      "a": "no"
+    },
+    {
+      "c": "Patch management on the EC2 instance's operating system",
+      "a": "yes"
+    },
+    {
+      "c": "Life-cycle management of IAM credentials",
+      "a": "yes"
+    },
+    {
+      "c": "Controlling physical access to compute resources",
+      "a": "no"
+    },
+    {
+      "c": "Encryption of EBS (Elastic Block Storage) volumes",
+      "a": "yes"
+    }
+  ],
+  "nt": "Security Group and ACL settings control network traffic to resources. Patch management ensures operating systems and applications are updated with security fixes. IAM credential lifecycle management prevents unauthorized access through proper credential rotation and revocation. EBS volume encryption protects data at rest, which is the customer's responsibility to implement and manage."
+},
+{
+  "id": 1254,
+  "q": "You have a web application running on six Amazon EC2 instances, consuming about 45% of resources on each instance. You are using auto-scaling to make sure that six instances are running at all times. The number of requests this application processes is consistent and does not experience spikes. The application is critical to your business and you want high availability at all times. You want the load to be distributed evenly between all instances. You also want to use the same Amazon Machine Image (AMI) for all instances. Which of the following architectural choices should you make?",
+  "o": [
+    {
+      "c": "Deploy 6 EC2 instances in one Availability Zone and use Amazon Elastic Load Balancer",
+      "a": "no"
+    },
+    {
+      "c": "Deploy 3 EC2 instances in one region and 3 in another region and use Amazon Elastic Load Balancer",
+      "a": "no"
+    },
+    {
+      "c": "Deploy 3 EC2 instances in one Availability Zone and 3 in another Availability Zone and use Amazon Elastic Load Balancer",
+      "a": "yes"
+    },
+    {
+      "c": "Deploy 2 EC2 instances in three regions and use Amazon Elastic Load Balancer",
+      "a": "no"
+    }
+  ],
+  "nt": "Distributing instances across multiple Availability Zones within the same region provides high availability while maintaining low latency. If one Availability Zone fails, the application continues running in other zones. Elastic Load Balancer automatically distributes incoming traffic across multiple Availability Zones and provides health checks to route traffic only to healthy instances."
+},
+{
+  "id": 1255,
+  "q": "An ERP application is deployed across multiple AZs in a single region. In the event of failure, the Recovery Time Objective (RTO) must be less than 3 hours, and the Recovery Point Objective (RPO) must be 15 minutes. The customer realizes that data corruption occurred roughly 1.5 hours ago. What DR strategy could be used to achieve this RTO and RPO in the event of this kind of failure?",
+  "o": [
+    {
+      "c": "Take hourly DB backups to S3, with transaction logs stored in S3 every 5 minutes",
+      "a": "yes"
+    },
+    {
+      "c": "Use synchronous database master-slave replication between two Availability Zones",
+      "a": "no"
+    },
+    {
+      "c": "Take hourly DB backups to EC2 Instance store volumes with transaction logs stored in S3 every 5 minutes",
+      "a": "no"
+    },
+    {
+      "c": "Take 15 minute DB backups stored in Glacier with transaction logs stored in S3 every 5 minutes",
+      "a": "no"
+    }
+  ],
+  "nt": "Hourly database backups to S3 combined with 5-minute transaction logs provide the required RPO of 15 minutes. In case of data corruption, you can restore from the last good backup and apply transaction logs to recover up to the point of failure. S3 provides durable storage for both backups and logs, ensuring data availability for recovery operations."
+},
+{
+  "id": 1256,
+  "q": "You have been setting up an Amazon Virtual Private Cloud (Amazon VPC) for your company, including setting up subnets. Security is a concern, and you are not sure which is the best security practice for securing subnets in your VPC. Which statement below is correct in describing the protection of AWS resources in each subnet?",
+  "o": [
+    {
+      "c": "You can use multiple layers of security, including security groups and network access control lists (ACL)",
+      "a": "yes"
+    },
+    {
+      "c": "You can only use access control lists (ACL)",
+      "a": "no"
+    },
+    {
+      "c": "You don't need any security in subnets",
+      "a": "no"
+    },
+    {
+      "c": "You can use multiple layers of security, including security groups, network access control lists (ACL) and CloudHSM",
+      "a": "no"
+    }
+  ],
+  "nt": "Using multiple layers of security with both security groups (operating at the instance level) and network ACLs (operating at the subnet level) provides defense in depth. Security groups are stateful and control traffic to EC2 instances, while network ACLs are stateless and control traffic at the subnet boundary. This layered approach allows for fine-grained control and better security posture."
+},
+{
+  "id": 1257,
+  "q": "Amazon EC2 provides a repository of public data sets that can be seamlessly integrated into AWS cloud-based applications. What is the monthly charge for using the public data sets?",
+  "o": [
+    {
+      "c": "A 1 time charge of 10$ for all the datasets",
+      "a": "no"
+    },
+    {
+      "c": "1$ per dataset per month",
+      "a": "no"
+    },
+    {
+      "c": "10$ per month for all the datasets",
+      "a": "no"
+    },
+    {
+      "c": "There is no charge for using the public data sets",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS Public Datasets are provided free of charge as a service to the community. Users only pay for the AWS resources they use to store and process the data, such as S3 storage costs and EC2 compute costs, but the datasets themselves are available at no additional charge."
+},
+{
+  "id": 1258,
+  "q": "[...] embodies the 'share-nothing' architecture and essentially involves breaking a large database into several smaller databases. Common ways to split a database include: 1. Splitting tables that are not joined in the same query onto different hosts or 2. Duplicating a table across multiple hosts and then using a hashing algorithm to determine which host receives a given update.",
+  "o": [
+    {
+      "c": "Sharding",
+      "a": "yes"
+    },
+    {
+      "c": "Failure recovery",
+      "a": "no"
+    },
+    {
+      "c": "Federation",
+      "a": "no"
+    },
+    {
+      "c": "DOL operations",
+      "a": "no"
+    }
+  ],
+  "nt": "Sharding is a database architecture pattern that horizontally partitions data across multiple databases, implementing a 'share-nothing' architecture. This approach improves scalability and performance by distributing the load. Each shard operates independently, and data is partitioned based on specific keys or algorithms, allowing the system to handle larger datasets and higher transaction volumes than a single database could manage."
+},
+{
+  "id": 1259,
+  "q": "After deploying a new website for a client on AWS, he asks if you can set it up so that if it fails it can be automatically redirected to a backup website that he has stored on a dedicated server elsewhere. You are wondering whether Amazon Route 53 can do this. Which statement below is correct in regards to Amazon Route 53?",
+  "o": [
+    {
+      "c": "Amazon Route 53 can't help detect an outage. You need to use another service",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Route 53 can help detect an outage of your website and redirect your end users to alternate locations",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Route 53 can help detect an outage of your website but can't redirect your end users to alternate locations",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Route 53 can't help detect an outage of your website, but can redirect your end users to alternate locations",
+      "a": "no"
+    }
+  ],
+  "nt": "Route 53 provides health checking capabilities that can monitor endpoints and automatically route traffic away from unhealthy resources to healthy alternatives. When combined with DNS failover routing policies, Route 53 can detect when a primary endpoint becomes unavailable and automatically redirect users to backup resources, ensuring high availability and business continuity."
+},
+{
+  "id": 1260,
+  "q": "Your company plans to host a large donation website on Amazon Web Services (AWS). You anticipate a large and undetermined amount of traffic that will create many database writes. To be certain that you do not drop any writes to a database hosted on AWS. Which service should you use?",
+  "o": [
+    {
+      "c": "Amazon RDS with provisioned IOPS up to the anticipated peak write throughput",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Simple Queue Service (SQS) for capturing the writes and draining the queue to write to the database",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon ElastiCache to store the writes until the writes are committed to the database",
+      "a": "no"
+    },
+    {
+      "c": "Amazon DynamoDB with provisioned write throughput up to the anticipated peak write throughput",
+      "a": "no"
+    }
+  ],
+  "nt": "SQS provides a reliable, highly-scalable hosted queue for storing messages as they travel between applications. By using SQS as a buffer between the application and database, writes can be captured even during traffic spikes and processed asynchronously. This ensures no writes are lost even if the database temporarily cannot keep up with the write volume, as messages will persist in the queue until successfully processed."
+},
+{
+  "id": 1261,
+  "q": "You have set up an Auto Scaling group. The cool down period for the Auto Scaling group is 7 minutes. The first instance is launched after 3 minutes, while the second instance is launched after 4 minutes. How many minutes after the first instance is launched will Auto Scaling accept another scaling activity request?",
+  "o": [
+    {
+      "c": "11 minutes",
+      "a": "yes"
+    },
+    {
+      "c": "7 minutes",
+      "a": "no"
+    },
+    {
+      "c": "10 minutes",
+      "a": "no"
+    },
+    {
+      "c": "14 minutes",
+      "a": "no"
+    }
+  ],
+  "nt": "The cooldown period starts when an instance becomes InService. For the first instance launched at 3 minutes, the cooldown period ends at 10 minutes (3 + 7). For the second instance launched at 4 minutes, the cooldown ends at 11 minutes (4 + 7). Auto Scaling waits for all instances to complete their cooldown periods before accepting new scaling activities, so it will wait until the longest cooldown period ends at 11 minutes."
+},
+{
+  "id": 1262,
+  "q": "You are migrating a legacy client-server application to AWS. The application responds to a specific DNS domain (e.g. <www.example.com>) and has a 2-tier architecture, with multiple application servers and a database server. Remote clients use TCP to connect to the application servers. The application servers need to know the IP address of the clients in order to function properly and are currently taking that information from the TCP socket. A Multi-AZ RDS MySQL instance will be used for the database. During the migration you can change the application code, but you have to file a change request. How would you implement the architecture on AWS in order to maximize scalability and high availability?",
+  "o": [
+    {
+      "c": "File a change request to implement Alias Resource support in the application. Use Route 53 Alias Resource Record to distribute load on two application servers in different AZs",
+      "a": "no"
+    },
+    {
+      "c": "File a change request to implement Latency Based Routing support in the application. Use Route 53 with Latency Based Routing enabled to distribute load on two application servers in different AZs",
+      "a": "no"
+    },
+    {
+      "c": "File a change request to implement Cross-Zone support in the application. Use an ELB with a TCP Listener and Cross-Zone Load Balancing enabled, two application servers in different AZs",
+      "a": "no"
+    },
+    {
+      "c": "File a change request to implement Proxy Protocol support in the application. Use an ELB with a TCP Listener and Proxy Protocol enabled to distribute load on two application servers in different AZs",
+      "a": "yes"
+    }
+  ],
+  "nt": "Proxy Protocol preserves the original client IP address when using a TCP load balancer. Without Proxy Protocol, the application servers would only see the ELB's IP address. By enabling Proxy Protocol on the ELB and modifying the application to parse the Proxy Protocol header, the application can obtain the actual client IP addresses while still benefiting from the scalability and high availability provided by ELB and Multi-AZ RDS."
+},
+{
+  "id": 1263,
+  "q": "Can I test my DB Instance against a new version before upgrading?",
+  "o": [
+    {
+      "c": "Yes",
+      "a": "yes"
+    },
+    {
+      "c": "No",
+      "a": "no"
+    },
+    {
+      "c": "Only in VPC",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS allows you to test database upgrades by creating a read replica of your DB instance and upgrading the replica to the new version. This enables you to run applications against the upgraded replica to verify compatibility and performance before committing to upgrading your production database, minimizing risk and ensuring a smooth upgrade process."
+},
+{
+  "id": 1264,
+  "q": "Your system recently experienced down time during the troubleshooting process. You found that a new administrator mistakenly terminated several production EC2 instances. Which of the following strategies will help prevent a similar situation in the future? The administrator still must be able to: Launch, start stop, and terminate development resources. Launch and start production instances.",
+  "o": [
+    {
+      "c": "Create an IAM user, which is not allowed to terminate instances by leveraging production EC2 termination protection",
+      "a": "no"
+    },
+    {
+      "c": "Leverage resource based tagging along with an IAM user, which can prevent specific users from terminating production EC2 resources",
+      "a": "yes"
+    },
+    {
+      "c": "Leverage EC2 termination protection and multi-factor authentication, which together require users to authenticate before terminating EC2 instances",
+      "a": "no"
+    },
+    {
+      "c": "Create an IAM user and apply an IAM role which prevents users from terminating production EC2 instances",
+      "a": "no"
+    }
+  ],
+  "nt": "Using resource-based tagging with IAM policies allows you to create fine-grained permissions based on resource tags. You can tag production resources and create IAM policies that deny termination actions on resources with specific tags (like 'Environment=Production'), while still allowing the same actions on development resources. This provides granular control without completely removing termination capabilities from the administrator."
+},
+{
+  "id": 1265,
+  "q": "You have just set up a large site for a client which involved a huge database which you set up with Amazon RDS to run as a Multi-AZ deployment. You now start to worry about what will happen if the database instance fails. Which statement best describes how this database will function if there is a database failure?",
+  "o": [
+    {
+      "c": "Updates to your DB Instance are synchronously replicated across Availability Zones to the standby in order to keep both in sync and protect your latest database updates against DB Instance failure",
+      "a": "yes"
+    },
+    {
+      "c": "Your database will not resume operation without manual administrative intervention",
+      "a": "no"
+    },
+    {
+      "c": "Updates to your DB Instance are asynchronously replicated across Availability Zones to the standby in order to keep both in sync and protect your latest database updates against DB Instance failure",
+      "a": "no"
+    },
+    {
+      "c": "Updates to your DB Instance are synchronously replicated across S3 to the standby in order to keep both in sync and protect your latest database updates against DB Instance failure",
+      "a": "no"
+    }
+  ],
+  "nt": "In Multi-AZ deployments, Amazon RDS synchronously replicates data to a standby instance in a different Availability Zone. This synchronous replication ensures that both primary and standby databases are consistently updated. In case of primary instance failure, RDS automatically fails over to the standby with minimal downtime, typically completing within 1-2 minutes, and no data loss occurs due to the synchronous replication."
+},
+{
+  "id": 1266,
+  "q": "Your company has an on-premises multi-tier PHP web application, which recently experienced downtime due to a large burst in web traffic due to a company announcement. Over the coming days, you are expecting similar announcements to drive similar unpredictable bursts, and are looking to find ways to quickly improve your infrastructure's ability to handle unexpected increases in traffic. The application currently consists of 2 tiers: a web tier which consists of a load balancer and several Linux Apache web servers, as well as a database tier which hosts a Linux server hosting a MySQL database. Which scenario below will provide full site functionality, while helping to improve the ability of your application in the short timeframe required?",
+  "o": [
+    {
+      "c": "Failover environment: Create an S3 bucket and configure it for website hosting. Migrate your DNS to Route 53 using zone file import, and leverage Route 53 DNS failover to failover to the S3 hosted website",
+      "a": "no"
+    },
+    {
+      "c": "Hybrid environment: Create an AMI, which can be used to launch web servers in EC2. Create an Auto Scaling group, which uses the AMI to scale the web tier based on incoming traffic. Leverage Elastic Load Balancing to balance traffic between on-premises web servers and those hosted in AWS",
+      "a": "no"
+    },
+    {
+      "c": "Offload traffic from on-premises environment: Setup a CloudFront distribution, and configure CloudFront to cache objects from a custom origin. Choose to customize your object cache behavior, and select a TTL that objects should exist in cache",
+      "a": "yes"
+    },
+    {
+      "c": "Migrate to AWS: Use VM Import/Export to quickly convert an on-premises web server to an AMI. Create an Auto Scaling group, which uses the imported AMI to scale the web tier based on incoming traffic. Create an RDS read replica and setup replication between the RDS instance and on-premises MySQL server to migrate the database",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudFront can cache static and dynamic content at edge locations worldwide, reducing the load on origin servers. By configuring appropriate TTL (Time to Live) settings, CloudFront serves cached content to users, which significantly reduces the traffic hitting the on-premises infrastructure during traffic spikes. This approach provides immediate relief without requiring major architectural changes and can be implemented quickly to handle unexpected traffic bursts."
+},
+{
+  "id": 1267,
+  "q": "When using consolidated billing there are two account types. What are they?",
+  "o": [
+    {
+      "c": "Paying account and Linked account",
+      "a": "yes"
+    },
+    {
+      "c": "Parent account and Child account",
+      "a": "no"
+    },
+    {
+      "c": "Main account and Sub account",
+      "a": "no"
+    },
+    {
+      "c": "Main account and Secondary account",
+      "a": "no"
+    }
+  ],
+  "nt": "In AWS Consolidated Billing, the 'Paying Account' is the account that pays the bills of all linked accounts, while 'Linked Accounts' are the member accounts whose usage is consolidated into a single bill. The paying account has visibility into the usage of all linked accounts but cannot access their resources, maintaining security isolation while providing billing consolidation and potential volume discounts."
+},
+{
+  "id": 1268,
+  "q": "You have a periodic Image analysis application that gets some files in input, analyzes them and for each file writes some data in output to a text file. The number of files in input per day is high and concentrated in a few hours of the day. Currently you have a server on EC2 with a large EBS volume that hosts the input data and the results. It takes almost 20 hours per day to complete the process. What services could be used to reduce the elaboration time and improve the availability of the solution?",
+  "o": [
+    {
+      "c": "Amazon S3 to store I/O files. SQS to distribute elaboration commands to a group of hosts working in parallel. Auto scaling to dynamically size the group of hosts depending on the length of the SQS queue",
+      "a": "no"
+    },
+    {
+      "c": "EBS with Provisioned IOPS (PIOPS) to store I/O files. SNS to distribute elaboration commands to a group of hosts working in parallel. Auto Scaling to dynamically size the group of hosts depending on the number of SNS notifications",
+      "a": "no"
+    },
+    {
+      "c": "Amazon S3 to store I/O files. SNS to distribute elaboration commands to a group of hosts working in parallel. Auto scaling to dynamically size the group of hosts depending on the number of SNS notifications",
+      "a": "no"
+    },
+    {
+      "c": "EBS with Provisioned IOPS (PIOPS) to store I/O files. SQS to distribute elaboration commands to a group of hosts working in parallel. Auto Scaling to dynamically size the group of hosts depending on the length of the SQS queue",
+      "a": "yes"
+    }
+  ],
+  "nt": "EBS with Provisioned IOPS provides consistent, high-performance storage needed for intensive I/O operations during image analysis. SQS enables reliable message queuing to distribute work among multiple workers, ensuring tasks are processed efficiently. Auto Scaling based on SQS queue length automatically adjusts the number of EC2 instances to match the workload, scaling up during peak hours and down during quiet periods, reducing processing time from 20 hours and improving cost efficiency."
+},
+{
+  "id": 1269,
+  "q": "While controlling access to Amazon EC2 resources, which of the following acts as a firewall that controls the traffic allowed to reach one or more instances?",
+  "o": [
+    {
+      "c": "A security group",
+      "a": "yes"
+    },
+    {
+      "c": "An instance type",
+      "a": "no"
+    },
+    {
+      "c": "A storage cluster",
+      "a": "no"
+    },
+    {
+      "c": "An object",
+      "a": "no"
+    }
+  ],
+  "nt": "Security groups act as virtual firewalls for EC2 instances, controlling inbound and outbound traffic at the instance level. They operate at the hypervisor level and provide stateful filtering, meaning if you allow an incoming request, the response is automatically allowed regardless of outbound rules. Security groups can be configured to allow specific protocols, ports, and source IP ranges, providing granular control over network access to instances."
+},
+{
+  "id": 1270,
+  "q": "The base URI for all requests for instance metadata is [...]",
+  "o": [
+    {
+      "c": "http://254.169.169.254/latest/",
+      "a": "no"
+    },
+    {
+      "c": "http://169.169.254.254/latest/",
+      "a": "no"
+    },
+    {
+      "c": "http://127.0.0.1/latest/",
+      "a": "no"
+    },
+    {
+      "c": "http://169.254.169.254/latest/",
+      "a": "yes"
+    }
+  ],
+  "nt": "The instance metadata service is available at the link-local IP address 169.254.169.254. This address is consistent across all EC2 instances and regions. The metadata service provides information about the instance itself, including instance ID, instance type, security groups, and IAM role credentials. Accessing this endpoint from within the instance allows applications to dynamically discover information about their environment without hardcoding configuration details."
+},
+{
+  "id": 1271,
+  "q": "While using the EC2 GET requests as URLs, the [...] is the URL that serves as the entry point for the web service.",
+  "o": [
+    {
+      "c": "token",
+      "a": "no"
+    },
+    {
+      "c": "endpoint",
+      "a": "yes"
+    },
+    {
+      "c": "action",
+      "a": "no"
+    },
+    {
+      "c": "None of these",
+      "a": "no"
+    }
+  ],
+  "nt": "The endpoint is the base URL that serves as the entry point for AWS web services. For EC2, this would be a regional endpoint like 'ec2.us-east-1.amazonaws.com'. All API requests are made to this endpoint with specific parameters that define the action to be performed. The endpoint handles authentication, request routing, and response generation for the service."
+},
+{
+  "id": 1272,
+  "q": "A user is planning to launch a scalable web application. Which of the below mentioned options will not affect the latency of the application?",
+  "o": [
+    {
+      "c": "Region",
+      "a": "no"
+    },
+    {
+      "c": "Provisioned IOPS",
+      "a": "yes"
+    },
+    {
+      "c": "Availability Zone",
+      "a": "no"
+    },
+    {
+      "c": "Instance size",
+      "a": "no"
+    }
+  ],
+  "nt": "Provisioned IOPS affects storage performance and throughput but does not directly impact network latency between the client and the application. Network latency is primarily influenced by geographical distance (region selection), network path quality, and instance network performance characteristics, which are determined by instance size and type rather than storage IOPS configuration."
+},
+{
+  "id": 1273,
+  "q": "Your firm has uploaded a large amount of aerial image data to S3. In the past, in your on-premises environment, you used a dedicated group of servers to often process this data and used Rabbit MQ, an open source messaging system to get job information to the servers. Once processed, the data would go to tape and be shipped offsite. Your manager told you to stay with the current design, and leverage AWS archival storage and messaging services to minimize cost. Which is correct?",
+  "o": [
+    {
+      "c": "Use SQS for passing job messages. Use Cloud Watch alarms to terminate EC2 worker instances when they become idle. Once data is processed, change the storage class of the S3 objects to Reduced Redundancy Storage",
+      "a": "no"
+    },
+    {
+      "c": "Setup Auto-Scaled workers triggered by queue depth that use spot instances to process messages in SQS. Once data is processed, change the storage class of the S3 objects to Reduced Redundancy Storage",
+      "a": "no"
+    },
+    {
+      "c": "Setup Auto-Scaled workers triggered by queue depth that use spot instances to process messages in SQS. Once data is processed, change the storage class of the S3 objects to Glacier",
+      "a": "yes"
+    },
+    {
+      "c": "Use SNS to pass job messages. Use Cloud Watch alarms to terminate spot worker instances when they become idle. Once data is processed, change the storage class of the S3 object to Glacier",
+      "a": "no"
+    }
+  ],
+  "nt": "SQS provides reliable message queuing to replace RabbitMQ for job distribution. Auto-scaling based on queue depth ensures the right number of workers are available to process jobs efficiently. Spot instances significantly reduce compute costs for batch processing workloads. Changing processed data to Glacier storage class provides cost-effective archival storage that matches the tape backup functionality while offering faster retrieval times when needed."
+},
+{
+  "id": 1274,
+  "q": "A user has launched 10 EC2 instances inside a placement group. Which of the below mentioned statements is true with respect to the placement group?",
+  "o": [
+    {
+      "c": "All instances must be in the same AZ",
+      "a": "yes"
+    },
+    {
+      "c": "All instances can be across multiple regions",
+      "a": "no"
+    },
+    {
+      "c": "The placement group cannot have more than 5 instances",
+      "a": "no"
+    },
+    {
+      "c": "All instances must be in the same region",
+      "a": "no"
+    }
+  ],
+  "nt": "Placement groups are logical groupings of instances within a single Availability Zone that enable applications to participate in low-latency, high-throughput networks. All instances in a placement group must reside in the same Availability Zone because the benefit of placement groups is to place instances close together to minimize network latency, which requires physical proximity within the same data center."
+},
+{
+  "id": 1275,
+  "q": "A user has created a CloudFormation stack. The stack creates AWS services, such as EC2 instances, ELB, AutoScaling, and RDS. While creating the stack it created EC2, ELB and AutoScaling but failed to create RDS. What will CloudFormation do in this scenario?",
+  "o": [
+    {
+      "c": "Rollback all the changes and terminate all the created services",
+      "a": "yes"
+    },
+    {
+      "c": "It will wait for the user's input about the error and correct the mistake after the input",
+      "a": "no"
+    },
+    {
+      "c": "CloudFormation can never throw an error after launching a few services since it verifies all the steps before launching",
+      "a": "no"
+    },
+    {
+      "c": "It will warn the user about the error and ask the user to manually create RDS",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudFormation automatically rolls back all resources when stack creation fails to ensure consistency and prevent orphaned resources. This rollback behavior maintains the atomicity of stack operations - either all resources are created successfully, or none are. The rollback process deletes all resources that were successfully created before the failure occurred, ensuring no partial deployments remain and billing is stopped for those resources."
+},
+{
+  "id": 1276,
+  "q": "You have been asked to design the storage layer for an application. The application requires disk performance of at least 100,000 IOPS. In addition, the storage layer must be able to survive the loss of an individual disk, EC2 instance, or Availability Zone without any data loss. The volume you provide must have a capacity of at least 3 TB. Which of the following designs will meet these objectives?",
+  "o": [
+    {
+      "c": "Instantiate a c3.8xlarge instance in us-east-1. Provision 4x1TB EBS volumes, attach them to the instance, and configure them as a single RAID 5 volume. Ensure that EBS snapshots are performed every 15 minutes",
+      "a": "no"
+    },
+    {
+      "c": "Instantiate a c3.8xlarge instance in us-east-1. Provision 3xlTB EBS volumes, attach them to the Instance, and configure them as a single RAID 0 volume. Ensure that EBS snapshots are performed every 15 minutes",
+      "a": "no"
+    },
+    {
+      "c": "Instantiate an i2.8xlarge instance in us-east-1a. Create a RAID 0 volume using the four 800GB SSD ephemeral disks provided with the instance. Provision 3x1TB EBS volumes, attach them to the instance, and configure them as a second RAID 0 volume. Configure synchronous, block-level replication from the ephemeral-backed volume to the EBS-backed volume",
+      "a": "no"
+    },
+    {
+      "c": "Instantiate a c3.8xlarge instance in us-east-1. Provision an AWS Storage Gateway and configure it for 3 TB of storage and 100,000 IOPS. Attach the volume to the instance",
+      "a": "no"
+    },
+    {
+      "c": "Instantiate an i2.8xlarge instance in us-east-1a. Create a RAID 0 volume using the four 800GB SSD ephemeral disks provided with the instance. Configure synchronous, block-level replication to an identically configured instance in us-east-1b",
+      "a": "yes"
+    }
+  ],
+  "nt": "The i2.8xlarge instance with four 800GB SSD ephemeral disks in RAID 0 can deliver over 100,000 IOPS. Synchronous block-level replication to another Availability Zone provides protection against instance failure and Availability Zone failure. Ephemeral SSDs on i2 instances provide the highest I/O performance in EC2, and cross-AZ replication ensures no data loss while meeting the 3TB capacity requirement through the combined storage of multiple disks."
+},
+{
+  "id": 1277,
+  "q": "A company is preparing to give AWS Management Console access to developers. Company policy mandates identity federation and role-based access control. Roles are currently assigned using groups in the corporate Active Directory. What combination of the following will give developers access to the AWS console? (Choose 2 answers)",
+  "o": [
+    {
+      "c": "AWS Directory Service AD Connector",
+      "a": "yes"
+    },
+    {
+      "c": "AWS Directory Service Simple AD",
+      "a": "no"
+    },
+    {
+      "c": "AWS Identity and Access Management groups",
+      "a": "no"
+    },
+    {
+      "c": "AWS identity and Access Management roles",
+      "a": "yes"
+    },
+    {
+      "c": "AWS identity and Access Management users",
+      "a": "no"
+    }
+  ],
+  "nt": "AD Connector enables federation between on-premises Active Directory and AWS, allowing users to sign in to the AWS Management Console using their existing corporate credentials. IAM roles provide temporary security credentials that can be assumed by federated users, enabling role-based access control based on Active Directory group memberships. This combination maintains existing corporate identity management while providing secure, temporary access to AWS resources."
+},
+{
+  "id": 1278,
+  "q": "Your startup wants to implement an order fulfillment process for selling a personalized gadget that needs an average of 3-4 days to produce with some orders taking up to 6 months. You expect 10 orders per day on your first day, 1000 orders per day after 6 months and 10,000 orders after 12 months. Orders coming in are checked for consistency, then dispatched to your manufacturing plant for production, quality control, packaging, shipment and payment processing. If the product does not meet the quality standards at any stage of the process, employees may force the process to repeat a step. Customers are notified via email about order status and any critical issues with their orders such as payment failure. Your base architecture includes AWS Elastic Beanstalk for your website with an RDS MySQL instance for customer data and orders. How can you implement the order fulfillment process while making sure that the emails are delivered reliably?",
+  "o": [
+    {
+      "c": "Add a business process management application to your Elastic Beanstalk app servers and re-use the RDS database for tracking order status. Use one of the Elastic Beanstalk instances to send emails to customers",
+      "a": "no"
+    },
+    {
+      "c": "Use SWF with an Auto Scaling group of activity workers and a decider instance in another Auto Scaling group with min/max=1. Use the decider instance to send emails to customers",
+      "a": "no"
+    },
+    {
+      "c": "Use SWF with an Auto Scaling group of activity workers and a decider instance in another Auto Scaling group with min/max=1. Use SES to send emails to customers",
+      "a": "yes"
+    },
+    {
+      "c": "Use an SQS queue to manage all process tasks. Use an Auto Scaling group of EC2 Instances that poll the tasks and execute them. Use SES to send emails to customers",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon SWF (Simple Workflow Service) is designed for complex business processes with multiple steps, human intervention, and potential retries. It maintains execution state and coordinates tasks across distributed components. SES (Simple Email Service) provides reliable, scalable email delivery with high deliverability rates. The combination of SWF for workflow management and SES for email notifications creates a robust system that can handle the long-running, complex order fulfillment process while ensuring reliable customer communication."
+},
+{
+  "id": 1279,
+  "q": "A, [...] is an individual, system, or application that interacts with AWS programmatically.",
+  "o": [
+    {
+      "c": "user",
+      "a": "yes"
+    },
+    {
+      "c": "AWS Account",
+      "a": "no"
+    },
+    {
+      "c": "group",
+      "a": "no"
+    },
+    {
+      "c": "role",
+      "a": "no"
+    }
+  ],
+  "nt": "In AWS IAM terminology, a 'user' is an entity that represents a person or application that interacts with AWS resources. Users can be given long-term credentials (access keys) to make programmatic requests to AWS services, or they can be given passwords to access the AWS Management Console. Users are the fundamental identity type for granting access to AWS services and resources."
+},
+{
+  "id": 1280,
+  "q": "A user is accessing an EC2 instance on the SSH port for IP 10.20.30.40. Which one is a secure way to configure that the instance can be accessed only from this IP?",
+  "o": [
+    {
+      "c": "In the security group, open port 22 for IP 10.20.30.40",
+      "a": "no"
+    },
+    {
+      "c": "In the security group, open port 22 for IP 10.20.30.40/32",
+      "a": "yes"
+    },
+    {
+      "c": "In the security group, open port 22 for IP 10.20.30.40/24",
+      "a": "no"
+    },
+    {
+      "c": "In the security group, open port 22 for IP 10.20.30.40/0",
+      "a": "no"
+    }
+  ],
+  "nt": "Using /32 CIDR notation specifies a single IP address (10.20.30.40/32 = 10.20.30.40 only). This is the most secure configuration as it restricts SSH access to exactly one specific IP address. Without the /32 suffix, the rule might be interpreted differently or provide broader access than intended. The /32 ensures that only traffic originating from that exact IP address is permitted, providing precise access control."
+},
+{
+  "id": 1281,
+  "q": "Read Replicas require a transactional storage engine and are only supported for the [...] storage engine.",
+  "o": [
+    {
+      "c": "OracleISAM",
+      "a": "no"
+    },
+    {
+      "c": "MSSQLDB",
+      "a": "no"
+    },
+    {
+      "c": "InnoDB",
+      "a": "yes"
+    },
+    {
+      "c": "MyISAM",
+      "a": "no"
+    }
+  ],
+  "nt": "InnoDB is MySQL's transactional storage engine that supports ACID properties, row-level locking, and foreign keys. Read Replicas rely on the binary log replication feature, which requires a transactional storage engine to ensure data consistency between the source and replica instances. MyISAM, being a non-transactional storage engine, cannot guarantee the same level of data consistency required for reliable replication."
+},
+{
+  "id": 1282,
+  "q": "What is Amazon Glacier?",
+  "o": [
+    {
+      "c": "You mean Amazon 'Iceberg': it's a low-cost storage service",
+      "a": "no"
+    },
+    {
+      "c": "A security tool that allows to 'freeze' an EBS volume and perform computer forensics on it",
+      "a": "no"
+    },
+    {
+      "c": "A low-cost storage service that provides secure and durable storage for data archiving and backup",
+      "a": "yes"
+    },
+    {
+      "c": "It's a security tool that allows to 'freeze' an EC2 instance and perform computer forensics on it",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Glacier is designed for data archiving and long-term backup at very low costs. It provides extremely durable storage (99.999999999% durability) with retrieval times ranging from minutes to hours, making it ideal for data that is rarely accessed but needs to be preserved. Glacier integrates with other AWS services like S3 through lifecycle policies and is commonly used for regulatory compliance, digital preservation, and backup storage."
+},
+{
+  "id": 1283,
+  "q": "You have a content management system running on an Amazon EC2 instance that is approaching 100% CPU utilization. Which option will reduce load on the Amazon EC2 instance?",
+  "o": [
+    {
+      "c": "Create a load balancer, and register the Amazon EC2 instance with it",
+      "a": "no"
+    },
+    {
+      "c": "Create a CloudFront distribution, and configure the Amazon EC2 instance as the origin",
+      "a": "yes"
+    },
+    {
+      "c": "Create an Auto Scaling group from the instance using the Create AutoScaling Group action",
+      "a": "no"
+    },
+    {
+      "c": "Create a launch configuration from the instance using the Create launch Configuration action",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudFront caches content at edge locations worldwide, serving static and dynamic content directly to users without hitting the origin server. By caching frequently accessed content, CloudFront significantly reduces the CPU load on the EC2 instance. Even for dynamic content, CloudFront can cache at the edge based on cache control headers, reducing the number of requests that reach the origin server and thus lowering CPU utilization."
+},
+{
+  "id": 1284,
+  "q": "Can I initiate a 'forced failover' for my MySQL Multi-AZ DB Instance deployment?",
+  "o": [
+    {
+      "c": "Only in certain regions",
+      "a": "no"
+    },
+    {
+      "c": "Only in VPC",
+      "a": "no"
+    },
+    {
+      "c": "Yes",
+      "a": "yes"
+    },
+    {
+      "c": "No",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS allows you to manually initiate a failover for Multi-AZ deployments through the AWS Management Console, CLI, or API. This forced failover promotes the standby replica to become the new primary database instance. This capability is useful for testing failover procedures, performing maintenance, or recovering from performance issues without waiting for automatic failover conditions to be met."
+},
+{
+  "id": 1285,
+  "q": "When controlling access to Amazon EC2 resources, each Amazon EBS Snapshot has a [...] attribute that controls which AWS accounts can use the snapshot.",
+  "o": [
+    {
+      "c": "createVolumePermission",
+      "a": "yes"
+    },
+    {
+      "c": "LaunchPermission",
+      "a": "no"
+    },
+    {
+      "c": "SharePermission",
+      "a": "no"
+    },
+    {
+      "c": "RequestPermission",
+      "a": "no"
+    }
+  ],
+  "nt": "The createVolumePermission attribute controls which AWS accounts can create volumes from an EBS snapshot. This permission mechanism allows snapshot owners to share snapshots with specific AWS accounts or make them publicly available. When shared, the recipient accounts can create new EBS volumes from the snapshot in their own AWS accounts, enabling data sharing and collaboration while maintaining control over the original snapshot."
+},
+{
+  "id": 1286,
+  "q": "You are trying to change the instance type for instances running in your application tier that is using Auto Scaling. In which area below would you change the instance type definition?",
+  "o": [
+    {
+      "c": "Auto Scaling policy",
+      "a": "no"
+    },
+    {
+      "c": "Auto Scaling group",
+      "a": "no"
+    },
+    {
+      "c": "Auto Scaling tags",
+      "a": "no"
+    },
+    {
+      "c": "Auto Scaling launch configuration",
+      "a": "yes"
+    }
+  ],
+  "nt": "The launch configuration defines the template used by Auto Scaling when launching new instances, including the instance type, AMI, security groups, key pair, and other instance specifications. To change the instance type for Auto Scaling, you must create a new launch configuration with the desired instance type and then update the Auto Scaling group to use the new launch configuration. Existing instances will continue to run with the old instance type until they are terminated and replaced by new instances using the updated launch configuration."
+},
+{
+  "id": 1287,
+  "q": "Which of the following statements is true of creating a launch configuration using an EC2 instance?",
+  "o": [
+    {
+      "c": "The launch configuration can be created only using the Query APIs",
+      "a": "no"
+    },
+    {
+      "c": "Auto Scaling automatically creates a launch configuration directly from an EC2 instance",
+      "a": "yes"
+    },
+    {
+      "c": "A user should manually create a launch configuration before creating an Auto Scaling group",
+      "a": "no"
+    },
+    {
+      "c": "The launch configuration should be created manually from the AWS CLI",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS provides the capability to create a launch configuration directly from an existing EC2 instance through the 'Create Launch Configuration like this' feature. This automatically captures the instance's current configuration including AMI, instance type, key pair, security groups, and IAM role, making it easy to create Auto Scaling groups that launch instances with the same configuration as an existing, properly configured instance."
+},
+{
+  "id": 1288,
+  "q": "Your company has multiple IT departments, each with their own VPC. Some VPCs are located within the same AWS account, and others in a different AWS account. You want to peer together all VPCs to enable the IT departments to have full access to each others' resources. There are certain limitations placed on VPC peering. Which of the following statements is incorrect in relation to VPC peering?",
+  "o": [
+    {
+      "c": "Private DNS values cannot be resolved between instances in peered VPCs",
+      "a": "no"
+    },
+    {
+      "c": "You can have up to 3 VPC peering connections between the same two VPCs at the same time",
+      "a": "yes"
+    },
+    {
+      "c": "You cannot create a VPC peering connection between VPCs in different regions",
+      "a": "no"
+    },
+    {
+      "c": "You have a limit on the number active and pending VPC peering connections that you can have per VPC",
+      "a": "no"
+    }
+  ],
+  "nt": "You can only have one VPC peering connection between the same two VPCs at any given time. VPC peering connections are one-to-one relationships. If you need to connect multiple VPCs, you must create separate peering connections for each VPC pair, creating a mesh topology. The statement about having up to 3 connections between the same two VPCs is incorrect because only one peering connection is allowed between any two VPCs."
+},
+{
+  "id": 1289,
+  "q": "A gaming company comes to you and asks you to build them infrastructure for their site. They are not sure how big they will be as with all start ups they have limited money and big ideas. What they do tell you is that if the game becomes successful, like one of their previous games, it may rapidly grow to millions of users and generate tens (or even hundreds) of thousands of writes and reads per second. After considering all of this, you decide that they need a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. Which of the following databases do you think would best fit their needs?",
+  "o": [
+    {
+      "c": "Amazon DynamoDB",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Redshift",
+      "a": "no"
+    },
+    {
+      "c": "Any non-relational database",
+      "a": "no"
+    },
+    {
+      "c": "Amazon SimpleDB",
+      "a": "no"
+    }
+  ],
+  "nt": "DynamoDB is a fully managed NoSQL database service designed for massive scale with predictable performance. It automatically scales throughput capacity to handle millions of requests per second while maintaining low-latency response times. With its pay-per-request pricing model, it's cost-effective for startups as they only pay for what they use. DynamoDB's seamless scalability makes it ideal for gaming applications that may experience rapid, unpredictable growth and need to handle massive read/write workloads."
+},
+{
+  "id": 1290,
+  "q": "A/An [...] acts as a firewall that controls the traffic allowed to reach one or more instances.",
+  "o": [
+    {
+      "c": "security group",
+      "a": "yes"
+    },
+    {
+      "c": "ACL",
+      "a": "no"
+    },
+    {
+      "c": "IAM",
+      "a": "no"
+    },
+    {
+      "c": "private IP Addresses",
+      "a": "no"
+    }
+  ],
+  "nt": "Security groups operate at the instance level and act as virtual firewalls, controlling inbound and outbound traffic for EC2 instances. They are stateful, meaning that if you allow an incoming request, the response is automatically allowed regardless of outbound rules. Security groups can be configured to allow specific protocols, ports, and source IP ranges, and multiple instances can belong to the same security group, inheriting its rules."
+},
+{
+  "id": 1291,
+  "q": "Your manager has just given you access to multiple VPN connections that someone else has recently set up between all your company's offices. She needs you to make sure that the communication between the VPNs is secure. Which of the following services would be best for providing a low-cost hub-and-spoke model for primary or backup connectivity between these remote offices?",
+  "o": [
+    {
+      "c": "Amazon CloudFront",
+      "a": "no"
+    },
+    {
+      "c": "AWS Direct Connect",
+      "a": "no"
+    },
+    {
+      "c": "AWS CloudHSM",
+      "a": "no"
+    },
+    {
+      "c": "AWS VPN CloudHub",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS VPN CloudHub provides a hub-and-spoke model using the AWS global network as the hub. It allows multiple sites to connect to a common VPC via VPN connections and communicate with each other through the AWS network. This is cost-effective as it leverages existing VPN connections without requiring additional dedicated connections between each site pair. The CloudHub automatically routes traffic between connected sites using the VPC routing tables."
+},
+{
+  "id": 1292,
+  "q": "You need to create a management network using network interfaces for a virtual private cloud (VPC) network. Which of the following statements is incorrect pertaining to Best Practices for Configuring Network Interfaces.",
+  "o": [
+    {
+      "c": "You can detach secondary (ethN) network interfaces when the instance is running or stopped. However, you can't detach the primary (eth0) interface",
+      "a": "no"
+    },
+    {
+      "c": "Launching an instance with multiple network interfaces automatically configures interfaces, private IP addresses, and route tables on the operating system of the instance",
+      "a": "no"
+    },
+    {
+      "c": "You can attach a network interface in one subnet to an instance in another subnet in the same VPC, however, both the network interface and the instance must reside in the same Availability Zone",
+      "a": "no"
+    },
+    {
+      "c": "Attaching another network interface to an instance is a valid method to increase or double the network bandwidth to or from the dual-homed instance",
+      "a": "yes"
+    }
+  ],
+  "nt": "Attaching multiple network interfaces to an instance does not aggregate bandwidth. Each network interface has its own bandwidth limit based on the instance type, but traffic is not load balanced across interfaces. To increase network bandwidth, you would need to use a larger instance type with higher network performance capabilities, not simply add more network interfaces. Multiple interfaces are typically used for creating management networks, multi-homed instances, or network appliances, not for bandwidth aggregation."
+},
+{
+  "id": 1293,
+  "q": "A user has launched 10 EC2 instances inside a placement group. Which of the following statements is true in regards to what ability launching your instances into a VPC instead of EC2-Classic gives you?",
+  "o": [
+    {
+      "c": "All of the things listed here",
+      "a": "yes"
+    },
+    {
+      "c": "Change security group membership for your instances while they're running",
+      "a": "no"
+    },
+    {
+      "c": "Assign static private IP addresses to your instances that persist across starts and stops",
+      "a": "no"
+    },
+    {
+      "c": "Define network interfaces, and attach one or more network interfaces to your instances",
+      "a": "no"
+    }
+  ],
+  "nt": "VPC provides several advantages over EC2-Classic: You can change security group membership for running instances, assign persistent static private IP addresses that survive instance stops and starts, and define and attach multiple network interfaces to instances. These capabilities provide greater network flexibility, improved management, and enhanced security compared to the EC2-Classic environment, which has more limited networking options."
+},
+{
+  "id": 1294,
+  "q": "In the HQ region you run an hourly batch process reading data from every region to compute cross regional reports that are sent by email to all offices this batch process must be completed as fast as possible to quickly optimize logistics how do you build the database architecture in order to meet the requirements?",
+  "o": [
+    {
+      "c": "For each regional deployment, use RDS MySQL with a master in the region and a read replica in the HQ region",
+      "a": "yes"
+    },
+    {
+      "c": "For each regional deployment, use MySQL on EC2 with a master in the region and send hourly EBS snapshots to the HQ region",
+      "a": "no"
+    },
+    {
+      "c": "For each regional deployment, use RDS MySQL with a master in the region and send hourly RDS snapshots to the HQ region",
+      "a": "no"
+    },
+    {
+      "c": "For each regional deployment, use MySQL on EC2 with a master in the region and use S3 to copy data files hourly to the HQ region",
+      "a": "no"
+    },
+    {
+      "c": "Use Direct Connect to connect all regional MySQL deployments to the HQ region and reduce network latency for the batch process",
+      "a": "no"
+    }
+  ],
+  "nt": "Using RDS Read Replicas in the HQ region for each regional database provides low-latency access to the data for batch processing. Read replicas asynchronously replicate data from the source databases, ensuring the batch process has access to recent data without impacting the performance of the primary databases. This architecture minimizes network latency for the batch process while maintaining data consistency and allowing the batch jobs to run efficiently against local replicas rather than cross-region primary databases."
+},
+{
+  "id": 1295,
+  "q": "What is the average IOPS that the user will get for most of the year as per EC2 SLA if the instance is attached to the EBS optimized instance?",
+  "o": [
+    {
+      "c": "950",
+      "a": "no"
+    },
+    {
+      "c": "990",
+      "a": "no"
+    },
+    {
+      "c": "1000",
+      "a": "no"
+    },
+    {
+      "c": "900",
+      "a": "yes"
+    }
+  ],
+  "nt": "The EC2 SLA guarantees 90% availability over a one-year period, which means services can be unavailable for up to 36.5 days per year. For IOPS performance, this translates to an average of approximately 900 IOPS (90% of 1000) over the course of a year when accounting for potential service interruptions, maintenance windows, and other factors that might affect consistent performance delivery."
+},
+{
+  "id": 1296,
+  "q": "You are working with a customer who has 10 TB of archival data that they want to migrate to Amazon Glacier. The customer has a 1-Mbps connection to the Internet. Which service or feature provides the fastest method of getting the data into Amazon Glacier?",
+  "o": [
+    {
+      "c": "Amazon Glacier multipart upload",
+      "a": "no"
+    },
+    {
+      "c": "AWS Storage Gateway",
+      "a": "no"
+    },
+    {
+      "c": "VM Import/Export",
+      "a": "no"
+    },
+    {
+      "c": "AWS Import/Export",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS Import/Export uses physical storage devices to transfer large amounts of data into AWS. With a 1-Mbps connection, transferring 10 TB would take approximately 2.5 years. AWS Import/Export can complete this transfer in days by shipping physical storage devices to AWS. This approach bypasses network limitations and is significantly faster for large datasets when internet bandwidth is constrained."
+},
+{
+  "id": 1297,
+  "q": "Your manager has asked you to set up a public subnet with instances that can send and receive internet traffic, and a private subnet that can't receive traffic directly from the internet, but can initiate traffic to the internet (and receive responses) through a NAT instance in the public subnet. Hence, the following 3 rules need to be allowed: Inbound SSH traffic. Web servers in the public subnet to read and write to MS SQL servers in the private subnet. Inbound RDP traffic from the Microsoft Terminal Services gateway in the public private subnet. What are the respective ports that need to be opened for this?",
+  "o": [
+    {
+      "c": "Ports 22, 1433, 3389",
+      "a": "yes"
+    },
+    {
+      "c": "Ports 21, 1433, 3389",
+      "a": "no"
+    },
+    {
+      "c": "Ports 25, 1433, 3389",
+      "a": "no"
+    },
+    {
+      "c": "Ports 22, 1343, 3999",
+      "a": "no"
+    }
+  ],
+  "nt": "Port 22 is used for SSH access to manage instances. Port 1433 is the default port for Microsoft SQL Server database connections. Port 3389 is used for RDP (Remote Desktop Protocol) to access Windows instances. These three ports cover the required connectivity: SSH for Linux administration, SQL Server for database access, and RDP for Windows terminal services access."
+},
+{
+  "id": 1298,
+  "q": "An EC2 instance is connected to an ENI (Elastic Network Interface) in one subnet. What happens to the data on an instance if the instance reboots (intentionally or unintentionally)?",
+  "o": [
+    {
+      "c": "Data will be lost",
+      "a": "no"
+    },
+    {
+      "c": "Data persists",
+      "a": "yes"
+    }
+  ],
+  "nt": "When an EC2 instance reboots, it maintains its instance store data and EBS volume data. The instance performs a standard reboot where the operating system is restarted, but the underlying virtual machine continues to run on the same host hardware. All data on attached EBS volumes and instance store volumes persists through the reboot process. Only when an instance is stopped or terminated is the data on instance store volumes lost."
+},
+{
+  "id": 1299,
+  "q": "Please select the Amazon EC2 resource which can be tagged.",
+  "o": [
+    {
+      "c": "Key pairs",
+      "a": "no"
+    },
+    {
+      "c": "Elastic IP addresses",
+      "a": "no"
+    },
+    {
+      "c": "Placement groups",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon EBS snapshots",
+      "a": "no"
+    }
+  ],
+  "nt": "Placement groups can be tagged with key-value pairs to help organize and identify them. Tags on placement groups can be used for cost allocation, resource management, and automation purposes. While many AWS resources support tagging, placement groups are among the EC2 resources that can be tagged, unlike key pairs, Elastic IP addresses, or EBS snapshots which have more limited or no tagging capabilities."
+},
+{
+  "id": 1300,
+  "q": "Without [...] you must either create multiple AWS accounts-each with its own billing and subscriptions to AWS products-or your employees must share the security credentials of a single AWS account.",
+  "o": [
+    {
+      "c": "Amazon RDS",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Glacier",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EMR",
+      "a": "no"
+    },
+    {
+      "c": "Amazon IAM",
+      "a": "yes"
+    }
+  ],
+  "nt": "IAM (Identity and Access Management) enables you to create multiple users within a single AWS account, each with their own security credentials and fine-grained permissions. Without IAM, organizations would need to create separate AWS accounts for each user or team, leading to billing complexity and management overhead, or share a single set of credentials, which is a security anti-pattern that makes accountability and access control impossible."
+}
+]

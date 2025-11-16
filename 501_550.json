@@ -1,0 +1,1164 @@
+[
+{
+  "id": 1501,
+  "q": "What is the default maximum number of MFA devices in use per AWS account (at the root account level)?",
+  "o": [
+    {
+      "c": "1.",
+      "a": "yes"
+    },
+    {
+      "c": "5.",
+      "a": "no"
+    },
+    {
+      "c": "15.",
+      "a": "no"
+    },
+    {
+      "c": "10.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS allows only one MFA device to be associated with the root account at a time for security reasons. This limitation ensures that there's a single point of authentication control for the most privileged account in the AWS environment."
+},
+{
+  "id": 1502,
+  "q": "Select the correct statement: Within Amazon EC2, when using Linux instances, the device name /dev/sda1 is [...].",
+  "o": [
+    {
+      "c": "reserved for EBS volumes.",
+      "a": "no"
+    },
+    {
+      "c": "recommended for EBS volumes.",
+      "a": "no"
+    },
+    {
+      "c": "recommended for instance store volumes.",
+      "a": "no"
+    },
+    {
+      "c": "reserved for the root device.",
+      "a": "yes"
+    }
+  ],
+  "nt": "In Amazon EC2 Linux instances, /dev/sda1 is specifically reserved for the root device volume. This is the primary storage device where the operating system is installed and from which the instance boots."
+},
+{
+  "id": 1503,
+  "q": "Does Amazon Route 53 support NS Records?",
+  "o": [
+    {
+      "c": "Yes, it supports Name Service records.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "It supports only MX records.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, it supports Name Server records.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Amazon Route 53 fully supports NS (Name Server) records, which are essential DNS records that specify the authoritative name servers for a domain or subdomain. This is a fundamental DNS record type that Route 53 handles as part of its comprehensive DNS service offering."
+},
+{
+  "id": 1504,
+  "q": "Your web application front end consists of multiple EC2 instances behind an Elastic Load Balancer. You configured ELB to perform health checks on these EC2 instances, if an instance fails to pass health checks, which statement will be true?",
+  "o": [
+    {
+      "c": "The instance gets terminated automatically by the ELB.",
+      "a": "no"
+    },
+    {
+      "c": "The instance gets quarantined by the ELB for root cause analysis.",
+      "a": "no"
+    },
+    {
+      "c": "The instance is replaced automatically by the ELB.",
+      "a": "no"
+    },
+    {
+      "c": "The ELB stops sending traffic to the instance that failed its health check.",
+      "a": "yes"
+    }
+  ],
+  "nt": "When an EC2 instance fails ELB health checks, the load balancer automatically stops routing traffic to that unhealthy instance while continuing to monitor it. If the instance recovers and passes subsequent health checks, ELB will resume sending traffic to it. This behavior ensures that client requests are only directed to healthy instances."
+},
+{
+  "id": 1505,
+  "q": "George has launched three EC2 instances inside the US-East-1a zone with his AWS account. Ray has launched two EC2 instances in the US-East-1a zone with his AWS account. Which of the below mentioned statements will help George and Ray understand the Availability Zone (AZ) concept better?",
+  "o": [
+    {
+      "c": "All the instances of George and Ray can communicate over a private IP with a minimal cost.",
+      "a": "no"
+    },
+    {
+      "c": "The US-East-1a region of George and Ray can be different Availability Zones.",
+      "a": "yes"
+    },
+    {
+      "c": "All the instances of George and Ray can communicate over a private IP without any cost.",
+      "a": "no"
+    },
+    {
+      "c": "The instances of George and Ray will be running in the same data centre.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS intentionally randomizes Availability Zone identifiers (like us-east-1a) across different AWS accounts to distribute workloads evenly across physical data centers. This means that what appears as us-east-1a in one account might actually map to a different physical data center than us-east-1a in another account, providing better resource distribution and fault isolation."
+},
+{
+  "id": 1506,
+  "q": "Once again your customers are concerned about the security of their sensitive data and with their latest enquiry ask about what happens to old storage devices on AWS. What would be the best answer to this question?",
+  "o": [
+    {
+      "c": "AWS reformats the disks and uses them again.",
+      "a": "no"
+    },
+    {
+      "c": "AWS uses the techniques detailed in DoD 5220.22-M to destroy data as part of the decommissioning process.",
+      "a": "yes"
+    },
+    {
+      "c": "AWS uses their own proprietary software to destroy data as part of the decommissioning process.",
+      "a": "no"
+    },
+    {
+      "c": "AWS uses a 3rd party security organization to destroy data as part of the decommissioning process.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS follows strict data destruction procedures based on industry standards, including the U.S. Department of Defense (DoD) 5220.22-M standard for sanitizing storage media. This ensures that all data is completely irrecoverable when storage devices are decommissioned, providing customers with confidence that their sensitive information cannot be retrieved from retired hardware."
+},
+{
+  "id": 1507,
+  "q": "Which of the following are characteristics of Amazon VPC subnets? (Choose 2 answers)",
+  "o": [
+    {
+      "c": "Each subnet spans at least 2 Availability Zones to provide a high-availability environment.",
+      "a": "no"
+    },
+    {
+      "c": "Each subnet maps to a single Availability Zone.",
+      "a": "yes"
+    },
+    {
+      "c": "CIDR block mask of/25 is the smallest range supported.",
+      "a": "no"
+    },
+    {
+      "c": "By default, all subnets can route between each other, whether they are private or public.",
+      "a": "no"
+    },
+    {
+      "c": "Instances in a private subnet can communicate with the Internet only if they have an Elastic IP.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Each VPC subnet is confined to a single Availability Zone to provide fault isolation, as AZs are physically separate data centers. Instances in private subnets require a NAT gateway or NAT instance to access the internet, as Elastic IPs alone don't provide internet connectivity without a route through an internet gateway, which private subnets lack by design."
+},
+{
+  "id": 1508,
+  "q": "Which AWS instance address has the following characteristics? 'If you stop an instance, its Elastic IP address is unmapped, and you must remap it when you restart the instance.'",
+  "o": [
+    {
+      "c": "Both A and B.",
+      "a": "no"
+    },
+    {
+      "c": "None of these.",
+      "a": "no"
+    },
+    {
+      "c": "VPC Addresses.",
+      "a": "no"
+    },
+    {
+      "c": "EC2 Addresses.",
+      "a": "yes"
+    }
+  ],
+  "nt": "In EC2-Classic (the older networking model), Elastic IP addresses are automatically disassociated when an instance is stopped and must be manually reassociated when the instance is restarted. This behavior differs from VPC, where Elastic IP addresses remain associated with stopped instances."
+},
+{
+  "id": 1509,
+  "q": "You are designing a data leak prevention solution for your VPC environment. You want your VPC Instances to be able to access software depots and distributions on the Internet for product updates. The depots and distributions are accessible via third party CONs by their URLs. You want to explicitly deny any other outbound connections from your VPC instances to hosts on the internet. Which of the following options would you consider?",
+  "o": [
+    {
+      "c": "Configure a web proxy server in your VPC and enforce URL-based ru les for outbound access Remove default routes.",
+      "a": "yes"
+    },
+    {
+      "c": "Implement security groups and configure outbound rules to only permit traffic to software depots.",
+      "a": "no"
+    },
+    {
+      "c": "Move all your instances into private VPC subnets remove default routes from all routing tables and add specific routes to the software depots and distributions only.",
+      "a": "no"
+    },
+    {
+      "c": "Implement network access control lists to all specific destinations, with an Implicit deny as a rule.",
+      "a": "no"
+    }
+  ],
+  "nt": "A web proxy server provides granular control over outbound internet access at the application layer (URL level), allowing you to whitelist specific software depots while blocking all other internet traffic. By removing default routes and configuring the proxy as the only path to the internet, you can enforce strict outbound access policies that security groups and NACLs (which operate at the network/transport layers) cannot provide for URL-based filtering."
+},
+{
+  "id": 1510,
+  "q": "What is an isolated database environment running in the cloud (Amazon RDS) called?",
+  "o": [
+    {
+      "c": "DB Instance.",
+      "a": "yes"
+    },
+    {
+      "c": "DB Unit.",
+      "a": "no"
+    },
+    {
+      "c": "DB Server.",
+      "a": "no"
+    },
+    {
+      "c": "DB Volume.",
+      "a": "no"
+    }
+  ],
+  "nt": "In Amazon RDS terminology, a 'DB Instance' is the basic building block that represents an isolated database environment in the cloud. Each DB instance runs a DB engine (MySQL, PostgreSQL, Oracle, etc.) and contains multiple user-created databases, with compute and memory resources defined by the DB instance class."
+},
+{
+  "id": 1511,
+  "q": "A user is sending bulk emails using AWS SES. The emails are not reaching some of the targeted audience because they are not authorized by the ISPs. How can the user ensure that the emails are all delivered?",
+  "o": [
+    {
+      "c": "Send an email using DKIM with SE.",
+      "a": "yes"
+    },
+    {
+      "c": "Send an email using SMTP with SE.",
+      "a": "no"
+    },
+    {
+      "c": "Open a ticket with AWS support to get it authorized with the IS.",
+      "a": "no"
+    },
+    {
+      "c": "Authorize the ISP by sending emails from the development account.",
+      "a": "no"
+    }
+  ],
+  "nt": "DKIM (DomainKeys Identified Mail) is an email authentication method that allows the receiver to check that an email was indeed sent and authorized by the owner of the domain. By implementing DKIM with SES, you cryptographically sign your emails, proving to ISPs that the emails are legitimate and not spoofed, which significantly improves email deliverability and helps prevent emails from being marked as spam."
+},
+{
+  "id": 1512,
+  "q": "What's an ECU?",
+  "o": [
+    {
+      "c": "Extended Cluster User.",
+      "a": "no"
+    },
+    {
+      "c": "None of these.",
+      "a": "no"
+    },
+    {
+      "c": "Elastic Computer Usage.",
+      "a": "no"
+    },
+    {
+      "c": "Elastic Compute Unit.",
+      "a": "yes"
+    }
+  ],
+  "nt": "ECU stands for Elastic Compute Unit, which is an abstract measurement of compute capacity that AWS uses to provide a consistent measure of CPU performance across different EC2 instance types. This allows customers to compare the relative compute power of various instance families regardless of the underlying physical hardware architecture."
+},
+{
+  "id": 1513,
+  "q": "You would like to create a mirror image of your production environment in another region for disaster recovery purposes. Which of the following AWS resources do not need to be recreated in the second region? (Choose 2 answers)",
+  "o": [
+    {
+      "c": "Route 53 Record Sets.",
+      "a": "yes"
+    },
+    {
+      "c": "IAM Roles.",
+      "a": "yes"
+    },
+    {
+      "c": "Elastic IP Addresses (EIP).",
+      "a": "no"
+    },
+    {
+      "c": "EC2 Key Pairs.",
+      "a": "no"
+    },
+    {
+      "c": "Launch configurations.",
+      "a": "no"
+    },
+    {
+      "c": "Security Groups.",
+      "a": "no"
+    }
+  ],
+  "nt": "Route 53 is a global service, so record sets are accessible across all regions without needing regional replication. IAM is also a global service where roles, users, and policies are available in all regions within an AWS account. In contrast, resources like EIPs, key pairs, launch configurations, and security groups are region-specific and must be recreated in the target region for a complete DR setup."
+},
+{
+  "id": 1514,
+  "q": "Which procedure for backing up a relational database on EC2 that is using a set of RAIDed EBS volumes for storage minimizes the time during which the database cannot be written to and results in a consistent backup?",
+  "o": [
+    {
+      "c": "1. Detach EBS volumes, 2. Start EBS snapshot of volumes, 3. Re-attach EBS volumes.",
+      "a": "no"
+    },
+    {
+      "c": "1. Stop the EC2 Instance. 2. Snapshot the EBS volumes.",
+      "a": "no"
+    },
+    {
+      "c": "1. Suspend disk 1/0, 2. Create an image of the EC2 Instance, 3. Resume disk 1/0.",
+      "a": "no"
+    },
+    {
+      "c": "1. Suspend disk 1/0, 2. Start EBS snapshot of volumes, 3. Resume disk 1/0.",
+      "a": "no"
+    },
+    {
+      "c": "1. Suspend disk 1/0, 2. Start EBS snapshot of volumes, 3. Wait for snapshots to complete, 4. Resume disk 1/0.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Suspending disk I/O ensures that all pending writes are completed and no new writes occur during the snapshot process, guaranteeing a consistent backup of the RAID array. Waiting for the snapshots to complete before resuming I/O ensures that the entire backup process captures a point-in-time consistent state across all volumes in the RAID set, which is crucial for database recovery integrity."
+},
+{
+  "id": 1515,
+  "q": "My Read Replica appears 'stuck' after a Multi-AZ failover and is unable to obtain or apply updates from the source DB Instance. What do I do?",
+  "o": [
+    {
+      "c": "You will need to delete the Read Replica and create a new one to rep lace it.",
+      "a": "yes"
+    },
+    {
+      "c": "You will need to disassociate the DB Engine and re associate it.",
+      "a": "no"
+    },
+    {
+      "c": "The instance should be deployed to Single AZ and then moved to Multi-AZ once again.",
+      "a": "no"
+    },
+    {
+      "c": "You will need to delete the DB Instance and create a new one to replace it.",
+      "a": "no"
+    }
+  ],
+  "nt": "After a Multi-AZ failover, Read Replicas can lose synchronization with the new primary database instance due to changes in the replication topology. The most reliable solution is to delete the stuck Read Replica and create a new one from the current primary instance, as attempting to repair the existing replication relationship often proves more complex and time-consuming than starting fresh."
+},
+{
+  "id": 1516,
+  "q": "You are setting up some IAM user policies and have also become aware that some services support resource-based permissions, which let you attach policies to the service's resources instead of to IAM users or groups. Which of the below statements is true in regards to resource-level permissions?",
+  "o": [
+    {
+      "c": "All services support resource-level permissions for all actions.",
+      "a": "no"
+    },
+    {
+      "c": "Resource-level permissions are supported by Amazon CloudFront.",
+      "a": "no"
+    },
+    {
+      "c": "All services support resource-level permissions only for some actions.",
+      "a": "no"
+    },
+    {
+      "c": "Some services support resource-level permissions only for some actions.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Resource-based permissions are implemented selectively across AWS services. Some services like Amazon S3 (bucket policies), SNS (topic policies), and SQS (queue policies) support comprehensive resource-based permissions, while other services may offer limited or no resource-level permission capabilities. The support varies by service and by specific API actions within each service."
+},
+{
+  "id": 1517,
+  "q": "You have some very sensitive data stored on AWS S3 and want to try every possible alternative to keeping it secure in regards to access control. What are the mechanisms available for access control on AWS S3?",
+  "o": [
+    {
+      "c": "(IAM) policies, Access Control Lists (ACLs), bucket policies, and query string authentication.",
+      "a": "yes"
+    },
+    {
+      "c": "(IAM) policies, Access Control Lists (ACLs) and bucket policies.",
+      "a": "no"
+    },
+    {
+      "c": "Access Control Lists (ACLs), bucket policies, and query string authentication.",
+      "a": "no"
+    },
+    {
+      "c": "(IAM) policies, Access Control Lists (ACLs), bucket policies, query string authentication and encryption.",
+      "a": "no"
+    }
+  ],
+  "nt": "S3 provides multiple layers of access control: IAM policies control user/role access across AWS services, bucket policies define resource-based permissions at the bucket level, ACLs offer legacy fine-grained object-level permissions, and query string authentication enables temporary pre-signed URLs for time-limited access to private objects without requiring AWS credentials from the requester."
+},
+{
+  "id": 1518,
+  "q": "You are implementing AWS Direct Connect. You intend to use AWS public service end points such as Amazon S3, across the AWS Direct Connect link. You want other Internet traffic to use your existing link to an Internet Service Provider. What is the correct way to configure AWS Direct connect for access to services such as Amazon S3?",
+  "o": [
+    {
+      "c": "Configure a public Interface on your AWS Direct Connect link. Configure a static route via your AWS Direct Connect link that points to Amazon S3 Advertise a default route to AWS using BGP.",
+      "a": "no"
+    },
+    {
+      "c": "Create a private interface on your AWS Direct Connect link. Configure a static route via your AWS Direct connect link that points to Amazon S3 Configure specific routes to your network in your VPC.",
+      "a": "no"
+    },
+    {
+      "c": "Create a public interface on your AWS Direct Connect link. Redistribute BGP routes into your existing routing infrastructure; advertise specific routes for your network to AWS.",
+      "a": "yes"
+    },
+    {
+      "c": "Create a private interface on your AWS Direct connect link. Redistribute BGP routes into your existing routing infrastructure and advertise a default route to AWS.",
+      "a": "no"
+    }
+  ],
+  "nt": "A public Direct Connect interface allows access to AWS public services like S3, CloudFront, and DynamoDB over the private connection. By redistributing BGP routes into your existing infrastructure and advertising specific routes to AWS, you enable selective routing where AWS public service traffic uses the Direct Connect link while general internet traffic continues to use your existing ISP connection, optimizing both performance and cost."
+},
+{
+  "id": 1519,
+  "q": "You are setting up your first Amazon Virtual Private Cloud (Amazon VPC) network so you decide you should probably use the AWS Management Console and the VPC Wizard. Which of the following is not an option for network architectures after launching the 'Start VPC Wizard' in Amazon VPC page on the AWS Management Console?",
+  "o": [
+    {
+      "c": "VPC with a Single Public Subnet Only.",
+      "a": "no"
+    },
+    {
+      "c": "VPC with a Public Subnet Only and Hardware VPN Access.",
+      "a": "yes"
+    },
+    {
+      "c": "VPC with Public and Private Subnets and Hardware VPN Access.",
+      "a": "no"
+    },
+    {
+      "c": "VPC with a Private Subnet Only and Hardware VPN Access.",
+      "a": "no"
+    }
+  ],
+  "nt": "The VPC Wizard does not offer a 'VPC with a Public Subnet Only and Hardware VPN Access' configuration because this combination doesn't make practical sense. Hardware VPN Access is designed to connect on-premises networks to private subnets within a VPC. A public-only subnet configuration with VPN access would create a conflicting architecture since public subnets are intended for internet-facing resources, while VPN connections are typically used to access internal, private resources."
+},
+{
+  "id": 1520,
+  "q": "True or False: A VPC contains multiple subnets, where each subnet can span multiple Availability Zones.",
+  "o": [
+    {
+      "c": "This is true only if requested during the set-up of VPC.",
+      "a": "no"
+    },
+    {
+      "c": "This is true.",
+      "a": "no"
+    },
+    {
+      "c": "This is false.",
+      "a": "yes"
+    },
+    {
+      "c": "This is true only for US regions.",
+      "a": "no"
+    }
+  ],
+  "nt": "This statement is false because each subnet in a VPC must reside entirely within one Availability Zone. AWS designed subnets to be AZ-specific to provide fault isolation and high availability. To achieve high availability, you must create multiple subnets in different Availability Zones within the same VPC, but a single subnet cannot span across multiple AZs."
+},
+{
+  "id": 1521,
+  "q": "Amazon RDS automated backups and DB Snapshots are currently supported for only the [...] storage engine.",
+  "o": [
+    {
+      "c": "InnoDB.",
+      "a": "yes"
+    },
+    {
+      "c": "MyISAM.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS automated backups and snapshots rely on transaction-consistent storage engine technology. InnoDB, being a transactional storage engine with crash recovery capabilities and write-ahead logging, supports point-in-time recovery and consistent backups. MyISAM, which lacks transactional support and crash recovery features, cannot guarantee consistent backups without table locking, hence RDS automated backup features are limited to InnoDB."
+},
+{
+  "id": 1522,
+  "q": "While signing in REST/ Query requests, for additional security, you should transmit your requests using Secure Sockets Layer (SSL) by using [...].",
+  "o": [
+    {
+      "c": "HTTP.",
+      "a": "no"
+    },
+    {
+      "c": "Internet Protocol Security (IPsec).",
+      "a": "no"
+    },
+    {
+      "c": "TLS (Transport Layer Security).",
+      "a": "no"
+    },
+    {
+      "c": "HTTPS.",
+      "a": "yes"
+    }
+  ],
+  "nt": "HTTPS (HTTP Secure) encrypts the entire communication between the client and AWS API endpoints using SSL/TLS protocols, protecting sensitive information like access keys, request parameters, and response data from eavesdropping and man-in-the-middle attacks. While the term SSL is mentioned, modern implementations typically use TLS, but HTTPS remains the correct protocol for secure API communications."
+},
+{
+  "id": 1523,
+  "q": "Out of the stripping options available for the EBS volumes, which one has the following disadvantage: 'Doubles the amount of 1/0 required from the instance to EBS compared to RAID 0, because you're mirroring all writes to a pair of volumes, limiting how much you can stripe.'?",
+  "o": [
+    {
+      "c": "Raid 0.",
+      "a": "no"
+    },
+    {
+      "c": "RAID 1+0 (RAID 10).",
+      "a": "yes"
+    },
+    {
+      "c": "Raid 1.",
+      "a": "no"
+    },
+    {
+      "c": "Raid.",
+      "a": "no"
+    }
+  ],
+  "nt": "RAID 10 (also called RAID 1+0) combines mirroring (RAID 1) and striping (RAID 0). The mirroring component requires that every write operation is duplicated to multiple disks, effectively doubling the I/O requirements compared to RAID 0, which only stripes data without redundancy. This I/O overhead limits the maximum achievable throughput since each write must be confirmed on multiple EBS volumes before being considered complete."
+},
+{
+  "id": 1524,
+  "q": "Can I encrypt connections between my application and my DB Instance using SSL?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "Only in VPC.",
+      "a": "no"
+    },
+    {
+      "c": "Only in certain regions.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS supports SSL encryption for database connections across all supported database engines (MySQL, PostgreSQL, Oracle, SQL Server, MariaDB). This feature is available in all regions and for instances in both EC2-Classic and VPC environments, allowing applications to establish secure, encrypted connections to protect sensitive data in transit between the application and database layers."
+},
+{
+  "id": 1525,
+  "q": "Which of the following items are required to allow an application deployed on an EC2 instance to write data to a DynamoDB table? Assume that no security keys are allowed to be stored on the EC2 instance. (Choose 3 answers)",
+  "o": [
+    {
+      "c": "Create an IAM Role that allows write access to the DynamoDB table.",
+      "a": "yes"
+    },
+    {
+      "c": "Add an IAM Role to a running EC2 instance.",
+      "a": "yes"
+    },
+    {
+      "c": "Create an IAM User that allows write access to the Dynamo DB table.",
+      "a": "no"
+    },
+    {
+      "c": "Add an IAM User to a running EC2 instance.",
+      "a": "no"
+    },
+    {
+      "c": "Launch an EC2 Instance with the IAM Role included in the launch configuration.",
+      "a": "yes"
+    }
+  ],
+  "nt": "IAM Roles provide temporary security credentials to EC2 instances without storing long-term access keys on the instance. Creating a role with DynamoDB write permissions and associating it with the EC2 instance (either at launch time or later) enables the application to securely access DynamoDB using automatically rotated temporary credentials, following AWS security best practices for credential management."
+},
+{
+  "id": 1526,
+  "q": "Identify a true statement about the On-Demand instances purchasing option provided by Amazon EC2.",
+  "o": [
+    {
+      "c": "Pay for the instances that you use by the hour, with no long-term commitments or up-front payments.",
+      "a": "yes"
+    },
+    {
+      "c": "Make a low, one-time, up-front payment for an instance, reserve it for a one- or three-year term, and pay a significantly lower hourly rate for these instances.",
+      "a": "no"
+    },
+    {
+      "c": "Pay for the instances that you use by the hour, with long-term commitments or up-front payments.",
+      "a": "no"
+    },
+    {
+      "c": "Make a high, one-time, all-front payment for an instance, reserve it for a one- or three-year term, and pay a significantly higher hourly rate for these instances.",
+      "a": "no"
+    }
+  ],
+  "nt": "On-Demand Instances provide maximum flexibility with no long-term commitments or upfront payments. You pay for compute capacity by the second or hour (depending on instance type) with no termination fees, making this ideal for unpredictable workloads, short-term projects, or applications being developed or tested for the first time."
+},
+{
+  "id": 1527,
+  "q": "When will you incur costs with an Elastic IP address (EIP)?",
+  "o": [
+    {
+      "c": "When an EIP is allocated.",
+      "a": "no"
+    },
+    {
+      "c": "When it is allocated and associated with a running instance.",
+      "a": "no"
+    },
+    {
+      "c": "When it is allocated and associated with a stopped instance.",
+      "a": "no"
+    },
+    {
+      "c": "Costs are incurred regardless of whether the ElP is associated with a running instance.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS charges for Elastic IP addresses when they are allocated to your account but not associated with a running instance, or when associated with a stopped instance or unattached network interface. This pricing model encourages efficient use of static IP addresses and prevents hoarding of limited public IP resources."
+},
+{
+  "id": 1528,
+  "q": "IAM provides several policy templates you can use to automatically assign permissions to the groups you create. The [...] policy template gives the Admins group permission to access all account resources, except your AWS account information.",
+  "o": [
+    {
+      "c": "Read Only Access.",
+      "a": "no"
+    },
+    {
+      "c": "Power User Access.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Cloud Formation Read Only Access.",
+      "a": "no"
+    },
+    {
+      "c": "Administrator Access.",
+      "a": "yes"
+    }
+  ],
+  "nt": "The Administrator Access policy template provides full access to AWS services and resources, allowing administrative permissions for all actions except for AWS account management tasks (like changing contact information, payment methods, or closing the account). This separation ensures that even administrators cannot accidentally modify critical account-level settings without explicit root account access."
+},
+{
+  "id": 1529,
+  "q": "What does RRS stand for when talking about S3?",
+  "o": [
+    {
+      "c": "Redundancy Removal System.",
+      "a": "no"
+    },
+    {
+      "c": "Relational Rights Storage.",
+      "a": "no"
+    },
+    {
+      "c": "Regional Rights Standard.",
+      "a": "no"
+    },
+    {
+      "c": "Reduced Redundancy Storage.",
+      "a": "yes"
+    }
+  ],
+  "nt": "RRS stands for Reduced Redundancy Storage, which was an older S3 storage class that provided lower durability (99.99%) at a reduced cost compared to Standard storage. It was designed for non-critical, reproducible data. Note that AWS has since introduced more cost-effective options like S3 Standard-IA and S3 One Zone-IA, which generally make RRS obsolete for most use cases."
+},
+{
+  "id": 1530,
+  "q": "Can I change the EC2 security groups after an instance is launched in EC2-Classic?",
+  "o": [
+    {
+      "c": "Yes, you can change security groups after you launch an instance in EC2-Classic.",
+      "a": "no"
+    },
+    {
+      "c": "No, you cannot change security groups after you launch an instance in EC2-Classic.",
+      "a": "yes"
+    },
+    {
+      "c": "Yes, you can only when you remove rules from a security group.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, you can only when you add rules to a security group.",
+      "a": "no"
+    }
+  ],
+  "nt": "In EC2-Classic (the legacy networking model), security groups cannot be modified for a running instance. The security group association is fixed at launch time. This limitation was addressed in the VPC environment, where you can change security groups for running instances, providing greater flexibility for network security management."
+},
+{
+  "id": 1531,
+  "q": "Please select the Amazon EC2 resource which cannot be tagged.",
+  "o": [
+    {
+      "c": "Images (AMIs, kernels, RAM disks).",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EBS volumes.",
+      "a": "no"
+    },
+    {
+      "c": "Elastic IP addresses.",
+      "a": "yes"
+    },
+    {
+      "c": "VPCs.",
+      "a": "no"
+    }
+  ],
+  "nt": "Elastic IP addresses are one of the few EC2 resources that cannot be tagged. This limitation means you cannot apply metadata tags to EIPs for organizational, cost allocation, or automation purposes, unlike most other AWS resources including instances, volumes, AMIs, and VPC components which all support tagging."
+},
+{
+  "id": 1532,
+  "q": "Does Route 53 support MX Records?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "It supports CNAME records, but not MX records.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "Only Primary MX records. Secondary MX records are not supported.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Route 53 fully supports MX (Mail Exchange) records, which are essential for directing email traffic to the correct mail servers. Route 53 can host MX records with multiple values and priority settings, allowing for complex email routing configurations including primary and secondary mail servers, making it a complete DNS solution for both web and email services."
+},
+{
+  "id": 1533,
+  "q": "Which of the following notification endpoints or clients are supported by Amazon Simple Notification Service? (Choose 2 answers)",
+  "o": [
+    {
+      "c": "Email.",
+      "a": "yes"
+    },
+    {
+      "c": "CloudFront distribution.",
+      "a": "no"
+    },
+    {
+      "c": "File Transfer Protocol.",
+      "a": "no"
+    },
+    {
+      "c": "Short Message Service.",
+      "a": "yes"
+    },
+    {
+      "c": "Simple Network Management Protocol.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon SNS supports multiple notification protocols including Email (via SMTP) for sending messages to email addresses, and SMS (Short Message Service) for delivering text messages to mobile phones. These endpoints allow SNS to serve as a versatile messaging service for both application-to-person and application-to-application communication scenarios."
+},
+{
+  "id": 1534,
+  "q": "AWS Identity and Access Management is a web service that enables Amazon Web Services (AWS) customers to manage users and user permissions in AWS. In addition to supporting IAM user policies, some services support resource-based permissions. Which of the following services are supported by resource-based permissions?",
+  "o": [
+    {
+      "c": "Amazon SNS, and Amazon SQS and AWS Direct Connect.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon S3 and Amazon SQS and Amazon ElastiCache.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon S3, Amazon SNS, Amazon SQS, Amazon Glacier and Amazon EB",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Glacier, Amazon SNS, and Amazon CloudWatch.",
+      "a": "no"
+    }
+  ],
+  "nt": "Resource-based permissions allow policies to be attached directly to the resource rather than to IAM principals. S3 supports bucket policies, SNS supports topic policies, SQS supports queue policies, Glacier supports vault access policies, and EBS supports volume policies for snapshot sharing. This approach provides flexible authorization models where the resource controls access to itself."
+},
+{
+  "id": 1535,
+  "q": "What does the following policy for Amazon EC2 do? { 'Statement':[{ 'Effect': 'Allow', 'Action':'ec2: Describe*', 'Resource':'*' }] }",
+  "o": [
+    {
+      "c": "Allow users to use actions that start with 'Describe' over all the EC2 resources.",
+      "a": "yes"
+    },
+    {
+      "c": "Share an AMI with a partner.",
+      "a": "no"
+    },
+    {
+      "c": "Share an AMI within the account.",
+      "a": "no"
+    },
+    {
+      "c": "Allow a group to only be able to describe, run, stop, start, and terminate instances.",
+      "a": "no"
+    }
+  ],
+  "nt": "This IAM policy uses a wildcard pattern 'Describe*' in the Action element, which grants permission to execute any EC2 API action that begins with 'Describe'. This includes actions like DescribeInstances, DescribeVolumes, DescribeSecurityGroups, and all other describe operations, providing read-only access to view EC2 resources and their configurations without allowing any modification capabilities."
+},
+{
+  "id": 1536,
+  "q": "Which IAM role do you use to grant AWS Lambda permission to access a DynamoDB Stream?",
+  "o": [
+    {
+      "c": "Dynamic role.",
+      "a": "no"
+    },
+    {
+      "c": "Invocation role.",
+      "a": "no"
+    },
+    {
+      "c": "Execution role.",
+      "a": "yes"
+    },
+    {
+      "c": "Event Source role.",
+      "a": "no"
+    }
+  ],
+  "nt": "The Execution Role (also called the Lambda function's role) is the IAM role that AWS Lambda assumes when it executes your function. This role must have the necessary permissions to access other AWS services, including DynamoDB Streams for reading stream records, as well as any other resources the function needs to interact with during execution."
+},
+{
+  "id": 1537,
+  "q": "Can resource record sets in a hosted zone have a different domain suffix (for example, <www.blog>. acme.com and <www.acme.ca>)?",
+  "o": [
+    {
+      "c": "Yes, it can have for a maximum of three different TLDs.",
+      "a": "no"
+    },
+    {
+      "c": "Yes.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, it can have depending on the TL.",
+      "a": "yes"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    }
+  ],
+  "nt": "A Route 53 hosted zone can contain resource record sets with different domain suffixes, but this capability depends on the top-level domain (TLD) and its specific registration requirements. Some TLD registries impose restrictions on mixing domains within hosted zones, so while technically possible in many cases, the actual implementation may be constrained by TLD-specific policies and DNS protocol standards."
+},
+{
+  "id": 1538,
+  "q": "In Amazon Elastic Compute Cloud, which of the following is used for communication between instances in the same network (EC2-Classic or a VPC)?",
+  "o": [
+    {
+      "c": "Private IP addresses.",
+      "a": "yes"
+    },
+    {
+      "c": "Elastic IP addresses.",
+      "a": "no"
+    },
+    {
+      "c": "Static IP addresses.",
+      "a": "no"
+    },
+    {
+      "c": "Public IP addresses.",
+      "a": "no"
+    }
+  ],
+  "nt": "Private IP addresses are used for communication between instances within the same network (whether EC2-Classic or VPC) because this traffic never leaves the AWS network infrastructure. Using private IPs provides better performance (lower latency), enhanced security (traffic stays within AWS backbone), and avoids data transfer charges that would apply to communication over public IP addresses."
+},
+{
+  "id": 1539,
+  "q": "A user is planning to host a mobile game on EC2 which sends notifications to active users on either high score or the addition of new features. The user should get this notification when he is online on his mobile device. Which of the below mentioned AWS services can help achieve this functionality?",
+  "o": [
+    {
+      "c": "AWS Simple Notification Service.",
+      "a": "yes"
+    },
+    {
+      "c": "AWS Simple Email Service.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Mobile Communication Service.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Simple Queue Service.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon SNS provides mobile push notification capabilities that can deliver messages directly to mobile devices through platform-specific push notification services (Apple Push Notification Service for iOS, Firebase Cloud Messaging for Android, etc.). This enables real-time notifications to users when they achieve high scores or when new features are available, enhancing user engagement without requiring the app to be actively running."
+},
+{
+  "id": 1540,
+  "q": "You need to create an Amazon Machine Image (AMI) for a customer for an application which does not appear to be part of the standard AWS AMI template that you can see in the AWS console. What are the alternative possibilities for creating an AMI on AWS?",
+  "o": [
+    {
+      "c": "You can purchase an AMIs from a third party but cannot create your own AMI.",
+      "a": "no"
+    },
+    {
+      "c": "You can purchase an AMIs from a third party or can create your own AMI.",
+      "a": "yes"
+    },
+    {
+      "c": "Only AWS can create AMIs and you need to wait till it becomes available.",
+      "a": "no"
+    },
+    {
+      "c": "Only AWS can create AMIs and you need to request them to create one for you.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS provides multiple options for AMI creation: you can create custom AMIs from existing EC2 instances (using the 'Create Image' feature), import virtual machine images from your on-premises environment, or purchase pre-configured AMIs from AWS Marketplace vendors. This flexibility allows you to build exactly the environment you need, whether through custom creation or leveraging third-party solutions."
+},
+{
+  "id": 1541,
+  "q": "Will I be charged if the DB instance is idle?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "Only is running in GovCloud.",
+      "a": "no"
+    },
+    {
+      "c": "Only if running in VPC.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS charges are based on instance hours (the time the DB instance is running), storage allocation, and additional features like backups and data transfer. An idle DB instance still consumes compute resources and storage capacity, so billing continues regardless of utilization level. The only way to stop RDS charges is to stop or terminate the instance (where supported) or delete it entirely."
+},
+{
+  "id": 1542,
+  "q": "Your company has been storing a lot of data in Amazon Glacier and has asked for an inventory of what is in there exactly. So you have decided that you need to download a vault inventory. Which of the following statements is incorrect in relation to Vault Operations in Amazon Glacier?",
+  "o": [
+    {
+      "c": "You can use Amazon Simple Notification Service (Amazon SNS) notifications to notify you when the job completes.",
+      "a": "no"
+    },
+    {
+      "c": "A vault inventory refers to the list of archives in a vault.",
+      "a": "no"
+    },
+    {
+      "c": "You can use Amazon Simple Queue Service (Amazon SQS) notifications to notify you when the job completes.",
+      "a": "yes"
+    },
+    {
+      "c": "Downloading a vault inventory is an asynchronous operation.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Glacier does not support Amazon SQS for inventory job notifications. Glacier inventory retrieval is an asynchronous operation that typically takes 3-5 hours to complete, and you can only use Amazon SNS for completion notifications. The vault inventory provides a complete list of archives stored in the vault, including their archive IDs, creation dates, sizes, and descriptions."
+},
+{
+  "id": 1543,
+  "q": "Your fortune 500 company has undertaken a TCO analysis evaluating the use of Amazon S3 versus acquiring more hardware. The outcome was that all employees would be granted access to use Amazon S3 for storage of their personal documents. Which of the following will you need to consider so you can set up a solution that incorporates single sign-on from your corporate AD or LDAP directory and restricts access for each user to a designated user folder in a bucket? (Choose 3 answers)",
+  "o": [
+    {
+      "c": "Setting up a federation proxy or identity provider.",
+      "a": "yes"
+    },
+    {
+      "c": "Using AWS Security Token Service to generate temporary tokens.",
+      "a": "yes"
+    },
+    {
+      "c": "Tagging each folder in the bucket.",
+      "a": "no"
+    },
+    {
+      "c": "Configuring IAM role.",
+      "a": "yes"
+    },
+    {
+      "c": "Setting up a matching IAM user for every user in your corporate directory that needs access to a folder in the bucket.",
+      "a": "no"
+    }
+  ],
+  "nt": "For enterprise SSO integration with corporate directories, you need a federation proxy (like AWS SSO or a third-party IdP) to handle authentication, AWS STS to generate temporary security credentials for federated users, and IAM roles with policies that restrict access to specific user folders using policy variables (like ${aws:username}). This approach scales efficiently without creating individual IAM users for each corporate user."
+},
+{
+  "id": 1544,
+  "q": "Your company policies require encryption of sensitive data at rest. You are considering the possible options for protecting data while storing it at rest on an EBS data volume, attached to an EC2 instance. Which of these options would allow you to encrypt your data at rest? (Choose 3 answers)",
+  "o": [
+    {
+      "c": "Implement third party volume encryption tools.",
+      "a": "yes"
+    },
+    {
+      "c": "Do nothing as EBS volumes are encrypted by default.",
+      "a": "no"
+    },
+    {
+      "c": "Encrypt data inside your applications before storing it on EBS.",
+      "a": "yes"
+    },
+    {
+      "c": "Encrypt data using native data encryption drivers at the file system level.",
+      "a": "yes"
+    },
+    {
+      "c": "Implement SSL/TLS for all services running on the server.",
+      "a": "no"
+    }
+  ],
+  "nt": "EBS data encryption can be implemented at multiple layers: third-party tools can provide full-disk encryption, application-level encryption protects data before it reaches the storage layer, and file system encryption (like LUKS for Linux or BitLocker for Windows) encrypts data at the OS level. SSL/TLS only protects data in transit, not at rest. EBS volumes are not encrypted by default unless specifically configured during volume creation."
+},
+{
+  "id": 1545,
+  "q": "A scope has been handed to you to set up a super fast gaming server and you decide that you will use Amazon DynamoDB as your database. For efficient access to data in a table, Amazon DynamoDB creates and maintains indexes for the primary key attributes. A secondary index is a data structure that contains a subset of attributes from a table, along with an alternate key to support Query operations. How many types of secondary indexes does DynamoDB support?",
+  "o": [
+    {
+      "c": "2.",
+      "a": "yes"
+    },
+    {
+      "c": "16.",
+      "a": "no"
+    },
+    {
+      "c": "4.",
+      "a": "no"
+    },
+    {
+      "c": "As many as you need.",
+      "a": "no"
+    }
+  ],
+  "nt": "DynamoDB supports two types of secondary indexes: Global Secondary Indexes (GSI) and Local Secondary Indexes (LSI). GSIs can have a partition key and sort key different from the base table and support eventually consistent reads, while LSIs must have the same partition key as the base table but can have a different sort key and support both eventually consistent and strongly consistent reads."
+},
+{
+  "id": 1546,
+  "q": "True or False: in Amazon Route 53, you can create a hosted zone for a top-level domain (TLD).",
+  "o": [
+    {
+      "c": "False.",
+      "a": "yes"
+    },
+    {
+      "c": "False, Amazon Route 53 automatically creates it for you.",
+      "a": "no"
+    },
+    {
+      "c": "True, only if you send an XML document with a CreateHostedZoneRequest element for TLD.",
+      "a": "no"
+    },
+    {
+      "c": "True.",
+      "a": "no"
+    }
+  ],
+  "nt": "This statement is false because you cannot create hosted zones for top-level domains (TLDs) like .com, .org, .net, etc. in Route 53 or any public DNS service. TLDs are managed by domain registries and root servers, not by individual DNS providers. Route 53 hosted zones can only be created for domains that you own and have registered through a domain registrar."
+},
+{
+  "id": 1547,
+  "q": "You want to use AWS Import/Export to send data from your S3 bucket to several of your branch offices. What should you do if you want to send 10 storage units to AWS?",
+  "o": [
+    {
+      "c": "Make sure your disks are encrypted prior to shipping.",
+      "a": "no"
+    },
+    {
+      "c": "Make sure you format your disks prior to shipping.",
+      "a": "no"
+    },
+    {
+      "c": "Make sure your disks are 1TB or more.",
+      "a": "no"
+    },
+    {
+      "c": "Make sure you submit a separate job request for each device.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS Import/Export requires a separate job request for each physical storage device being shipped. This ensures proper tracking, processing, and accountability for each device throughout the import/export workflow. Each job is associated with a specific device and its contents, allowing AWS to process multiple devices in parallel while maintaining clear separation between different data transfers."
+},
+{
+  "id": 1548,
+  "q": "You are deploying an application to track GPS coordinates of delivery trucks in the United States. Coordinates are transmitted from each delivery truck once every three seconds. You need to design an architecture that will enable real-time processing of these coordinates from multiple consumers. Which service should you use to implement data ingestion?",
+  "o": [
+    {
+      "c": "Amazon Kinesis.",
+      "a": "yes"
+    },
+    {
+      "c": "AWS Data Pipeline.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon AppStream.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Simple Queue Service.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Kinesis is designed specifically for real-time streaming data ingestion and processing. It can handle high-throughput data from multiple sources (like GPS coordinates from delivery trucks) and supports multiple consumers reading the same data stream simultaneously. This makes it ideal for real-time analytics, monitoring, and processing scenarios where low-latency data ingestion and multiple consumer access patterns are required."
+},
+{
+  "id": 1549,
+  "q": "While performing the volume status checks, if the status is insufficient-data, what does it mean?",
+  "o": [
+    {
+      "c": "The checks may still be in progress on the volume.",
+      "a": "yes"
+    },
+    {
+      "c": "The check has passed.",
+      "a": "no"
+    },
+    {
+      "c": "The check has failed.",
+      "a": "no"
+    }
+  ],
+  "nt": "The 'insufficient-data' status in EBS volume status checks indicates that the monitoring system has not yet collected enough data points to determine the volume's health status. This typically occurs immediately after volume creation, during the initial monitoring period, or when the volume has been recently attached to an instance. The status will transition to 'ok' or 'impaired' once sufficient data has been collected for accurate assessment."
+},
+{
+  "id": 1550,
+  "q": "Can you create IAM security credentials for existing users?",
+  "o": [
+    {
+      "c": "Yes, existing users can have security credentials associated with their account.",
+      "a": "yes"
+    },
+    {
+      "c": "No, IAM requires that all users who have credentials set up are not existing users.",
+      "a": "no"
+    },
+    {
+      "c": "No, security credentials are created within GROUPS, and then users are associated to GROUPS at a later time.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, but only IAM credentials, not ordinary security credentials.",
+      "a": "no"
+    }
+  ],
+  "nt": "IAM allows you to create and manage access keys (security credentials) for existing IAM users at any time. These credentials include access key IDs and secret access keys that can be used for programmatic access to AWS services via APIs or CLI. You can create, rotate, and delete these credentials for any IAM user without affecting the user's other permissions or group memberships."
+}
+]

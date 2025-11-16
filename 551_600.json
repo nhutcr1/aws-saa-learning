@@ -1,0 +1,1156 @@
+[
+{
+  "id": 1551,
+  "q": "Can I move a Reserved Instance from one Region to another?",
+  "o": [
+    {
+      "c": "No.",
+      "a": "yes"
+    },
+    {
+      "c": "Only if they are moving into GovCloud.",
+      "a": "no"
+    },
+    {
+      "c": "Yes.",
+      "a": "no"
+    },
+    {
+      "c": "Only if they are moving to US East from another region.",
+      "a": "no"
+    }
+  ],
+  "nt": "Reserved Instances are region-specific and cannot be moved between regions. Each Reserved Instance is tied to the specific AWS Region where it was purchased and provides the capacity reservation and billing benefits only within that region. If you need capacity in a different region, you must purchase new Reserved Instances for that region."
+},
+{
+  "id": 1552,
+  "q": "A user has created an ELB with the Availability Zone US-East-1A. The user wants to add more zones to ELB to achieve High Availability. How can the user add more zones to the existing ELB?",
+  "o": [
+    {
+      "c": "The user should stop the ELB and add zones and instances as required.",
+      "a": "no"
+    },
+    {
+      "c": "The only option is to launch instances in different zones and add to ELB.",
+      "a": "no"
+    },
+    {
+      "c": "It is not possible to add more zones to the existing ELB.",
+      "a": "no"
+    },
+    {
+      "c": "The user can add zones on the fly from the AWS console.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Elastic Load Balancers can have their Availability Zones modified dynamically without stopping the load balancer. You can add or remove Availability Zones through the AWS Management Console, CLI, or API at any time. This allows you to easily expand your load balancer's reach across multiple Availability Zones for better high availability without service interruption."
+},
+{
+  "id": 1553,
+  "q": "Amazon SWF is designed to help users …",
+  "o": [
+    {
+      "c": "Design graphical user interface interactions.",
+      "a": "no"
+    },
+    {
+      "c": "Manage user identification and authorization.",
+      "a": "no"
+    },
+    {
+      "c": "Store Web content.",
+      "a": "no"
+    },
+    {
+      "c": "Coordinate synchronous and asynchronous tasks which are distributed and fault tolerant.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Amazon Simple Workflow Service (SWF) is designed to coordinate work across distributed application components. It helps in building applications that coordinate tasks across multiple services, handling task dependencies, managing execution flow, and maintaining application state. SWF ensures reliable execution of tasks even in the face of failures, making it ideal for workflows that require coordination between synchronous and asynchronous tasks in a distributed, fault-tolerant manner."
+},
+{
+  "id": 1554,
+  "q": "Which technique can be used to integrate AWS IAM (Identity and Access Management) with an on-premise LDAP (Lightweight Directory Access Protocol) directory service?",
+  "o": [
+    {
+      "c": "Use an IAM policy that references the LDAP account identifiers and the AWS credentials.",
+      "a": "no"
+    },
+    {
+      "c": "Use SAML (Security Assertion Markup Language) to enable single sign-on between AWS and LDAP.",
+      "a": "yes"
+    },
+    {
+      "c": "Use AWS Security Token Service from an identity broker to issue short-lived AWS credentials.",
+      "a": "no"
+    },
+    {
+      "c": "Use IAM roles to automatically rotate the IAM credentials when LDAP credentials are updated.",
+      "a": "no"
+    },
+    {
+      "c": "Use the LDAP credentials to restrict a group of users from launching specific EC2 instance types.",
+      "a": "no"
+    }
+  ],
+  "nt": "SAML (Security Assertion Markup Language) enables federated single sign-on between AWS and on-premises LDAP directories. This allows users to authenticate against their existing corporate LDAP directory and then access AWS resources without needing separate IAM credentials. The SAML identity provider acts as a bridge between the LDAP directory and AWS, passing authentication claims that AWS trusts to grant temporary security credentials."
+},
+{
+  "id": 1555,
+  "q": "You are building a solution for a customer to extend their on-premises data center to AWS. The customer requires a 50-Mbps dedicated and private connection to their VPC. Which AWS product or feature satisfies this requirement?",
+  "o": [
+    {
+      "c": "Amazon VPC peering.",
+      "a": "no"
+    },
+    {
+      "c": "Elastic IP Addresses.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Direct Connect.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon VPC virtual private gateway.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS Direct Connect provides a dedicated, private network connection between your on-premises data center and AWS. It bypasses the public internet, offering more consistent network performance, reduced bandwidth costs, and enhanced security. Direct Connect connections can be provisioned at various speeds (including 50 Mbps, 100 Mbps, 1 Gbps, 10 Gbps) and provide a private connection to your VPC through a virtual private gateway."
+},
+{
+  "id": 1556,
+  "q": "A customer wants to leverage Amazon Simple Storage Service (S3) and Amazon Glacier as part of their backup and archive infrastructure. The customer plans to use third-party software to support this integration. Which approach will limit the access of the third party software to only the Amazon S3 bucket named 'company-backup'?",
+  "o": [
+    {
+      "c": "A custom bucket policy limited to the Amazon S3 API in the Amazon Glacier archive 'company backup'.",
+      "a": "no"
+    },
+    {
+      "c": "A custom bucket policy limited to the Amazon S3 API in 'company-backup'.",
+      "a": "no"
+    },
+    {
+      "c": "A custom IAM user policy limited to the Amazon S3 API for the Amazon Glacier archive 'company backup'.",
+      "a": "no"
+    },
+    {
+      "c": "A custom IAM user policy limited to the Amazon S3 API in 'company-backup'.",
+      "a": "yes"
+    }
+  ],
+  "nt": "When using third-party software that requires AWS credentials, the most secure approach is to create an IAM user specifically for that software with a custom IAM user policy that restricts access to only the required S3 bucket ('company-backup'). This follows the principle of least privilege and ensures the third-party software cannot access any other AWS resources. The policy should specify the exact S3 API actions needed and restrict resource access to the specific bucket."
+},
+{
+  "id": 1557,
+  "q": "A user needs to run a batch process which runs for 10 minutes. This will only be run once, or at maximum twice, in the next month, so the processes will be temporary only. The process needs 15 X-Large instances. The process downloads the code from S3 on each instance when it is launched, and then generates a temporary log file. Once the instance is terminated, all the data will be lost. Which of the below mentioned pricing models should the user choose in this case?",
+  "o": [
+    {
+      "c": "Spot instance.",
+      "a": "yes"
+    },
+    {
+      "c": "Reserved instance.",
+      "a": "no"
+    },
+    {
+      "c": "On-demand instance.",
+      "a": "no"
+    },
+    {
+      "c": "EBS optimized instance.",
+      "a": "no"
+    }
+  ],
+  "nt": "Spot Instances are ideal for fault-tolerant, flexible, and short-duration workloads like batch processing. They can provide up to 90% cost savings compared to On-Demand Instances. Since this batch process is interruptible (only runs for 10 minutes and data is not persistent), can tolerate interruptions, and requires significant compute capacity temporarily, Spot Instances offer the most cost-effective solution without long-term commitments."
+},
+{
+  "id": 1558,
+  "q": "You have been doing a lot of testing of your VPC Network by deliberately failing EC2 instances to test whether instances are failing over properly. Your customer who will be paying the AWS bill for all this asks you if he being charged for all these instances. You try to explain to him how the billing works on EC2 instances to the best of your knowledge. What would be an appropriate response to give to the customer in regards to this?",
+  "o": [
+    {
+      "c": "Billing commences when Amazon EC2 AMI instance is completely up and billing ends as soon as the instance starts to shutdown.",
+      "a": "no"
+    },
+    {
+      "c": "Billing only commences only after 1 hour of uptime and billing ends when the instance terminates.",
+      "a": "no"
+    },
+    {
+      "c": "Billing commences when Amazon EC2 initiates the boot sequence of an AMI instance and billing ends when the instance shuts down.",
+      "a": "yes"
+    },
+    {
+      "c": "Billing commences when Amazon EC2 initiates the boot sequence of an AMI instance and billing ends as soon as the instance starts to shutdown.",
+      "a": "no"
+    }
+  ],
+  "nt": "EC2 instances are billed from the moment they enter the 'running' state (when the boot sequence initiates) until the moment they are explicitly terminated and enter the 'terminated' state. This means you're charged for partial hours when instances run for less than a full hour. Even during failure testing, if instances are running for any duration, they will incur charges based on the actual running time."
+},
+{
+  "id": 1559,
+  "q": "Refer to the architecture diagram above of a batch processing solution using Simple Queue Service (SQS) to set up a message queue between EC2 instances which are used as batch processors Cloud Watch monitors the number of Job requests (queued messages) and an Auto Scaling group adds or deletes batch servers automatically based on parameters set in Cloud Watch alarms. You can use this architecture to implement which of the following features in a cost effective and efficient manner?",
+  "o": [
+    {
+      "c": "Reduce the overall lime for executing jobs through parallel processing by allowing a busy EC2 instance that receives a message to pass it to the next instance in a daisy-chain setup.",
+      "a": "no"
+    },
+    {
+      "c": "Implement fault tolerance against EC2 instance failure since messages would remain in SQS and worn can continue with recovery of EC2 instances implement fault tolerance against SQS failure by backing up messages to S3.",
+      "a": "no"
+    },
+    {
+      "c": "Implement message passing between EC2 instances within a batch by exchanging messages through SQS.",
+      "a": "no"
+    },
+    {
+      "c": "Coordinate number of EC2 instances with number of job requests automatically thus Improving cost effectiveness.",
+      "a": "yes"
+    },
+    {
+      "c": "Handle high priority jobs before lower priority jobs by assigning a priority metadata fie ld to SQS messages.",
+      "a": "no"
+    }
+  ],
+  "nt": "This architecture enables automatic scaling of EC2 instances based on the number of queued messages in SQS. CloudWatch monitors the queue depth, and Auto Scaling adjusts the number of batch processors dynamically. This ensures that you have just enough compute resources to handle the current workload, scaling out during high demand and scaling in during low demand, which optimizes costs by eliminating over-provisioning while maintaining processing efficiency."
+},
+{
+  "id": 1560,
+  "q": "You are migrating an internal server on your DC to an EC2 instance with EBS volume. Your server disk usage is around 500GB so you just copied all your data to a 2TB disk to be used with AWS Import/Export. Where will the data be imported once it arrives at Amazon?",
+  "o": [
+    {
+      "c": "To a 2TB EBS volume.",
+      "a": "no"
+    },
+    {
+      "c": "To an S3 bucket with 2 objects of 1TB.",
+      "a": "no"
+    },
+    {
+      "c": "To an 500GB EBS volume.",
+      "a": "no"
+    },
+    {
+      "c": "To an S3 bucket as a 2TB snapshot.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS Import/Export transfers data directly from portable storage devices into Amazon S3 as EBS snapshots. The data is not imported directly to EBS volumes but rather stored as snapshots in S3. After the import process completes, you can then create new EBS volumes from these snapshots. This approach allows you to efficiently transfer large amounts of data without depending on network bandwidth."
+},
+{
+  "id": 1561,
+  "q": "Is there any way to own a direct connection to Amazon Web Services?",
+  "o": [
+    {
+      "c": "You can create an encrypted tunnel to VPC, but you don't own the connection.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, it's called Amazon Dedicated Connection.",
+      "a": "no"
+    },
+    {
+      "c": "No, AWS only allows access from the public Internet.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, it's called Direct Connect.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS Direct Connect provides dedicated network connections from your premises to AWS. While you don't 'own' the physical infrastructure, you provision dedicated network ports that establish a private, high-bandwidth connection bypassing the public internet. This provides more consistent network performance, reduced bandwidth costs, and enhanced security compared to internet-based connections."
+},
+{
+  "id": 1562,
+  "q": "Which of the following strategies can be used to control access to your Amazon EC2 instances?",
+  "o": [
+    {
+      "c": "DB security groups.",
+      "a": "no"
+    },
+    {
+      "c": "IAM policies.",
+      "a": "no"
+    },
+    {
+      "c": "None of these.",
+      "a": "no"
+    },
+    {
+      "c": "EC2 security groups.",
+      "a": "yes"
+    }
+  ],
+  "nt": "EC2 security groups act as virtual firewalls that control inbound and outbound traffic to your EC2 instances. They operate at the instance level and allow you to specify permitted protocols, ports, and source IP ranges. Security groups are stateful, meaning if you allow inbound traffic, the corresponding outbound response traffic is automatically allowed regardless of outbound rules."
+},
+{
+  "id": 1563,
+  "q": "A client of yours has a huge amount of data stored on Amazon S3, but is concerned about someone stealing it while it is in transit. You know that all data is encrypted in transit on AWS, but which of the following is wrong when describing server-side encryption on AWS?",
+  "o": [
+    {
+      "c": "Amazon S3 server-side encryption employs strong multi-factor encryption.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon S3 server-side encryption uses one of the strongest block ciphers available, 256-bit Advanced Encryption Standard (AES-256), to encrypt your data.",
+      "a": "no"
+    },
+    {
+      "c": "In server-side encryption, you manage encryption/decryption of your data, the encryption keys, and related tools.",
+      "a": "yes"
+    },
+    {
+      "c": "Server-side encryption is about data encryption at rest―that is, Amazon S3 encrypts your data as it writes it to disks.",
+      "a": "no"
+    }
+  ],
+  "nt": "The incorrect statement suggests that in server-side encryption, the customer manages the encryption/decryption process and keys. In reality, with Amazon S3 server-side encryption, AWS manages the encryption/decryption process transparently. The customer can choose between different key management options (S3-managed keys, AWS KMS keys, or customer-provided keys), but AWS handles the actual encryption operations on the server side when data is stored."
+},
+{
+  "id": 1564,
+  "q": "When you run a DB Instance as a Multi-AZ deployment, the [...] serves database writes and reads",
+  "o": [
+    {
+      "c": "secondary.",
+      "a": "no"
+    },
+    {
+      "c": "backup.",
+      "a": "no"
+    },
+    {
+      "c": "stand by.",
+      "a": "no"
+    },
+    {
+      "c": "primary.",
+      "a": "yes"
+    }
+  ],
+  "nt": "In a Multi-AZ RDS deployment, the primary DB instance handles all database writes and read operations. The standby replica in a different Availability Zone is synchronously replicated but does not serve read traffic; it exists solely for high availability and automatic failover purposes. During normal operation, all application traffic is directed to the primary instance."
+},
+{
+  "id": 1565,
+  "q": "In Amazon EC2, how many Elastic IP addresses can you have by default?",
+  "o": [
+    {
+      "c": "10.",
+      "a": "no"
+    },
+    {
+      "c": "2.",
+      "a": "no"
+    },
+    {
+      "c": "5.",
+      "a": "yes"
+    },
+    {
+      "c": "20.",
+      "a": "no"
+    }
+  ],
+  "nt": "By default, AWS accounts are limited to 5 Elastic IP addresses per region. Elastic IP addresses are static IPv4 addresses designed for dynamic cloud computing. If you need more than 5 Elastic IP addresses, you can request a limit increase through the AWS Support Center, but you should justify the business need for additional addresses."
+},
+{
+  "id": 1566,
+  "q": "A user has created photo editing software and hosted it on EC2. The software accepts requests from the user about the photo format and resolution and sends a message to S3 to enhance the picture accordingly. Which of the below mentioned AWS services will help make a scalable software with the AWS infrastructure in this scenario?",
+  "o": [
+    {
+      "c": "AWS Simple Notification Service.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Simple Queue Service.",
+      "a": "yes"
+    },
+    {
+      "c": "AWS Elastic Transcoder.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Glacier.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon SQS (Simple Queue Service) enables decoupling of the photo processing workflow. The EC2 instances can send photo processing requests to an SQS queue, and worker processes can asynchronously pull messages from the queue to perform the actual image processing. This allows for scalable, fault-tolerant processing where the number of workers can scale independently based on the queue depth, ensuring efficient resource utilization and handling variable workloads."
+},
+{
+  "id": 1567,
+  "q": "Using Amazon CloudWatch's Free Tier, what is the frequency of metric updates which you receive?",
+  "o": [
+    {
+      "c": "5 minutes.",
+      "a": "yes"
+    },
+    {
+      "c": "500 milliseconds.",
+      "a": "no"
+    },
+    {
+      "c": "30 seconds",
+      "a": "no"
+    },
+    {
+      "c": "1 minute.",
+      "a": "no"
+    }
+  ],
+  "nt": "In the CloudWatch Free Tier, basic monitoring provides metrics at 5-minute intervals at no charge. For more frequent metric collection (1-minute intervals), you need to enable detailed monitoring, which incurs additional costs. The 5-minute frequency is sufficient for many monitoring needs and is included in the free tier to help users get started with CloudWatch monitoring."
+},
+{
+  "id": 1568,
+  "q": "When you resize the Amazon RDS DB instance, Amazon RDS will perform the upgrade during the next maintenance window. If you want the upgrade to be performed now, rather than waiting for the maintenance window, specify the [...] option.",
+  "o": [
+    {
+      "c": "Apply Now.",
+      "a": "no"
+    },
+    {
+      "c": "Apply Soon.",
+      "a": "no"
+    },
+    {
+      "c": "Apply This.",
+      "a": "no"
+    },
+    {
+      "c": "Apply Immediately.",
+      "a": "yes"
+    }
+  ],
+  "nt": "The 'Apply Immediately' parameter forces the RDS instance modification to occur immediately instead of waiting for the scheduled maintenance window. This is useful when you need to quickly scale your database resources to handle increased load or performance requirements. However, applying changes immediately may cause a brief interruption as the database instance restarts, so it should be used cautiously during peak business hours."
+},
+{
+  "id": 1569,
+  "q": "A user is running a webserver on EC2. The user wants to receive the SMS when the EC2 instance utilization is above the threshold limit. Which AWS services should the user configure in this case?",
+  "o": [
+    {
+      "c": "AWS CloudWatch + AWS SQS.",
+      "a": "no"
+    },
+    {
+      "c": "AWS CloudWatch + AWS SNS.",
+      "a": "yes"
+    },
+    {
+      "c": "AWS CloudWatch + AWS SES.",
+      "a": "no"
+    },
+    {
+      "c": "AWS EC2 + AWS Cloudwatch.",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudWatch monitors the EC2 instance metrics (like CPU utilization) and can trigger alarms when thresholds are breached. SNS (Simple Notification Service) then delivers the alarm notifications via SMS, email, or other supported protocols. This combination provides a complete monitoring and alerting solution where CloudWatch detects the condition and SNS handles the notification delivery to the appropriate recipients."
+},
+{
+  "id": 1570,
+  "q": "You're running an application on-premises due to its dependency on non-x86 hardware and want to use AWS for data backup. Your backup application is only able to write to POSIX-compatible block based storage. You have 140TB of data and would like to mount it as a single folder on your file server Users must be able to access portions of this data while the backups are taking place. What backup solution would be most appropriate for this use case?",
+  "o": [
+    {
+      "c": "Use Storage Gateway and configure it to use Gateway Cached volumes.",
+      "a": "no"
+    },
+    {
+      "c": "Configure your backup software to use S3 as the target for your data backups.",
+      "a": "no"
+    },
+    {
+      "c": "Configure your backup software to use Glacier as the target for your data backups.",
+      "a": "no"
+    },
+    {
+      "c": "Use Storage Gateway and configure it to use Gateway Stored volumes.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS Storage Gateway with Stored Volumes configuration keeps the primary data on-premises while asynchronously backing it up to Amazon S3. This provides low-latency access to frequently accessed data locally while maintaining durable backups in AWS. The gateway presents iSCSI block storage to your on-premises servers, making it compatible with backup applications that require POSIX-compatible block storage, and allows users to access data during backup operations."
+},
+{
+  "id": 1571,
+  "q": "What happens to Amazon EBS root device volumes, by default, when an instance terminates?",
+  "o": [
+    {
+      "c": "Amazon EBS root device volumes are moved to IA",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EBS root device volumes are copied into Amazon RD",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EBS root device volumes are automatically deleted.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon EBS root device volumes remain in the database until you delete them.",
+      "a": "no"
+    }
+  ],
+  "nt": "By default, when an EBS-backed EC2 instance is terminated, the DeleteOnTermination attribute for the root EBS volume is set to true, causing the volume to be automatically deleted. This behavior helps prevent unintended storage costs from accumulating from unused volumes. However, you can modify this behavior by changing the DeleteOnTermination attribute to false before terminating the instance if you want to preserve the root volume."
+},
+{
+  "id": 1572,
+  "q": "You require the ability to analyze a customer's clickstream data on a website so they can do behavioral analysis. Your customer needs to know what sequence of pages and ads their customer clicked on. This data will be used in real time to modify the page layouts as customers click through the site to increase stickiness and advertising click-through. Which option meets the requirements for captioning and analyzing this data?",
+  "o": [
+    {
+      "c": "Log clicks in weblogs by URL store to Amazon S3, and then analyze with Elastic MapReduce.",
+      "a": "no"
+    },
+    {
+      "c": "Push web clicks by session to Amazon Kinesis and analyze behavior using Kinesis workers.",
+      "a": "yes"
+    },
+    {
+      "c": "Write click events directly to Amazon Redshift and then analyze with SQL.",
+      "a": "no"
+    },
+    {
+      "c": "Publish web clicks by session to an Amazon SQS queue men periodically drain these events to Amazon RDS and analyze with SQL.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Kinesis is designed for real-time processing of streaming data like clickstream events. It can capture, process, and analyze data in real time, allowing for immediate behavioral analysis and page layout modifications. Kinesis workers can process the clickstream data as it arrives, enabling real-time insights and immediate response to user behavior patterns, which is essential for dynamic content personalization and advertising optimization."
+},
+{
+  "id": 1573,
+  "q": "What happens when you create a topic on Amazon SNS?",
+  "o": [
+    {
+      "c": "The topic is created, and it has the name you specified for it.",
+      "a": "no"
+    },
+    {
+      "c": "An ARN (Amazon Resource Name) is created.",
+      "a": "yes"
+    },
+    {
+      "c": "You can create a topic on Amazon SQS, not on Amazon SNS.",
+      "a": "no"
+    },
+    {
+      "c": "This question doesn't make sense.",
+      "a": "no"
+    }
+  ],
+  "nt": "When you create an Amazon SNS topic, AWS generates a unique Amazon Resource Name (ARN) for that topic. The ARN serves as the unique identifier for the topic across AWS services and is used to specify the topic in permissions, subscriptions, and when publishing messages. The ARN format includes the AWS region, account ID, and topic name, making it globally unique within the AWS ecosystem."
+},
+{
+  "id": 1574,
+  "q": "A company needs to deploy virtual desktops to its customers in a virtual private cloud, leveraging existing security controls. Which set of AWS services and features will meet the company's requirements?",
+  "o": [
+    {
+      "c": "Virtual Private Network connection. AWS Directory Services, and Classic link.",
+      "a": "no"
+    },
+    {
+      "c": "Virtual Private Network connection. AWS Di rectory Services, and Amazon Workspaces.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Directory Service, Amazon Workspaces, and AWS Identity and Access Management.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Elastic Compute Cloud, and AWS Identity and Access Management.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon WorkSpaces provides managed virtual desktops in the cloud. AWS Directory Service integrates with existing Microsoft Active Directory for user authentication and access control. IAM manages permissions for AWS resources and services. This combination allows the company to deploy secure virtual desktops within a VPC while leveraging existing security controls and directory services for user management and authentication."
+},
+{
+  "id": 1575,
+  "q": "You are designing a multi-platform web application for AWS. The application will run on EC2 instances and will be accessed from PCs, tablets and smart phones. Supported accessing platforms are Windows, macOS, iOS and Android. Separate sticky session and SSL certificate setups are required for different platform types. Which of the following describes the most cost effective and performance efficient architecture setup?",
+  "o": [
+    {
+      "c": "Setup a hybrid architecture to handle session state and SSL certificates on-prem and separate EC2 Instance groups running web applications for different platform types running in a VPC.",
+      "a": "no"
+    },
+    {
+      "c": "Set up one ELB for all platforms to distribute load among multiple instances under it. Each EC2 instance implements all functionality for a particular platform.",
+      "a": "no"
+    },
+    {
+      "c": "Set up two ELBs. The first ELB handles SSL certificates for all platforms and the second ELB handles session stickiness for all platforms. For each ELB, run separate EC2 instance groups to handle the web application for each platform.",
+      "a": "no"
+    },
+    {
+      "c": "Assign multiple ELBs to an EC2 instance or group of EC2 instances running the common components of the web application, one ELB for each platform type. Session stickiness and SSL termination are done at the ELBs.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Using multiple Elastic Load Balancers (one for each platform type) with a common set of EC2 instances running the application logic is the most efficient approach. Each ELB can handle platform-specific SSL certificate termination and session stickiness configuration while distributing traffic to the same backend instances. This architecture provides platform-specific optimizations at the load balancer level while maintaining cost efficiency through shared compute resources and simplified application code maintenance."
+},
+{
+  "id": 1576,
+  "q": "A company is deploying a two-tier, highly available web application to AWS. Which service provides durable storage for static content while utilizing lower Overall CPU resources for the web tier?",
+  "o": [
+    {
+      "c": "Amazon EBS volume.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon S3.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon EC2 instance store.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon RD5 instance.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon S3 provides highly durable, scalable object storage for static content like images, CSS, JavaScript files, and media. By offloading static content to S3, you reduce the CPU and memory load on web servers, allowing them to focus on dynamic content generation. S3 also integrates well with CloudFront for content delivery, further improving performance and reducing load on backend systems while providing 99.999999999% durability for stored objects."
+},
+{
+  "id": 1577,
+  "q": "Select the incorrect statement.",
+  "o": [
+    {
+      "c": "In Amazon EC2, the private IP addresses only returned to Amazon EC2 when the instance is stopped or terminated.",
+      "a": "no"
+    },
+    {
+      "c": "In Amazon VPC, an instance retains its private IP addresses when the instance is stopped.",
+      "a": "no"
+    },
+    {
+      "c": "In Amazon VPC, an instance does NOT retain its private IP addresses when the instance is stopped.",
+      "a": "yes"
+    },
+    {
+      "c": "In Amazon EC2, the private IP address is associated exclusive ly with the instance for its lifetime.",
+      "a": "no"
+    }
+  ],
+  "nt": "In Amazon VPC, when an instance is stopped and then restarted, it retains its private IP addresses. This is different from EC2-Classic where private IP addresses were released when instances were stopped. In VPC, the network interface and its associated IP addresses persist across stop/start cycles, providing more predictable networking behavior and making it easier to maintain consistent network configurations."
+},
+{
+  "id": 1578,
+  "q": "An organization has a statutory requirement to protect the data at rest for data stored in EBS volumes. Which of the below mentioned options can the organization use to achieve data protection?",
+  "o": [
+    {
+      "c": "Data replication.",
+      "a": "no"
+    },
+    {
+      "c": "Data encryption.",
+      "a": "no"
+    },
+    {
+      "c": "Data snapshot.",
+      "a": "no"
+    },
+    {
+      "c": "All the options listed here.",
+      "a": "yes"
+    }
+  ],
+  "nt": "All three options contribute to data protection for EBS volumes: Data encryption protects confidentiality by making data unreadable without proper keys. Data replication (through Multi-AZ deployments or manual copying) protects against data loss from hardware failures. Data snapshots provide point-in-time backups for disaster recovery and data restoration. A comprehensive data protection strategy typically employs multiple layers of protection to address different types of risks and compliance requirements."
+},
+{
+  "id": 1579,
+  "q": "A web design company currently runs several FTP servers that their 250 customers use to upload and download large graphic files. They wish to move this system to AWS to make it more scalable, but they wish to maintain customer privacy and keep costs to a minimum. What AWS architecture would you recommend?",
+  "o": [
+    {
+      "c": "Ask their customers to use an S3 client instead of an FTP client. Create a single S3 bucket. Create an IAM user for each customer. Put the IAM Users in a Group that has an IAM policy that permits access to sub-directories within the bucket via use of the 'username' Policy variable.",
+      "a": "yes"
+    },
+    {
+      "c": "Create a single S3 bucket with Reduced Redundancy Storage turned on and ask their customers to use an S3 client instead of an FTP client. Create a bucket for each customer with a Bucket Policy that permits access only to that one customer.",
+      "a": "no"
+    },
+    {
+      "c": "Create an auto-scaling group of FTP servers with a scaling policy to automatically scale-in when minimum network traffic on the auto-scaling group is below a given threshold. Load a central list of ftp users from S3 as part of the user Data startup script on each Instance.",
+      "a": "no"
+    },
+    {
+      "c": "Create a single S3 bucket with Requester Pays turned on and ask their customers to use an S3 client instead of an FTP client. Create a bucket for each customer with a Bucket Policy that permits access only to that one customer.",
+      "a": "no"
+    }
+  ],
+  "nt": "Using a single S3 bucket with IAM users and policy variables provides the most scalable and cost-effective solution. The policy variable ${aws:username} automatically substitutes the IAM username, allowing each customer to access only their designated folder within the shared bucket. This approach minimizes storage costs (no need for multiple buckets), simplifies management, maintains customer privacy through fine-grained access control, and leverages S3's inherent scalability and durability."
+},
+{
+  "id": 1580,
+  "q": "Amazon RDS DB snapshots and automated backups are stored in:",
+  "o": [
+    {
+      "c": "Amazon S3.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon ECS Volume.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon RDS.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EMR.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS stores both manual DB snapshots and automated backups in Amazon S3. This provides high durability (99.999999999%) and availability for your database backups. The S3 storage is managed transparently by RDS, so you don't need to interact with S3 directly for backup management, but you benefit from S3's robust storage infrastructure and durability guarantees."
+},
+{
+  "id": 1581,
+  "q": "Can Amazon S3 uploads resume on failure or do they need to restart?",
+  "o": [
+    {
+      "c": "Restart from beginning.",
+      "a": "no"
+    },
+    {
+      "c": "You can resume them, if you flag the 'resume on fai lure' option before uploading.",
+      "a": "no"
+    },
+    {
+      "c": "Resume on failure.",
+      "a": "yes"
+    },
+    {
+      "c": "Depends on the file size.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon S3 supports resumable uploads through its Multipart Upload feature. When uploading large objects, S3 automatically divides them into parts. If an upload fails, you can resume from the last successfully uploaded part rather than restarting the entire upload. This is particularly useful for large files and unreliable network connections, as it saves time and bandwidth by only retrying failed parts."
+},
+{
+  "id": 1582,
+  "q": "Prior to the introduction of this function, the HA feature provided redundancy and performance, but required that a failed/lost group member be [...] reinstated.",
+  "o": [
+    {
+      "c": "automatically.",
+      "a": "no"
+    },
+    {
+      "c": "periodically.",
+      "a": "no"
+    },
+    {
+      "c": "manually.",
+      "a": "yes"
+    },
+    {
+      "c": "continuously.",
+      "a": "no"
+    }
+  ],
+  "nt": "Before the introduction of automatic failover and recovery features in various AWS services, high availability configurations often required manual intervention to reinstate failed group members. Administrators had to manually detect failures, provision replacement resources, and reconfigure the system to incorporate the new members. Modern AWS services now provide automated failure detection and recovery, reducing operational overhead and improving system reliability."
+},
+{
+  "id": 1583,
+  "q": "A company has a workflow that sends video files from their on-premise system to AWS for transcoding. They use EC2 worker instances that pull transcoding jobs from SQS. Why is SQS an appropriate service for this scenario?",
+  "o": [
+    {
+      "c": "SQS guarantees the order of the messages.",
+      "a": "no"
+    },
+    {
+      "c": "SQS synchronously provides transcoding output.",
+      "a": "no"
+    },
+    {
+      "c": "SQS checks the health of the worker instances.",
+      "a": "no"
+    },
+    {
+      "c": "SQS helps to facilitate horizontal scaling of encoding tasks.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Amazon SQS enables horizontal scaling by decoupling the video file submission from the transcoding process. Worker instances can independently pull jobs from the queue, allowing the system to scale the number of workers based on the queue depth. This provides elasticity to handle variable workloads, fault tolerance (messages remain in queue if workers fail), and efficient resource utilization by distributing work across multiple instances."
+},
+{
+  "id": 1584,
+  "q": "Which statement below best describes what thresholds you can set to trigger a CloudWatch Alarm?",
+  "o": [
+    {
+      "c": "Set a target value and choose whether the alarm will trigger when the value is greater than (>), greater than or equal to (>=), less than (<), or less than or equal to (<=) that value.",
+      "a": "yes"
+    },
+    {
+      "c": "Thresholds need to be set in IAM not CloudWatch.",
+      "a": "no"
+    },
+    {
+      "c": "Only default thresholds can be set you can't choose your own thresholds.",
+      "a": "no"
+    },
+    {
+      "c": "Set a target value and choose whether the alarm will trigger when the value hits this threshold.",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudWatch Alarms allow you to set custom thresholds with flexible comparison operators. You can configure alarms to trigger when a metric is greater than (>), greater than or equal to (>=), less than (<), or less than or equal to (<=) a specified value for a certain number of evaluation periods. This flexibility enables precise monitoring conditions tailored to your specific application requirements and performance thresholds."
+},
+{
+  "id": 1585,
+  "q": "You are designing a web application that stores static assets in an Amazon Simple Storage Service (S3) bucket. You expect this bucket to immediately receive over 150 PUT requests per second. What should you do to ensure optimal performance?",
+  "o": [
+    {
+      "c": "Use multi-part upload.",
+      "a": "no"
+    },
+    {
+      "c": "Add a random prefix to the key names.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon S3 will automatically manage performance at this scale.",
+      "a": "no"
+    },
+    {
+      "c": "Use a predictable naming scheme, such as sequential numbers or date time sequences, in the key names.",
+      "a": "no"
+    }
+  ],
+  "nt": "Adding random prefixes to S3 key names distributes objects across multiple partitions in the S3 backend, preventing hotspotting and ensuring high request performance. S3 automatically scales to support very high request rates, but performance is optimized when object keys have prefixes that are randomized or distributed across the key namespace. Sequential or predictable naming patterns can create partitions that become bottlenecks under high load."
+},
+{
+  "id": 1586,
+  "q": "What does Amazon EC2 provide?",
+  "o": [
+    {
+      "c": "Virtual servers in the Cloud.",
+      "a": "yes"
+    },
+    {
+      "c": "A platform to run code (Java, PHP, Python), paying on an hourly basis.",
+      "a": "no"
+    },
+    {
+      "c": "Computer Clusters in the Cloud.",
+      "a": "no"
+    },
+    {
+      "c": "Physical servers, remotely managed by the customer.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon EC2 (Elastic Compute Cloud) provides resizable compute capacity in the cloud through virtual servers. These virtual servers can be launched in minutes, scaled up or down based on demand, and terminated when no longer needed. EC2 offers various instance types optimized for different use cases, along with flexible pricing options including On-Demand, Reserved, and Spot Instances."
+},
+{
+  "id": 1587,
+  "q": "A customer has a single 3-TB volume on-premises that is used to hold a large repository of images and print layout files. This repository is growing at 500 GB a year and must be presented as a single logical volume. The customer is becoming increasingly constrained with their local storage capacity and wants an off-site backup of this data, while maintaining low-latency access to their frequently accessed data. Which AWS Storage Gateway configuration meets the customer requirements?",
+  "o": [
+    {
+      "c": "Gateway-Cached volumes with snapshots scheduled to Amazon S3.",
+      "a": "no"
+    },
+    {
+      "c": "Gateway-Stored volumes with snapshots scheduled to Amazon S3.",
+      "a": "yes"
+    },
+    {
+      "c": "Gateway-Virtual Tape Library with snapshots to Amazon S3.",
+      "a": "no"
+    },
+    {
+      "c": "Gateway-Virtual Tape Library with snapshots to Amazon Glacier.",
+      "a": "no"
+    }
+  ],
+  "nt": "Storage Gateway with Stored Volumes keeps the primary data locally on-premises for low-latency access while asynchronously backing up point-in-time snapshots to Amazon S3. This configuration maintains a full copy of the data locally for performance while providing durable backups in AWS. The entire repository appears as a single logical volume to applications, and the automated snapshots to S3 provide off-site backup without impacting local access performance."
+},
+{
+  "id": 1588,
+  "q": "You are architecting an auto-scalable batch processing system using video processing pipelines and Amazon Simple Queue Service (Amazon SQS) for a customer. You are unsure of the limitations of SQS and need to find out. What do you think is a correct statement about the limitations of Amazon SQS?",
+  "o": [
+    {
+      "c": "It supports an unlimited number of queues but a limited number of messages per queue for each user but automatically deletes messages that have been in the queue for more than 4 weeks.",
+      "a": "no"
+    },
+    {
+      "c": "It supports an unlimited number of queues and unlimited number of messages per queue for each user but automatically deletes messages that have been in the queue for more than 4 days.",
+      "a": "yes"
+    },
+    {
+      "c": "It supports an unlimited number of queues but a limited number of messages per queue for each user but automatically deletes messages that have been in the queue for more than 4 days.",
+      "a": "no"
+    },
+    {
+      "c": "It supports an unlimited number of queues and unlimited number of messages per queue for each user but automatically deletes messages that have been in the queue for more than 4 weeks.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon SQS supports an unlimited number of queues and an unlimited number of messages per queue. However, messages have a maximum retention period that defaults to 4 days and can be configured from 1 minute to 14 days. After this retention period expires, messages are automatically deleted from the queue. This ensures that queues don't accumulate stale messages indefinitely and helps manage storage costs."
+},
+{
+  "id": 1589,
+  "q": "Which Amazon service can I use to define a virtual network that closely resembles a traditional data center?",
+  "o": [
+    {
+      "c": "Amazon VPC.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Service Bus.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EMR.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon RDS.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon VPC (Virtual Private Cloud) enables you to provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways. This closely resembles traditional data center networking while providing the scalability and flexibility of AWS."
+},
+{
+  "id": 1590,
+  "q": "Select the correct set of options. These are the initial settings for the default security group:",
+  "o": [
+    {
+      "c": "Allow no inbound traffic, Allow all outbound traffic and Allow instances associated with this security group to talk to each other.",
+      "a": "yes"
+    },
+    {
+      "c": "Allow all inbound traffic, Allow no outbound traffic and Allow instances associated with this security group to talk to each other.",
+      "a": "no"
+    },
+    {
+      "c": "Allow no inbound traffic, Allow all outbound traffic and Does NOT allow instances associated with this security group to talk to each other.",
+      "a": "no"
+    },
+    {
+      "c": "Allow all inbound traffic, Allow all outbound traffic and Does NOT allow instances associated with this security group to talk to each other.",
+      "a": "no"
+    }
+  ],
+  "nt": "The default security group in a VPC is configured to: deny all inbound traffic (no external access), allow all outbound traffic (instances can initiate connections to anywhere), and allow instances within the same security group to communicate with each other. This provides a secure baseline configuration while enabling necessary communication between related instances and outbound connectivity for software updates and external service access."
+},
+{
+  "id": 1591,
+  "q": "You need to migrate a large amount of data into the cloud that you have stored on a hard disk and you decide that the best way to accomplish this is with AWS Import/Export and you mail the hard disk to AWS. Which of the following statements is incorrect in regards to AWS Import/Export?",
+  "o": [
+    {
+      "c": "It can export from Amazon S3.",
+      "a": "no"
+    },
+    {
+      "c": "It can Import to Amazon Glacier.",
+      "a": "no"
+    },
+    {
+      "c": "It can export from Amazon Glacier.",
+      "a": "yes"
+    },
+    {
+      "c": "It can Import to Amazon EBS.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS Import/Export cannot export data from Amazon Glacier. Glacier is designed for long-term archival storage with specific retrieval processes and costs. While you can import data to Glacier using Import/Export (now largely superseded by AWS Snowball family), you cannot use it to export data from Glacier. Data retrieval from Glacier typically occurs through standard Glacier retrieval processes or the Snowball service for larger datasets."
+},
+{
+  "id": 1592,
+  "q": "Can I control if and when MySQL based RDS Instance is upgraded to new supported versions?",
+  "o": [
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "Only in VPC.",
+      "a": "no"
+    },
+    {
+      "c": "Yes.",
+      "a": "yes"
+    }
+  ],
+  "nt": "You have control over when major version upgrades occur for RDS instances. While AWS may automatically apply minor version patches during maintenance windows, major version upgrades require your explicit approval. You can choose to apply major version upgrades immediately or schedule them for a specific maintenance window. This allows you to test compatibility and plan upgrades during low-traffic periods to minimize business impact."
+},
+{
+  "id": 1593,
+  "q": "If I have multiple Read Replicas for my master DB Instance and I promote one of them, what happens to the rest of the Read Replicas?",
+  "o": [
+    {
+      "c": "The remaining Read Replicas will still replicate from the older master DB Instance.",
+      "a": "yes"
+    },
+    {
+      "c": "The remaining Read Replicas will be deleted.",
+      "a": "no"
+    },
+    {
+      "c": "The remaining Read Replicas will be combined to one read replica.",
+      "a": "no"
+    }
+  ],
+  "nt": "When you promote a Read Replica to become a standalone DB instance, the other Read Replicas continue to replicate from the original master DB instance. The promotion only affects the specific replica you choose to promote. The remaining replicas maintain their existing replication relationships unless you manually reconfigure them to replicate from the newly promoted instance or make other changes to the replication topology."
+},
+{
+  "id": 1594,
+  "q": "A user is running a batch process which runs for 1 hour every day. Which of the below mentioned options is the right instance type and costing model in this case if the user performs the same task for the whole year?",
+  "o": [
+    {
+      "c": "EBS backed instance with on-demand instance pricing.",
+      "a": "no"
+    },
+    {
+      "c": "EBS backed instance with heavy utilized reserved instance pricing.",
+      "a": "no"
+    },
+    {
+      "c": "EBS backed instance with low utilized reserved instance pricing.",
+      "a": "no"
+    },
+    {
+      "c": "Instance store backed instance with spot instance pricing.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Spot Instances are ideal for fault-tolerant, flexible workloads like daily batch processing that runs for short durations. They can provide up to 90% savings compared to On-Demand Instances. Since the batch process only runs for 1 hour daily and can tolerate interruptions (can be restarted if interrupted), Spot Instances offer the most cost-effective solution. Instance store is suitable since the data can be regenerated or loaded from persistent storage at the start of each batch run."
+},
+{
+  "id": 1595,
+  "q": "You are in the process of building an online gaming site for a client and one of the requirements is that it must be able to process vast amounts of data easily. Which AWS Service would be very helpful in processing all this data?",
+  "o": [
+    {
+      "c": "Amazon S3.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Data Pipeline.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Direct Connect.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EMR.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Amazon EMR (Elastic MapReduce) provides a managed Hadoop framework that can process vast amounts of data across dynamically scalable Amazon EC2 instances. It's ideal for big data processing tasks like log analysis, web indexing, data warehousing, machine learning, financial analysis, and scientific simulation. EMR can handle petabyte-scale data processing efficiently and cost-effectively, making it well-suited for gaming analytics and processing large volumes of game data."
+},
+{
+  "id": 1596,
+  "q": "Your team has a tomcat-based Java application you need to deploy into development, test and production environments. After some research, you opt to use Elastic Beanstalk due to its tight integration with your developer tools and RDS due to its ease of management. Your QA team lead points out that you need to roll a sanitized set of production data into your environment on a nightly basis. Similarly, other software teams in your org want access to that same restored data via their EC2 instances in your VPC. The optimal setup for persistence and security that meets the above requirements would be the following:",
+  "o": [
+    {
+      "c": "Create your RDS instance as part of your Elastic Beanstalk definition and alter its security group to allow access to it from hosts in your application subnets.",
+      "a": "no"
+    },
+    {
+      "c": "Create your RDS instance separately and add its IP address to your application's DB connection strings in your code Alter its security group to allow access to it from hosts within your VPC's IP address block.",
+      "a": "no"
+    },
+    {
+      "c": "Create your RDS instance separately and pass its DNS name to your app's DB connection string as an environment variable. Create a security group for client machines and add it as a valid source for DB traffic to the security group of the RDS instance itself.",
+      "a": "yes"
+    },
+    {
+      "c": "Create your RDS instance separately and pass its DNS name to your's DB connection string as an environment variable Alter its security group to allow access to It from hosts in your application subnets.",
+      "a": "no"
+    }
+  ],
+  "nt": "Creating the RDS instance separately from Elastic Beanstalk provides better control and flexibility. Using environment variables for the database connection string follows best practices for configuration management. Creating a dedicated security group for client machines and adding it to the RDS security group rules enables fine-grained access control. This approach allows multiple teams to access the database securely while maintaining the ability to refresh data nightly and manage access through security groups rather than IP-based rules."
+},
+{
+  "id": 1597,
+  "q": "What are characteristics of Amazon S3? (Choose 2 answers)",
+  "o": [
+    {
+      "c": "Amazon S3 allows you to store objects of virtually unlimited size.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon S3 offers Provisioned IOP.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon S3 allows you to store unlimited amounts of data.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon S3 should be used to host a relational database.",
+      "a": "no"
+    },
+    {
+      "c": "Objects are directly accessible via a URL.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Amazon S3 provides unlimited storage capacity - you can store as much data as you need without capacity planning. Objects in S3 are accessible via unique URLs, enabling direct web access to stored content. While individual objects are limited to 5TB in size (not 'virtually unlimited'), S3 itself has no total storage limit. S3 is not designed for hosting relational databases as it's an object storage service, not a block storage service suitable for database files."
+},
+{
+  "id": 1598,
+  "q": "You need to set up a complex network infrastructure for your organization that will be reasonably easy to deploy, replicate, control, and track changes on. Which AWS service would be best to use to help you accomplish this?",
+  "o": [
+    {
+      "c": "AWS Import/Export.",
+      "a": "no"
+    },
+    {
+      "c": "AWS CloudFormation.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Route 53.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon CloudWatch.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS CloudFormation allows you to model, provision, and manage AWS resources using templates. For complex network infrastructure, CloudFormation templates can define VPCs, subnets, route tables, security groups, and other networking components in a declarative way. These templates are version-controlled, repeatable, and can be used to consistently deploy identical environments across multiple regions or accounts while tracking changes through template revisions."
+},
+{
+  "id": 1599,
+  "q": "How should the application use AWS credentials to access the S3 bucket securely?",
+  "o": [
+    {
+      "c": "Use the AWS account access Keys the application retrieves the credentials from the source code of the application.",
+      "a": "no"
+    },
+    {
+      "c": "Create an IAM user for the application with permissions that allow list access to the S3 bucket launch the instance as the IAM user and retrieve the IAM user's credentials from the EC2 instance user data.",
+      "a": "no"
+    },
+    {
+      "c": "Create an IAM role for EC2 that allows list access to objects in the S3 bucket. Launch the instance with the role, and retrieve the role's credentials from the EC2 Instance metadata.",
+      "a": "yes"
+    },
+    {
+      "c": "Create an IAM user for the application with permissions that allow list access to the S3 bucket. The application retrieves the IAM user credentials from a temporary directory with permissions that allow read access only to the application user.",
+      "a": "no"
+    }
+  ],
+  "nt": "Using IAM roles for EC2 instances is the most secure method for granting applications access to AWS resources. The IAM role is attached to the EC2 instance, and the application automatically retrieves temporary security credentials from the instance metadata service. These credentials are automatically rotated and never stored in code, configuration files, or user data. This approach follows AWS security best practices by eliminating the need to manage long-term access keys."
+},
+{
+  "id": 1600,
+  "q": "You are setting up a VPC and you need to set up a public subnet within that VPC. Which following requirement must be met for this subnet to be considered a public subnet?",
+  "o": [
+    {
+      "c": "Subnet's traffic is not routed to an internet gateway but has its traffic routed to a virtual private gateway.",
+      "a": "no"
+    },
+    {
+      "c": "Subnet's traffic is routed to an internet gateway.",
+      "a": "yes"
+    },
+    {
+      "c": "Subnet's traffic is not routed to an internet gateway.",
+      "a": "no"
+    },
+    {
+      "c": "None of these answers can be considered a public subnet.",
+      "a": "no"
+    }
+  ],
+  "nt": "A subnet is considered public when its route table includes a route that directs internet-bound traffic (0.0.0.0/0) to an Internet Gateway (IGW). The Internet Gateway enables communication between instances in the VPC and the internet. Without this route to an IGW, instances in the subnet cannot directly access the internet, and the subnet is considered private, even if it has public IP addresses assigned to its instances."
+}
+]

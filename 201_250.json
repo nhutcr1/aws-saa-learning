@@ -1,0 +1,824 @@
+[{
+  "id": 1201,
+  "q": "Which Amazon Elastic Compute Cloud feature can you query from within the instance to access instance properties?",
+  "o": [{
+    "c": "Instance user data",
+    "a": "no"
+  }, {
+    "c": "Resource tags",
+    "a": "no"
+  }, {
+    "c": "Instance metadata",
+    "a": "yes"
+  }, {
+    "c": "Amazon Machine Image",
+    "a": "no"
+  }],
+  "nt": "Instance metadata is the correct answer because it provides data about your EC2 instance that you can use to configure or manage the running instance. This includes information such as instance ID, instance type, security groups, and network interfaces. You can access this data from within the instance itself using the instance metadata service at http://169.254.169.254/latest/meta-data/, which is only accessible from within the instance and provides valuable configuration information without requiring external API calls."
+}, {
+  "id": 1202,
+  "q": "Making your snapshot public shares all snapshot data with everyone. Can the snapshots with AWS Market place product codes be made public?",
+  "o": [{
+    "c": "Yes",
+    "a": "no"
+  }, {
+    "c": "No",
+    "a": "yes"
+  }],
+  "nt": "The correct answer is No because AWS Marketplace product codes are subject to licensing restrictions and cannot be made public. Making a snapshot with AWS Marketplace product codes public would violate the terms of service and licensing agreements associated with the Marketplace products. AWS enforces this restriction to protect intellectual property and ensure compliance with software licensing terms."
+}, {
+  "id": 1203,
+  "q": "Which service enables AWS customers to manage users and permissions in AWS?",
+  "o": [{
+    "c": "AWS Access Control Service (ACS)",
+    "a": "no"
+  }, {
+    "c": "AWS Identity and Access Management (IAM)",
+    "a": "yes"
+  }],
+  "nt": "AWS Identity and Access Management (IAM) is the correct answer because it is the AWS service that enables you to manage access to AWS services and resources securely. IAM allows you to create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources. IAM provides centralized control of your AWS account, allowing you to implement the principle of least privilege and manage authentication and authorization across your AWS environment."
+}, {
+  "id": 1204,
+  "q": "You have launched an EC2 instance with four (4) 500 GB EBS Provisioned IOPS volumes attached. The EC2 instance is EBS-Optimized and supports 500 Mbps throughput between EC2 and EBS. The four EBS volumes are configured as a single RAID 0 device, and each Provisioned IOPS volume is provisioned with 4,000IOPS (4,000 16KB reads or writes), for a total of 16,000 random IOPS on the instance. The EC2 instance initially delivers the expected 16,000 IOPS random read and write performance. Sometime later, in order to increase the total random I/O performance of the instance, you add an additional two 500 GB EBS Provisioned IOPS volumes to the RAID. Each volume is provisioned to 4,000 IOPs like the original four, for a total of 24,000 IOPS on the EC2 instance. Monitoring shows that the EC2 instance CPU utilization increased from 50% to 70%, but the total random IOPS measured at the instance level does not increase at all. What is the problem and a valid solution?",
+  "o": [{
+    "c": "Larger storage volumes support higher Provisioned IOPS rates; increase the provisioned volume storage of each of the 6 EBS volumes to 1TB",
+    "a": "no"
+  }, {
+    "c": "The EBS-Optimized throughput limits the total IOPS that can be utilized; use an EBS Optimized instance that provides larger throughput",
+    "a": "yes"
+  }, {
+    "c": "Small block sizes cause performance degradation, limiting the I/O throughput; configure the instance device driver and filesystem to use 64KB blocks to increase throughput",
+    "a": "no"
+  }, {
+    "c": "The standard EBS Instance root volume limits the total IOPS rate; change the instance root volume to also be a 500GB 4,000 Provisioned IOPS volume",
+    "a": "no"
+  }, {
+    "c": "RAID 0 only scales linearly to about 4 devices; use RAID 0 with 4 EBS Provisioned IOPS volumes, but increase each Provisioned IOPS EBS volume to 6,000 IOPS",
+    "a": "no"
+  }],
+  "nt": "The EBS-Optimized throughput limits the total IOPS that can be utilized is the correct answer because EBS-optimized instances have a maximum network throughput limit between EC2 and EBS. With 16,000 IOPS at 16KB per I/O, the throughput required is 16,000 * 16KB = 256 MB/s, which is within the 500 Mbps (62.5 MB/s) limit. However, when trying to achieve 24,000 IOPS, the required throughput becomes 24,000 * 16KB = 384 MB/s, which exceeds the 500 Mbps (62.5 MB/s) capacity. The solution is to use an EBS-optimized instance type that provides higher throughput capacity to support the increased IOPS requirement."
+}, {
+  "id": 1205,
+  "q": "A user has configured a website and launched it using the Apache web server on port 80. The user is using ELB with the EC2 instances for Load Balancing. What should the user do to ensure that the EC2 instances accept requests only from ELB?",
+  "o": [{
+    "c": "Configure the security group of EC2, which allows access to the ELB source security group",
+    "a": "yes"
+  }, {
+    "c": "Configure the EC2 instance so that it only listens on the ELB port",
+    "a": "no"
+  }, {
+    "c": "Open the port for an ELB static IP in the EC2 security group",
+    "a": "no"
+  }, {
+    "c": "Configure the security group of EC2, which allows access only to the ELB listener",
+    "a": "no"
+  }],
+  "nt": "Configuring the security group of EC2 to allow access to the ELB source security group is the correct answer because this approach uses security group references rather than specific IP addresses. When you reference the ELB's security group in your EC2 instance's security group rules, the instances will only accept traffic from the ELB. This is more secure and maintainable than using static IP addresses, as ELB nodes can change and their IP addresses are not fixed. This method automatically allows traffic from all ELB nodes without needing to know their specific IP addresses."
+}, {
+  "id": 1206,
+  "q": "You're trying to delete an SSL certificate from the IAM certificate store, and you're getting the message 'Certificate: <certificate-id> is being used by CloudFront.' Which of the following statements is probably the reason why you are getting this error?",
+  "o": [{
+    "c": "Before you can delete an SSL certificate, you need to either rotate SSL certificates or revert from using a custom SSL certificate to using the default CloudFront certificate",
+    "a": "yes"
+  }, {
+    "c": "You can't delete SSL certificates. You need to request it from AWS",
+    "a": "no"
+  }, {
+    "c": "Before you can delete an SSL certificate, you need to set up the appropriate access level in IAM",
+    "a": "no"
+  }, {
+    "c": "Before you can delete an SSL certificate you need to set up https on your server",
+    "a": "no"
+  }],
+  "nt": "The correct answer is that before you can delete an SSL certificate, you need to either rotate SSL certificates or revert from using a custom SSL certificate to using the default CloudFront certificate. This is because when an SSL certificate is associated with a CloudFront distribution, it cannot be deleted until it is disassociated. You must first update the CloudFront distribution to use a different certificate (either a new custom certificate or the default CloudFront certificate) before the current certificate can be deleted from IAM."
+}, {
+  "id": 1207,
+  "q": "A government client needs you to set up secure cryptographic key storage for some of their extremely confidential data. You decide that the AWS CloudHSM is the best service for this. However, there seem to be a few pre-requisites before this can happen, one of those being a security group that has certain ports open. Which of the following is correct in regards to those security groups?",
+  "o": [{
+    "c": "A security group that has port 22 (for SSH) or port 3389 (for RDP) open to your network",
+    "a": "yes"
+  }, {
+    "c": "A security group that has no ports open to your network",
+    "a": "no"
+  }, {
+    "c": "A security group that has only port 3389 (for RDP) open to your network",
+    "a": "no"
+  }, {
+    "c": "A security group that has only port 22 (for SSH) open to your network",
+    "a": "no"
+  }],
+  "nt": "The correct answer is a security group that has port 22 (for SSH) or port 3389 (for RDP) open to your network because AWS CloudHSM requires administrative access to manage the hardware security modules. Port 22 is used for SSH access to Linux-based management tools, while port 3389 is used for RDP access to Windows-based management tools. These ports need to be open to allow authorized administrators to connect to and manage the CloudHSM appliances for tasks such as initializing the HSMs, creating crypto users, and performing backup operations."
+}, {
+  "id": 1208,
+  "q": "A web company is looking to implement an intrusion detection and prevention system into their deployed VPC. This platform should have the ability to scale to thousands of instances running inside of the VPC. How should they architect their solution to achieve these goals?",
+  "o": [{
+    "c": "Configure an instance with monitoring software and the elastic network interface (ENI) set to promiscuous mode packet sniffing to see an traffic across the VPC. Configure servers running in the VPC using the host-based 'route' commands to send all traffic through the platform to a scalable virtualized IDS/IP",
+    "a": "no"
+  }, {
+    "c": "Create a second VPC and route all traffic from the primary application VPC through the second VPC where the scalable virtualized IDS/IPS platform resides",
+    "a": "no"
+  }, {
+    "c": "Configure servers running in the VPC using the host-based 'route' commands to send all traffic through the platform to a scalable virtualized IDS/IP",
+    "a": "yes"
+  }, {
+    "c": "Configure each host with an agent that collects all network traffic and sends that traffic to the IDS/IPS platform for inspection",
+    "a": "no"
+  }],
+  "nt": "Configuring servers running in the VPC using the host-based 'route' commands to send all traffic through the platform to a scalable virtualized IDS/IPS is the correct answer because this approach provides a scalable intrusion detection and prevention solution. By using route tables to redirect traffic through the IDS/IPS platform, all network traffic can be inspected without requiring changes to individual applications. This method allows the IDS/IPS platform to scale independently of the application instances and can handle traffic from thousands of instances by scaling the inspection layer horizontally as needed."
+}, {
+  "id": 1209,
+  "q": "You run an ad-supported photo sharing website using Amazon S3 to serve photos to visitors of your site. At some point you find out that other sites have been linking to the photos on your site, causing loss to your business. What is an effective method to mitigate this?",
+  "o": [{
+    "c": "Remove public read access and use signed URLs with expiry dates",
+    "a": "yes"
+  }, {
+    "c": "Use CloudFront distributions for static content",
+    "a": "no"
+  }, {
+    "c": "Block the IPs of the offending websites in Security Groups",
+    "a": "no"
+  }, {
+    "c": "Store photos on an EBS volume of the web server",
+    "a": "no"
+  }],
+  "nt": "Removing public read access and using signed URLs with expiry dates is the correct answer because this approach provides controlled, time-limited access to S3 objects. Signed URLs (presigned URLs) allow you to grant temporary access to private S3 objects without making them publicly accessible. This prevents other websites from directly linking to your photos because the URLs expire after a specified time period and require cryptographic signatures that only you can generate. This method effectively protects your content while still allowing legitimate users to access it through your application."
+}, {
+  "id": 1210,
+  "q": "Which of the following is not a true statement relating to the performance of your EBS volumes?",
+  "o": [{
+    "c": "Frequent snapshots provide a higher level of data durability and they will not degrade the performance of your application while the snapshot is in progress",
+    "a": "yes"
+  }, {
+    "c": "General Purpose (SSD) and Provisioned IOPS (SSD) volumes have a throughput limit of 128 MB/s per volume",
+    "a": "no"
+  }, {
+    "c": "There is a relationship between the maximum performance of your EBS volumes, the amount of I/O you are driving to them, and the amount of time it takes for each transaction to complete",
+    "a": "no"
+  }, {
+    "c": "There is a 5 to 50 percent reduction in IOPS when you first access each block of data on a newly created or restored EBS volume",
+    "a": "no"
+  }],
+  "nt": "The statement that 'Frequent snapshots provide a higher level of data durability and they will not degrade the performance of your application while the snapshot is in progress' is not true because while EBS snapshots do provide data durability through point-in-time backups, they can indeed impact performance during the snapshot process. When you create a snapshot, EBS may need to copy data blocks to S3, which can consume I/O bandwidth and potentially degrade performance, especially for write-intensive workloads. The performance impact is typically minimal for most use cases, but it's not accurate to claim that snapshots never degrade performance."
+}, {
+  "id": 1211,
+  "q": "Changes to the backup window take effect [...].",
+  "o": [{
+    "c": "from the next billing cycle",
+    "a": "no"
+  }, {
+    "c": "after 30 minutes",
+    "a": "no"
+  }, {
+    "c": "immediately",
+    "a": "yes"
+  }, {
+    "c": "after 24 hours",
+    "a": "no"
+  }],
+  "nt": "Changes to the backup window take effect immediately because AWS RDS allows you to modify backup settings in real-time. When you change the backup window through the AWS Management Console, CLI, or API, the new backup window configuration is applied immediately and will be used for the next scheduled backup. There is no waiting period or delay for backup window changes to take effect in RDS."
+}, {
+  "id": 1212,
+  "q": "Location of Instances are [...].",
+  "o": [{
+    "c": "regional",
+    "a": "no"
+  }, {
+    "c": "based on Availability Zone",
+    "a": "yes"
+  }, {
+    "c": "global",
+    "a": "no"
+  }],
+  "nt": "The location of EC2 instances is based on Availability Zone because when you launch an EC2 instance, you must specify both the region and the specific Availability Zone within that region. Each Availability Zone is a distinct location within a region that is engineered to be isolated from failures in other Availability Zones. This design provides high availability and fault tolerance by allowing you to distribute instances across multiple Availability Zones within the same region."
+}, {
+  "id": 1213,
+  "q": "You log in to IAM on your AWS console and notice the following message. 'Delete your root access keys.' Why do you think IAM is requesting this?",
+  "o": [{
+    "c": "Because the root access keys will expire as soon as you log out",
+    "a": "no"
+  }, {
+    "c": "Because the root access keys expire after 1 week",
+    "a": "no"
+  }, {
+    "c": "Because the root access keys are the same for all users",
+    "a": "no"
+  }, {
+    "c": "Because they provide unrestricted access to your AWS resources",
+    "a": "yes"
+  }],
+  "nt": "IAM recommends deleting root access keys because they provide unrestricted access to your AWS resources. The root account has full administrative privileges to all AWS services and resources in the account, which poses a significant security risk if the keys are compromised. AWS best practices recommend using IAM users with appropriate permissions instead of the root account for daily operations, and enabling multi-factor authentication (MFA) on the root account for additional security."
+}, {
+  "id": 1214,
+  "q": "What is the minimum charge for the data transferred between Amazon RDS and Amazon EC2 Instances in the same Availability Zone?",
+  "o": [{
+    "c": "USD 0.10 per GB",
+    "a": "no"
+  }, {
+    "c": "No charge. It is free",
+    "a": "yes"
+  }, {
+    "c": "USD 0.02 per GB",
+    "a": "no"
+  }, {
+    "c": "USD 0.01 per GB",
+    "a": "no"
+  }],
+  "nt": "There is no charge for data transferred between Amazon RDS and Amazon EC2 instances in the same Availability Zone because AWS does not charge for data transfer within the same Availability Zone. This is part of AWS's pricing model that encourages optimal architecture design by placing resources that communicate frequently within the same Availability Zone to avoid data transfer costs and reduce latency."
+}, {
+  "id": 1215,
+  "q": "In DynamoDB, could you use IAM to grant access to Amazon DynamoDB resources and API actions?",
+  "o": [{
+    "c": "In DynamoDB there is no need to grant access",
+    "a": "no"
+  }, {
+    "c": "Depended to the type of access",
+    "a": "no"
+  }, {
+    "c": "Yes",
+    "a": "yes"
+  }, {
+    "c": "No",
+    "a": "no"
+  }],
+  "nt": "Yes, you can use IAM to grant access to Amazon DynamoDB resources and API actions because IAM integrates with DynamoDB to provide fine-grained access control. You can create IAM policies that specify which DynamoDB actions (such as Query, Scan, PutItem, UpdateItem, DeleteItem) are allowed on specific tables or even specific items within tables. IAM policies can be attached to IAM users, groups, or roles to control access to DynamoDB resources based on the principle of least privilege."
+}, {
+  "id": 1216,
+  "q": "The common use cases for DynamoDB Fine-Grained Access Control (FGAC) are cases in which the end user wants [...].",
+  "o": [{
+    "c": "to change the hash keys of the table directly",
+    "a": "no"
+  }, {
+    "c": "to check if an IAM policy requires the hash keys of the tables directly",
+    "a": "no"
+  }, {
+    "c": "to read or modify any code commit key of the table directly, without a middle-tier service",
+    "a": "no"
+  }, {
+    "c": "to read or modify the table directly, without a middle-tier service",
+    "a": "yes"
+  }],
+  "nt": "The common use cases for DynamoDB Fine-Grained Access Control (FGAC) are cases in which the end user wants to read or modify the table directly, without a middle-tier service. FGAC allows you to control access to individual data items and attributes in DynamoDB tables based on the identity of the user making the request. This enables scenarios like mobile and web applications where end users need direct, secure access to DynamoDB without requiring a backend application server to proxy all database requests, reducing complexity and improving performance."
+}, {
+  "id": 1217,
+  "q": "What are the initial settings of an user created security group?",
+  "o": [{
+    "c": "Allow all inbound traffic and Allow no outbound traffic",
+    "a": "no"
+  }, {
+    "c": "Al low no inbound traffic and Al low no outbound traffic",
+    "a": "no"
+  }, {
+    "c": "Al low no inbound traffic and Al low all outbound traffic",
+    "a": "yes"
+  }, {
+    "c": "Allow all inbound traffic and Allow all outbound traffic",
+    "a": "no"
+  }],
+  "nt": "The initial settings of a user-created security group are to allow no inbound traffic and allow all outbound traffic. This is the default security posture for AWS security groups - they are deny-all for inbound traffic by default, which follows security best practices of least privilege. However, they allow all outbound traffic by default, which enables instances to communicate with external services and download updates without requiring explicit outbound rules to be configured initially."
+}, {
+  "id": 1218,
+  "q": "Which one of the following answers is not a possible state of Amazon CloudWatch Alarm?",
+  "o": [{
+    "c": "INSUFFICIENT_DATA",
+    "a": "no"
+  }, {
+    "c": "ALARM",
+    "a": "no"
+  }, {
+    "c": "OK",
+    "a": "no"
+  }, {
+    "c": "STATUS_CHECK_FAILED",
+    "a": "yes"
+  }],
+  "nt": "STATUS_CHECK_FAILED is not a possible state of an Amazon CloudWatch Alarm because CloudWatch alarms have three possible states: OK (the metric is within the defined threshold), ALARM (the metric is outside the defined threshold), and INSUFFICIENT_DATA (the alarm has just started, the metric is not available, or not enough data is available to determine the alarm state). STATUS_CHECK_FAILED is actually an EC2 instance status check that indicates problems with the instance, but it is not a CloudWatch alarm state."
+}, {
+  "id": 1219,
+  "q": "[...] let you categorize your EC2 resources in different ways, for example, by purpose, owner, or environment.",
+  "o": [{
+    "c": "wildcards",
+    "a": "no"
+  }, {
+    "c": "pointers",
+    "a": "no"
+  }, {
+    "c": "tags",
+    "a": "yes"
+  }, {
+    "c": "special filters",
+    "a": "no"
+  }],
+  "nt": "Tags let you categorize your EC2 resources in different ways, for example, by purpose, owner, or environment. AWS tags are key-value pairs that you can assign to AWS resources, including EC2 instances, EBS volumes, security groups, and more. Tags enable you to organize your resources, track costs by department or project, implement automation based on resource characteristics, and enforce security policies through tag-based access control in IAM policies."
+}, {
+  "id": 1220,
+  "q": "Which of the below mentioned options is not available when an instance is launched by Auto Scaling with EC2 Classic?",
+  "o": [{
+    "c": "Public IP",
+    "a": "no"
+  }, {
+    "c": "Elastic IP",
+    "a": "yes"
+  }, {
+    "c": "Private DNS",
+    "a": "no"
+  }, {
+    "c": "Private IP",
+    "a": "no"
+  }],
+  "nt": "Elastic IP is not available when an instance is launched by Auto Scaling with EC2 Classic because Elastic IP addresses are static IP addresses designed for dynamic cloud computing, but they cannot be automatically assigned to instances launched by Auto Scaling groups in EC2-Classic. In EC2-Classic, Auto Scaling groups automatically assign public IP addresses to instances, but these are dynamic and change when instances are terminated and replaced. Elastic IP addresses must be manually associated and are not suitable for Auto Scaling scenarios where instances are frequently launched and terminated."
+}, {
+  "id": 1221,
+  "q": "You have a lot of data stored in the AWS Storage Gateway and your manager has come to you asking about how the billing is calculated, specifically the Virtual Tape Shelf usage. What would be a correct response to this?",
+  "o": [{
+    "c": "You are billed for the virtual tape data you store in Amazon Glacier and are billed for the size of the virtual tape",
+    "a": "no"
+  }, {
+    "c": "You are billed for the virtual tape data you store in Amazon Glacier and billed for the portion of virtual tape capacity that you use, not for the size of the virtual tape",
+    "a": "yes"
+  }, {
+    "c": "You are billed for the virtual tape data you store in Amazon S3 and billed for the portion of virtual tape capacity that you use, not for the size of the virtual tape",
+    "a": "no"
+  }, {
+    "c": "You are billed for the virtual tape data you store in Amazon S3 and are billed for the size of the virtual tape",
+    "a": "no"
+  }],
+  "nt": "You are billed for the virtual tape data you store in Amazon Glacier and billed for the portion of virtual tape capacity that you use, not for the size of the virtual tape. With AWS Storage Gateway's Virtual Tape Shelf (VTS), you pay only for the storage you actually use for your virtual tapes in Amazon Glacier, not for the provisioned capacity of the tapes. This means if you create a 1TB virtual tape but only store 100GB of data on it, you only pay for 100GB of storage in Glacier, not for the full 1TB capacity of the virtual tape."
+}, {
+  "id": 1222,
+  "q": "True or False: The new DB Instance that is created when you promote a Read Replica retains the backup window period.",
+  "o": [{
+    "c": "True",
+    "a": "yes"
+  }, {
+    "c": "False",
+    "a": "no"
+  }],
+  "nt": "True, when you promote a Read Replica to a standalone DB instance, it retains the backup window period from the original Read Replica configuration. The promoted instance maintains the same backup and maintenance window settings that were configured for the Read Replica. This ensures continuity in your backup strategy and maintenance operations after the promotion process is complete."
+}, {
+  "id": 1223,
+  "q": "[...] is a fast, flexible, fully managed push messaging service.",
+  "o": [{
+    "c": "Amazon SNS",
+    "a": "yes"
+  }, {
+    "c": "Amazon SES",
+    "a": "no"
+  }, {
+    "c": "Amazon SQS",
+    "a": "no"
+  }, {
+    "c": "Amazon FPS",
+    "a": "no"
+  }],
+  "nt": "Amazon SNS (Simple Notification Service) is a fast, flexible, fully managed push messaging service. SNS enables you to send messages or notifications directly to applications or end users via multiple transport protocols including HTTP/S, email, SMS, and mobile push notifications. It follows a publish-subscribe model where publishers send messages to topics, and subscribers receive messages from topics they're interested in. SNS is designed for high-throughput, push-based, many-to-many messaging scenarios."
+}, {
+  "id": 1224,
+  "q": "You are tasked with setting up a Linux bastion host for access to Amazon EC2 instances running in your VPC. Only clients connecting from the corporate external public IP address 72.34.51.100 should have SSH access to the host. Which option will meet the customer requirement?",
+  "o": [{
+    "c": "Security Group Inbound Rule: Protocol – TCP. Port Range – 22, Source 72.34.51.100/32",
+    "a": "yes"
+  }, {
+    "c": "Port Range- 22, Source 72.34.51. 100/32",
+    "a": "no"
+  }, {
+    "c": "Security Group Inbound Rule: Protocol – UDP, Port Range- 22, Source 72.34.51.100/32",
+    "a": "no"
+  }, {
+    "c": "Network ACL Inbound Rule: Protocol – UDP, Port Range- 22, Source 72.34.51.100/32",
+    "a": "no"
+  }, {
+    "c": "Network ACL Inbound Rule: Protocol – TCP, Port Range-22, Source 72.34.51.100/0",
+    "a": "no"
+  }],
+  "nt": "The correct answer is Security Group Inbound Rule: Protocol – TCP, Port Range – 22, Source 72.34.51.100/32 because security groups operate at the instance level and provide stateful firewall protection. SSH uses TCP protocol on port 22, not UDP. The CIDR notation /32 specifies a single IP address (72.34.51.100), which restricts SSH access only from the corporate external public IP address. This configuration provides the precise access control required for the bastion host while maintaining security."
+}, {
+  "id": 1225,
+  "q": "How can you secure data at rest on an EBS volume?",
+  "o": [{
+    "c": "Attach the volume to an instance using EC2's SSL interface",
+    "a": "no"
+  }, {
+    "c": "Write the data randomly instead of sequentially",
+    "a": "no"
+  }, {
+    "c": "Encrypt the volume using the S3 server-side encryption service",
+    "a": "no"
+  }, {
+    "c": "Create an IAM policy that restricts read and write access to the volume",
+    "a": "no"
+  }, {
+    "c": "Use an encrypted file system on top of the EBS volume",
+    "a": "yes"
+  }],
+  "nt": "Using an encrypted file system on top of the EBS volume is a valid method to secure data at rest because this approach provides encryption at the file system level, which encrypts individual files and directories. While AWS now offers native EBS encryption, using an encrypted file system (such as using Linux's dm-crypt/LUKS or Windows EFS) provides an additional layer of security and control over the encryption process. This method allows you to manage your own encryption keys and provides protection even if the underlying storage medium is compromised."
+}, {
+  "id": 1226,
+  "q": "Is there a method in the IAM system to allow or deny access to a specific instance?",
+  "o": [{
+    "c": "Only for VPC based instances",
+    "a": "no"
+  }, {
+    "c": "Yes",
+    "a": "yes"
+  }, {
+    "c": "No",
+    "a": "no"
+  }],
+  "nt": "Yes, there is a method in the IAM system to allow or deny access to a specific instance because IAM policies can include conditions that reference specific EC2 resources. You can create IAM policies that use the 'ec2:ResourceTag' condition key to control access based on tags applied to EC2 instances, or use the 'ec2:InstanceID' condition to control access to specific instance IDs. This allows you to implement fine-grained access control where IAM users or roles can only perform actions on specific EC2 instances that meet the conditions specified in the IAM policy."
+}, {
+  "id": 1227,
+  "q": "Using Amazon IAM, can I give permission based on organizational groups?",
+  "o": [{
+    "c": "Yes but only in certain cases",
+    "a": "no"
+  }, {
+    "c": "Yes",
+    "a": "yes"
+  }, {
+    "c": "No",
+    "a": "no"
+  }],
+  "nt": "Yes, you can give permission based on organizational groups using Amazon IAM because IAM supports the creation of groups that represent organizational units, departments, or teams. You can create IAM groups (such as Developers, Administrators, Finance, etc.), attach policies to these groups that define their permissions, and then add IAM users to the appropriate groups. This allows you to manage permissions at the group level rather than individually for each user, making it easier to maintain and update permissions as organizational roles change."
+}, {
+  "id": 1228,
+  "q": "Which services allow the customer to retain full administrative privileges of the underlying EC2 instances? (Choose 2 answers)",
+  "o": [{
+    "c": "Amazon Relational Database Service",
+    "a": "no"
+  }, {
+    "c": "Amazon Elastic MapReduce",
+    "a": "yes"
+  }, {
+    "c": "Amazon ElastiCache",
+    "a": "no"
+  }, {
+    "c": "Amazon DynamoDB",
+    "a": "no"
+  }, {
+    "c": "AWS Elastic Beanstalk",
+    "a": "yes"
+  }],
+  "nt": "Amazon Elastic MapReduce and AWS Elastic Beanstalk allow the customer to retain full administrative privileges of the underlying EC2 instances because both services provide managed environments where customers still have SSH/RDP access to the underlying instances. With EMR, you can connect to the master and core nodes to install additional software, modify configurations, and troubleshoot issues. With Elastic Beanstalk, you can use SSH to access the EC2 instances running your application to perform administrative tasks, while still benefiting from the platform's deployment and management capabilities."
+}, {
+  "id": 1229,
+  "q": "While launching an RDS DB instance, on which page I can select the Availability Zone?",
+  "o": [{
+    "c": "REVIEW",
+    "a": "no"
+  }, {
+    "c": "DB INSTANCE DETAILS",
+    "a": "no"
+  }, {
+    "c": "MANAGEMENT OPTIONS",
+    "a": "no"
+  }, {
+    "c": "ADDITIONAL CONFIGURATION",
+    "a": "yes"
+  }],
+  "nt": "You can select the Availability Zone on the ADDITIONAL CONFIGURATION page when launching an RDS DB instance because this is where AWS places advanced configuration options that are not required for basic instance setup. The Availability Zone selection is considered an advanced option since the default behavior is to let AWS choose an Availability Zone automatically for high availability purposes. The ADDITIONAL CONFIGURATION section contains optional settings like Availability Zone, VPC, subnet group, publicly accessible option, and other advanced features."
+}, {
+  "id": 1230,
+  "q": "You are responsible for a legacy web application whose server environment is approaching end of life. You would like to migrate this application to AWS as quickly as possible, since the application environment currently has the following limitations. The VM's single 10GB VMDK is almost full. The virtual network interface still uses the 10Mbps driver, which leaves your 100Mbps WAN connection completely underutilized. It is currently running on a highly customized Windows VM within a VMware environment. You do not have the installation media. This is a mission critical application with an RTO (Recovery Time Objective) of 8 hours and RPO (Recovery Point Objective) of 1 hour. How could you best migrate this application to AWS while meeting your business continuity requirements?",
+  "o": [{
+    "c": "Use the EC2 VM Import Connector for vCenter to import the VM into EC2",
+    "a": "yes"
+  }, {
+    "c": "Use Import/Export to import the VM as an EBS snapshot and attach to EC2",
+    "a": "no"
+  }, {
+    "c": "Use S3 to create a backup of the VM and restore the data into EC2",
+    "a": "no"
+  }, {
+    "c": "Use the ec2-bundle-instance API to Import an Image of the VM into EC2",
+    "a": "no"
+  }],
+  "nt": "Using the EC2 VM Import Connector for vCenter to import the VM into EC2 is the correct answer because this approach allows you to directly migrate the existing VMware virtual machine to AWS without needing the original installation media. The VM Import/Export service can convert VMDK files to Amazon Machine Images (AMIs) that can be launched as EC2 instances. This method preserves the existing customized configuration, addresses the storage capacity issue by allowing you to resize the storage during migration, and improves network performance by using AWS's high-speed network interfaces. It also meets the RTO and RPO requirements by providing a relatively fast migration path with minimal downtime."
+}, {
+  "id": 1231,
+  "q": "You are setting up some EBS volumes for a customer who has requested a setup which includes a RAID (redundant array of inexpensive disks). AWS has some recommendations for RAID setups. Which RAID setup is not recommended for Amazon EBS?",
+  "o": [{
+    "c": "RAID 5 only",
+    "a": "no"
+  }, {
+    "c": "RAID 5 and RAID 6",
+    "a": "yes"
+  }, {
+    "c": "RAID 1 only",
+    "a": "no"
+  }, {
+    "c": "RAID 1 and RAID 6",
+    "a": "no"
+  }],
+  "nt": "RAID 5 and RAID 6 are not recommended for Amazon EBS because these RAID configurations use parity-based redundancy which can result in high write latency and reduced performance. RAID 5 in particular is not recommended due to the 'write penalty' where each write operation requires multiple I/O operations (read-modify-write cycle). AWS recommends using RAID 0 for striping to increase I/O performance, or RAID 1 for mirroring to increase fault tolerance, but advises against RAID 5 and RAID 6 due to their performance characteristics and complexity in cloud environments."
+}, {
+  "id": 1232,
+  "q": "Much of your company's data does not need to be accessed often, and can take several hours for retrieval time, so it's stored on Amazon Glacier. However someone within your organization has expressed concerns that his data is more sensitive than the other data, and is wondering whether the high level of encryption that he knows is on S3 is also used on the much cheaper Glacier service. Which of the following statements would be most applicable in regards to this concern?",
+  "o": [{
+    "c": "There is no encryption on Amazon Glacier, that's why it is cheaper",
+    "a": "no"
+  }, {
+    "c": "Amazon Glacier automatically encrypts the data using AES-128 a lesser encryption method than Amazon S3 but you can change it to AES-256 if you are willing to pay more",
+    "a": "no"
+  }, {
+    "c": "Amazon Glacier automatically encrypts the data using AES-256, the same as Amazon S3",
+    "a": "yes"
+  }, {
+    "c": "Amazon Glacier automatically encrypts the data using AES-128 a lesser encryption method than Amazon S3",
+    "a": "no"
+  }],
+  "nt": "Amazon Glacier automatically encrypts the data using AES-256, the same as Amazon S3 because AWS applies server-side encryption to all data at rest in Glacier using 256-bit AES encryption, which is the same strong encryption standard used by Amazon S3. All data stored in Glacier is protected by this encryption, and there is no additional charge for this security feature. The lower cost of Glacier compared to S3 is due to its optimization for archival storage with slower retrieval times, not due to differences in security or encryption strength."
+}, {
+  "id": 1233,
+  "q": "Can I use Provisioned IOPS with VPC?",
+  "o": [{
+    "c": "Only Oracle based RDS",
+    "a": "no"
+  }, {
+    "c": "No",
+    "a": "no"
+  }, {
+    "c": "Only with MSSQL based RDS",
+    "a": "no"
+  }, {
+    "c": "Yes for all RDS instances",
+    "a": "yes"
+  }],
+  "nt": "Yes, you can use Provisioned IOPS with VPC for all RDS instances because Provisioned IOPS (Input/Output Operations Per Second) is a storage feature that is independent of network configuration. Whether your RDS instance is deployed in EC2-Classic or within a VPC, you can still configure Provisioned IOPS storage to deliver predictable, high-performance I/O capacity. The VPC configuration affects network isolation and connectivity, while Provisioned IOPS affects storage performance, and these features are compatible with each other across all supported RDS database engines."
+}, {
+  "id": 1234,
+  "q": "To ensure failover capabilities, consider using a [...] for incoming traffic on a network interface.",
+  "o": [{
+    "c": "primary public IP",
+    "a": "no"
+  }, {
+    "c": "secondary private IP",
+    "a": "yes"
+  }, {
+    "c": "secondary public IP",
+    "a": "no"
+  }, {
+    "c": "add on secondary IP",
+    "a": "no"
+  }],
+  "nt": "To ensure failover capabilities, consider using a secondary private IP for incoming traffic on a network interface because this allows you to reassign the IP address to another instance in case of failure. By configuring your application to use a secondary private IP address rather than the primary one, you can quickly move that IP address to a standby instance if the primary instance fails. This provides a mechanism for implementing high availability at the application level without relying on Elastic Load Balancing or other external failover mechanisms."
+}, {
+  "id": 1235,
+  "q": "By default, EBS volumes that are created and attached to an instance at launch are deleted when that instance is terminated. You can modify this behavior by changing the value of the flag [...] to false when you launch the instance.",
+  "o": [{
+    "c": "Delete On Termination",
+    "a": "yes"
+  }, {
+    "c": "Remove On Deletion",
+    "a": "no"
+  }, {
+    "c": "Remove On Termination",
+    "a": "no"
+  }, {
+    "c": "Terminate On Deletion",
+    "a": "no"
+  }],
+  "nt": "The correct flag is Delete On Termination because this parameter controls whether an EBS volume is automatically deleted when the instance it's attached to is terminated. By default, this flag is set to true for the root volume and any additional volumes created during instance launch. Setting this flag to false preserves the EBS volume even when the instance is terminated, allowing you to attach the volume to another instance or create snapshots from it after the original instance is no longer running."
+}, {
+  "id": 1236,
+  "q": "Which AWS service helps this functionality?",
+  "o": [{
+    "c": "AWS Simple Queue Service",
+    "a": "yes"
+  }, {
+    "c": "AWS Simple Notification Service",
+    "a": "no"
+  }, {
+    "c": "AWS Simple Workflow Service",
+    "a": "no"
+  }, {
+    "c": "AWS Simple Email Service",
+    "a": "no"
+  }],
+  "nt": "AWS Simple Queue Service helps this functionality because SQS provides a reliable, highly scalable hosted queue for storing messages as they travel between computers. SQS enables decoupling of application components, allowing them to run independently and asynchronously. It helps manage message traffic between different parts of distributed applications, ensuring that messages are processed reliably even if parts of the system are temporarily unavailable. This makes it ideal for building scalable, fault-tolerant systems where components need to communicate without being directly connected."
+}, {
+  "id": 1237,
+  "q": "Which of the below statements would be an incorrect response to your customers enquiry?",
+  "o": [{
+    "c": "Amazon EMR customers can choose to send data to Amazon S3 using the HTTPS protocol for secure transmission",
+    "a": "no"
+  }, {
+    "c": "Amazon S3 provides authentication mechanisms to ensure that stored data is secured against unauthorized access",
+    "a": "no"
+  }, {
+    "c": "Every packet sent in the AWS network uses Internet Protocol Security (IPsec)",
+    "a": "yes"
+  }, {
+    "c": "Customers may encrypt the input data before they upload it to Amazon S3",
+    "a": "no"
+  }],
+  "nt": "The statement 'Every packet sent in the AWS network uses Internet Protocol Security (IPsec)' is incorrect because while AWS provides secure networking infrastructure, not every packet in the AWS network uses IPsec encryption. AWS uses multiple layers of security including physical security, network isolation (VPC, security groups), and optional encryption services, but IPsec is specifically used for VPN connections between customer networks and AWS, not for all internal AWS network traffic. Customers can implement additional encryption for their specific use cases, but IPsec is not universally applied to all packets in AWS's network."
+}, {
+  "id": 1238,
+  "q": "The one-time payment for Reserved Instances is [...] refundable if the reservation is cancelled.",
+  "o": [{
+    "c": "always",
+    "a": "no"
+  }, {
+    "c": "in some circumstances",
+    "a": "no"
+  }, {
+    "c": "never",
+    "a": "yes"
+  }],
+  "nt": "The one-time payment for Reserved Instances is never refundable if the reservation is cancelled because the upfront payment for Reserved Instances is a non-refundable payment made to reserve capacity and secure discounted pricing for a 1-year or 3-year term. When you purchase a Reserved Instance with an upfront payment, you are committing to that term, and AWS does not provide refunds for the upfront portion if you cancel the reservation. However, you may be able to sell Standard Reserved Instances in the Reserved Instance Marketplace if you no longer need them."
+}, {
+  "id": 1239,
+  "q": "Is it possible to get a history of all EC2 API calls made on your account for security analysis and operational troubleshooting purposes?",
+  "o": [{
+    "c": "Yes, by default, the history of your API calls is logged",
+    "a": "no"
+  }, {
+    "c": "Yes, you should turn on the CloudTrail in the AWS console",
+    "a": "yes"
+  }, {
+    "c": "No, you can only get a history of VPC API calls",
+    "a": "no"
+  }, {
+    "c": "No, you cannot store history of EC2 API calls on Amazon",
+    "a": "no"
+  }],
+  "nt": "Yes, you should turn on CloudTrail in the AWS console because AWS CloudTrail is the service that enables logging of API calls and related events made in your AWS account. CloudTrail captures API activity for EC2 and other AWS services, providing a history of who made what API call, when it was made, from which IP address, and whether the call was successful. These logs are delivered to an S3 bucket and can be used for security analysis, operational troubleshooting, and compliance auditing. CloudTrail is not enabled by default and must be explicitly configured to start logging API activity."
+}, {
+  "id": 1240,
+  "q": "The Trusted Advisor service provides insight regarding which four categories of an AWS account?",
+  "o": [{
+    "c": "Security, fault tolerance, high availability, and connectivity",
+    "a": "no"
+  }, {
+    "c": "Security, access control, high availability, and performance",
+    "a": "no"
+  }, {
+    "c": "Performance, cost optimization, security, and fault tolerance",
+    "a": "yes"
+  }, {
+    "c": "Performance, cost optimization, access control, and connectivity",
+    "a": "no"
+  }],
+  "nt": "The Trusted Advisor service provides insight regarding Performance, cost optimization, security, and fault tolerance because these are the four main categories that AWS Trusted Advisor monitors and provides recommendations for. Trusted Advisor analyzes your AWS environment and provides best practice recommendations in these areas: Performance (service limits, utilization), Cost Optimization (unused resources, reservation opportunities), Security (security groups, IAM, MFA), and Fault Tolerance (backups, multi-AZ, auto scaling). These categories help customers optimize their AWS infrastructure for reliability, security, performance, and cost-effectiveness."
+}, {
+  "id": 1241,
+  "q": "An AWS customer runs a public blogging website. The site users upload two million blog entries a month. The average blog entry size is 200 KB. The access rate to blog entries drops to negligible 6 months after publication and users rarely access a blog entry 1 year after publication. Additionally, blog entries have a high update rate during the first 3 months following publication, this drops to no updates after 6 months. The customer wants to use CloudFront to improve his user's load times. Which of the following recommendations would you make to the customer?",
+  "o": [{
+    "c": "Duplicate entries into two different buckets and create two separate CloudFront distributions where S3 access is restricted only to CloudFront identity",
+    "a": "no"
+  }, {
+    "c": "Create a CloudFront distribution with 'US' Europe price class for US/ Europe users and a different CloudFront distribution with Al l Edge Locations' for the remaining users",
+    "a": "no"
+  }, {
+    "c": "Create a CloudFront distribution with S3 access restricted only to the CloudFront identity and partition the blog entry's location in S3 according to the month it was uploaded to be used withCloudFront behaviors",
+    "a": "yes"
+  }, {
+    "c": "Create a CloudFronl distribution with Restrict Viewer Access Forward Query string set to true and minimum TTL of 0",
+    "a": "no"
+  }],
+  "nt": "Creating a CloudFront distribution with S3 access restricted only to the CloudFront identity and partitioning the blog entry's location in S3 according to the month it was uploaded to be used with CloudFront behaviors is the correct answer because this approach optimizes both performance and cost. Partitioning content by upload month allows you to implement different caching behaviors based on content age - newer content (frequently accessed and updated) can have shorter TTLs, while older content (rarely accessed) can have longer TTLs. Restricting S3 access to CloudFront only enhances security. This strategy aligns with the access patterns described where recent content has high update rates and older content becomes mostly static, allowing for optimal cache performance and cost efficiency."
+}, {
+  "id": 1242,
+  "q": "Your supervisor has asked you to build a simple file synchronization service for your department. He doesn't want to spend too much money and he wants to be notified of any changes to files by email. What do you think would be the best Amazon service to use for the email solution?",
+  "o": [{
+    "c": "Amazon SES",
+    "a": "yes"
+  }, {
+    "c": "Amazon CloudSearch",
+    "a": "no"
+  }, {
+    "c": "Amazon SWF",
+    "a": "no"
+  }, {
+    "c": "Amazon AppStream",
+    "a": "no"
+  }],
+  "nt": "Amazon SES (Simple Email Service) would be the best Amazon service to use for the email solution because it is a cost-effective, scalable email sending service designed for sending transactional, marketing, or notification emails. SES is ideal for sending automated emails when file changes occur in a synchronization service. It provides high deliverability, detailed sending metrics, and integrates easily with other AWS services. Compared to other options, SES is specifically designed for email sending at scale with low cost, making it perfect for notification scenarios like file synchronization alerts."
+}, {
+  "id": 1243,
+  "q": "What are the Amazon EC2 API tools?",
+  "o": [{
+    "c": "They don't exist. The Amazon EC2 AMI tools, instead, are used to manage permissions",
+    "a": "no"
+  }, {
+    "c": "Command-line tools to the Amazon EC2 web service",
+    "a": "yes"
+  }, {
+    "c": "They are a set of graphical tools to manage EC2 instances",
+    "a": "no"
+  }, {
+    "c": "They don't exist. The Amazon API tools are a client interface to Amazon Web Services",
+    "a": "no"
+  }],
+  "nt": "The Amazon EC2 API tools are command-line tools to the Amazon EC2 web service because they provide a command-line interface to interact with the EC2 API. These tools allow users to manage EC2 instances, EBS volumes, security groups, and other EC2 resources from the command line without using the AWS Management Console. The EC2 API tools are part of the AWS Command Line Interface (CLI) and AWS SDKs, which enable programmatic access to AWS services for automation, scripting, and integration with other systems."
+}, {
+  "id": 1244,
+  "q": "Your customer wishes to deploy an enterprise application to AWS which will consist of several web servers, several application servers and a small (50GB) Oracle database information is stored, both in the database and the file systems of the various servers. The backup system must support database recovery whole server and whole disk restores, and individual file restores with a recovery time of no more than two hours. They have chosen to use RDS Oracle as the database. Which backup architecture will meet these requirements?",
+  "o": [{
+    "c": "Backup RDS using automated daily DB backups Backup the EC2 instances using AMIs and supplement with file-level backup to S3 using traditional enterprise backup software to provide file level restore",
+    "a": "yes"
+  }, {
+    "c": "Backup RDS using a Multi-AZ Deployment Backup the EC2 instances using Amis, and supplement by copying file system data to S3 to provide file-level restore",
+    "a": "no"
+  }, {
+    "c": "Backup RDS using automated daily DB backups Backup the EC2 instances using EBS snapshots and supplement with file-level backups to Amazon Glacier using traditional enterprise backup software to provide file-level restore",
+    "a": "no"
+  }, {
+    "c": "Backup RDS database to S3 using Oracle RMAN Backup the EC2 instances using Amis, and supplement with EBS snapshots for individual volume restore",
+    "a": "no"
+  }],
+  "nt": "Backup RDS using automated daily DB backups, backup the EC2 instances using AMIs, and supplement with file-level backup to S3 using traditional enterprise backup software to provide file level restore is the correct answer because this approach provides comprehensive coverage for all recovery scenarios. RDS automated backups handle database recovery, AMIs provide whole server/disk restoration capability for EC2 instances, and file-level backups to S3 enable individual file restores. This combination meets the RTO requirement of 2 hours by providing multiple restoration paths and leverages AWS-native services (RDS backups, AMIs) while integrating with existing enterprise backup solutions for file-level granularity."
+}, {
+  "id": 1245,
+  "q": "You are architecting a highly-scalable and reliable web application which will have a huge amount of content. You have decided to use Cloudfront as you know it will speed up distribution of your static and dynamic web content and know that Amazon CloudFront integrates with Amazon CloudWatch metrics so that you can monitor your web application. Because you live in Sydney you have chosen the the Asia Pacific (Sydney) region in the AWS console. However you have set up this up but no CloudFront metrics seem to be appearing in the CloudWatch console. What is the most likely reason from the possible choices below for this?",
+  "o": [{
+    "c": "Metrics for CloudWatch are available only when you choose the same region as the application you are monitoring",
+    "a": "no"
+  }, {
+    "c": "You need to pay for CloudWatch for it to become active",
+    "a": "no"
+  }, {
+    "c": "Metrics for CloudWatch are available only when you choose the US East (Virginia)",
+    "a": "yes"
+  }, {
+    "c": "Metrics for CloudWatch are not available for the Asia Pacific region as yet",
+    "a": "no"
+  }],
+  "nt": "Metrics for CloudWatch are available only when you choose the US East (Virginia) region because CloudFront metrics are global and are only published to the US East (N. Virginia) region in CloudWatch, regardless of which region your CloudFront distribution is configured in or which region you're using the console from. When viewing CloudFront metrics in CloudWatch, you must switch your CloudWatch console to the US East (N. Virginia) region to see the metrics, even if your CloudFront distribution serves content from edge locations worldwide. This is a specific characteristic of how CloudFront integrates with CloudWatch."
+}, {
+  "id": 1246,
+  "q": "Is the SQL Server Audit feature supported in the Amazon RDS SQL Server engine?",
+  "o": [{
+    "c": "Yes",
+    "a": "no"
+  }, {
+    "c": "No",
+    "a": "yes"
+  }],
+  "nt": "No, the SQL Server Audit feature is not supported in the Amazon RDS SQL Server engine because RDS is a managed database service that restricts access to certain SQL Server features that require operating system-level access or could impact the manageability and stability of the service. SQL Server Audit requires access to the underlying file system to store audit logs, which is not permitted in the RDS managed environment. AWS provides alternative auditing capabilities through database engine native features and AWS services like CloudTrail for API auditing."
+}, {
+  "id": 1247,
+  "q": "What is the command line instruction for running the remote desktop client in Windows?",
+  "o": [{
+    "c": "desk.cpl",
+    "a": "no"
+  }, {
+    "c": "mstsc",
+    "a": "yes"
+  }],
+  "nt": "The command line instruction for running the remote desktop client in Windows is mstsc because this is the executable name for Microsoft Terminal Services Client, which is the official Remote Desktop Connection application in Windows. Running 'mstsc' from the command line or Run dialog opens the Remote Desktop Connection client, allowing you to connect to remote Windows machines, including EC2 instances running Windows Server. This is the standard method for establishing RDP connections to Windows-based EC2 instances in AWS."
+}, {
+  "id": 1248,
+  "q": "Which of the following cannot be used in Amazon EC2 to control who has access to specific Amazon EC2 instances?",
+  "o": [{
+    "c": "Security Groups",
+    "a": "no"
+  }, {
+    "c": "IAM System",
+    "a": "yes"
+  }, {
+    "c": "SSH keys",
+    "a": "no"
+  }, {
+    "c": "Windows passwords",
+    "a": "no"
+  }],
+  "nt": "The IAM System cannot be used to control who has access to specific Amazon EC2 instances because IAM is designed to control access to AWS APIs and services, not to control operating system-level access to EC2 instances. IAM determines who can perform actions like starting, stopping, or terminating instances through the AWS API, but it does not control who can log into the operating system of running instances. For EC2 instance access, you use security groups (for network-level access control), SSH keys (for Linux instances), and Windows passwords (for Windows instances) to control who can actually connect to and use the instances."
+}, {
+  "id": 1249,
+  "q": "What is the charge for the data transfer incurred in replicating data between your primary and standby?",
+  "o": [{
+    "c": "Same as the standard data transfer charge",
+    "a": "no"
+  }, {
+    "c": "Double the standard data transfer charge",
+    "a": "no"
+  }, {
+    "c": "No charge. It is free",
+    "a": "yes"
+  }, {
+    "c": "Half of the standard data transfer charge",
+    "a": "no"
+  }],
+  "nt": "There is no charge for the data transfer incurred in replicating data between your primary and standby because AWS does not charge for data transfer between EC2 instances and RDS databases in the same Availability Zone, or for replication traffic between Multi-AZ RDS instances within the same region. This includes the synchronous data replication that occurs between the primary and standby instances in a Multi-AZ RDS deployment. AWS absorbs these costs to encourage high availability architectures and fault-tolerant designs."
+}, {
+  "id": 1250,
+  "q": "You have a load balancer configured for VPC, and all back-end Amazon EC2 instances are in service. However, your web browser times out when connecting to the load balancer's DNS name. Which options are probable causes of this behavior? (Choose 2 answers)",
+  "o": [{
+    "c": "The load balancer was not configured to use a public subnet with an Internet gateway configured",
+    "a": "yes"
+  }, {
+    "c": "The Amazon EC2 instances do not have a dynamically allocated private IP address",
+    "a": "no"
+  }, {
+    "c": "The security groups or network ACLs are not properly configured for web traffic",
+    "a": "yes"
+  }, {
+    "c": "The load balancer is not configured in a private subnet with a NAT instance",
+    "a": "no"
+  }, {
+    "c": "The VPC does not have a VGW configured",
+    "a": "no"
+  }],
+  "nt": "The load balancer was not configured to use a public subnet with an Internet gateway configured and The security groups or network ACLs are not properly configured for web traffic are probable causes because: 1) An ELB needs to be in a public subnet with a route to an Internet Gateway to be accessible from the internet. If it's in a private subnet without proper routing, external clients cannot reach it. 2) Security groups must allow inbound traffic on the listener ports (typically 80/443 for web traffic) from the client IP ranges, and network ACLs must allow both inbound and outbound traffic on the necessary ports. Misconfigured security groups or ACLs would block traffic even if the ELB is properly positioned in the network."
+}]

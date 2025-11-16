@@ -1940,8 +1940,8 @@
 ### What are the initial settings of an user created security group?
 
 - [ ] Allow all inbound traffic and Allow no outbound traffic.
-- [ ] Al low no inbound traffic and Al low no outbound traffic.
-- [x] Al low no inbound traffic and Al low all outbound traffic.
+- [ ] Allow no inbound traffic and Allow no outbound traffic.
+- [x] Allow no inbound traffic and Allow all outbound traffic.
 - [ ] Allow all inbound traffic and Allow all outbound traffic.
 
 
@@ -3594,7 +3594,7 @@
 
 
 
-### You are running a successful multitier web application on AWS and your marketing department has asked you to add a reporting tier to the application. The reporting tier will aggregate and publish status reports every 30 minutes from user-generated information that is being stored in your web application s database. You are currently running a Multi-AZ RDS MySQL instance for the database tier. You also have implemented Elasticache as a database caching layer between the application tier and database tier. Please select the answer that will allow you to successful ly implement the reporting tier with as little impact as possible to your database.
+### You are running a successful multitier web application on AWS and your marketing department has asked you to add a reporting tier to the application. The reporting tier will aggregate and publish status reports every 30 minutes from user-generated information that is being stored in your web application s database. You are currently running a Multi-AZ RDS MySQL instance for the database tier. You also have implemented Elasticache as a database caching layer between the application tier and database tier. Please select the answer that will allow you to successfully implement the reporting tier with as little impact as possible to your database.
 
 - [ ] Continually send transaction logs from your master database to an S3 bucket and generate the reports off the S3 bucket using S3 byte range requests.
 - [ ] Generate the reports by querying the synchronously replicated standby RDS MySQL instance maintained through Multi-AZ.
@@ -5304,7 +5304,7 @@
 - [x] Allow no inbound traffic, Allow all outbound traffic and Allow instances associated with this security group to talk to each other.
 - [ ] Allow all inbound traffic, Allow no outbound traffic and Allow instances associated with this security group to talk to each other.
 - [ ] Allow no inbound traffic, Allow all outbound traffic and Does NOT allow instances associated with this security group to talk to each other.
-- [ ] Al low all inbound traffic, Allow all outbound traffic and Does NOT allow instances associated with this security group to talk to each other.
+- [ ] Allow all inbound traffic, Allow all outbound traffic and Does NOT allow instances associated with this security group to talk to each other.
 
 
 

@@ -1,0 +1,1124 @@
+[
+{
+  "id": 1401,
+  "q": "You are running a successful multitier web application on AWS and your marketing department has asked you to add a reporting tier to the application. The reporting tier will aggregate and publish status reports every 30 minutes from user-generated information that is being stored in your web application s database. You are currently running a Multi-AZ RDS MySQL instance for the database tier. You also have implemented Elasticache as a database caching layer between the application tier and database tier. Please select the answer that will allow you to successfully implement the reporting tier with as little impact as possible to your database.",
+  "o": [
+    {
+      "c": "Continually send transaction logs from your master database to an S3 bucket and generate the reports off the S3 bucket using S3 byte range requests.",
+      "a": "no"
+    },
+    {
+      "c": "Generate the reports by querying the synchronously replicated standby RDS MySQL instance maintained through Multi-AZ.",
+      "a": "no"
+    },
+    {
+      "c": "Launch a RDS Read Replica connected to your Multi-AZ master database and generate reports by querying the Read Replica.",
+      "a": "yes"
+    },
+    {
+      "c": "Generate the reports by querying the ElastiCache database caching tier.",
+      "a": "no"
+    }
+  ],
+  "nt": "RDS Read Replica is specifically designed for read-heavy workloads like reporting and analytics. It operates asynchronously from the primary database, so reporting queries won't impact the performance of the main application. The Multi-AZ standby is for high availability and disaster recovery, not for read scaling, and using it for reporting could impact failover performance. ElastiCache contains cached data which may be incomplete or stale, making it unsuitable for comprehensive reporting."
+},
+{
+  "id": 1402,
+  "q": "Can I delete a snapshot of the root device of an EBS volume used by a registered AMI?",
+  "o": [
+    {
+      "c": "Only via API.",
+      "a": "no"
+    },
+    {
+      "c": "Only via Console.",
+      "a": "no"
+    },
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    }
+  ],
+  "nt": "You can delete EBS snapshots even if they were used to create an AMI. The AMI registration and the snapshot are separate entities. Once an AMI is created from a snapshot, the snapshot can be deleted independently, though this would prevent creating new instances from that AMI if needed."
+},
+{
+  "id": 1403,
+  "q": "MySQL installations default to port [...].",
+  "o": [
+    {
+      "c": "3306.",
+      "a": "yes"
+    },
+    {
+      "c": "443.",
+      "a": "no"
+    },
+    {
+      "c": "80.",
+      "a": "no"
+    },
+    {
+      "c": "1158.",
+      "a": "no"
+    }
+  ],
+  "nt": "Port 3306 is the standard default port for MySQL database servers across all platforms and installations. This is defined in the MySQL documentation and is consistent whether MySQL is installed on-premises or running on AWS RDS."
+},
+{
+  "id": 1404,
+  "q": "In the 'Detailed ' monitoring data available for your Amazon EBS volumes, Provisioned IOPS volumes automatically send [...] minute metrics to Amazon CloudWatch.",
+  "o": [
+    {
+      "c": "5.",
+      "a": "no"
+    },
+    {
+      "c": "2.",
+      "a": "no"
+    },
+    {
+      "c": "1.",
+      "a": "yes"
+    },
+    {
+      "c": "3.",
+      "a": "no"
+    }
+  ],
+  "nt": "Provisioned IOPS (PIOPS) volumes provide detailed monitoring with 1-minute granularity, unlike standard EBS volumes which provide basic monitoring at 5-minute intervals. This finer granularity allows for more precise performance monitoring and troubleshooting for high-performance storage workloads."
+},
+{
+  "id": 1405,
+  "q": "A user has deployed an application on his private cloud. The user is using his own monitoring tool. He wants to configure it so that whenever there is an error, the monitoring tool will notify him via SMS. Which of the below mentioned AWS services will help in this scenario?",
+  "o": [
+    {
+      "c": "AWS SES.",
+      "a": "no"
+    },
+    {
+      "c": "AWS SNS.",
+      "a": "yes"
+    },
+    {
+      "c": "None because the user infrastructure is in the private cloud.",
+      "a": "no"
+    },
+    {
+      "c": "AWS SMS.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon SNS (Simple Notification Service) can send SMS messages, mobile push notifications, and email notifications. It can integrate with external monitoring tools through APIs, allowing the private cloud monitoring system to publish error notifications to SNS topics, which can then deliver SMS messages to designated recipients."
+},
+{
+  "id": 1406,
+  "q": "What does Amazon Route 53 provide?",
+  "o": [
+    {
+      "c": "A global Content Delivery Network.",
+      "a": "no"
+    },
+    {
+      "c": "None of these.",
+      "a": "no"
+    },
+    {
+      "c": "A scalable Domain Name System.",
+      "a": "yes"
+    },
+    {
+      "c": "An SSH endpoint for Amazon EC2.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Route 53 is AWS's highly available and scalable Domain Name System (DNS) web service. It routes end users to internet applications by translating domain names into IP addresses, and provides domain registration, DNS routing, and health checking capabilities."
+},
+{
+  "id": 1407,
+  "q": "The AWS CloudHSM service defines a resource known as a high-availability (HA) [...], which is a virtual partition that represents a group of partitions, typically distributed between several physical HSMs for high-availability.",
+  "o": [
+    {
+      "c": "proxy group.",
+      "a": "no"
+    },
+    {
+      "c": "partition group.",
+      "a": "yes"
+    },
+    {
+      "c": "functional group.",
+      "a": "no"
+    },
+    {
+      "c": "relational group.",
+      "a": "no"
+    }
+  ],
+  "nt": "In AWS CloudHSM, a partition group is a logical grouping of HSM partitions that provides high availability. If one HSM in the group fails, the partitions automatically fail over to another HSM in the same group, ensuring continuous availability of cryptographic operations."
+},
+{
+  "id": 1408,
+  "q": "In Amazon EC2, partial instance-hours are billed [...].",
+  "o": [
+    {
+      "c": "per second used in the hour.",
+      "a": "no"
+    },
+    {
+      "c": "per minute used.",
+      "a": "no"
+    },
+    {
+      "c": "by combining partial segments into full hours.",
+      "a": "no"
+    },
+    {
+      "c": "as full hours.",
+      "a": "yes"
+    }
+  ],
+  "nt": "EC2 instances are billed on an hourly basis, with any partial instance-hour consumed being billed as a full hour. This billing model applies when instances are launched, stopped, or terminated, with the minimum charge being for one hour."
+},
+{
+  "id": 1409,
+  "q": "In Amazon EC2, what is the limit of Reserved Instances per Availability Zone each month?",
+  "o": [
+    {
+      "c": "5.",
+      "a": "no"
+    },
+    {
+      "c": "20.",
+      "a": "yes"
+    },
+    {
+      "c": "50.",
+      "a": "no"
+    },
+    {
+      "c": "10.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS allows up to 20 Reserved Instances per Availability Zone for each instance type. This limit helps manage capacity planning and ensures fair distribution of reserved capacity across customers in the same AZ."
+},
+{
+  "id": 1410,
+  "q": "True or False: When using IAM to control access to your RDS resources, the key names that can be used are case sensitive. For example, aws: CurrentTime is NOT equivalent to AWS: currenttime.",
+  "o": [
+    {
+      "c": "True.",
+      "a": "no"
+    },
+    {
+      "c": "False.",
+      "a": "yes"
+    }
+  ],
+  "nt": "IAM policy condition keys are not case-sensitive. AWS normalizes condition key names to lowercase during policy evaluation, so 'aws:CurrentTime' and 'AWS:currenttime' would be treated as equivalent. This ensures consistent policy evaluation regardless of case variations in the condition key names."
+},
+{
+  "id": 1411,
+  "q": "You need to create a JSON-formatted text file for AWS CloudFormation. This is your first template and the only thing you know is that the templates include several major sections but there is only one that is required for it to work. What is the only section required?",
+  "o": [
+    {
+      "c": "Mappings.",
+      "a": "no"
+    },
+    {
+      "c": "Outputs.",
+      "a": "no"
+    },
+    {
+      "c": "Resources.",
+      "a": "yes"
+    },
+    {
+      "c": "Conditions.",
+      "a": "no"
+    }
+  ],
+  "nt": "The Resources section is the only required section in a CloudFormation template. It defines the AWS resources that you want to create and configure. Without the Resources section, there would be nothing for CloudFormation to create, making the template effectively useless."
+},
+{
+  "id": 1412,
+  "q": "A user wants to use an EBS-backed Amazon EC2 instance for a temporary job. Based on the input data, the job is most likely to finish within a week. Which of the following steps should be followed to terminate the instance automatically once the job is finished?",
+  "o": [
+    {
+      "c": "Configure the EC2 instance with a stop instance to terminate it.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the EC2 instance with ELB to terminate the instance when it remains idle.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the Cloud Watch alarm on the instance that should perform the termination action once the instance is idle.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the Auto Scaling schedule activity that terminates the instance after 7 days.",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudWatch alarms can monitor instance metrics like CPU utilization. When the job completes and CPU utilization drops to near zero for a sustained period, the alarm can trigger an action to terminate the instance. This provides an automated way to clean up resources based on actual workload completion rather than fixed time schedules."
+},
+{
+  "id": 1413,
+  "q": "You are building an automated transcription service in which Amazon EC2 worker instances process an uploaded audio file and generate a text file. You must store both of these files in the same durable storage until the text file is retrieved. You do not know what the storage capacity requirements are. Which storage option is both cost-efficient and scalable?",
+  "o": [
+    {
+      "c": "Multiple Amazon EBS volume with snapshots.",
+      "a": "no"
+    },
+    {
+      "c": "A single Amazon Glacier vault.",
+      "a": "no"
+    },
+    {
+      "c": "A single Amazon S3 bucket.",
+      "a": "yes"
+    },
+    {
+      "c": "Multiple instance stores.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon S3 provides unlimited, durable, and scalable object storage at low cost. It can store both audio and text files in the same bucket with different access patterns. S3 automatically scales to accommodate growing storage needs without requiring capacity planning, and offers lifecycle policies to transition data to cheaper storage classes like Glacier for long-term retention."
+},
+{
+  "id": 1414,
+  "q": "Your company has recently extended its datacenter into a VPC on AWS to add burst computing capacity as needed Members of your Network Operations Center need to be able to go to the AWSManagement Console and administer Amazon EC2 instances as necessary You don't want to create new IAM users for each NOC member and make those users sign in again to the AWS Management Console Which option below will meet the needs for your NOC members?",
+  "o": [
+    {
+      "c": "Use OAuth 2 0 to retrieve temporary AWS security credentials to enable your NOC members to sign in to the AWS Management Console.",
+      "a": "no"
+    },
+    {
+      "c": "Use web Identity Federation to retrieve AWS temporary security credentials to enable your NOC members to sign in to the AWS Management Console.",
+      "a": "no"
+    },
+    {
+      "c": "Use your on-premises SAML 2.0-compliant identity provider (IOP) to grant the NOC members federated access to the AWS Management Console via the AWS sing le sign-on (550) endpoint.",
+      "a": "no"
+    },
+    {
+      "c": "Use your on-premises SAML2.0-compliam identity provider (IOP) to retrieve temporary security credentials to enable NOC members to sign in to the AWS Management Console.",
+      "a": "yes"
+    }
+  ],
+  "nt": "SAML 2.0 federation allows users to authenticate with their existing corporate credentials (from on-premises Active Directory or other identity providers) and obtain temporary AWS security credentials. This enables single sign-on to the AWS Management Console without creating separate IAM users for each NOC member, simplifying user management and leveraging existing authentication systems."
+},
+{
+  "id": 1415,
+  "q": "You have just set up your first Elastic Load Balancer (ELB) but it does not seem to be configured properly. You discover that before you start using ELB, you have to configure the listeners for your load balancer. Which protocols does ELB use to support the load balancing of applications?",
+  "o": [
+    {
+      "c": "HTTP and HTTPS.",
+      "a": "no"
+    },
+    {
+      "c": "HTTP, HTTPS, TCP, SSL and SSH.",
+      "a": "no"
+    },
+    {
+      "c": "HTTP, HTTPS, TCP, and SSL.",
+      "a": "yes"
+    },
+    {
+      "c": "HTTP, HTTPS, TCP, SSL and SFTP.",
+      "a": "no"
+    }
+  ],
+  "nt": "Elastic Load Balancer supports HTTP (port 80), HTTPS (port 443), TCP (various ports), and SSL (secure socket layer) protocols. These cover most common application traffic patterns including web applications, secure web applications, and custom TCP-based applications. SSH and SFTP are not directly supported as listener protocols."
+},
+{
+  "id": 1416,
+  "q": "A t2.medium EC2 instance type must be launched with what type of Amazon Machine Image (AMI)?",
+  "o": [
+    {
+      "c": "An Instance store Hardware Virtual Machine AMI.",
+      "a": "no"
+    },
+    {
+      "c": "An Instance store Paravirtual AMI.",
+      "a": "no"
+    },
+    {
+      "c": "An Amazon EBS-backed Hardware Virtual Machine AMI.",
+      "a": "yes"
+    },
+    {
+      "c": "An Amazon EBS-backed Paravirtual AMI.",
+      "a": "no"
+    }
+  ],
+  "nt": "T2 instances are current generation instance types that require HVM (Hardware Virtual Machine) AMIs and use EBS-backed storage by default. HVM AMIs take advantage of hardware extensions that provide better performance and more complete virtualization of the underlying hardware compared to paravirtual (PV) AMIs."
+},
+{
+  "id": 1417,
+  "q": "A user has created a subnet in VPC and launched an EC2 instance within it. The user has not selected the option to assign the IP address while launching the instance. The user has 3 elastic IPs and is trying to assign one of the Elastic IPs to the VPC instance from the console. The console does not show any instance in the IP assignment screen. What is a possible reason that the instance is unavailable in the assigned IP console?",
+  "o": [
+    {
+      "c": "The IP address may be attached to one of the instances.",
+      "a": "no"
+    },
+    {
+      "c": "The IP address belongs to a different zone than the subnet zone.",
+      "a": "no"
+    },
+    {
+      "c": "The user has not created an internet gateway.",
+      "a": "no"
+    },
+    {
+      "c": "The IP addresses belong to EC2 Classic; so they cannot be assigned to VPC.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Elastic IP addresses are specific to either EC2-Classic or VPC environments and cannot be moved between them. If the Elastic IPs were allocated in the EC2-Classic platform, they cannot be associated with instances running in a VPC. The user would need to allocate new Elastic IPs within the VPC environment to assign them to VPC instances."
+},
+{
+  "id": 1418,
+  "q": "Will I be alerted when automatic fail over occurs?",
+  "o": [
+    {
+      "c": "Only if SNS configured.",
+      "a": "no"
+    },
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "Only if Cloud watch configured.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS automatically generates notifications for automatic failover events in services like RDS Multi-AZ deployments. These events are recorded in the AWS Management Console and can also be monitored through Amazon CloudWatch Events, which can then trigger SNS notifications or other actions if configured."
+},
+{
+  "id": 1419,
+  "q": "Amazon EC2 provides a [...]. It is an HTTP or HTTPS request that uses the HTTP verbs GET or POST.",
+  "o": [
+    {
+      "c": "web database.",
+      "a": "no"
+    },
+    {
+      "c": ".NET framework.",
+      "a": "no"
+    },
+    {
+      "c": "Query API.",
+      "a": "yes"
+    },
+    {
+      "c": "C library.",
+      "a": "no"
+    }
+  ],
+  "nt": "The Amazon EC2 Query API is a web service interface that uses HTTP or HTTPS requests with GET or POST methods. It allows developers to programmatically manage EC2 resources by sending requests with parameters that specify the desired actions, making it the foundation for AWS SDKs and command-line tools."
+},
+{
+  "id": 1420,
+  "q": "Which of the following requires a custom Cloud Watch metric to monitor?",
+  "o": [
+    {
+      "c": "Memory Utilization of an EC2 instance.",
+      "a": "no"
+    },
+    {
+      "c": "CPU Utilization of an EC2 instance.",
+      "a": "no"
+    },
+    {
+      "c": "Disk usage activity of an EC2 instance.",
+      "a": "yes"
+    },
+    {
+      "c": "Data transfer of an EC2 instance.",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudWatch provides default metrics for EC2 instances including CPU utilization, network traffic, and disk I/O operations, but it does not provide memory utilization or disk space usage metrics by default. These require custom metrics that must be pushed to CloudWatch using the CloudWatch agent or API calls from within the instance."
+},
+{
+  "id": 1421,
+  "q": "An International company has deployed a multi-tier web application that relies on DynamoDB in a single region. For regulatory reasons they need disaster recovery capability in a separate region with a Recovery Time Objective of 2 hours and a Recovery Point Objective of 24 hours. They should synchronize their data on a regular basis and be able to provision the web application rapidly using CloudFormation. The objective is to minimize changes to the existing web application, control the throughput of DynamoDB used for the synchronization of data and synchronize only the modified elements. Which design would you choose to meet these requirements?",
+  "o": [
+    {
+      "c": "Use AWS data Pipeline to schedule a DynamoDB cross region copy once a day. Create a 'Last updated' attribute in your DynamoDB table that would represent the timestamp of the last update and use it as a filter.",
+      "a": "yes"
+    },
+    {
+      "c": "Use EMR and write a custom script to retrieve data from DynamoDB in the current region using a SCAN operation and push it to DynamoDB in the second region.",
+      "a": "no"
+    },
+    {
+      "c": "Use AWS data Pipeline to schedule an export of the DynamoDB table to S3 in the current region once a day, then schedule another task immediately after it that will import data from S3 to DynamoDB in the other region.",
+      "a": "no"
+    },
+    {
+      "c": "Send also each item into an SQS queue in the second region; use an auto-scaling group behind the SQS queue to replay the write in the second region.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS Data Pipeline can efficiently copy DynamoDB data between regions on a scheduled basis (once daily meets the 24-hour RPO). Using a 'Last updated' timestamp attribute allows filtering to copy only modified items, reducing data transfer and controlling throughput. This approach minimizes application changes while providing the required disaster recovery capabilities with controlled resource utilization."
+},
+{
+  "id": 1422,
+  "q": "An Elastic IP address (EIP) is a static IP address designed for dynamic cloud computing. With an EIP, you can mask the failure of an instance or software by rapidly remapping the address to another instance in your account. Your EIP is associated with your AWS account, not a particular EC2 instance, and it remains associated with your account until you choose to explicitly release it. By default how many EIPs is each AWS account limited to on a per region basis?",
+  "o": [
+    {
+      "c": "1.",
+      "a": "no"
+    },
+    {
+      "c": "5.",
+      "a": "yes"
+    },
+    {
+      "c": "Unlimited.",
+      "a": "no"
+    },
+    {
+      "c": "10.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS accounts are limited to 5 Elastic IP addresses per region by default. This limit helps prevent IP address exhaustion and encourages efficient use of static IP addresses. Users can request increases to this limit through the AWS Support Center if they can demonstrate a legitimate need for more EIPs."
+},
+{
+  "id": 1423,
+  "q": "Which Amazon Storage behaves like raw, unformatted, external block devices that you can attach to your instances?",
+  "o": [
+    {
+      "c": "None of these.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Instance Storage",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EBS",
+      "a": "yes"
+    },
+    {
+      "c": "All of these.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon EBS (Elastic Block Store) volumes are network-attached block storage devices that behave like raw, unformatted hard drives. They can be attached to EC2 instances as block devices, formatted with file systems, and used like physical hard drives. Unlike instance storage, EBS volumes persist independently from the life of an instance."
+},
+{
+  "id": 1424,
+  "q": "You currently operate a web application in the AWS US-East region. The application runs on an autoscaled layer of EC2 instances and an RDS Multi-AZ database. Your IT security compliance officer has tasked you to develop a reliable and durable logging solution to track changes made to your EC2, IAM, and RDS resources. The solution must ensure the integrity and confidentiality of your log data. Which of these solutions would you recommend?",
+  "o": [
+    {
+      "c": "Create a new CloudTrail trail with one new S3 bucket to store the logs and with the global services option selected. Use IAM roles, S3 bucket policies, and Multi Factor Authentication (MFA) Delete on the S3 bucket that stores your logs.",
+      "a": "yes"
+    },
+    {
+      "c": "Create a new CloudTrail with one new S3 bucket to store the logs. Configure SNS to send log file delivery notifications to your management system. Use IAM roles and S3 bucket policies on the S3 bucket that stores your logs.",
+      "a": "no"
+    },
+    {
+      "c": "Create a new CloudTrail trail with an existing S3 bucket to store the logs and with the global services option selected. Use S3 ACLs and Multi Factor Authentication (MFA) Delete on the S3 bucket that stores your logs.",
+      "a": "no"
+    },
+    {
+      "c": "Create three new CloudTrail trails with three new S3 buckets to store the logs: one for the AWS Management console, one for AWS SDKs, and one for command line tools. Use IAM roles and S3 bucket policies on the S3 buckets that store your logs.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS CloudTrail is specifically designed to log API activity across AWS services including EC2, IAM, and RDS. Creating a single trail with the global services option captures activity across all regions. Using a dedicated S3 bucket with IAM roles, bucket policies, and MFA Delete provides comprehensive security: IAM controls access, bucket policies enforce encryption and access restrictions, and MFA Delete prevents accidental or malicious deletion of log data, ensuring integrity and confidentiality."
+},
+{
+  "id": 1425,
+  "q": "Does DynamoDB support in-place atomic updates?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    },
+    {
+      "c": "It does support in-place non-atomic updates.",
+      "a": "no"
+    },
+    {
+      "c": "It is not defined.",
+      "a": "no"
+    }
+  ],
+  "nt": "DynamoDB supports atomic counters and conditional writes that allow in-place atomic updates. The UpdateItem operation can atomically increment or decrement numeric attributes, and conditional writes ensure updates only occur if specified conditions are met, providing ACID-like consistency for individual items."
+},
+{
+  "id": 1426,
+  "q": "Which of the following is true of Amazon EC2 security group?",
+  "o": [
+    {
+      "c": "You can modify the outbound rules for EC2-Classic.",
+      "a": "no"
+    },
+    {
+      "c": "You can modify the rules for a security group only if the security group controls the traffic for just one instance.",
+      "a": "no"
+    },
+    {
+      "c": "You can modify the rules for a security group only when a new instance is created.",
+      "a": "no"
+    },
+    {
+      "c": "You can modify the rules for a security group at any time.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Security group rules can be modified at any time, and the changes take effect immediately. This allows for dynamic adjustment of firewall rules without needing to stop or restart instances. New rules are applied to all instances associated with the security group, providing flexible and responsive network security management."
+},
+{
+  "id": 1427,
+  "q": "You need to set up security for your VPC and you know that Amazon VPC provides two features that you can use to increase security for your VPC: security groups and network access control lists (ACLs). You have already looked into security groups and you are now trying to understand ACLs. Which statement below is incorrect in relation to ACLs?",
+  "o": [
+    {
+      "c": "Supports allow rules and deny rules.",
+      "a": "no"
+    },
+    {
+      "c": "Is stateful: Return traffic is automatically allowed, regardless of any rules.",
+      "a": "yes"
+    },
+    {
+      "c": "Processes rules in number order when deciding whether to allow traffic.",
+      "a": "no"
+    },
+    {
+      "c": "Operates at the subnet level (second layer of defense).",
+      "a": "no"
+    }
+  ],
+  "nt": "Network ACLs are stateless, not stateful. This means that return traffic must be explicitly allowed by rules, unlike security groups which are stateful and automatically allow return traffic. Network ACLs evaluate rules in numeric order, support both allow and deny rules, and operate at the subnet level as a secondary layer of defense after security groups."
+},
+{
+  "id": 1428,
+  "q": "A user is trying to launch a similar EC2 instance from an existing instance with the option 'Launch More like this'. The AMI of the selected instance is deleted. What will happen in this case?",
+  "o": [
+    {
+      "c": "AWS does not need an AMI for the 'Launch more like this' option.",
+      "a": "no"
+    },
+    {
+      "c": "AWS will launch the instance but will not create a new AMI.",
+      "a": "no"
+    },
+    {
+      "c": "AWS will create a new AMI and launch the instance.",
+      "a": "no"
+    },
+    {
+      "c": "AWS will throw an error saying that the AMI is deregistered.",
+      "a": "yes"
+    }
+  ],
+  "nt": "The 'Launch More Like This' feature relies on the original AMI to create new instances with similar configuration. If the AMI has been deregistered (deleted), AWS cannot reference it to launch new instances and will return an error indicating the AMI is no longer available. The original AMI must exist to use this feature."
+},
+{
+  "id": 1429,
+  "q": "True or False: When you use the AWS Management Console to delete an IAM user, IAM also deletes any signing certificates and any access keys belonging to the user.",
+  "o": [
+    {
+      "c": "False.",
+      "a": "no"
+    },
+    {
+      "c": "This is configurable.",
+      "a": "no"
+    },
+    {
+      "c": "True.",
+      "a": "yes"
+    }
+  ],
+  "nt": "When deleting an IAM user through the Management Console, AWS automatically deletes all associated security credentials including access keys, signing certificates, and password. This ensures that no orphaned credentials remain that could potentially be misused, enhancing security during user lifecycle management."
+},
+{
+  "id": 1430,
+  "q": "You are working with a customer who is using Chef configuration management in their data center. Which service is designed to let the customer leverage existing Chef recipes in AWS?",
+  "o": [
+    {
+      "c": "Amazon Simple Workflow Service.",
+      "a": "no"
+    },
+    {
+      "c": "AWS Elastic Beanstalk.",
+      "a": "no"
+    },
+    {
+      "c": "AWS CloudFormation.",
+      "a": "no"
+    },
+    {
+      "c": "AWS OpsWorks.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS OpsWorks is a configuration management service that uses Chef (and Puppet) to automate how servers are configured, deployed, and managed. It allows customers to use their existing Chef recipes and cookbooks to manage EC2 instances and on-premises servers, providing a seamless transition from traditional data centers to AWS."
+},
+{
+  "id": 1431,
+  "q": "Does Amazon RDS for SQL Server currently support importing data into the msdb database?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Amazon RDS for SQL Server does not support importing data into the msdb system database. The msdb database is used by SQL Server Agent for scheduling alerts and jobs, and RDS manages this database to maintain the service's operational integrity. Customers have limited access to system databases in managed RDS instances to prevent conflicts with AWS management operations."
+},
+{
+  "id": 1432,
+  "q": "How can an EBS volume that is currently attached to an EC2 instance be migrated from one Availability Zone to another?",
+  "o": [
+    {
+      "c": "Detach the volume and attach it to another EC2 instance in the other AZ.",
+      "a": "no"
+    },
+    {
+      "c": "Simply create a new volume in the other AZ and specify the original volume as the source.",
+      "a": "no"
+    },
+    {
+      "c": "Create a snapshot of the volume, and create a new volume from the snapshot in the other AZ.",
+      "a": "yes"
+    },
+    {
+      "c": "Detach the volume, then use the ec2-migrate-voiume command to move it to another AZ.",
+      "a": "no"
+    }
+  ],
+  "nt": "EBS volumes are tied to specific Availability Zones and cannot be directly moved between AZs. The standard method is to create a snapshot of the volume (which is stored in S3 and region-wide), then create a new volume from that snapshot in the target Availability Zone. This process effectively migrates the data while maintaining the volume's integrity."
+},
+{
+  "id": 1433,
+  "q": "Having set up a website to automatically be redirected to a backup website if it fails, you realize that there are different types of failovers that are possible. You need all your resources to be available the majority of the time. Using Amazon Route 53 which configuration would best suit this requirement?",
+  "o": [
+    {
+      "c": "Active-active failover.",
+      "a": "yes"
+    },
+    {
+      "c": "None. Route 53 can't failover.",
+      "a": "no"
+    },
+    {
+      "c": "Active-passive failover.",
+      "a": "no"
+    },
+    {
+      "c": "Active-active-passive and other mixed configurations.",
+      "a": "no"
+    }
+  ],
+  "nt": "Active-active failover uses all resources in all locations to serve traffic continuously. Route 53 can distribute traffic across multiple endpoints using routing policies like weighted, latency, or geolocation routing. If one endpoint becomes unhealthy, Route 53 automatically redirects traffic to the remaining healthy endpoints, ensuring high availability and utilizing all resources efficiently."
+},
+{
+  "id": 1434,
+  "q": "A client application requires operating system privileges on a relational database server. What is an appropriate configuration for a highly available database architecture?",
+  "o": [
+    {
+      "c": "A standalone Amazon EC2 instance.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon RDS in a Multi-AZ configuration.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EC2 instances in a replication configuration utilizing a single Availability Zone.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon EC2 instances in a replication configuration utilizing two different Availability Zones.",
+      "a": "yes"
+    }
+  ],
+  "nt": "When an application requires OS-level access to the database server (which isn't available with managed services like RDS), the solution is to self-manage the database on EC2 instances. For high availability, deploy instances in a replication configuration across multiple Availability Zones. This provides redundancy against AZ failures while maintaining the required OS-level access for the application."
+},
+{
+  "id": 1435,
+  "q": "Is decreasing the storage size of a DB Instance permitted?",
+  "o": [
+    {
+      "c": "Depends on the ROMS used.",
+      "a": "no"
+    },
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS allows decreasing the storage size for a DB instance, though there are some limitations depending on the database engine and storage type. This flexibility enables cost optimization when storage requirements decrease, but it's important to check the specific limitations for each database engine as some may have minimum storage requirements or other constraints."
+},
+{
+  "id": 1436,
+  "q": "Can you encrypt EBS volumes?",
+  "o": [
+    {
+      "c": "Yes, you can enable encryption when you create a new EBS volume using the AWS Management Console, API, or CLI.",
+      "a": "yes"
+    },
+    {
+      "c": "No, you should use a third-party software to perform raw block-level encryption of an EBS volume.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, but you must use a third-party API for encrypting data before it's loaded on EBS.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, you can encrypt with the special 'ebs_encrypt' command through Amazon APIs.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS provides native encryption for EBS volumes using AWS Key Management Service (KMS). When creating a new EBS volume through the Management Console, API, or CLI, you can enable encryption, and AWS handles the encryption transparently without requiring third-party tools. The data is encrypted at rest, in transit, and all snapshots created from encrypted volumes are also automatically encrypted."
+},
+{
+  "id": 1437,
+  "q": "You must assign each server to at least [...] security group.",
+  "o": [
+    {
+      "c": "3.",
+      "a": "no"
+    },
+    {
+      "c": "2.",
+      "a": "no"
+    },
+    {
+      "c": "4.",
+      "a": "no"
+    },
+    {
+      "c": "1.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Each EC2 instance must be associated with at least one security group. Security groups act as virtual firewalls that control inbound and outbound traffic for instances. While an instance can be associated with multiple security groups (up to 5 by default), it must have at least one security group assigned to define its network access rules."
+},
+{
+  "id": 1438,
+  "q": "Is the encryption of connections between my application and my DB Instance using SSL for the MySQL server engines available?",
+  "o": [
+    {
+      "c": "Yes.",
+      "a": "yes"
+    },
+    {
+      "c": "Only in VPC.",
+      "a": "no"
+    },
+    {
+      "c": "Only in certain regions.",
+      "a": "no"
+    },
+    {
+      "c": "No.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS for MySQL supports SSL encryption for connections between applications and database instances. RDS automatically creates and installs an SSL certificate on each DB instance, and applications can use these certificates to establish encrypted connections. This feature is available across all regions and deployment options, not limited to VPC environments."
+},
+{
+  "id": 1439,
+  "q": "Your manager has come to you saying that he is very confused about the bills he is receiving from AWS as he is getting different bills for every user and needs you to look into making it more understandable. Which of the following would be the best solution to meet his request?",
+  "o": [
+    {
+      "c": "AWS Billing Aggregation.",
+      "a": "no"
+    },
+    {
+      "c": "Consolidated Billing.",
+      "a": "yes"
+    },
+    {
+      "c": "Deferred Billing.",
+      "a": "no"
+    },
+    {
+      "c": "Aggregated Billing.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS Consolidated Billing allows organizations to combine usage from multiple AWS accounts into a single bill. The paying account receives one consolidated bill with line items for each linked account, making it easier to track and manage costs across the organization while potentially qualifying for volume discounts by combining usage from all accounts."
+},
+{
+  "id": 1440,
+  "q": "Regarding Amazon Route 53, if your application is running on Amazon EC2 instances in two or more Amazon EC2 regions and if you have more than one Amazon EC2 instance in one or more regions, you can use [...] to route traffic to the correct region and then use [...] route traffic to instances within the region, based on probabilities that you specify.",
+  "o": [
+    {
+      "c": "weighted-based routing; alias resource record sets.",
+      "a": "no"
+    },
+    {
+      "c": "latency-based routing; weighted resource record sets.",
+      "a": "yes"
+    },
+    {
+      "c": "weighted-based routing; weighted resource record sets.",
+      "a": "no"
+    },
+    {
+      "c": "latency-based routing; alias resource record sets.",
+      "a": "no"
+    }
+  ],
+  "nt": "Latency-based routing directs users to the AWS region that provides the best latency, optimizing performance for global applications. Once traffic reaches the optimal region, weighted routing distributes traffic among multiple instances within that region based on specified probabilities, allowing for load balancing and controlled traffic distribution."
+},
+{
+  "id": 1441,
+  "q": "If I scale the storage capacity provisioned to my DB Instance by mid of a billing month, how will I be charged?",
+  "o": [
+    {
+      "c": "You will be charged for the highest storage capacity you have used.",
+      "a": "no"
+    },
+    {
+      "c": "On a proration basis.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS charges for RDS storage on a pro-rated basis. When you modify storage capacity, you're charged for the original storage size for the first part of the month and the new storage size for the remainder of the month. This prorated billing ensures you only pay for what you use during each portion of the billing cycle."
+},
+{
+  "id": 1442,
+  "q": "When using the following AWS services, which should be implemented in multiple Availability Zones for high availability solutions? (Choose 2 answers)",
+  "o": [
+    {
+      "c": "Amazon Dynamo DB.",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Elastic Compute Cloud (EC2).",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Elastic Load Balancing.",
+      "a": "yes"
+    },
+    {
+      "c": "Amazon Simple Notification Service (SNS).",
+      "a": "no"
+    },
+    {
+      "c": "Amazon Simple Storage Service (S3).",
+      "a": "no"
+    }
+  ],
+  "nt": "EC2 instances should be distributed across multiple Availability Zones to protect against AZ failures, ensuring application availability even if one zone becomes unavailable. Elastic Load Balancers should also span multiple AZs to distribute traffic across instances in different zones and provide redundancy. Services like DynamoDB, SNS, and S3 are regional services that are inherently designed with high availability across multiple AZs without requiring explicit multi-AZ configuration by users."
+},
+{
+  "id": 1443,
+  "q": "A customer is hosting their company website on a cluster of web servers that are behind a public facing load balancer. The customer also uses Amazon Route 53 to manage their public DNS. How should the customer configure the DNS zone apex record to point to the load balancer?",
+  "o": [
+    {
+      "c": "Create an A record pointing to the IP address of the load balancer.",
+      "a": "no"
+    },
+    {
+      "c": "Create a CNAME record pointing to the load balancer DNS name.",
+      "a": "no"
+    },
+    {
+      "c": "Create a CNAME record aliased to the load balancer DNS name.",
+      "a": "no"
+    },
+    {
+      "c": "Create an A record aliased to the load balancer DNS name.",
+      "a": "yes"
+    }
+  ],
+  "nt": "For zone apex records (the root domain like example.com), you cannot use CNAME records due to DNS RFC restrictions. Instead, Route 53 provides alias records that function like A records but can route traffic to AWS resources like load balancers. Creating an A record aliased to the load balancer DNS name is the correct approach for zone apex records pointing to ELB."
+},
+{
+  "id": 1444,
+  "q": "True or False: REST or Query requests are HTTP or HTTPS requests that use an HTTP verb (such as GET or POST) and a parameter named Action or Operation that specifies the API you are calling.",
+  "o": [
+    {
+      "c": "True.",
+      "a": "no"
+    },
+    {
+      "c": "False.",
+      "a": "yes"
+    }
+  ],
+  "nt": "This statement is false because it conflates two different AWS API request types. REST requests use standard HTTP verbs (GET, POST, PUT, DELETE) with resource-based URLs, while Query requests use POST method with parameters including Action to specify the API operation. They are distinct request formats with different authentication and parameter handling mechanisms."
+},
+{
+  "id": 1445,
+  "q": "Which of the following features ensures even distribution of traffic to Amazon EC2 instances in multiple Availability Zones registered with a load balancer?",
+  "o": [
+    {
+      "c": "Elastic Load Balancing request routing.",
+      "a": "no"
+    },
+    {
+      "c": "An Amazon Route 53 weighted routing policy.",
+      "a": "no"
+    },
+    {
+      "c": "Elastic Load Balancing cross-zone load balancing.",
+      "a": "yes"
+    },
+    {
+      "c": "An Amazon Route 53 latency routing policy.",
+      "a": "no"
+    }
+  ],
+  "nt": "ELB cross-zone load balancing distributes traffic evenly across all registered instances in all enabled Availability Zones, rather than distributing traffic only across instances in the same zone as the load balancer node receiving the request. This ensures more balanced utilization of instances regardless of their AZ distribution and prevents uneven load distribution that could occur with per-AZ load balancing."
+},
+{
+  "id": 1446,
+  "q": "Groups can't [...].",
+  "o": [
+    {
+      "c": "be nested more than 3 levels.",
+      "a": "no"
+    },
+    {
+      "c": "be nested at all.",
+      "a": "yes"
+    },
+    {
+      "c": "be nested more than 4 levels.",
+      "a": "no"
+    },
+    {
+      "c": "be nested more than 2 levels.",
+      "a": "no"
+    }
+  ],
+  "nt": "IAM groups cannot contain other groups (no nesting). Each group can only contain users, not other groups. This design simplifies permission management and prevents complex group hierarchies that could be difficult to manage and audit. If you need to apply similar policies to multiple groups, you must attach the policies to each group individually or use IAM roles for more complex permission scenarios."
+},
+{
+  "id": 1447,
+  "q": "You have been using T2 instances as your CPU requirements have not been that intensive. However you now start to think about larger instance types and start looking at M1 and M3 instances. You are a little confused as to the differences between them as they both seem to have the same ratio of CPU and memory. Which statement below is incorrect as to why you would use one over the other?",
+  "o": [
+    {
+      "c": "M3 instances are less expensive than M1 instances.",
+      "a": "no"
+    },
+    {
+      "c": "M3 instances are configured with more swap memory than M1 instances.",
+      "a": "yes"
+    },
+    {
+      "c": "M3 instances provide better, more consistent performance that M1 instances for most use-cases.",
+      "a": "no"
+    },
+    {
+      "c": "M3 instances also offer SSD-based instance storage that delivers higher I/O performance.",
+      "a": "no"
+    }
+  ],
+  "nt": "The statement about M3 instances having more swap memory is incorrect. Swap memory is not a configured feature of instance types - it's managed at the operating system level. The actual advantages of M3 over M1 instances include better CPU performance (newer generation processors), SSD instance storage for higher I/O, and generally better price-performance ratio, but not pre-configured swap memory differences."
+},
+{
+  "id": 1448,
+  "q": "Do the system resources on the Micro instance meet the recommended configuration for Oracle?",
+  "o": [
+    {
+      "c": "Yes, completely.",
+      "a": "no"
+    },
+    {
+      "c": "Yes, but only for certain situations.",
+      "a": "yes"
+    }
+  ],
+  "nt": "Micro instances can run Oracle database for specific low-throughput scenarios like development, testing, or very small production workloads, but they don't meet the recommended configuration for typical production Oracle deployments. The limited CPU resources (burstable) and memory make them unsuitable for most production database workloads that require consistent performance and higher resource allocation."
+},
+{
+  "id": 1449,
+  "q": "Which of the following are true regarding AWS CloudTrail? (Choose 3 answers)",
+  "o": [
+    {
+      "c": "CloudTrail is enabled globally.",
+      "a": "no"
+    },
+    {
+      "c": "CloudTrail is enabled by default.",
+      "a": "no"
+    },
+    {
+      "c": "CloudTrail is enabled on a per-region basis.",
+      "a": "yes"
+    },
+    {
+      "c": "CloudTrail is enabled on a per-service basis.",
+      "a": "yes"
+    },
+    {
+      "c": "Logs can be delivered to a single Amazon S3 bucket for aggregation.",
+      "a": "yes"
+    },
+    {
+      "c": "CloudTrail is enabled for all available services within a region.",
+      "a": "no"
+    },
+    {
+      "c": "Logs can only be processed and delivered to the region in which they are generated.",
+      "a": "no"
+    }
+  ],
+  "nt": "CloudTrail is configured per region - you enable it separately in each region where you want to log API activity. It's enabled per service - you choose which AWS services to log. Logs from multiple regions can be delivered to a single S3 bucket for centralized aggregation and analysis. CloudTrail is not enabled by default (except for the last 90 days of management event history in the Event History feature), and it doesn't automatically log all services - you must configure which services to monitor."
+},
+{
+  "id": 1450,
+  "q": "If you're unable to connect via SSH to your EC2 instance, which of the following should you check and possibly correct to restore connectivity?",
+  "o": [
+    {
+      "c": "Adjust Security Group to permit egress traffic over TCP port 443 from your IP.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the JAM role to permit changes to security group settings.",
+      "a": "no"
+    },
+    {
+      "c": "Modify the instance security group to allow ingress of ICMP packets from your IP.",
+      "a": "no"
+    },
+    {
+      "c": "Adjust the instance's Security Group to permit ingress traffic over port 22 from your IP.",
+      "a": "yes"
+    },
+    {
+      "c": "Apply the most recently released Operating System security patches.",
+      "a": "no"
+    }
+  ],
+  "nt": "SSH connections use TCP port 22. If the security group associated with the EC2 instance doesn't have an inbound rule allowing SSH access (port 22) from your IP address, the connection will be blocked. Security groups act as virtual firewalls, and without the proper inbound rule for SSH, even correct credentials and a running instance won't allow connection. This is the most common cause of SSH connectivity issues to EC2 instances."
+}
+]

@@ -1,0 +1,1152 @@
+[
+  {
+    "id": 1001,
+    "q": "Which set of Amazon S3 features helps to prevent and recover from accidental data loss?",
+    "o": [
+      {
+        "c": "Object lifecycle and service access logging.",
+        "a": "no"
+      },
+      {
+        "c": "Object versioning and Multi-factor authentication.",
+        "a": "yes"
+      },
+      {
+        "c": "Access controls and server-side encryption.",
+        "a": "no"
+      },
+      {
+        "c": "Website hosting and Amazon S3 policies.",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon S3 **Object Versioning** keeps multiple versions of an object in the same bucket, which allows you to recover from unintended user actions or application failures, effectively preventing accidental data loss. **Multi-Factor Authentication (MFA) Delete** requires an additional authentication code before a protected object version or the bucket can be permanently deleted, which is a strong measure against accidental or malicious deletions."
+  },
+  {
+    "id": 1002,
+    "q": "What is the minimum time interval for the data that Amazon CloudWatch receives and aggregates?",
+    "o": [
+      {
+        "c": "One second.",
+        "a": "no"
+      },
+      {
+        "c": "Five seconds.",
+        "a": "no"
+      },
+      {
+        "c": "One minute.",
+        "a": "yes"
+      },
+      {
+        "c": "Three minutes.",
+        "a": "no"
+      },
+      {
+        "c": "Five minutes.",
+        "a": "no"
+      }
+    ],
+    "nt": "By default, **Amazon CloudWatch** collects metrics with a standard resolution of **one minute**. You can enable **High-Resolution Metrics** to publish data at a granularity of one second, five seconds, or ten seconds, but the question asks for the minimum time interval for *data that CloudWatch receives and aggregates* which, by default for most AWS services and standard metrics, is one minute."
+  },
+  {
+    "id": 1003,
+    "q": "A user has launched an EC2 instance. The instance got terminated as soon as it was launched. Which of the below mentioned options is not a possible reason for this?",
+    "o": [
+      {
+        "c": "The user account has reached the maximum volume limit.",
+        "a": "no"
+      },
+      {
+        "c": "The AMI is missing. It is the required part.",
+        "a": "no"
+      },
+      {
+        "c": "The snapshot is corrupt.",
+        "a": "no"
+      },
+      {
+        "c": "The user account has reached the maximum EC2 instance limit.",
+        "a": "yes"
+      }
+    ],
+    "nt": "If the user reached the **maximum EC2 instance limit**, the launch request would be rejected, and the instance would never be started; it would fail at the 'pending' stage, not launch and then 'terminate immediately'. The other options (volume limit, missing AMI part, corrupt snapshot) are valid reasons for an instance to transition quickly from `pending` to `terminated`."
+  },
+  {
+    "id": 1004,
+    "q": "Your website is serving on-demand training videos to your workforce. Videos are uploaded monthly in high resolution MP4 format. Your workforce is distributed globally often on the move and using company-provided tablets that require the HTTP Live Streaming (HLS) protocol to watch a video. Your company has no video transcoding expertise and it required you may need to pay for a consultant. How do you implement the most cost-efficient architecture without compromising high availability and quality of video delivery?",
+    "o": [
+      {
+        "c": "A video transcoding pipeline running on EC2 using SQS to distribute tasks and Auto Scaling to adjust the number of nodes depending on the length of the queue. EBS volumes to host videos and EBS snapshots to incrementally backup original files after a few days. CloudFront to serve HLS transcoded videos from EC2.",
+        "a": "no"
+      },
+      {
+        "c": "Elastic Transcoder to transcode original high-resolution MP4 videos to HLS. EBS volumes to host videos and EBS snapshots to incrementally backup original files after a few days. CloudFront to serve HLS transcoded videos from EC2.",
+        "a": "no"
+      },
+      {
+        "c": "Elastic Transcoder to transcode original high-resolution MP4 videos to HLS. S3 to host videos with Lifecycle Management to archive original files to Glacier after a few days. CloudFront to serve HLS transcoded videos from S3.",
+        "a": "yes"
+      },
+      {
+        "c": "A video transcoding pipeline running on EC2 using SQS to distribute tasks and Auto Scaling to adjust the number of nodes depending on the length of the queue. S3 to host videos with Lifecycle Management to archive all files to Glacier after a few days. CloudFront to serve HLS transcoded videos from Glacier.",
+        "a": "no"
+      }
+    ],
+    "nt": "This option is the most cost-efficient because it uses **Amazon Elastic Transcoder**, a managed service, which eliminates the need for specialized video transcoding expertise and managing an EC2-based transcoding pipeline. **Amazon S3** is the standard, scalable, durable, and highly available storage for media, and its **Lifecycle Management** allows cost-saving by automatically moving infrequently accessed original files to **Glacier** (for archival). **Amazon CloudFront** is the best choice for global distribution with low latency (high availability and quality of video delivery)."
+  },
+  {
+    "id": 1005,
+    "q": "You are designing an intrusion detection prevention (IDS/IPS) solution for a customer web application in a single VPC. You are considering the options for implementing IOS IPS protection for traffic coming from the Internet. Which of the following options would you consider? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Implement IDS/IPS agents on each Instance running in VPC.",
+        "a": "yes"
+      },
+      {
+        "c": "Configure an instance in each subnet to switch its network interface card to promiscuous mode and analyze network traffic.",
+        "a": "no"
+      },
+      {
+        "c": "Implement Elastic Load Balancing with SSL listeners in front of the web applications.",
+        "a": "no"
+      },
+      {
+        "c": "Implement a reverse proxy layer in front of web servers and configure IDS/ IPS agents on each reverse proxy server.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Implementing **IDS/IPS agents on each Instance** (host-based IDS/IPS) is a common and effective method to inspect traffic at the application and operating system level, which is a good solution for protection. Implementing a **reverse proxy layer** in front of web servers allows you to centralize security enforcement (like a Web Application Firewall or IDS/IPS), inspecting traffic before it reaches the backend instances, which is also a very common and effective pattern."
+  },
+  {
+    "id": 1006,
+    "q": "Which of the following are valid statements about Amazon S3? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Amazon S3 provides read-after-write consistency for any type of PUT or DELETE.",
+        "a": "no"
+      },
+      {
+        "c": "Consistency is not guaranteed for any type of PUT or DELETE.",
+        "a": "no"
+      },
+      {
+        "c": "A successful response to a PUT request only occurs when a complete object is saved.",
+        "a": "yes"
+      },
+      {
+        "c": "Partially saved objects are immediately readable with a GET after an overwrite PU.",
+        "a": "no"
+      },
+      {
+        "c": "S3 provides eventual consistency for overwrite PUTS and DELETE.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Statement 3 is true: S3 is designed for durability, and a successful **HTTP 200 response to a PUT** means that the object has been successfully stored. Statement 5 is true: S3 provides **read-after-write consistency for new objects** but provides **eventual consistency for overwrite PUTS and DELETEs** in all regions. This means that if you overwrite or delete an object, a subsequent read might temporarily return the old data or the deleted object."
+  },
+  {
+    "id": 1007,
+    "q": "How can the domain's zone apex, for example, 'myzoneapexdomain.com', be pointed towards an Elastic Load Balancer?",
+    "o": [
+      {
+        "c": "By using an Amazon Route 53 Alias record.",
+        "a": "yes"
+      },
+      {
+        "c": "By using an AAAA record.",
+        "a": "no"
+      },
+      {
+        "c": "By using an Amazon Route 53 CNAME record.",
+        "a": "no"
+      },
+      {
+        "c": "By using an A record.",
+        "a": "no"
+      }
+    ],
+    "nt": "The **Zone Apex** (or naked domain, e.g., `example.com`) cannot use a CNAME record because a CNAME must be the only record for a domain name. **Amazon Route 53 Alias records** are a Route 53-specific extension that acts like a CNAME but is allowed on the zone apex. Alias records can point to AWS resources like an Elastic Load Balancer (ELB) or a CloudFront distribution."
+  },
+  {
+    "id": 1008,
+    "q": "When should I choose Provisioned IOPS over Standard RDS storage?",
+    "o": [
+      {
+        "c": "If you have batch-oriented workloads.",
+        "a": "no"
+      },
+      {
+        "c": "If you use production online transaction processing (OLTP) workloads.",
+        "a": "yes"
+      },
+      {
+        "c": "If you have workloads that are not sensitive to consistent performance.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Provisioned IOPS (PIOPS)** is designed to deliver fast, predictable, and consistent I/O performance. It is the optimal choice for **I/O-intensive database workloads**, particularly for production Online Transaction Processing (OLTP) applications that require low latency and high throughput."
+  },
+  {
+    "id": 1009,
+    "q": "Your department creates regular analytics reports from your company's log files All log data is collected in Amazon S3 and processed by daily Amazon Elastic MapReduce (EMR) jobs that generate daily PDF reports and aggregated tables in CSV format for an Amazon Redshift data warehouse. Which of the following alternatives will lower costs without compromising average performance of the system or data integrity for the raw data?",
+    "o": [
+      {
+        "c": "Use reduced redundancy storage (RRS) for all data in S3. Use a combination of Spot Instances and Reserved Instances for Amazon EMR jobs. Use Reserved Instances for Amazon Redshift.",
+        "a": "no"
+      },
+      {
+        "c": "Use reduced redundancy storage (RRS) for PDF and .csv data in S3. Add Spot Instances to EMR jobs. Use Spot Instances for Amazon Redshift.",
+        "a": "no"
+      },
+      {
+        "c": "Use reduced redundancy storage (RRS) for PDF and .csv data in Amazon S3. Add Spot Instances to Amazon EMR jobs. Use Reserved Instances for Amazon Redshift.",
+        "a": "yes"
+      },
+      {
+        "c": "Use reduced redundancy storage (RRS) for all data in Amazon S3. Add Spot Instances to Amazon EMR jobs. Use Reserved Instances for Amazon Redshift.",
+        "a": "no"
+      }
+    ],
+    "nt": "To lower costs: 1) The original **log data** should remain in **Standard S3** for highest integrity, but the *reproducible* **PDF and CSV reports** can use **Reduced Redundancy Storage (RRS)**, which is cheaper and acceptable since the data can be regenerated. 2) **Amazon EMR jobs** are flexible and can tolerate interruption, making **Spot Instances** a cost-effective choice. 3) **Amazon Redshift** is a persistent data warehouse requiring high availability and predictability, so **Reserved Instances** are the best option for a cost-effective commitment."
+  },
+  {
+    "id": 1010,
+    "q": "Because of the extensibility limitations of striped storage attached to Windows Server, Amazon RDS does not currently support increasing storage on a [...] DB Instance.",
+    "o": [
+      {
+        "c": "SQL Server.",
+        "a": "yes"
+      },
+      {
+        "c": "MySQL.",
+        "a": "no"
+      },
+      {
+        "c": "Oracle.",
+        "a": "no"
+      }
+    ],
+    "nt": "Due to the underlying Windows Server storage limitations at the time the question was authored, Amazon RDS for **SQL Server** did not support storage scaling on striped storage configurations without downtime."
+  },
+  {
+    "id": 1011,
+    "q": "In regards to IAM you can edit user properties later, but you cannot use the console to change the [...].",
+    "o": [
+      {
+        "c": "user name.",
+        "a": "yes"
+      },
+      {
+        "c": "password.",
+        "a": "no"
+      },
+      {
+        "c": "default group.",
+        "a": "no"
+      }
+    ],
+    "nt": "In AWS IAM, the **user name** is a unique identifier and cannot be changed after the IAM user has been created, either through the AWS Management Console or the API. Other properties like password, access keys, and group membership can be modified."
+  },
+  {
+    "id": 1012,
+    "q": "In Amazon EC2 Container Service, are other container types supported?",
+    "o": [
+      {
+        "c": "Yes, EC2 Container Service supports any container service you need.",
+        "a": "no"
+      },
+      {
+        "c": "Yes, EC2 Container Service also supports Microsoft container service.",
+        "a": "no"
+      },
+      {
+        "c": "No, Docker is the only container platform supported by EC2 Container Service presently.",
+        "a": "yes"
+      },
+      {
+        "c": "Yes, EC2 Container Service supports Microsoft container service and Openstack.",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS **EC2 Container Service (ECS)**, which is the service mentioned, is built to orchestrate and run **Docker containers**. At the time the question was written, Docker was the sole container technology supported for workload deployment on ECS."
+  },
+  {
+    "id": 1013,
+    "q": "Content and Media Server is the latest requirement that you need to meet for a client. The client has been very specific about his requirements such as low latency, high availability, durability, and access control. Potentially there will be millions of views on this server and because of 'spiky' usage patterns, operations teams will need to provision static hardware, network, and management resources to support the maximum expected need. The Customer base will be initially low but is expected to grow and become more geographically distributed. Which of the following would be a good solution for content distribution?",
+    "o": [
+      {
+        "c": "Amazon S3 as both the origin server and for caching.",
+        "a": "no"
+      },
+      {
+        "c": "AWS Storage Gateway as the origin server and Amazon EC2 for caching.",
+        "a": "no"
+      },
+      {
+        "c": "AWS CloudFront as both the origin server and for caching.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon S3 as the origin server and Amazon CloudFront for caching.",
+        "a": "yes"
+      }
+    ],
+    "nt": "**Amazon S3** is the best choice for the **origin server** as it offers high availability, scalability, and durability for static content storage. **Amazon CloudFront** is the global **Content Delivery Network (CDN)**, which satisfies the requirements for low latency and distributed, 'spiky' access by caching content close to users globally, significantly improving performance and handling the massive request volume."
+  },
+  {
+    "id": 1014,
+    "q": "Name the disk storage supported by Amazon Elastic Compute Cloud (EC2)",
+    "o": [
+      {
+        "c": "None of these.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon AppStream store.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon SNS store.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Instance Store.",
+        "a": "yes"
+      }
+    ],
+    "nt": "**Amazon Instance Store** (ephemeral storage) is a type of disk storage supported by Amazon EC2. It is physically attached to the host computer and provides temporary block-level storage for the instance. Other common storage options for EC2 are Amazon EBS (Elastic Block Store) and Amazon S3 (as a data source for AMIs, not directly a disk volume)."
+  },
+  {
+    "id": 1015,
+    "q": "After an Amazon VPC instance is launched, can I change the VPC security groups it belongs to?",
+    "o": [
+      {
+        "c": "Only if the tag 'VPC_Change_Group' is true.",
+        "a": "no"
+      },
+      {
+        "c": "Yes. You can.",
+        "a": "yes"
+      },
+      {
+        "c": "No. You cannot.",
+        "a": "no"
+      },
+      {
+        "c": "Only if the tag 'VPC Change Group' is true.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Security groups** act as a virtual firewall for your EC2 instance. You can indeed **change an instance's security group membership** while the instance is running, as long as the security groups are in the same VPC. This can be done via the AWS Management Console, CLI, or API."
+  },
+  {
+    "id": 1016,
+    "q": "If I want an instance to have a public IP address, which IP address should I use?",
+    "o": [
+      {
+        "c": "Elastic IP Address.",
+        "a": "yes"
+      },
+      {
+        "c": "Class B IP Address.",
+        "a": "no"
+      },
+      {
+        "c": "Class A IP Address.",
+        "a": "no"
+      },
+      {
+        "c": "Dynamic IP Address.",
+        "a": "no"
+      }
+    ],
+    "nt": "An **Elastic IP (EIP) address** is a static, public IP address designed for dynamic cloud computing. It is reserved in your account and you can associate it with an EC2 instance. Unlike a dynamically assigned Public IP, an EIP does not change when the instance is stopped and started, making it ideal for instances that need a fixed public endpoint."
+  },
+  {
+    "id": 1017,
+    "q": "Amazon RDS supports SOAP only through [...].",
+    "o": [
+      {
+        "c": "HTTP or HTTPS.",
+        "a": "no"
+      },
+      {
+        "c": "TCP/IP.",
+        "a": "no"
+      },
+      {
+        "c": "HTTP.",
+        "a": "no"
+      },
+      {
+        "c": "HTTPS.",
+        "a": "yes"
+      }
+    ],
+    "nt": "Amazon RDS, like most AWS services, uses a secure mechanism for its APIs. The **SOAP (Simple Object Access Protocol)** API for Amazon RDS is accessible only via **HTTPS** (HTTP over SSL/TLS) to ensure that all data transmitted is encrypted and secure."
+  },
+  {
+    "id": 1018,
+    "q": "Which of the following services natively encrypts data at rest within an AWS region? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "AWS Storage Gateway.",
+        "a": "yes"
+      },
+      {
+        "c": "Amazon DynamoDB.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon CloudFront.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Glacier.",
+        "a": "yes"
+      },
+      {
+        "c": "Amazon Simple Queue Service.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Amazon Glacier** encrypts all data at rest by default using AES 256-bit encryption. **AWS Storage Gateway** (for both File Gateway and Volume Gateway) also supports encryption of data at rest stored in S3/Glacier."
+  },
+  {
+    "id": 1019,
+    "q": "Which one of the following can't be used as an origin server with Amazon CloudFront?",
+    "o": [
+      {
+        "c": "A web server running in your infrastructure.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon S3.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Glacier.",
+        "a": "yes"
+      },
+      {
+        "c": "A web server running on Amazon EC2 instances.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Amazon Glacier** is an archival storage service optimized for infrequent access and retrieval times are typically several hours, making it unsuitable to serve content to a Content Delivery Network (CDN) like CloudFront, which requires low-latency, on-demand access. CloudFront can use S3 buckets, EC2 instances, and external web servers as origins."
+  },
+  {
+    "id": 1020,
+    "q": "Select the most correct The device name /dev/sdal (within Amazon EC2) is [...].",
+    "o": [
+      {
+        "c": "possible for EBS volumes.",
+        "a": "no"
+      },
+      {
+        "c": "reserved for the root device.",
+        "a": "yes"
+      },
+      {
+        "c": "recommended for EBS volumes.",
+        "a": "no"
+      },
+      {
+        "c": "recommended for instance store volumes.",
+        "a": "no"
+      }
+    ],
+    "nt": "In an Amazon EC2 instance that uses an EBS volume as the root device, the name `/dev/sda1` (or sometimes `/dev/xvda`) is the conventional device name **reserved for the root volume** (or boot volume) of the operating system. Attempting to use this name for an additional EBS volume attachment will likely result in an error or unexpected behavior."
+  },
+  {
+    "id": 1021,
+    "q": "How can I change the security group membership for interfaces owned by other AWS, such as Elastic Load Balancing?",
+    "o": [
+      {
+        "c": "By using the service specific console or APICLI commands.",
+        "a": "yes"
+      },
+      {
+        "c": "None of these.",
+        "a": "no"
+      },
+      {
+        "c": "Using Amazon EC2 API/CLI.",
+        "a": "no"
+      },
+      {
+        "c": "Using all these methods.",
+        "a": "no"
+      }
+    ],
+    "nt": "Network interfaces owned by other AWS services, such as an **Elastic Load Balancer (ELB)** or **RDS DB Instance**, are managed by their respective services. To change the associated security groups, you must use the **service-specific console, API, or CLI commands** (e.g., the ELB console/API, not the general EC2 API/CLI for modifying the ELB-owned interface)."
+  },
+  {
+    "id": 1022,
+    "q": "You have created a Route 53 latency record set from your domain to a machine in Northern Virginia and a similar record to a machine in Sydney. When a user located in US visits your domain he will be routed to",
+    "o": [
+      {
+        "c": "Northern Virginia.",
+        "a": "yes"
+      },
+      {
+        "c": "Sydney.",
+        "a": "no"
+      },
+      {
+        "c": "Both, Northern Virginia and Sydney.",
+        "a": "no"
+      },
+      {
+        "c": "Depends on the Weighted Resource Record Sets.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Latency-based Routing** in Amazon Route 53 directs user requests to the AWS region that provides the **lowest latency** (fastest response time) for the user. Since the user is located in the US, the server in **Northern Virginia (us-east-1)** will typically provide lower latency compared to the server in Sydney, Australia."
+  },
+  {
+    "id": 1023,
+    "q": "In the context of MySQL, version numbers are organized as MySQL version = X.Y.Z. What does X denote here?",
+    "o": [
+      {
+        "c": "Release level.",
+        "a": "no"
+      },
+      {
+        "c": "Minor version.",
+        "a": "no"
+      },
+      {
+        "c": "Version number.",
+        "a": "no"
+      },
+      {
+        "c": "Major version.",
+        "a": "yes"
+      }
+    ],
+    "nt": "In the standard MySQL versioning scheme of X.Y.Z: **X** denotes the **Major Version** number (e.g., 5, 8), which typically indicates a significant version change with major new features and sometimes backward-incompatible changes. **Y** denotes the Release Level (Minor Version), and **Z** denotes the patch/revision level."
+  },
+  {
+    "id": 1024,
+    "q": "Which one of the below doesn't affect Amazon CloudFront billing?",
+    "o": [
+      {
+        "c": "Distribution Type.",
+        "a": "yes"
+      },
+      {
+        "c": "Data Transfer Out.",
+        "a": "no"
+      },
+      {
+        "c": "Dedicated IP SSL Certificates.",
+        "a": "no"
+      },
+      {
+        "c": "Requests.",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon CloudFront billing is primarily affected by: **Data Transfer Out** (the amount of data transferred out from CloudFront edge locations), **Requests** (the number of HTTP/HTTPS requests processed), and the use of optional features like **Dedicated IP Custom SSL** certificates. The *type* of distribution (Web or RTMP) affects the features and capabilities but is not a direct billing component like the others."
+  },
+  {
+    "id": 1025,
+    "q": "Just when you thought you knew every possible storage option on AWS you hear someone mention Reduced Redundancy Storage (RRS) within Amazon S3. What is the ideal scenario to use Reduced Redundancy Storage (RRS)?",
+    "o": [
+      {
+        "c": "Huge volumes of data.",
+        "a": "no"
+      },
+      {
+        "c": "Sensitive data.",
+        "a": "no"
+      },
+      {
+        "c": "Non-critical or reproducible data.",
+        "a": "yes"
+      },
+      {
+        "c": "Critical data.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Reduced Redundancy Storage (RRS)** was an Amazon S3 storage class designed for **non-critical, reproducible data** that could be easily re-created if lost. It offered lower durability than Standard S3 but at a lower cost, making it ideal for data like thumbnails or logs that are eventually processed and can be regenerated."
+  },
+  {
+    "id": 1026,
+    "q": "Which of the following AWS CLI commands is syntactically incorrect?",
+    "o": [
+      {
+        "c": "$ aws ec2 describe-instances",
+        "a": "no"
+      },
+      {
+        "c": "$ aws ec2 start-instances --instance-ids i-1348636c",
+        "a": "no"
+      },
+      {
+        "c": "$ aws sns publish --topic-arn arn:aws:sns:us-east-1:546419318123:OperationsError -message \"Script Failure\"",
+        "a": "yes"
+      },
+      {
+        "c": "$ aws sqs receive-message --queue-url https://queue.amazonaws.com/546419318123/Test",
+        "a": "no"
+      }
+    ],
+    "nt": "The incorrect command is the one for **SNS publish**. The parameter for the message content should be `--message` (double dash), not `-message` (single dash) as shown in the option. The single dash is incorrect parameter syntax for the AWS CLI."
+  },
+  {
+    "id": 1027,
+    "q": "When running my DB Instance as a Multi-AZ deployment, can I use the standby for read or write operations?",
+    "o": [
+      {
+        "c": "Yes.",
+        "a": "no"
+      },
+      {
+        "c": "Only with MSSQL based RDS.",
+        "a": "no"
+      },
+      {
+        "c": "Only for Oracle RDS instances.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "yes"
+      }
+    ],
+    "nt": "In an AWS RDS **Multi-AZ Deployment**, the standby replica is a synchronous, read-only copy that is used *only* for automatic failover. It is not accessible for read or write traffic to offload the primary instance. To offload read traffic, you must use an RDS **Read Replica**, which is a separate feature."
+  },
+  {
+    "id": 1028,
+    "q": "In the Launch Db Instance Wizard, where can I select the backup and maintenance options?",
+    "o": [
+      {
+        "c": "Under DB INSTANCE DETAILS.",
+        "a": "no"
+      },
+      {
+        "c": "Under REVI EW.",
+        "a": "no"
+      },
+      {
+        "c": "Under MANAGEMENT OPTIONS.",
+        "a": "yes"
+      },
+      {
+        "c": "Under ENGINE SELECTION.",
+        "a": "no"
+      }
+    ],
+    "nt": "In the Amazon RDS Console's launch wizard, the settings for **Backup Retention Period**, **Maintenance Window**, and other operational aspects are grouped under the **MANAGEMENT OPTIONS** section."
+  },
+  {
+    "id": 1029,
+    "q": "What is the network performance offered by the c4.8xlarge instance in Amazon EC2?",
+    "o": [
+      {
+        "c": "20 Gigabit.",
+        "a": "no"
+      },
+      {
+        "c": "10 Gigabit.",
+        "a": "yes"
+      },
+      {
+        "c": "Very High but variable.",
+        "a": "no"
+      },
+      {
+        "c": "5 Gigabit.",
+        "a": "no"
+      }
+    ],
+    "nt": "The **c4.8xlarge** instance type supports **10 Gigabit** (10 Gbps) network performance. This is generally advertised for the largest instance types within a series and is beneficial for applications requiring high network throughput."
+  },
+  {
+    "id": 1030,
+    "q": "In Amazon EC2, if your EBS volume stays in the detaching state, you can force the detachment by clicking [...].",
+    "o": [
+      {
+        "c": "Force Detach.",
+        "a": "yes"
+      },
+      {
+        "c": "Detach Instance.",
+        "a": "no"
+      },
+      {
+        "c": "AttachVolume.",
+        "a": "no"
+      },
+      {
+        "c": "AttachInstance.",
+        "a": "no"
+      }
+    ],
+    "nt": "If an EBS volume gets stuck in the *detaching* state (e.g., due to an underlying issue or the instance is unresponsive), you can use the **Force Detach** option in the AWS Management Console or the equivalent API/CLI command (`aws ec2 detach-volume --force`) to immediately detach the volume, although this can sometimes lead to data inconsistency."
+  },
+  {
+    "id": 1031,
+    "q": "What does Amazon DynamoDB provide?",
+    "o": [
+      {
+        "c": "A predictable and scalable MySQL database.",
+        "a": "no"
+      },
+      {
+        "c": "A fast and reliable PL/SQL database cluster.",
+        "a": "no"
+      },
+      {
+        "c": "A standalone Cassandra database, managed by Amazon Web Services.",
+        "a": "no"
+      },
+      {
+        "c": "A fast, highly scalable managed NoSQL database service.",
+        "a": "yes"
+      }
+    ],
+    "nt": "**Amazon DynamoDB** is AWS's fully managed, serverless, key-value and document database that delivers single-digit millisecond performance at any scale. It is a **NoSQL** service, designed for high scalability and reliability."
+  },
+  {
+    "id": 1032,
+    "q": "Security groups act like a firewall at the instance level, whereas [...] are an additional layer of security that act at the subnet level.",
+    "o": [
+      {
+        "c": "DB Security Groups.",
+        "a": "no"
+      },
+      {
+        "c": "VPC Security Groups.",
+        "a": "no"
+      },
+      {
+        "c": "network ACLs.",
+        "a": "yes"
+      }
+    ],
+    "nt": "**Network Access Control Lists (network ACLs)** are an optional layer of security for your VPC that act as a firewall for controlling traffic in and out of one or more subnets. **Security Groups** operate at the instance level, while **Network ACLs** operate at the subnet level."
+  },
+  {
+    "id": 1033,
+    "q": "You have been asked to tighten up the password policies in your organization after a serious security breach, so you need to consider every possible security measure. Which of the following is not an account password policy for IAM Users that can be set?",
+    "o": [
+      {
+        "c": "Force IAM users to contact an account administrator when the user has allowed his or her password to expire.",
+        "a": "no"
+      },
+      {
+        "c": "A minimum password length.",
+        "a": "no"
+      },
+      {
+        "c": "Force IAM users to contact an account administrator when the user has entered his password incorrectly.",
+        "a": "yes"
+      },
+      {
+        "c": "Prevent IAM users from reusing previous passwords.",
+        "a": "no"
+      }
+    ],
+    "nt": "IAM Account Password Policies allow setting rules like minimum length, character complexity, password expiration, and password reuse prevention. AWS does **not** have a policy option to automatically force an administrator contact based on repeated failed login attempts; this kind of detection and action is typically handled by AWS monitoring and security tools, or custom logic, not the native IAM password policy."
+  },
+  {
+    "id": 1034,
+    "q": "Multi-AZ deployment [...] supported for Microsoft SQL Server DB Instances.",
+    "o": [
+      {
+        "c": "is not currently.",
+        "a": "yes"
+      },
+      {
+        "c": "is as of 2013.",
+        "a": "no"
+      },
+      {
+        "c": "is planned to be in 2014.",
+        "a": "no"
+      },
+      {
+        "c": "will never be.",
+        "a": "no"
+      }
+    ],
+    "nt": "At the time the question was relevant, RDS **Multi-AZ deployments for Microsoft SQL Server DB Instances were not supported** in the same way as other engines like MySQL or PostgreSQL, which use synchronous replication. SQL Server relied on different technologies."
+  },
+  {
+    "id": 1035,
+    "q": "What does Amazon Elastic Beanstalk provide?",
+    "o": [
+      {
+        "c": "A scalable storage appliance on top of Amazon Web Services.",
+        "a": "no"
+      },
+      {
+        "c": "An application container on top of Amazon Web Services.",
+        "a": "yes"
+      },
+      {
+        "c": "A service by this name doesn't exist.",
+        "a": "no"
+      },
+      {
+        "c": "A scalable cluster of EC2 instances.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Amazon Elastic Beanstalk** is an easy-to-use service for deploying and scaling web applications and services developed with popular languages. It automatically handles the deployment, capacity provisioning, load balancing, auto-scaling, and health monitoring, essentially providing a managed platform or **application container** where you upload your code."
+  },
+  {
+    "id": 1036,
+    "q": "You need to quickly set up an email-sending service because a client needs to start using it in the next hour. Amazon Simple Email Service (Amazon SES) seems to be the logical choice but there are several options available to set it up. Which of the following options to set up SES would best meet the needs of the client?",
+    "o": [
+      {
+        "c": "Amazon SES console.",
+        "a": "yes"
+      },
+      {
+        "c": "AWS CloudFormation.",
+        "a": "no"
+      },
+      {
+        "c": "SMTP Interface.",
+        "a": "no"
+      },
+      {
+        "c": "AWS Elastic Beanstalk.",
+        "a": "no"
+      }
+    ],
+    "nt": "The requirement is to **quickly set up** and start using the service *in the next hour*. Using the **Amazon SES console** offers the fastest and most immediate way to verify domains/email addresses and start sending emails, requiring minimal setup and configuration."
+  },
+  {
+    "id": 1037,
+    "q": "A user is observing the EC2 CPU utilization metric on CloudWatch. The user has observed some interesting patterns while filtering over the 1 week period for a particular hour. The user wants to zoom that data point to a more granular period. How can the user do that easily with CloudWatch?",
+    "o": [
+      {
+        "c": "The user can zoom a particular period by selecting that period with the mouse and then releasing the mouse.",
+        "a": "yes"
+      },
+      {
+        "c": "The user can zoom a particular period by specifying the aggregation data for that period.",
+        "a": "no"
+      },
+      {
+        "c": "The user can zoom a particular period by double clicking on that period with the mouse.",
+        "a": "no"
+      },
+      {
+        "c": "The user can zoom a particular period by specifying the period in the Time Range.",
+        "a": "no"
+      }
+    ],
+    "nt": "In the **Amazon CloudWatch Console** graphs, the most direct and **easiest** way to zoom in on a specific time range is by using the graphical interface feature: **clicking and dragging a selection box** over the desired period on the graph and then releasing the mouse. This action automatically updates the time range and refreshes the data for the selected, more granular period."
+  },
+  {
+    "id": 1038,
+    "q": "A company is running a batch analysis every hour on their main transactional DB, running on an RDS MySQL instance to populate their central Data Warehouse running on Redshift. During the execution of the batch their transactional applications are very slow. When the batch completes they need to update the top management dashboard with the new data. The dashboard is produced by another system running on-premises that is currently started when a manually-sent email notifies that an update is required. The on-premises system cannot be modified because it is managed by another team. How would you optimize this scenario to solve performance issues and automate the process as much as possible?",
+    "o": [
+      {
+        "c": "Replace RDS with Redshift for the batch analysis and SNS to notify the on-premises system to update the dashboard.",
+        "a": "yes"
+      },
+      {
+        "c": "Replace RDS with Redshift for the batch analysis and SQS to send a message to the on-premises system to update the dashboard.",
+        "a": "no"
+      },
+      {
+        "c": "Create an RDS Read Replica for the batch analysis and SNS to notify the on-premises system to update the dashboard.",
+        "a": "no"
+      },
+      {
+        "c": "Create an RDS Read Replica for the batch analysis and SQS to send a message to the on-premises system to update the dashboard.",
+        "a": "no"
+      }
+    ],
+    "nt": "To solve the **performance issues**, the batch analysis must be moved off the primary transactional RDS DB. Offloading the entire data warehouse population task to **Amazon Redshift** is superior, as it is a dedicated, highly-optimized data warehouse service. To **automate the notification** to the *unmodifiable on-premises system* (which currently relies on a manual email), **Amazon SNS (Simple Notification Service)** can be used to send an email notification, directly replacing the manual email step and automating the trigger."
+  },
+  {
+    "id": 1039,
+    "q": "You are configuring a new VPC for one of your clients for a cloud migration project, and only a public VPN will be in place. After you created your VPC, you created a new subnet, a new internet gateway, and attached your internet gateway to your VPC. When you launched your first instance into your VPC, you realized that you aren't able to connect to the instance, even if it is configured with an elastic IP. What should be done to access the instance?",
+    "o": [
+      {
+        "c": "A route should be created as 0.0.0.0/0 and your internet gateway as target.",
+        "a": "yes"
+      },
+      {
+        "c": "Attach another ENI to the instance and connect via new ENI.",
+        "a": "no"
+      },
+      {
+        "c": "A NAT instance should be created and all traffic should be forwarded to NAT instance.",
+        "a": "no"
+      },
+      {
+        "c": "A NACL should be created that allows all outbound traffic.",
+        "a": "no"
+      }
+    ],
+    "nt": "For an EC2 instance in a VPC to be accessible from the public internet (which is required since it has an Elastic IP), its subnet must be a **public subnet**. A subnet is made public by having a **route table entry** that directs all traffic destined outside the VPC (represented by the destination **0.0.0.0/0**) to the **Internet Gateway** attached to the VPC. This step was missed in the initial setup."
+  },
+  {
+    "id": 1040,
+    "q": "You have been asked to build a database warehouse using Amazon Redshift. You know a little about it, including that it is a SQL data warehouse solution, and uses industry standard ODBC and JDBC connections and PostgreSQL drivers. However, you are not sure about what sort of storage it uses for database tables. What sort of storage does Amazon Redshift use for database tables?",
+    "o": [
+      {
+        "c": "InnoDB Tables.",
+        "a": "no"
+      },
+      {
+        "c": "NDB data storage.",
+        "a": "no"
+      },
+      {
+        "c": "Columnar data storage.",
+        "a": "yes"
+      },
+      {
+        "c": "NDB CLUSTER Storage.",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon Redshift is a petabyte-scale data warehouse service that uses **Columnar data storage**. In columnar storage, table data is stored by columns rather than by rows, which significantly reduces the amount of data read from disk and increases I/O efficiency, making it highly optimized for analytical processing (OLAP) and massive parallel query execution."
+  },
+  {
+    "id": 1041,
+    "q": "A user has attached 1 EBS volume to a VPC instance. The user wants to achieve the best fault tolerance of data possible. Which of the below mentioned options can help achieve fault tolerance?",
+    "o": [
+      {
+        "c": "Attach one more volume with RAID 1 configuration.",
+        "a": "yes"
+      },
+      {
+        "c": "Attach one more volume with RAID 0 configuration.",
+        "a": "no"
+      },
+      {
+        "c": "Connect multiple volumes and stripe them with RAID.",
+        "a": "no"
+      },
+      {
+        "c": "Use the EBS volume as a root device.",
+        "a": "no"
+      }
+    ],
+    "nt": "**RAID 1 (Mirroring)** is a configuration that writes the same data simultaneously to two or more disks. If one volume fails, the data remains intact and accessible on the other volume, which provides the best level of **fault tolerance** among the options for data redundancy. (RAID 0 provides performance but no fault tolerance.)"
+  },
+  {
+    "id": 1042,
+    "q": "Which features can be used to restrict access to data in S3? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Set an S3 ACL on the bucket or the object.",
+        "a": "yes"
+      },
+      {
+        "c": "Create a CloudFront distribution for the bucket.",
+        "a": "no"
+      },
+      {
+        "c": "Set an S3 bucket policy.",
+        "a": "yes"
+      },
+      {
+        "c": "Enable IAM Identity Federation.",
+        "a": "no"
+      },
+      {
+        "c": "Use S3 Virtual Hosting.",
+        "a": "no"
+      }
+    ],
+    "nt": "The primary native S3 mechanisms to restrict access are: **Bucket Policies** (written in JSON, apply to all objects in a bucket or subsets, and are the preferred method) and **Access Control Lists (ACLs)** (legacy mechanism for finer-grained control on individual objects or buckets)."
+  },
+  {
+    "id": 1043,
+    "q": "You are in the process of creating a Route 53 DNS failover to direct traffic to two EC2 zones. Obviously, if one fails, you would like Route 53 to direct traffic to the other region. Each region has an ELB with some instances being distributed. What is the best way for you to configure the Route 53 health check?",
+    "o": [
+      {
+        "c": "Route 53 doesn't support ELB with an internal health check. You need to create your own Route 53 health check of the ELB.",
+        "a": "no"
+      },
+      {
+        "c": "Route 53 natively supports ELB with an internal health check. Turn 'Evaluate target health' off and 'Associate with Health Check' on and R53 will use the ELB's internal health check.",
+        "a": "no"
+      },
+      {
+        "c": "Route 53 doesn't support ELB with an internal health check. You need to associate your resource record set for the ELB with your own health check.",
+        "a": "no"
+      },
+      {
+        "c": "Route 53 natively supports ELB with an internal health check. Turn 'Evaluate target health' on and 'Associate with Health Check' off and R53 will use the ELB's internal health check.",
+        "a": "yes"
+      }
+    ],
+    "nt": "For a failover configuration involving an Elastic Load Balancer (ELB), the most efficient method is to use Route 53's native integration. By setting **'Evaluate Target Health' to 'Yes'** on the Alias record set that points to the ELB, Route 53 will automatically use the health status information gathered by the ELB itself to determine if the endpoint is healthy, removing the need for a separate Route 53 health check."
+  },
+  {
+    "id": 1044,
+    "q": "For each DB Instance class, what is the maximum size of associated storage capacity?",
+    "o": [
+      {
+        "c": "5GB.",
+        "a": "no"
+      },
+      {
+        "c": "1TB.",
+        "a": "yes"
+      },
+      {
+        "c": "2TB.",
+        "a": "no"
+      },
+      {
+        "c": "500GB.",
+        "a": "no"
+      }
+    ],
+    "nt": "The maximum storage size for Amazon RDS varies by database engine and storage type. Historically, and within the context of older questions, the storage limit for some RDS engines (like MySQL/Oracle/PostgreSQL with Magnetic or Standard Storage) was **1TB**."
+  },
+  {
+    "id": 1045,
+    "q": "A user is planning a highly available application deployment with EC2. Which of the below mentioned options will not help to achieve HA?",
+    "o": [
+      {
+        "c": "Elastic IP address.",
+        "a": "no"
+      },
+      {
+        "c": "PIOPS.",
+        "a": "yes"
+      },
+      {
+        "c": "AMI.",
+        "a": "no"
+      },
+      {
+        "c": "Availability Zones.",
+        "a": "no"
+      }
+    ],
+    "nt": "**PIOPS (Provisioned IOPS)** is a feature of EBS volumes designed to provide **consistent and predictable performance** (low latency, high throughput) for I/O-intensive workloads. While performance is critical, PIOPS is a *performance* feature, not a core mechanism for ensuring **High Availability (HA)**. HA is achieved through redundancy (Availability Zones), fast recovery (AMI), and stable addressing (Elastic IP)."
+  },
+  {
+    "id": 1046,
+    "q": "What does specifying the mapping /dev/sdc=none when launching an instance do?",
+    "o": [
+      {
+        "c": "Prevents /dev/sdc from creating the instance.",
+        "a": "no"
+      },
+      {
+        "c": "Prevents /dev/sdc from deleting the instance.",
+        "a": "no"
+      },
+      {
+        "c": "Set the value of /dev/sdc to 'zero'.",
+        "a": "no"
+      },
+      {
+        "c": "Prevents /dev/sdc from attaching to the instance.",
+        "a": "yes"
+      }
+    ],
+    "nt": "When using the block device mapping configuration during instance launch, setting a device mapping to **`none`** (e.g., `/dev/sdc=none`) is a specific command to **remove (or prevent the attachment of) an existing instance store volume** or a pre-configured EBS volume that is mapped by the AMI to that specific device name. This is often used to override the default mappings inherited from the AMI."
+  },
+  {
+    "id": 1047,
+    "q": "Which of the following statements is true of tagging an Amazon EC2 resource?",
+    "o": [
+      {
+        "c": "You don't need to specify the resource identifier while terminating a resource.",
+        "a": "no"
+      },
+      {
+        "c": "You can terminate, stop, or delete a resource based solely on its tags.",
+        "a": "no"
+      },
+      {
+        "c": "You can't terminate, stop, or delete a resource based solely on its tags.",
+        "a": "yes"
+      },
+      {
+        "c": "You don't need to specify the resource identifier while stopping a resource.",
+        "a": "no"
+      }
+    ],
+    "nt": "In the standard AWS console and API/CLI operations, you must specify the resource's actual **identifier** (e.g., `i-xxxxxxxx` for an instance, `vol-xxxxxxxx` for a volume) to perform destructive actions like stop, terminate, or delete. You **cannot** perform these actions by simply using a tag key/value pair alone."
+  },
+  {
+    "id": 1048,
+    "q": "You are deploying an application to collect votes for a very popular television show. Millions of users will submit votes using mobile devices. The votes must be collected into a durable, scalable, and highly available data store for real-time public tabulation. Which service should you use?",
+    "o": [
+      {
+        "c": "Amazon DynamoDB.",
+        "a": "yes"
+      },
+      {
+        "c": "Amazon Redshift.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Kinesis.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Simple Queue Service.",
+        "a": "no"
+      }
+    ],
+    "nt": "**Amazon DynamoDB** is the ideal solution for this use case (a 'flash crowd' event) because it is a fully managed **NoSQL** database that offers predictable, single-digit millisecond latency at *any scale* and can handle massive, sudden spikes in write traffic from millions of users, providing the required **durability, scalability, and high availability** for real-time collection and tabulation."
+  },
+  {
+    "id": 1049,
+    "q": "Are Reserved Instances available for Multi-AZ Deployments?",
+    "o": [
+      {
+        "c": "Only for Cluster Compute instances.",
+        "a": "no"
+      },
+      {
+        "c": "Yes for all instance types.",
+        "a": "yes"
+      },
+      {
+        "c": "Only for M3 instance types.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      }
+    ],
+    "nt": "Yes, **Reserved Instances (RIs)** can be purchased for any applicable instance type that is used in a Multi-AZ deployment (e.g., an RDS DB instance). Multi-AZ is a deployment option (for high availability), not a fundamental restriction on the RI purchase."
+  },
+  {
+    "id": 1050,
+    "q": "A [...] for a VPC is a collection of subnets (typically private) that you may want to designate for your backend RDS DB Instances.",
+    "o": [
+      {
+        "c": "DB Subnet Set.",
+        "a": "no"
+      },
+      {
+        "c": "RDS Subnet Group.",
+        "a": "no"
+      },
+      {
+        "c": "DB Subnet Group.",
+        "a": "yes"
+      },
+      {
+        "c": "DB Subnet Collection.",
+        "a": "no"
+      }
+    ],
+    "nt": "A **DB Subnet Group** is a collection of subnets (one in each Availability Zone) that you create in a VPC and then designate for your Amazon RDS DB instances. This group allows RDS to create the primary and standby instances in different Availability Zones for a Multi-AZ deployment, ensuring high availability."
+  }
+]

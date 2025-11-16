@@ -1,0 +1,1132 @@
+[
+  {
+    "id": 1151,
+    "q": "What will be the status of the snapshot until the snapshot is complete?",
+    "o": [
+      {
+        "c": "Running.",
+        "a": "no"
+      },
+      {
+        "c": "Working.",
+        "a": "no"
+      },
+      {
+        "c": "Progressing.",
+        "a": "no"
+      },
+      {
+        "c": "Pending.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Pending.\" is correct because EBS snapshot creation is an asynchronous operation; until the snapshot completes, its status is \"pending\" indicating the snapshot process is in progress."
+  },
+  {
+    "id": 1152,
+    "q": "A customer is running a multi-tier web application farm in a virtual private cloud (VPC) that is not connected to their corporate network. They are connecting to the VPC over the Internet to manage all of their Amazon EC2 instances running in both the public and private subnets. They have only authorized the bastion-security-group with Microsoft Remote Desktop Protocol (RDP) access to the application instance security groups, but the company wants to further limit administrative access to all of the instances in the VPC. Which of the following Bastion deployment scenarios will meet this requirement?",
+    "o": [
+      {
+        "c": "Deploy a Windows Bastion host on the corporate network that has RDP access to all instances in the VP.",
+        "a": "no"
+      },
+      {
+        "c": "Deploy a Windows Bastion host with an Elastic IP address in the public subnet and allow SSH access to the bastion from anywhere.",
+        "a": "no"
+      },
+      {
+        "c": "Deploy a Windows Bastion host with an Elastic IP address in the private subnet, and restrict RDP access to the bastion from only the corporate public IP addresses.",
+        "a": "yes"
+      },
+      {
+        "c": "Deploy a Windows Bastion host with an auto-assigned Public IP address in the public subnet, and allow RDP access to the bastion from only the corporate public IP addresses.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Deploy a Windows Bastion host with an Elastic IP address in the private subnet, and restrict RDP access to the bastion from only the corporate public IP addresses.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Deploy a Windows Bastion host with an Elastic IP address in the private subnet, and restrict RDP access to the bastion from only the corporate public IP addresses.."
+  },
+  {
+    "id": 1153,
+    "q": "True or False: Common points of failures like generators and cooling equipment are shared across Availability Zones.",
+    "o": [
+      {
+        "c": "True.",
+        "a": "no"
+      },
+      {
+        "c": "False.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"False.\" is correct because it directly corresponds to the documented AWS behavior or feature described: False.."
+  },
+  {
+    "id": 1154,
+    "q": "A company is building a voting system for a popular TV show. Viewers will watch the performances then visit the show's website to vote for their favorite performer. It is expected that in a short period of time after the show has finished the site will receive millions of visitors. The visitors will first login to the site using their Amazon.com credentials and then submit their vote. After the voting is completed the page will display the vote totals. The company needs to build the site such that can handle the rapid influx of traffic while maintaining good performance but also wants to keep costs to a minimum. Which of the design patterns below should they use?",
+    "o": [
+      {
+        "c": "Use CloudFront and an Elastic Load balancer in front of an auto-scaled set of web servers. The web servers will first call the Login With Amazon service to authenticate the user, then process the user's vote and store the result into a multi-AZ Relational Database Service instance.",
+        "a": "no"
+      },
+      {
+        "c": "Use CloudFront and the static website hosting feature of S3 with the Javascript SDK to call the Login With Amazon service to authenticate the user. Use IAM Roles to gain permissions to a DynamoDB table to store the user's vote.",
+        "a": "no"
+      },
+      {
+        "c": "Use CloudFront and an Elastic Load Balancer in front of an auto-scaled set of web servers. The web servers will first call the Login with Amazon service to authenticate the user. The web servers will process the user's vote and store the result into a DynamoDB table using IAM Roles for EC2 instances to gain permissions to the DynamoDB table.",
+        "a": "no"
+      },
+      {
+        "c": "Use CloudFront and an Elastic Load Balancer in front of an auto-scaled set of web servers. The web servers will first call the Login with Amazon service to authenticate the user. The web servers will process the user's vote and store the result into an SQS queue using IAM Roles for EC2 Instances to gain permissions to the SQS queue. A set of application servers will then retrieve the items from the queue and store the result into a DynamoDB table.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Use CloudFront and an Elastic Load Balancer in front of an auto-scaled set of web servers. The web servers will first call the Login with Amazon service to authenticate the user. The web servers will process the user's vote and store the result into an SQS queue using IAM Roles for EC2 Instances to gain permissions to the SQS queue. A set of application servers will then retrieve the items from the queue and store the result into a DynamoDB table.\" is correct because Amazon DynamoDB is a fully managed NoSQL database service that provides fast, predictable performance and seamless scalability appropriate for high-throughput workloads."
+  },
+  {
+    "id": 1155,
+    "q": "You are designing a photo sharing mobile app. The application will store all pictures in a single Amazon S3 bucket. Users will upload pictures from their mobile device directly to Amazon S3 and will be able to view and download their own pictures directly from Amazon S3. You want to configure security to handle potentially millions of users in the most secure manner possible. What should your server-side application do when a new user registers on the photo sharing mobile application?",
+    "o": [
+      {
+        "c": "Create an IAM user. Update the bucket policy with appropriate permissions for the IAM user. Generate an access key and secret key for the IAM user, store them in the mobile app and use these credentials to access Amazon S3.",
+        "a": "no"
+      },
+      {
+        "c": "Create an IAM user. Assign appropriate permissions to the IAM user. Generate an access key and secret key for the IAM user, store them in the mobile app and use these credentials to access Amazon S3.",
+        "a": "no"
+      },
+      {
+        "c": "Create a set of long-term credentials using AWS Security Token Service with appropriate permissions. Store these credentials in the mobile app and use them to access Amazon S3.",
+        "a": "no"
+      },
+      {
+        "c": "Record the user's information in Amazon RDS and create a role in IAM with appropriate permissions. When the user uses their mobile app, create temporary credentials using the AWS Security Token Service `AssumeRole` function. Store these credentials in the mobile app's memory and use them to access Amazon S3. Generate new credentials the next time the user runs the mobile app.",
+        "a": "yes"
+      },
+      {
+        "c": "Record the user's information in Amazon DynamoDB. When the user uses their mobile app, create temporary credentials using AWS Security Token Service with appropriate permissions. Store these credentials in the mobile app's memory and use them to access Amazon S3. Generate new credentials the next time the user runs the mobile app.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Record the user's information in Amazon RDS and create a role in IAM with appropriate permissions. When the user uses their mobile app, create temporary credentials using the AWS Security Token Service `AssumeRole` function. Store these credentials in the mobile app's memory and use them to access Amazon S3. Generate new credentials the next time the user runs the mobile app.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Record the user's information in Amazon RDS and create a role in IAM with appropriate permissions. When the user uses their mobile app, create temporary credentials using the AWS Security Token Service `AssumeRole` function. Store these credentials in the mobile app's memory and use them to access Amazon S3. Generate new credentials the next time the user runs the mobile app.."
+  },
+  {
+    "id": 1156,
+    "q": "Is there a limit to how many groups a user can be in?",
+    "o": [
+      {
+        "c": "Yes for all users.",
+        "a": "yes"
+      },
+      {
+        "c": "Yes for all users except root.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      },
+      {
+        "c": "Yes unless special permission granted.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Yes for all users.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Yes for all users.."
+  },
+  {
+    "id": 1157,
+    "q": "Which is the default region in AWS?",
+    "o": [
+      {
+        "c": "eu-west-1.",
+        "a": "no"
+      },
+      {
+        "c": "us-east-1.",
+        "a": "yes"
+      },
+      {
+        "c": "us-east-2.",
+        "a": "no"
+      },
+      {
+        "c": "ap-southeast-1.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"us-east-1.\" is correct because it directly corresponds to the documented AWS behavior or feature described: us-east-1.."
+  },
+  {
+    "id": 1158,
+    "q": "Your company hosts a social media site supporting users in multiple countries. You have been asked to provide a highly available design for the application that leverages multiple regions for the most recently accessed content and latency sensitive portions of the web site. The most latency sensitive component of the application involves reading user preferences to support web site personalization and ad selection. In addition to running your application in multiple regions, which option will support this application's requirements?",
+    "o": [
+      {
+        "c": "Serve user content from S3. CloudFront and use Route 53 latency-based routing between ELBs in each region. Retrieve user preferences from a local DynamoDB table in each region and leverage SQS to capture changes to user preferences with SQS workers for propagating updates to each table.",
+        "a": "yes"
+      },
+      {
+        "c": "Use the S3 Copy API to copy recently accessed content to multiple regions and serve user content from S3. CloudFront with dynamic content and an ELB in each region. Retrieve user preferences from an ElastiCache cluster in each region and leverage SNS notifications to propagate user preference changes to a worker node in each region.",
+        "a": "no"
+      },
+      {
+        "c": "Use the S3 Copy API to copy recently accessed content to multiple regions and serve user content from S3 CloudFront and Route 53 latency-based routing Between ELBs in each region. Retrieve user preferences from a DynamoDB table and leverage SQS to capture changes to user preferences with SQS workers for propagating DynamoDB updates.",
+        "a": "no"
+      },
+      {
+        "c": "Serve user content from S3. CloudFront with dynamic content, and an ELB in each region. Retrieve user preferences from an ElastiCache cluster in each region and leverage Simple Workflow (SWF) to manage the propagation of user preferences from a centralized DB to each ElastiCache cluster.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Serve user content from S3. CloudFront and use Route 53 latency-based routing between ELBs in each region. Retrieve user preferences from a local DynamoDB table in each region and leverage SQS to capture changes to user preferences with SQS workers for propagating updates to each table.\" is correct because Amazon DynamoDB is a fully managed NoSQL database service that provides fast, predictable performance and seamless scalability appropriate for high-throughput workloads."
+  },
+  {
+    "id": 1159,
+    "q": "A [...] is a document that provides a formal statement of one or more permissions.",
+    "o": [
+      {
+        "c": "policy.",
+        "a": "yes"
+      },
+      {
+        "c": "permission.",
+        "a": "no"
+      },
+      {
+        "c": "role.",
+        "a": "no"
+      },
+      {
+        "c": "resource.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"policy.\" is correct because it directly corresponds to the documented AWS behavior or feature described: policy.."
+  },
+  {
+    "id": 1160,
+    "q": "A company wants to implement their website in a virtual private cloud (VPC). The web tier will use an Auto Scaling group across multiple Availability Zones (AZs). The database will use Multi-AZ RDS MySQL and should not be publicly accessible. What is the minimum number of subnets that need to be configured in the VPC?",
+    "o": [
+      {
+        "c": "1.",
+        "a": "no"
+      },
+      {
+        "c": "2.",
+        "a": "no"
+      },
+      {
+        "c": "3.",
+        "a": "no"
+      },
+      {
+        "c": "4.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"4.\" is correct because it directly corresponds to the documented AWS behavior or feature described: 4.."
+  },
+  {
+    "id": 1161,
+    "q": "Is there a limit to the number of groups you can have?",
+    "o": [
+      {
+        "c": "Yes for all users except root.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      },
+      {
+        "c": "Yes unless special permission granted.",
+        "a": "no"
+      },
+      {
+        "c": "Yes for all users.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Yes for all users.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Yes for all users.."
+  },
+  {
+    "id": 1162,
+    "q": "True or False: Automated backups are enabled by default for a new DB Instance",
+    "o": [
+      {
+        "c": "True.",
+        "a": "yes"
+      },
+      {
+        "c": "False.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"True.\" is correct because it directly corresponds to the documented AWS behavior or feature described: True.."
+  },
+  {
+    "id": 1163,
+    "q": "What is one key difference between an Amazon EBS-backed and an instance-store backed instance?",
+    "o": [
+      {
+        "c": "Amazon EBS-backed instances can be stopped and restarted.",
+        "a": "yes"
+      },
+      {
+        "c": "Instance-store backed instances can be stopped and restarted.",
+        "a": "no"
+      },
+      {
+        "c": "Auto scaling requires using Amazon EBS-backed instances.",
+        "a": "no"
+      },
+      {
+        "c": "Virtual Private Cloud requires EBS backed instances.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Amazon EBS-backed instances can be stopped and restarted.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Amazon EBS-backed instances can be stopped and restarted.."
+  },
+  {
+    "id": 1164,
+    "q": "A major customer has asked you to set up his AWS infrastructure so that it will be easy to recover in the case of a disaster of some sort. Which of the following statements is true of Amazon EC2 security groups?",
+    "o": [
+      {
+        "c": "Create and maintain AMIs of key servers where fast recovery is required.",
+        "a": "no"
+      },
+      {
+        "c": "Regularly run your servers, test them, and apply any software updates and configuration changes.",
+        "a": "no"
+      },
+      {
+        "c": "Ensure that you have all supporting custom software packages available in AWS.",
+        "a": "no"
+      },
+      {
+        "c": "All items listed here are important when thinking about disaster recovery.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"All items listed here are important when thinking about disaster recovery.\" is correct because it directly corresponds to the documented AWS behavior or feature described: All items listed here are important when thinking about disaster recovery.."
+  },
+  {
+    "id": 1165,
+    "q": "Select a true statement about Amazon EC2 Security Groups (EC2-Classic).",
+    "o": [
+      {
+        "c": "After you launch an instance in EC2-Classic, you can't change its security groups.",
+        "a": "yes"
+      },
+      {
+        "c": "After you launch an instance in EC2-Classic, you can change its security groups only once.",
+        "a": "no"
+      },
+      {
+        "c": "After you launch an instance in EC2-Classic, you can only add rules to a security group.",
+        "a": "no"
+      },
+      {
+        "c": "After you launch an instance in EC2-Classic, you cannot add or remove rules from a security group.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"After you launch an instance in EC2-Classic, you can't change its security groups.\" is correct because it directly corresponds to the documented AWS behavior or feature described: After you launch an instance in EC2-Classic, you can't change its security groups.."
+  },
+  {
+    "id": 1166,
+    "q": "To view information about an Amazon EBS volume, open the Amazon EC2 console at <https://console.aws.amazon.com/ec2/>, click in the Navigation panel.",
+    "o": [
+      {
+        "c": "EBS.",
+        "a": "no"
+      },
+      {
+        "c": "Describe.",
+        "a": "no"
+      },
+      {
+        "c": "Details.",
+        "a": "no"
+      },
+      {
+        "c": "Volumes.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Volumes.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Volumes.."
+  },
+  {
+    "id": 1167,
+    "q": "True or False: Provisioned IOPS Costs - you are charged for the IOPS and storage whether or not you use them in a given month.",
+    "o": [
+      {
+        "c": "True.",
+        "a": "yes"
+      },
+      {
+        "c": "False.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"True.\" is correct because Provisioned IOPS storage is designed for I/O intensive transactional databases (OLTP) where consistent, high performance is required."
+  },
+  {
+    "id": 1168,
+    "q": "You have an EC2 Security Group with several running EC2 instances. You change the Security Group rules to allow inbound traffic on a new port and protocol, and launch several new instances in the same Security Group. The new rules apply:",
+    "o": [
+      {
+        "c": "Immediately to all instances in the security group.",
+        "a": "yes"
+      },
+      {
+        "c": "Immediately to the new instances only.",
+        "a": "no"
+      },
+      {
+        "c": "Immediately to the new instances, but old instances must be stopped and restarted before the new rules apply.",
+        "a": "no"
+      },
+      {
+        "c": "To all instances, but it may take several minutes for old instances to see the changes.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Immediately to all instances in the security group.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Immediately to all instances in the security group.."
+  },
+  {
+    "id": 1169,
+    "q": "An edge location refers to which Amazon Web Service?",
+    "o": [
+      {
+        "c": "An edge location is referred to the network configured within a Zone or Region.",
+        "a": "no"
+      },
+      {
+        "c": "An edge location is an AWS Region.",
+        "a": "no"
+      },
+      {
+        "c": "An edge location is the location of the data center used for Amazon CloudFront.",
+        "a": "yes"
+      },
+      {
+        "c": "An edge location is a Zone within an AWS Region.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"An edge location is the location of the data center used for Amazon CloudFront.\" is correct because Amazon CloudFront is a content delivery network that caches content at edge locations to reduce latency and offload origin servers."
+  },
+  {
+    "id": 1170,
+    "q": "If I want to run a database in an Amazon instance, which is the most recommended Amazon storage option?",
+    "o": [
+      {
+        "c": "Amazon Instance Storage.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon EBS.",
+        "a": "yes"
+      },
+      {
+        "c": "You can't run a database inside an Amazon instance.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon S3.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Amazon EBS.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Amazon EBS.."
+  },
+  {
+    "id": 1171,
+    "q": "A customer is leveraging Amazon Simple Storage Service in eu-west-1 to store static content for a web-based property. The customer is storing objects using the Standard Storage class. Where are the customers objects replicated?",
+    "o": [
+      {
+        "c": "A single facility in eu-west-1 and a single facility in eu-central-1.",
+        "a": "no"
+      },
+      {
+        "c": "A single facility in eu-west-1 and a single facility in us-east-1.",
+        "a": "no"
+      },
+      {
+        "c": "Multiple facilities in eu-west-1.",
+        "a": "yes"
+      },
+      {
+        "c": "A single facility in eu-west-1.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Multiple facilities in eu-west-1.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Multiple facilities in eu-west-1.."
+  },
+  {
+    "id": 1172,
+    "q": "You have set up an S3 bucket with a number of images in it and you have decided that you want anybody to be able to access these images, even anonymous users. To accomplish this you create a bucket policy. You will need to use an Amazon S3 bucket policy that specifies a [...] in the principal element, which means anyone can access the bucket.",
+    "o": [
+      {
+        "c": "hash tag (#).",
+        "a": "no"
+      },
+      {
+        "c": "anonymous user.",
+        "a": "no"
+      },
+      {
+        "c": "wildcard (*).",
+        "a": "yes"
+      },
+      {
+        "c": "S3 user.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"wildcard (*).\" is correct because it directly corresponds to the documented AWS behavior or feature described: wildcard (*).."
+  },
+  {
+    "id": 1173,
+    "q": "You try to connect via SSH to a newly created Amazon EC2 instance and get one of the following error messages: 'Network error: Connection timed out' or 'Error connecting to [instance], reason: -> Connection timed out: connect,' You have confirmed that the network and security group rules are configured correctly and the instance is passing status checks. What steps should you take to identify the source of the behavior? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Verify that the private key file corresponds to the Amazon EC2 key pair assigned at launch.",
+        "a": "yes"
+      },
+      {
+        "c": "Verify that your IAM user policy has permission to launch Amazon EC2 instances.",
+        "a": "no"
+      },
+      {
+        "c": "Verify that you are connecting with the appropriate user name for your AMI.",
+        "a": "yes"
+      },
+      {
+        "c": "Verify that the Amazon EC2 Instance was launched with the proper IAM role.",
+        "a": "no"
+      },
+      {
+        "c": "Verify that your federation trust to AWS has been established.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Verify that the private key file corresponds to the Amazon EC2 key pair assigned at launch.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Verify that the private key file corresponds to the Amazon EC2 key pair assigned at launch.. \"Verify that you are connecting with the appropriate user name for your AMI.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Verify that you are connecting with the appropriate user name for your AMI.."
+  },
+  {
+    "id": 1174,
+    "q": "An Auto-Scaling group spans 3 AZs and currently has 4 running EC2 instances. When Auto Scaling needs to terminate an EC2 instance by default, AutoScaling will: (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Allow at least five minutes for Windows/Linux shutdown scripts to complete, before terminating the instance.",
+        "a": "no"
+      },
+      {
+        "c": "Terminate the instance with the least active network connections. If multiple instances meet this criterion, one will be randomly selected.",
+        "a": "no"
+      },
+      {
+        "c": "Send an SNS notification, if configured to do so.",
+        "a": "yes"
+      },
+      {
+        "c": "Terminate an instance in the AZ which currently has 2 running EC2 instances.",
+        "a": "yes"
+      },
+      {
+        "c": "Randomly select one of the 3 AZs, and then terminate an instance in that A.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Send an SNS notification, if configured to do so.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Send an SNS notification, if configured to do so.. \"Terminate an instance in the AZ which currently has 2 running EC2 instances.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Terminate an instance in the AZ which currently has 2 running EC2 instances.."
+  },
+  {
+    "id": 1175,
+    "q": "A photo-sharing service stores pictures in Amazon Simple Storage Service (S3) and allows application sign-in using an OpenID Connect-compatible identity provider. Which AWS Security Token Service approach to temporary access should you use for the Amazon S3 operations?",
+    "o": [
+      {
+        "c": "SAML-based Identity Federation.",
+        "a": "no"
+      },
+      {
+        "c": "Cross-Account Access.",
+        "a": "no"
+      },
+      {
+        "c": "AWS Identity and Access Management roles.",
+        "a": "no"
+      },
+      {
+        "c": "Web Identity Federation.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Web Identity Federation.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Web Identity Federation.."
+  },
+  {
+    "id": 1176,
+    "q": "What is the maximum key length of a tag?",
+    "o": [
+      {
+        "c": "512 Unicode characters.",
+        "a": "no"
+      },
+      {
+        "c": "64 Unicode characters.",
+        "a": "no"
+      },
+      {
+        "c": "256 Unicode characters.",
+        "a": "no"
+      },
+      {
+        "c": "128 Unicode characters.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"128 Unicode characters.\" is correct because it directly corresponds to the documented AWS behavior or feature described: 128 Unicode characters.."
+  },
+  {
+    "id": 1177,
+    "q": "Does Amazon RDS allow direct host access via Telnet, Secure Shell (SSH), or Windows Remote Desktop Connection?",
+    "o": [
+      {
+        "c": "Yes.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"No.\" is correct because it directly corresponds to the documented AWS behavior or feature described: No.."
+  },
+  {
+    "id": 1178,
+    "q": "A user wants to achieve High Availability with PostgreSQL DB. Which of the below mentioned functionalities helps achieve HA?",
+    "o": [
+      {
+        "c": "Multi-AZ.",
+        "a": "yes"
+      },
+      {
+        "c": "Read Replica.",
+        "a": "no"
+      },
+      {
+        "c": "Multi region.",
+        "a": "no"
+      },
+      {
+        "c": "PostgreSQL does not support HA.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Multi-AZ.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Multi-AZ.."
+  },
+  {
+    "id": 1179,
+    "q": "Are penetration tests allowed as long as they are limited to the customer's instances?",
+    "o": [
+      {
+        "c": "Yes, they are allowed but only for selected regions.",
+        "a": "no"
+      },
+      {
+        "c": "No, they are never allowed.",
+        "a": "no"
+      },
+      {
+        "c": "Yes, they are allowed without any permission.",
+        "a": "no"
+      },
+      {
+        "c": "Yes, they are allowed but only with approval.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Yes, they are allowed but only with approval.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Yes, they are allowed but only with approval.."
+  },
+  {
+    "id": 1180,
+    "q": "You are building a system to distribute confidential documents to employees. Using CloudFront, what method could be used to serve content that is stored in S3, but not publically accessible from S3 directly?",
+    "o": [
+      {
+        "c": "Add the CloudFront account security group 'amazon-cf/amazon-cf-sg' to the appropriate S3 bucket policy.",
+        "a": "no"
+      },
+      {
+        "c": "Create a S3 bucket policy that lists the CloudFront distribution ID as the Principal and the target bucket as the Amazon Resource Name (ARN).",
+        "a": "no"
+      },
+      {
+        "c": "Create an Identity and Access Management (IAM) User for CloudFront and grant access to the objects in your S3 bucket to that IAM User.",
+        "a": "no"
+      },
+      {
+        "c": "Create an Origin Access Identity (OAI) for CloudFront and grant access to the objects in your S3 bucket to that OA.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Create an Origin Access Identity (OAI) for CloudFront and grant access to the objects in your S3 bucket to that OA.\" is correct because Amazon CloudFront is a content delivery network that caches content at edge locations to reduce latency and offload origin servers."
+  },
+  {
+    "id": 1181,
+    "q": "You require the ability to analyze a large amount of data, which is stored on Amazon S3 using Amazon Elastic MapReduce. You are using the cc2 8x large Instance type, whose CPUs are mostly idle during processing. Which of the below would be the most cost efficient way to reduce the runtime of the job?",
+    "o": [
+      {
+        "c": "Create more smaller flies on Amazon S3.",
+        "a": "no"
+      },
+      {
+        "c": "Add additional cc2 8x large instances by introducing a task group.",
+        "a": "no"
+      },
+      {
+        "c": "Use smaller instances that have higher aggregate 1/0 performance.",
+        "a": "yes"
+      },
+      {
+        "c": "Create fewer, larger fi les on Amazon S3.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Use smaller instances that have higher aggregate 1/0 performance.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Use smaller instances that have higher aggregate 1/0 performance.."
+  },
+  {
+    "id": 1182,
+    "q": "What is the name of licensing model in which I can use your existing Oracle Database licenses to run Oracle deployments on Amazon RDS?",
+    "o": [
+      {
+        "c": "Bring Your Own License.",
+        "a": "yes"
+      },
+      {
+        "c": "Role Bases License.",
+        "a": "no"
+      },
+      {
+        "c": "Enterprise License.",
+        "a": "no"
+      },
+      {
+        "c": "License Included.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Bring Your Own License.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Bring Your Own License.."
+  },
+  {
+    "id": 1183,
+    "q": "Which of the following statements are true about Amazon Route 53 resource records? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "An Alias record can map one DNS name to another Amazon Route 53 DNS name.",
+        "a": "yes"
+      },
+      {
+        "c": "A CNAME record can be created for your zone apex.",
+        "a": "no"
+      },
+      {
+        "c": "An Amazon Route 53 CNAME record can point to any DNS record hosted anywhere.",
+        "a": "yes"
+      },
+      {
+        "c": "TTL can be set for an Alias record in Amazon Route 53.",
+        "a": "no"
+      },
+      {
+        "c": "An Amazon Route 53 Alias record can point to any DNS record hosted anywhere.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"An Alias record can map one DNS name to another Amazon Route 53 DNS name.\" is correct because it directly corresponds to the documented AWS behavior or feature described: An Alias record can map one DNS name to another Amazon Route 53 DNS name.. \"An Amazon Route 53 CNAME record can point to any DNS record hosted anywhere.\" is correct because it directly corresponds to the documented AWS behavior or feature described: An Amazon Route 53 CNAME record can point to any DNS record hosted anywhere.."
+  },
+  {
+    "id": 1184,
+    "q": "Do you need to shutdown your EC2 instance when you create a snapshot of EBS volumes that serve as root devices?",
+    "o": [
+      {
+        "c": "No, you only need to shutdown an instance before deleting it.",
+        "a": "no"
+      },
+      {
+        "c": "Yes.",
+        "a": "yes"
+      },
+      {
+        "c": "No, the snapshot would turn off your instance automatically.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Yes.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Yes.."
+  },
+  {
+    "id": 1185,
+    "q": "Can I initiate a 'forced failover' for my Oracle Multi-AZ DB Instance deployment?",
+    "o": [
+      {
+        "c": "Yes.",
+        "a": "yes"
+      },
+      {
+        "c": "Only in certain regions.",
+        "a": "no"
+      },
+      {
+        "c": "Only in VPC.",
+        "a": "no"
+      },
+      {
+        "c": "No.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Yes.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Yes.."
+  },
+  {
+    "id": 1186,
+    "q": "Amazon RDS provides high availability and failover support for DB instances using [...].",
+    "o": [
+      {
+        "c": "customized deployments.",
+        "a": "no"
+      },
+      {
+        "c": "AppStream customizations.",
+        "a": "no"
+      },
+      {
+        "c": "log events.",
+        "a": "no"
+      },
+      {
+        "c": "Multi-AZ deployments.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Multi-AZ deployments.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Multi-AZ deployments.."
+  },
+  {
+    "id": 1187,
+    "q": "True or False: Amazon EC2 has no Amazon Resource Names (ARNs) because you can't specify a particular Amazon EC2 resource in an IAM policy.",
+    "o": [
+      {
+        "c": "True.",
+        "a": "yes"
+      },
+      {
+        "c": "False.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"True.\" is correct because it directly corresponds to the documented AWS behavior or feature described: True.."
+  },
+  {
+    "id": 1188,
+    "q": "A major client who has been spending a lot of money on his internet service provider asks you to set up an AWS Direct Connection to try and save him some money. You know he needs high-speed connectivity. Which connection port speeds are available on AWS Direct Connect?",
+    "o": [
+      {
+        "c": "500Mbps and 1Gbps.",
+        "a": "no"
+      },
+      {
+        "c": "1Gbps and 10Gbps.",
+        "a": "yes"
+      },
+      {
+        "c": "100Mbps and 1Gbps.",
+        "a": "no"
+      },
+      {
+        "c": "1Gbps.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"1Gbps and 10Gbps.\" is correct because it directly corresponds to the documented AWS behavior or feature described: 1Gbps and 10Gbps.."
+  },
+  {
+    "id": 1189,
+    "q": "What will be the state of the alarm at the end of 90 minutes, if the CPU utilization is constant at 80%?",
+    "o": [
+      {
+        "c": "ALERT.",
+        "a": "no"
+      },
+      {
+        "c": "ALARM.",
+        "a": "yes"
+      },
+      {
+        "c": "OK.",
+        "a": "no"
+      },
+      {
+        "c": "INSUFFICIENT_DATA.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"ALARM.\" is correct because it directly corresponds to the documented AWS behavior or feature described: ALARM.."
+  },
+  {
+    "id": 1190,
+    "q": "A 3-tier e-commerce web application is current deployed on-premises and will be migrated to AWS for greater scalability and elasticity The web server currently shares read-only data using a network distributed file system The app server tier uses a clustering mechanism for discovery and shared session state that depends on I P multicast The database tier uses shared-storage clustering to provide database fail over capability, and uses several read slaves for scaling Data on all servers and the distributed file system directory is backed up weekly to off-site tapes. Which AWS storage and database architecture meets the requirements of the application?",
+    "o": [
+      {
+        "c": "Web servers: store read-only data in S3, and copy from S3 to root volume at boot time. App servers: share state using a combination of DynamoDB and IP unicast. Database: use RDS with multi-AZdeployment and one or more read replicas. Backup: web servers, app servers, and database backed up weekly to Glacier using snapshots.",
+        "a": "no"
+      },
+      {
+        "c": "Web servers: store read-only data in an EC2 NFS server, mount to each web server at boot time. App servers: share state using a combination of DynamoDB and IP multicast. Database: use RDS with multi-AZ deployment and one or more Read Replicas. Backup: web and app servers backed up weekly via AMIs, database backed up via DB snapshots.",
+        "a": "no"
+      },
+      {
+        "c": "Web servers: store read-only data in S3, and copy from S3 to root volume at boot time. App servers: share state using a combination of DynamoDB and IP unicast. Database: use RDS with multi-AZ deployment and one or more Read Replicas. Backup: web and app servers backed up weekly via AMIs, database backed up via DB snapshots.",
+        "a": "yes"
+      },
+      {
+        "c": "Web servers: store read-only data in S3, and copy from S3 to root volume at boot time. App servers: share state using a combination of DynamoDB and IP unicast. Database: use RDS with multi-AZdeployment. Backup: web and app servers backed up weekly via AMIs, database backed up via DB snapshots.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Web servers: store read-only data in S3, and copy from S3 to root volume at boot time. App servers: share state using a combination of DynamoDB and IP unicast. Database: use RDS with multi-AZ deployment and one or more Read Replicas. Backup: web and app servers backed up weekly via AMIs, database backed up via DB snapshots.\" is correct because Amazon DynamoDB is a fully managed NoSQL database service that provides fast, predictable performance and seamless scalability appropriate for high-throughput workloads."
+  },
+  {
+    "id": 1191,
+    "q": "What are the four levels of AWS Premium Support?",
+    "o": [
+      {
+        "c": "Basic, Developer, Business, Enterprise.",
+        "a": "yes"
+      },
+      {
+        "c": "Basic, Startup, Business, Enterprise.",
+        "a": "no"
+      },
+      {
+        "c": "Free, Bronze, Silver, Gold.",
+        "a": "no"
+      },
+      {
+        "c": "All support is free.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Basic, Developer, Business, Enterprise.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Basic, Developer, Business, Enterprise.."
+  },
+  {
+    "id": 1192,
+    "q": "What is the default maximum number of Access Keys per user?",
+    "o": [
+      {
+        "c": "10.",
+        "a": "no"
+      },
+      {
+        "c": "15.",
+        "a": "no"
+      },
+      {
+        "c": "2.",
+        "a": "yes"
+      },
+      {
+        "c": "20.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"2.\" is correct because it directly corresponds to the documented AWS behavior or feature described: 2.."
+  },
+  {
+    "id": 1193,
+    "q": "In the most recent company meeting, your CEO focused on the fact that everyone in the organization needs to make sure that all of the infrastructure that is built is truly scalable. Which of the following statements is incorrect in reference to scalable architecture?",
+    "o": [
+      {
+        "c": "A scalable service is capable of handling heterogeneity.",
+        "a": "no"
+      },
+      {
+        "c": "A scalable service is resilient.",
+        "a": "no"
+      },
+      {
+        "c": "A scalable architecture won't be cost effective as it grows.",
+        "a": "yes"
+      },
+      {
+        "c": "Increasing resources results in a proportional increase in performance.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"A scalable architecture won't be cost effective as it grows.\" is correct because it directly corresponds to the documented AWS behavior or feature described: A scalable architecture won't be cost effective as it grows.."
+  },
+  {
+    "id": 1194,
+    "q": "What does Amazon S3 stand for?",
+    "o": [
+      {
+        "c": "Simple Storage Solution.",
+        "a": "no"
+      },
+      {
+        "c": "Storage Storage Storage (triple redundancy Storage).",
+        "a": "no"
+      },
+      {
+        "c": "Storage Server Solution.",
+        "a": "no"
+      },
+      {
+        "c": "Simple Storage Service.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Simple Storage Service.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Simple Storage Service.."
+  },
+  {
+    "id": 1195,
+    "q": "A company needs to monitor the read and write IOPs metrics for their AWS MySQL RDS instance and send real-time alerts to their operations team. Which AWS services can accomplish this? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Amazon Simple Email Service.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon CloudWatch.",
+        "a": "yes"
+      },
+      {
+        "c": "Amazon Simple Queue Service.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Route 53.",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Simple Notification Service.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"Amazon CloudWatch.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Amazon CloudWatch.. \"Amazon Simple Notification Service.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Amazon Simple Notification Service.."
+  },
+  {
+    "id": 1196,
+    "q": "A user has configured ELB with two EBS backed EC2 instances. The user is trying to understand the DNS access and IP support for ELB. Which of the below mentioned statements may not help the user understand the IP mechanism supported by ELB?",
+    "o": [
+      {
+        "c": "The client can connect over IPV4 or IPV6 using Dualstack.",
+        "a": "no"
+      },
+      {
+        "c": "Communication between the load balancer and back-end instances is always through IPV4.",
+        "a": "no"
+      },
+      {
+        "c": "ELB DNS supports both IPV4 and IPV6.",
+        "a": "no"
+      },
+      {
+        "c": "The ELB supports either IPV4 or IPV6 but not both.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"The ELB supports either IPV4 or IPV6 but not both.\" is correct because it directly corresponds to the documented AWS behavior or feature described: The ELB supports either IPV4 or IPV6 but not both.."
+  },
+  {
+    "id": 1197,
+    "q": "What is Oracle SQL Developer?",
+    "o": [
+      {
+        "c": "An AWS developer who is an expert in Amazon RDS using both the Oracle and SQL Server DB engines.",
+        "a": "no"
+      },
+      {
+        "c": "A graphical Java tool distributed without cost by Oracle.",
+        "a": "yes"
+      },
+      {
+        "c": "It is a variant of the SQL Server Management Studio designed by Microsoft to support Oracle DBMS functionalities.",
+        "a": "no"
+      },
+      {
+        "c": "A different DBMS released by Microsoft free of cost.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"A graphical Java tool distributed without cost by Oracle.\" is correct because it directly corresponds to the documented AWS behavior or feature described: A graphical Java tool distributed without cost by Oracle.."
+  },
+  {
+    "id": 1198,
+    "q": "You can use [...] to help secure the instances in your VPC.",
+    "o": [
+      {
+        "c": "security groups and multi-factor authentication.",
+        "a": "no"
+      },
+      {
+        "c": "security groups and 2-Factor authentication.",
+        "a": "no"
+      },
+      {
+        "c": "security groups and biometric authentication.",
+        "a": "no"
+      },
+      {
+        "c": "security groups and network ACLs.",
+        "a": "yes"
+      }
+    ],
+    "nt": "\"security groups and network ACLs.\" is correct because it directly corresponds to the documented AWS behavior or feature described: security groups and network ACLs.."
+  },
+  {
+    "id": 1199,
+    "q": "What is the type of monitoring data (for Amazon EBS volumes) which is available automatically in 5- minute periods at no charge called?",
+    "o": [
+      {
+        "c": "Basic.",
+        "a": "yes"
+      },
+      {
+        "c": "Primary.",
+        "a": "no"
+      },
+      {
+        "c": "Detailed.",
+        "a": "no"
+      },
+      {
+        "c": "Local.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"Basic.\" is correct because it directly corresponds to the documented AWS behavior or feature described: Basic.."
+  },
+  {
+    "id": 1200,
+    "q": "A user comes to you and wants access to Amazon CloudWatch but only wants to monitor a specific LoadBalancer. Is it possible to give him access to a specific set of instances or a specific LoadBalancer?",
+    "o": [
+      {
+        "c": "No because you can't use IAM to control access to CloudWatch data for specific resources.",
+        "a": "yes"
+      },
+      {
+        "c": "Yes. You can use IAM to control access to CloudWatch data for specific resources.",
+        "a": "no"
+      },
+      {
+        "c": "No because you need to be Sysadmin to access CloudWatch data.",
+        "a": "no"
+      },
+      {
+        "c": "Yes. Any user can see all CloudWatch data and needs no access rights.",
+        "a": "no"
+      }
+    ],
+    "nt": "\"No because you can't use IAM to control access to CloudWatch data for specific resources.\" is correct because it directly corresponds to the documented AWS behavior or feature described: No because you can't use IAM to control access to CloudWatch data for specific resources.."
+  }
+]

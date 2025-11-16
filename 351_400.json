@@ -1,0 +1,1152 @@
+[
+  {
+    "id": 1351,
+    "q": "Before I delete an EBS volume, what can I do if I want to recreate the volume later?",
+    "o": [
+      {
+        "c": "Create a copy of the EBS volume (not a snapshot)",
+        "a": "no"
+      },
+      {
+        "c": "Store a snapshot of the volume",
+        "a": "yes"
+      },
+      {
+        "c": "Download the content to an EC2 instance",
+        "a": "no"
+      },
+      {
+        "c": "Back up the data in to a physical disk",
+        "a": "no"
+      }
+    ],
+    "nt": "EBS snapshots are point-in-time copies of EBS volumes stored in Amazon S3. They provide a durable and cost-effective way to preserve data before deleting an EBS volume. When you need to recreate the volume later, you can create a new EBS volume from the snapshot, which will contain all the data as it existed at the time the snapshot was taken. Snapshots are incremental, meaning only the blocks that have changed since your last snapshot are saved, making them storage-efficient."
+  },
+  {
+    "id": 1352,
+    "q": "An accountant asks you to design a small VPC network for him and, due to the nature of his business, just needs something where the workload on the network will be low, and dynamic data will be accessed infrequently. Being an accountant, low cost is also a major factor. Which EBS volume type would best suit his requirements?",
+    "o": [
+      {
+        "c": "Magnetic",
+        "a": "yes"
+      },
+      {
+        "c": "Any, as they all perform the same and cost the same",
+        "a": "no"
+      },
+      {
+        "c": "General Purpose (SSD)",
+        "a": "no"
+      },
+      {
+        "c": "Magnetic or Provisioned IOPS (SSD)",
+        "a": "no"
+      }
+    ],
+    "nt": "Magnetic (standard) EBS volumes are the lowest-cost storage option and are ideal for workloads with low I/O requirements and infrequent data access. They provide approximately 100 IOPS on average with burst capability, which is sufficient for the described accounting workload. Magnetic volumes are cost-effective for data that is accessed infrequently, making them the best choice when budget is a primary concern and performance requirements are minimal."
+  },
+  {
+    "id": 1353,
+    "q": "Your company currently has a 2-tier web application running in an on-premises data center. You have experienced several infrastructure failures in the past two months resulting in significant financial losses. Your CIO is strongly agreeing to move the application to AWS. While working on achieving buy-in from the other company executives, he asks you to develop a disaster recovery plan to help improve Business continuity in the short term. He specifies a target Recovery Time Objective (RTO) of 4 hours and a Recovery Point Objective (RPO) of 1 hour or less. He also asks you to implement the solution within 2 weeks. Your database is 200GB in size and you have a 20Mbps Internet connection. How would you do this while minimizing costs?",
+    "o": [
+      {
+        "c": "Create an EBS backed private AMI which includes a fresh install of your application. Develop a CloudFormation template which includes your AMI and the required EC2, AutoScaling, and ELB resources to support deploying the application across Multiple Availability Zones. Asynchronously replicate transactions from your on-premises database to a database instance in AWS across a secure VPN connection",
+        "a": "yes"
+      },
+      {
+        "c": "Deploy your application on EC2 instances within an Auto Scaling group across multiple availability zones. Asynchronously replicate transactions from your on-premises database to a database instance in AWS across a secure VPN connection",
+        "a": "no"
+      },
+      {
+        "c": "Create an EBS backed private AMI which includes a fresh install of your application. Setup a script in your data center to backup the local database every 1 hour and to encrypt and copy the resulting file to an S3 bucket using multi-part upload",
+        "a": "no"
+      },
+      {
+        "c": "Install your application on a compute-optimized EC2 instance capable of supporting the application's average load. Synchronously replicate transactions from your on-premises database to a database instance in AWS across a secure Direct Connect connection",
+        "a": "no"
+      }
+    ],
+    "nt": "This solution meets the RTO of 4 hours by using CloudFormation for rapid infrastructure deployment and the RPO of 1 hour through asynchronous database replication. Creating a private AMI ensures the application is pre-configured and ready for deployment. Using Auto Scaling and ELB across multiple Availability Zones provides high availability. Asynchronous replication over VPN is cost-effective compared to Direct Connect and can handle the 200GB database size with a 20Mbps connection while meeting the 1-hour RPO requirement."
+  },
+  {
+    "id": 1354,
+    "q": "A customer implemented AWS Storage Gateway with a gateway-cached volume at their main office. An event takes the link between the main and branch office offline. Which methods will enable the branch office to access their data? (Choose 3 answers)",
+    "o": [
+      {
+        "c": "Use a HTTPS GET to the Amazon S3 bucket where the files are located",
+        "a": "no"
+      },
+      {
+        "c": "Restore by implementing a lifecycle policy on the Amazon S3 bucket",
+        "a": "no"
+      },
+      {
+        "c": "Make an Amazon Glacier Restore API call to load the files into another Amazon S3 bucket within four to six hours",
+        "a": "no"
+      },
+      {
+        "c": "Launch a new AWS Storage Gateway instance AMI in Amazon EC2, and restore from a gateway snapshot",
+        "a": "yes"
+      },
+      {
+        "c": "Create an Amazon EBS volume from a gateway snapshot, and mount it to an Amazon EC2 instance",
+        "a": "yes"
+      },
+      {
+        "c": "Launch an AWS Storage Gateway virtual iSCSI device at the branch office, and restore from a gateway snapshot",
+        "a": "yes"
+      }
+    ],
+    "nt": "Launching a new Storage Gateway instance in EC2 allows restoration from snapshots stored in S3, providing immediate access to data. Creating an EBS volume from a gateway snapshot and mounting it to an EC2 instance enables direct access to the data through EC2. Deploying a new Storage Gateway virtual appliance at the branch office with restoration from snapshots re-establishes the iSCSI connection locally. All these methods leverage the snapshots that Storage Gateway automatically creates and stores in S3, ensuring data durability and accessibility even when the primary connection is offline."
+  },
+  {
+    "id": 1355,
+    "q": "Your customer is willing to consolidate their log streams (access logs, application logs, security logs, etc.) in one single system. Once consolidated, the customer wants to analyze these logs in real-time based on heuristics. From time to time, the customer needs to validate heuristics, which requires going back to data samples extracted from the last 12 hours. What is the best approach to meet your customer's requirements?",
+    "o": [
+      {
+        "c": "Send all the log events to Amazon SQS. Setup an Auto Scaling group of EC2 servers to consume the logs and apply the heuristics",
+        "a": "no"
+      },
+      {
+        "c": "Send all the log events to Amazon Kinesis. Develop a client process to apply heuristics on the logs",
+        "a": "yes"
+      },
+      {
+        "c": "Configure Amazon Cloud Trail to receive custom logs. Use EMR to apply heuristics to the logs",
+        "a": "no"
+      },
+      {
+        "c": "Setup an Auto Scaling group of EC2 syslogd servers. Store the logs on S3. Use EMR to apply heuristics on the logs",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon Kinesis is designed for real-time processing of streaming data, making it ideal for analyzing log streams with heuristics as they arrive. It can handle multiple log sources consolidated into a single stream. Kinesis retains data for up to 7 days by default (extendable to 365 days), allowing the customer to go back and validate heuristics against data from the last 12 hours without additional storage configuration. The client process can consume data from Kinesis in real-time for immediate analysis while also having access to recent historical data for validation purposes."
+  },
+  {
+    "id": 1356,
+    "q": "Can the string value of 'Key' be prefixed with laws?",
+    "o": [
+      {
+        "c": "No",
+        "a": "yes"
+      },
+      {
+        "c": "Only for EC2 not S3",
+        "a": "no"
+      },
+      {
+        "c": "Yes",
+        "a": "no"
+      },
+      {
+        "c": "Only for S3 not EC2",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS reserves the 'aws:' prefix for internal use and does not allow users to create tags, keys, or other resources with this prefix. This naming convention restriction prevents conflicts with AWS-owned resources and ensures that AWS services can safely use the 'aws:' namespace for their internal operations without interfering with customer resources. Attempting to use 'aws:' as a prefix for keys will result in validation errors or rejection of the request."
+  },
+  {
+    "id": 1357,
+    "q": "You are configuring your company's application to use Auto Scaling and need to move user state information. Which of the following AWS services provides a shared data store with durability and low latency?",
+    "o": [
+      {
+        "c": "AWS ElastiCache Memcached",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Simple Storage Service",
+        "a": "no"
+      },
+      {
+        "c": "Amazon EC2 instance storage",
+        "a": "no"
+      },
+      {
+        "c": "Amazon DynamoDB",
+        "a": "yes"
+      }
+    ],
+    "nt": "Amazon DynamoDB provides a fully managed, shared NoSQL database service with single-digit millisecond latency at any scale. It offers built-in durability through automatic replication across multiple Availability Zones, making it ideal for storing user state information in Auto Scaling environments. Unlike instance storage (which is ephemeral) or ElastiCache Memcached (which is in-memory and not persistent), DynamoDB ensures data persistence while providing the low-latency access needed for user session data. S3 has higher latency and is not designed for frequent small read/write operations like user state management."
+  },
+  {
+    "id": 1358,
+    "q": "Your company previously configured a heavily used, dynamically routed VPN connection between your on-premises data center and AWS. You recently provisioned a DirectConnect connection and would like to start using the new connection. After configuring DirectConnect settings in the AWS Console, which of the following options will provide the most seamless transition for your users?",
+    "o": [
+      {
+        "c": "Delete your existing VPN connection to avoid routing loops. Configure your DirectConnect router with the appropriate settings and verify network traffic is leveraging DirectConnect",
+        "a": "no"
+      },
+      {
+        "c": "Configure your DirectConnect router with a higher BGP priority than your VPN router. Verify network traffic is leveraging DirectConnect and then delete your existing VPN connection",
+        "a": "no"
+      },
+      {
+        "c": "Update your VPC route tables to point to the DirectConnect connection. Configure your DirectConnect router with the appropriate settings. Verify network traffic is leveraging DirectConnect and then delete the VPN connection",
+        "a": "no"
+      },
+      {
+        "c": "Configure your DirectConnect router. Update your VPC route tables to point to the DirectConnect connection. Configure your VPN connection with a higher BGP priority and verify network traffic is leveraging the DirectConnect connection",
+        "a": "yes"
+      }
+    ],
+    "nt": "This approach ensures a seamless transition by maintaining both connections during the migration period. By configuring the VPN connection with a higher BGP priority initially, traffic continues to flow through the existing VPN while the DirectConnect connection is being tested and validated. This prevents service disruption during the cutover. Once DirectConnect is verified to be working correctly and handling traffic properly, the BGP priorities can be adjusted to prefer DirectConnect, and eventually the VPN connection can be removed. This method provides a rollback option if any issues arise with the new DirectConnect connection."
+  },
+  {
+    "id": 1359,
+    "q": "After setting up several database instances in Amazon Relational Database Service (Amazon RDS) you decide that you need to track the performance and health of your databases. How can you do this?",
+    "o": [
+      {
+        "c": "Subscribe to Amazon RDS events to be notified when changes occur with a DB instance, DB snapshot, DB parameter group, or DB security group",
+        "a": "no"
+      },
+      {
+        "c": "Use the free Amazon CloudWatch service to monitor the performance and health of a DB instance",
+        "a": "no"
+      },
+      {
+        "c": "All of the items listed will track the performance and health of a database",
+        "a": "yes"
+      },
+      {
+        "c": "View, download, or watch database log files using the Amazon RDS console or Amazon RDS APIs. You can also query some database log files that are loaded into database tables",
+        "a": "no"
+      }
+    ],
+    "nt": "RDS provides multiple complementary monitoring methods: Amazon RDS Events provides notifications for significant database events and changes; Amazon CloudWatch offers detailed performance metrics like CPU utilization, database connections, and storage metrics; and database log files give access to database engine-specific logs for troubleshooting and auditing. Using all these methods together provides comprehensive monitoring coverage - CloudWatch for real-time performance metrics, RDS Events for administrative notifications, and database logs for detailed diagnostic information."
+  },
+  {
+    "id": 1360,
+    "q": "You deployed your company website using Elastic Beanstalk and you enabled log file rotation to S3. An Elastic MapReduce job is periodically analyzing the logs on S3 to build a usage dashboard that you share with your CIO. You recently improved overall performance of the website using CloudFront for dynamic content delivery and your website as the origin. After this architectural change, the usage dashboard shows that the traffic on your website dropped by an order of magnitude. How do you fix your usage dashboard?",
+    "o": [
+      {
+        "c": "Enable CloudFront to deliver access logs to S3 and use them as input of the Elastic MapReduce job",
+        "a": "yes"
+      },
+      {
+        "c": "Turn on Cloud Trail and use trail log files on S3 as input of the Elastic MapReduce job",
+        "a": "no"
+      },
+      {
+        "c": "Change your log collection process to use Cloud Watch ELB metrics as input of the Elastic Map Reduce job",
+        "a": "no"
+      },
+      {
+        "c": "Use Elastic Beanstalk 'Rebuild Environment' option to update log delivery to the Elastic Map Reduce job",
+        "a": "no"
+      }
+    ],
+    "nt": "When CloudFront is deployed in front of a website, most user requests are served directly from CloudFront edge locations rather than reaching the origin servers. The Elastic Beanstalk logs only capture requests that reach the origin servers (cache misses, dynamic content, etc.), while CloudFront serves the majority of requests from its cache. Enabling CloudFront access logs provides complete visibility into all user requests, including those served from edge locations. These logs contain detailed information about viewer requests and can be delivered to S3 for analysis by the EMR job, restoring accurate traffic reporting."
+  },
+  {
+    "id": 1361,
+    "q": "A customer has a 10 GB AWS Direct Connect connection to an AWS region where they have a web application hosted on Amazon Elastic Computer Cloud (EC2). The application has dependencies on an on-premises mainframe database that uses a BASE (Basic Available. Sort stale Eventual consistency) rather than an ACID (Atomicity. Consistency isolation. Durability) consistency model. The application is exhibiting undesirable behavior because the database is not able to handle the volume of writes. How can you reduce the load on your on-premises database resources in the most cost-effective way?",
+    "o": [
+      {
+        "c": "Use an Amazon Elastic MapReduce (EMR) S3DistCp as a synchronization mechanism between the on-premises database and a Hadoop cluster on AWS",
+        "a": "no"
+      },
+      {
+        "c": "Modify the application to write to an Amazon SQS queue and develop a worker process to flush the queue to the on-premises database",
+        "a": "yes"
+      },
+      {
+        "c": "Modify the application to use DynamoDB to feed an EMR cluster which uses a map function to write to the on-premises database",
+        "a": "no"
+      },
+      {
+        "c": "Provision an RDS read-replica database on AWS to handle the writes and synchronize the two databases using Data Pipeline",
+        "a": "no"
+      }
+    ],
+    "nt": "Using Amazon SQS as a buffer between the application and the on-premises database decouples the write operations, allowing the application to continue processing without being blocked by database performance limitations. The worker process can then consume messages from the queue at a rate the mainframe database can handle. This approach is cost-effective because SQS is a fully managed service with pay-per-use pricing, and it leverages the existing Direct Connect connection. The BASE consistency model of the mainframe database makes it suitable for this eventual consistency approach where writes can be processed asynchronously."
+  },
+  {
+    "id": 1362,
+    "q": "You are very concerned about security on your network because you have multiple programmers testing APIs and SDKs and you have no idea what is happening. You think CloudTrail may help but are not sure what it does. Which of the following statements best describes the AWS service CloudTrail?",
+    "o": [
+      {
+        "c": "With AWS CloudTrail you can get a history of AWS API calls and related events for your account",
+        "a": "yes"
+      },
+      {
+        "c": "With AWS CloudTrail you can get a history of IAM users for your account",
+        "a": "no"
+      },
+      {
+        "c": "With AWS CloudTrail you can get a history of S3 logfiles for your account",
+        "a": "no"
+      },
+      {
+        "c": "With AWS CloudTrail you can get a history of CloudFormation JSON scripts used for your account",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS CloudTrail is a service that enables governance, compliance, operational auditing, and risk auditing of your AWS account. It logs all API calls and related events made in your AWS account, including calls made through the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services. CloudTrail provides a complete history of who did what, when, and from where, which is essential for security monitoring, troubleshooting, and compliance requirements. The logs include details about the API caller, time of call, source IP address, request parameters, and response elements returned by the AWS service."
+  },
+  {
+    "id": 1363,
+    "q": "Every user you create in the IAM system starts with [...].",
+    "o": [
+      {
+        "c": "partial permissions",
+        "a": "no"
+      },
+      {
+        "c": "full permissions",
+        "a": "no"
+      },
+      {
+        "c": "no permissions",
+        "a": "yes"
+      }
+    ],
+    "nt": "IAM follows the principle of least privilege by default. When a new IAM user is created, they have no permissions to perform any actions on any AWS resources until explicit permissions are granted through policies attached directly to the user, to groups the user belongs to, or through roles the user can assume. This security-by-default approach ensures that users only receive the minimum permissions necessary to perform their job functions, reducing the risk of accidental or malicious actions."
+  },
+  {
+    "id": 1364,
+    "q": "Amazon S3 allows you to set per-file permissions to grant read and/or write access. However you have decided that you want an entire bucket with 100 files already in it to be accessible to the public. You don't want to go through 100 files individually and set permissions. What would be the best way to do this?",
+    "o": [
+      {
+        "c": "Move the bucket to a new region",
+        "a": "no"
+      },
+      {
+        "c": "Add a bucket policy to the bucket",
+        "a": "yes"
+      },
+      {
+        "c": "Move the files to a new bucket",
+        "a": "no"
+      },
+      {
+        "c": "Use Amazon EBS instead of S3",
+        "a": "no"
+      }
+    ],
+    "nt": "S3 bucket policies are JSON-based access policies that apply to all objects within a bucket. By creating a bucket policy that grants public read access, you can make all existing and future objects in the bucket publicly accessible without modifying individual object permissions. This is much more efficient than setting permissions on each object individually, especially with 100 files. Bucket policies also provide centralized management of access controls and can include conditions based on IP address, referrer, time of day, or other factors."
+  },
+  {
+    "id": 1365,
+    "q": "You are designing an SSUTLS solution that requires HTTPS clients to be authenticated by the Web server using client certificate authentication. The solution must be resilient. Which of the following options would you consider for configuring the web server infrastructure? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Configure ELB with TCP listeners on TCP/443. And place the Web servers behind it",
+        "a": "yes"
+      },
+      {
+        "c": "Configure your Web servers with EIPS Place the Web servers in a Route 53 Record Set and configure health checks against all Web servers",
+        "a": "yes"
+      },
+      {
+        "c": "Configure ELB with HTTPS listeners, and place the Web servers behind it",
+        "a": "no"
+      },
+      {
+        "c": "Configure your web servers as the origins for a CloudFront distribution. Use custom SSL certificates on your CloudFront distribution",
+        "a": "no"
+      }
+    ],
+    "nt": "Using ELB with TCP listeners on port 443 allows SSL/TLS termination to occur on the web servers themselves, which is necessary for client certificate authentication since ELB doesn't support client certificate validation at the load balancer level. This preserves the client certificate information that the web servers need for authentication. Alternatively, using EIPs with Route 53 health checks and DNS-based load balancing allows direct client-to-server SSL connections where the web servers can perform client certificate authentication natively. Both approaches maintain the end-to-end SSL connection required for client certificate validation while providing resilience through load balancing and health checking."
+  },
+  {
+    "id": 1366,
+    "q": "Which of the following are use cases for Amazon DynamoDB? (Choose 3 answers)",
+    "o": [
+      {
+        "c": "Storing BLOB data",
+        "a": "no"
+      },
+      {
+        "c": "Managing web sessions",
+        "a": "yes"
+      },
+      {
+        "c": "Storing JSON documents",
+        "a": "yes"
+      },
+      {
+        "c": "Storing metadata for Amazon S3 objects",
+        "a": "yes"
+      },
+      {
+        "c": "Running relational joins and complex updates",
+        "a": "no"
+      },
+      {
+        "c": "Storing large amounts of infrequently accessed data",
+        "a": "no"
+      }
+    ],
+    "nt": "DynamoDB is ideal for managing web sessions because it provides fast, predictable performance with single-digit millisecond latency and automatic scaling to handle session storage needs. It natively supports JSON document storage through its Document SDK, making it perfect for storing structured and semi-structured data. For S3 object metadata, DynamoDB offers a highly scalable and low-latency solution to store and query metadata while the actual objects reside in S3. These use cases leverage DynamoDB's key-value and document data model, consistent performance at scale, and fully managed nature."
+  },
+  {
+    "id": 1367,
+    "q": "You have been asked to set up a database in AWS that will require frequent and granular updates. You know that you will require a reasonable amount of storage space but are not sure of the best option. What is the recommended storage option when you run a database on an instance with the above criteria?",
+    "o": [
+      {
+        "c": "Amazon S3",
+        "a": "no"
+      },
+      {
+        "c": "Amazon EBS",
+        "a": "yes"
+      },
+      {
+        "c": "AWS Storage Gateway",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Glacier",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon EBS is designed for database workloads that require frequent, granular updates because it provides block-level storage that can be mounted as volumes to EC2 instances. EBS volumes support random read/write operations with consistent I/O performance, which is essential for database operations. They offer durability through automatic replication within an Availability Zone and can be backed up via snapshots. EBS also provides options like Provisioned IOPS for predictable performance and General Purpose SSD for balanced price-performance, making it suitable for various database requirements."
+  },
+  {
+    "id": 1368,
+    "q": "An application hosted at the EC2 instance receives an HTTP request from ELB. The same request has an X-Forwarded-For header, which has three IP addresses. Which system's IP will be a part of this header?",
+    "o": [
+      {
+        "c": "Previous Request IP address",
+        "a": "no"
+      },
+      {
+        "c": "Client IP address",
+        "a": "no"
+      },
+      {
+        "c": "All of the answers listed here",
+        "a": "yes"
+      },
+      {
+        "c": "Load Balancer IP address",
+        "a": "no"
+      }
+    ],
+    "nt": "The X-Forwarded-For header contains a list of IP addresses from each proxy or load balancer that the request passed through. When ELB receives a request, it appends the client's original IP address to the X-Forwarded-For header. If there are multiple proxies or load balancers in the chain, each will append its client's IP address, resulting in multiple IP addresses in the header. The first IP in the list is the original client, followed by each intermediate proxy/LB that handled the request. ELB's own IP is not included in this header since it's the current recipient of the request."
+  },
+  {
+    "id": 1369,
+    "q": "An organization has developed a mobile application which allows end users to capture a photo on their mobile device, and store it inside an application. The application internally uploads the data to AWS S3. The organization wants each user to be able to directly upload data to S3 using their Google ID. How will the mobile app allow this?",
+    "o": [
+      {
+        "c": "Use the AWS Web identity federation for mobile applications, and use it to generate temporary security credentials for each user",
+        "a": "yes"
+      },
+      {
+        "c": "It is not possible to connect to AWS S3 with a Google ID",
+        "a": "no"
+      },
+      {
+        "c": "Create an IAM user every time a user registers with their Google ID and use IAM to upload files to S3",
+        "a": "no"
+      },
+      {
+        "c": "Create a bucket policy with a condition which allows everyone to upload if the login ID has a Google part to it",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS Web Identity Federation allows users to authenticate with identity providers like Google, Facebook, or Amazon, and then obtain temporary AWS security credentials to access AWS resources directly. The mobile app can use the Google authentication token to assume an IAM role through AWS Security Token Service (STS), which returns temporary credentials with permissions to upload to S3. This approach is secure because it doesn't require embedding long-term AWS credentials in the mobile app, and it provides fine-grained access control through IAM roles and policies based on the user's identity."
+  },
+  {
+    "id": 1370,
+    "q": "You must increase storage size in increments of at least [...].",
+    "o": [
+      {
+        "c": "40",
+        "a": "no"
+      },
+      {
+        "c": "20",
+        "a": "no"
+      },
+      {
+        "c": "50",
+        "a": "no"
+      },
+      {
+        "c": "10",
+        "a": "yes"
+      }
+    ],
+    "nt": "When scaling storage for Amazon RDS instances, you must increase the allocated storage in increments of at least 10 GB. This requirement ensures that storage scaling operations are performed efficiently and maintain database performance and stability. The 10 GB minimum increment applies to most RDS database engines and helps AWS optimize the underlying storage infrastructure while providing predictable scaling behavior. There's also a maximum storage limit depending on the database engine and instance type, but the minimum scaling increment remains 10 GB across most scenarios."
+  },
+  {
+    "id": 1371,
+    "q": "You need to set up a security certificate for a client's e-commerce website as it will use the HTTPS protocol. Which of the below AWS services do you need to access to manage your SSL server certificate?",
+    "o": [
+      {
+        "c": "AWS Directory Service",
+        "a": "no"
+      },
+      {
+        "c": "AWS Identity & Access Management",
+        "a": "yes"
+      },
+      {
+        "c": "AWS CloudFormation",
+        "a": "no"
+      },
+      {
+        "c": "Amazon Route 53",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS Identity and Access Management (IAM) provides a certificate storage feature that allows you to upload and manage SSL/TLS server certificates for use with AWS services like Elastic Load Balancer (ELB) and CloudFront. You can upload your own certificates purchased from a certificate authority to IAM, and then reference these certificates when configuring HTTPS listeners on load balancers or CloudFront distributions. IAM provides secure storage and management of these certificates, including the ability to list, update, and delete certificates as needed."
+  },
+  {
+    "id": 1372,
+    "q": "After setting up a Virtual Private Cloud (VPC) network, a more experienced cloud engineer suggests that to achieve low network latency and high network throughput you should look into setting up a placement group. You know nothing about this, but begin to do some research about it and are especially curious about its limitations. Which of the below statements is wrong in describing the limitations of a placement group?",
+    "o": [
+      {
+        "c": "Although launching multiple instance types into a placement group is possible, this reduces the likelihood that the required capacity will be available for your launch to succeed",
+        "a": "no"
+      },
+      {
+        "c": "A placement group can span multiple Availability Zones",
+        "a": "yes"
+      },
+      {
+        "c": "You can't move an existing instance into a placement group",
+        "a": "no"
+      },
+      {
+        "c": "A placement group can span peered VPCs",
+        "a": "no"
+      }
+    ],
+    "nt": "Placement groups are logical groupings of instances within a single Availability Zone that enable applications to participate in low-latency, high-throughput networking. They cannot span multiple Availability Zones because the low-latency network connectivity they provide depends on physical proximity within the same data center. Each placement group is confined to one AZ to ensure the network performance benefits. Instances must be launched directly into a placement group; existing instances cannot be moved into one later. While you can use multiple instance types, this may reduce capacity availability due to the specific hardware requirements for placement groups."
+  },
+  {
+    "id": 1373,
+    "q": "True or False: When you perform a restore operation to a point in time or from a DB Snapshot, a new DB Instance is created with a new endpoint.",
+    "o": [
+      {
+        "c": "True",
+        "a": "yes"
+      },
+      {
+        "c": "False",
+        "a": "no"
+      }
+    ],
+    "nt": "When you restore an RDS instance from a DB snapshot or to a point-in-time, AWS creates a completely new DB instance with its own unique endpoint (DNS name). This is because the restore operation doesn't modify the original instance but rather creates a new instance from the backup data. The new instance will have different connection details, and you'll need to update your applications to use the new endpoint. This approach ensures that your original production instance remains unchanged and available during the restore process."
+  },
+  {
+    "id": 1374,
+    "q": "What is the Reduced Redundancy option in Amazon S3?",
+    "o": [
+      {
+        "c": "Less redundancy for a lower cost",
+        "a": "yes"
+      },
+      {
+        "c": "It doesn't exist in Amazon S3, but in Amazon EBS",
+        "a": "no"
+      },
+      {
+        "c": "It allows you to destroy any copy of your files outside a specific jurisdiction",
+        "a": "no"
+      },
+      {
+        "c": "It doesn't exist at all",
+        "a": "no"
+      }
+    ],
+    "nt": "Reduced Redundancy Storage (RRS) is an Amazon S3 storage option that provides lower durability than standard S3 storage (99.99% vs 99.999999999%) at a reduced cost. RRS objects are replicated fewer times within the AWS infrastructure, making them suitable for non-critical, reproducible data such as thumbnails, transcoded media, or other data that can be easily regenerated. While RRS still provides high durability, it's designed for use cases where the cost savings outweigh the slightly reduced durability guarantees."
+  },
+  {
+    "id": 1375,
+    "q": "You are setting up your first Amazon Virtual Private Cloud (Amazon VPC) so you decide to use the VPC wizard in the AWS console to help make it easier for you. Which of the following statements is correct regarding instances that you launch into a default subnet via the VPC wizard?",
+    "o": [
+      {
+        "c": "Instances that you launch into a default subnet receive a public IP address and 10 private IP addresses",
+        "a": "no"
+      },
+      {
+        "c": "Instances that you launch into a default subnet receive both a public IP address and a private IP address",
+        "a": "yes"
+      },
+      {
+        "c": "Instances that you launch into a default subnet don't receive any ip addresses and you need to define them manually",
+        "a": "no"
+      },
+      {
+        "c": "Instances that you launch into a default subnet receive a public IP address and 5 private IP addresses",
+        "a": "no"
+      }
+    ],
+    "nt": "When you use the VPC wizard to create a VPC with a public subnet, instances launched into that default subnet automatically receive both a private IP address from the subnet's CIDR range and a public IP address from Amazon's pool of public IP addresses. The public IP address enables direct internet connectivity, while the private IP address is used for communication within the VPC. This automatic assignment simplifies the setup process for instances that need internet access without requiring manual configuration of Elastic IP addresses or NAT devices."
+  },
+  {
+    "id": 1376,
+    "q": "For which of the following use cases are Simple Workflow Service (SWF) and Amazon EC2 an appropriate solution? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "Using as an endpoint to collect thousands of data points per hour from a distributed fleet of sensors",
+        "a": "no"
+      },
+      {
+        "c": "Managing a multi-step and multi-decision checkout process of an e-commerce website",
+        "a": "yes"
+      },
+      {
+        "c": "Orchestrating the execution of distributed and auditable business processes",
+        "a": "yes"
+      },
+      {
+        "c": "Using as an SNS (Simple Notification Service) endpoint to trigger execution of video transcoding jobs",
+        "a": "no"
+      },
+      {
+        "c": "Using as a distributed session store for your web application",
+        "a": "no"
+      }
+    ],
+    "nt": "SWF is designed for coordinating multi-step workflows that involve both automated tasks and human interactions. Managing an e-commerce checkout process is ideal for SWF because it involves multiple steps (payment processing, inventory check, shipping calculation) that may require human intervention and need to maintain state across distributed components. Orchestrating distributed business processes is another core SWF use case, as it provides reliable execution, maintains workflow state, and offers built-in auditing capabilities. SWF ensures that tasks are assigned once, executed once, and tracks progress through the workflow, making it suitable for complex business processes that require coordination and reliability."
+  },
+  {
+    "id": 1377,
+    "q": "Which of the following instance types are available as Amazon EBS-backed only? (Choose 2 answers)",
+    "o": [
+      {
+        "c": "General purpose T2",
+        "a": "yes"
+      },
+      {
+        "c": "General purpose M3",
+        "a": "no"
+      },
+      {
+        "c": "Compute-optimized C4",
+        "a": "no"
+      },
+      {
+        "c": "Compute-optimized C3",
+        "a": "yes"
+      },
+      {
+        "c": "Storage-optimized 12",
+        "a": "no"
+      }
+    ],
+    "nt": "T2 instances are only available as EBS-backed because they are burstable performance instances designed for workloads with moderate CPU usage that benefit from the flexibility and persistence of EBS storage. C3 instances are also EBS-only, as they are compute-optimized instances that prioritize CPU performance over local instance storage. These instance types are optimized for use cases where data persistence, snapshots, and flexible storage configurations are more important than the ultra-high I/O performance provided by instance store volumes."
+  },
+  {
+    "id": 1378,
+    "q": "True or False: Without IAM, you cannot control the tasks a particular user or system can do and what AWS resources they might use.",
+    "o": [
+      {
+        "c": "True",
+        "a": "yes"
+      },
+      {
+        "c": "False",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS Identity and Access Management (IAM) is the service that enables you to manage access to AWS services and resources securely. Without IAM, you would only have the root account credentials with full administrative access, making it impossible to implement the principle of least privilege or grant granular permissions to different users, applications, or services. IAM allows you to create users, groups, roles, and policies that define precisely what actions can be performed on which resources, enabling proper security controls and access management in your AWS environment."
+  },
+  {
+    "id": 1379,
+    "q": "What does Amazon ELB stand for?",
+    "o": [
+      {
+        "c": "Elastic Linux Box",
+        "a": "no"
+      },
+      {
+        "c": "Encrypted Linux Box",
+        "a": "no"
+      },
+      {
+        "c": "Encrypted Load Balancing",
+        "a": "no"
+      },
+      {
+        "c": "Elastic Load Balancing",
+        "a": "yes"
+      }
+    ],
+    "nt": "Amazon ELB stands for Elastic Load Balancing, which is a service that automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, and IP addresses. It provides elastic scalability to handle varying traffic loads and offers high availability by routing traffic only to healthy targets. ELB can handle the load balancing of HTTP, HTTPS, TCP, and SSL traffic, and it includes features like health checking, SSL termination, and sticky sessions to support various application architectures."
+  },
+  {
+    "id": 1380,
+    "q": "A read only news reporting site with a combined web and application tier and a database tier that receives large and unpredictable traffic demands must be able to respond to these traffic fluctuations automatically. What AWS services should be used meet these requirements?",
+    "o": [
+      {
+        "c": "Stateless instances for the web and application tier synchronized using Elasticache Memcached in an autoscaling group monitored with CloudWatch. And RDS with read replicas",
+        "a": "yes"
+      },
+      {
+        "c": "Stateful instances for the web and application tier in an autoscaling group monitored with CloudWatch and RDS with read replicas",
+        "a": "no"
+      },
+      {
+        "c": "Stateful instances for the web and application tier in an autoscaling group monitored with CloudWatch and multi-AZ RDS",
+        "a": "no"
+      },
+      {
+        "c": "Stateless instances for the web and application tier synchronized using ElastiCache Memcached in an autoscaling group monitored with CloudWatch and multi-AZ RDS",
+        "a": "no"
+      }
+    ],
+    "nt": "For a read-only news site with unpredictable traffic, stateless web/application instances can automatically scale using Auto Scaling groups monitored by CloudWatch metrics. ElastiCache Memcached provides a distributed caching layer to offload read requests from the database and maintain session state if needed. RDS read replicas handle the database read load and can be scaled independently to accommodate traffic spikes. This architecture separates read and write operations, allows horizontal scaling of the application tier, and uses caching to reduce database load, making it highly responsive to fluctuating traffic patterns."
+  },
+  {
+    "id": 1381,
+    "q": "In Amazon AWS, which of the following statements is true of key pairs?",
+    "o": [
+      {
+        "c": "Key pairs are used only for Amazon SDKs",
+        "a": "no"
+      },
+      {
+        "c": "Key pairs are used only for Amazon EC2 and Amazon CloudFront",
+        "a": "yes"
+      },
+      {
+        "c": "Key pairs are used only for Elastic Load Balancing and AWS IAM",
+        "a": "no"
+      },
+      {
+        "c": "Key pairs are used for all Amazon services",
+        "a": "no"
+      }
+    ],
+    "nt": "Key pairs in AWS are primarily used for two services: Amazon EC2 for SSH access to Linux instances and RDP access to Windows instances, and Amazon CloudFront for creating signed URLs and signed cookies for private content distribution. In EC2, key pairs provide secure access to instances without using passwords. In CloudFront, key pairs enable content providers to create signed URLs that grant time-limited access to private content. Other AWS services typically use different authentication mechanisms like IAM policies, access keys, or security tokens."
+  },
+  {
+    "id": 1382,
+    "q": "What does Amazon ElastiCache provide?",
+    "o": [
+      {
+        "c": "A service by this name doesn't exist. Perhaps you mean Amazon CloudCache",
+        "a": "no"
+      },
+      {
+        "c": "A virtual server with a huge amount of memory",
+        "a": "no"
+      },
+      {
+        "c": "A managed In-memory cache service",
+        "a": "yes"
+      },
+      {
+        "c": "An Amazon EC2 instance with the Memcached software already pre-installed",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon ElastiCache is a fully managed in-memory caching service that supports two popular open-source in-memory caching engines: Redis and Memcached. It provides high-performance, scalable, and cost-effective caching solutions that remove the operational burden of deploying, managing, and scaling distributed cache environments. ElastiCache automatically handles tasks like software patching, failure detection, and recovery, while providing features like automatic failover, backup/restore, and monitoring. It's commonly used to improve application performance by caching frequently accessed data and reducing database load."
+  },
+  {
+    "id": 1383,
+    "q": "What are the two permission types used by AWS?",
+    "o": [
+      {
+        "c": "Resource-based and Product-based",
+        "a": "no"
+      },
+      {
+        "c": "Product-based and Service-based",
+        "a": "no"
+      },
+      {
+        "c": "Service-based",
+        "a": "no"
+      },
+      {
+        "c": "User-based and Resource-based",
+        "a": "yes"
+      }
+    ],
+    "nt": "AWS uses two main types of permissions: Identity-based policies (user-based) that are attached to IAM identities (users, groups, roles) and define what actions those identities can perform, and Resource-based policies that are attached to AWS resources (like S3 buckets, SNS topics, or Lambda functions) and define which principals can access that resource and what actions they can perform. Identity-based policies are the most common and follow the principal of 'who can do what.' Resource-based policies are used in specific services to grant cross-account access or define resource-level permissions."
+  },
+  {
+    "id": 1384,
+    "q": "In AWS CloudHSM, in addition to the AWS recommendation that you use two or more HSM appliances in a high-availability configuration to prevent the loss of keys and data, you can also perform a remote backup/restore of a Luna SA partition if you have purchased a:",
+    "o": [
+      {
+        "c": "Luna Restore HS",
+        "a": "no"
+      },
+      {
+        "c": "Luna Backup HS",
+        "a": "yes"
+      },
+      {
+        "c": "Luna HS",
+        "a": "no"
+      },
+      {
+        "c": "Luna SA HS",
+        "a": "no"
+      }
+    ],
+    "nt": "The Luna Backup HSM is a dedicated hardware security module designed specifically for backup and recovery operations in AWS CloudHSM deployments. It allows you to create encrypted backups of your cryptographic keys and materials from your primary HSMs and store them securely. This enables disaster recovery scenarios where you can restore your keys to new HSMs in case of hardware failure, accidental deletion, or regional disasters. The Luna Backup HSM maintains the same FIPS 140-2 Level 3 security validation as the primary HSMs, ensuring that backups remain secure and compliant."
+  },
+  {
+    "id": 1385,
+    "q": "An organization has a statutory requirement to protect the data at rest for the S3 objects. Which of the below mentioned options need not be enabled by the organization to achieve data security?",
+    "o": [
+      {
+        "c": "MFA delete for S3 objects",
+        "a": "no"
+      },
+      {
+        "c": "Client side encryption",
+        "a": "no"
+      },
+      {
+        "c": "Bucket versioning",
+        "a": "no"
+      },
+      {
+        "c": "Data replication",
+        "a": "yes"
+      }
+    ],
+    "nt": "Data replication (such as Cross-Region Replication) is primarily a durability and availability feature, not a data security feature. While it does create additional copies of data in different locations, it doesn't inherently provide encryption or access control protections for data at rest. The security of data at rest is achieved through encryption (client-side or server-side), access controls (bucket policies, ACLs), versioning with MFA delete protection, and proper IAM policies. Replication copies both the data and its permissions, so if the original data is unencrypted or improperly secured, the replicated copies will have the same security posture."
+  },
+  {
+    "id": 1386,
+    "q": "Your company is in the process of developing a next generation pet collar that collects biometric information to assist families with promoting healthy lifestyles for their pets. Each collar will push 30kb of biometric data in JSON format every 2 seconds to a collection platform that will process and analyze the data providing health trending information back to the pet owners and veterinarians via a web portal. Management has tasked you to architect the collection platform ensuring the following requirements are met. Provide the ability for real-time analytics of the inbound biometric data. Ensure processing of the biometric data is highly durable, elastic and parallel. The results of the analytic processing should be persisted for data mining. Which architecture outlined below will meet the initial requirements for the collection platform?",
+    "o": [
+      {
+        "c": "Utilize S3 to collect the inbound sensor data, analyze the data from S3 with a daily scheduled Data Pipeline and save the results to a Redshift Cluster",
+        "a": "no"
+      },
+      {
+        "c": "Utilize Amazon Kinesis to collect the inbound sensor data, analyze the data with Kinesis clients and save the results to a Redshift cluster using EMR",
+        "a": "yes"
+      },
+      {
+        "c": "Utilize SQS to collect the inbound sensor data, analyze the data from SQS with Amazon Kinesis and save the results to a Microsoft SQL Server RDS instance",
+        "a": "no"
+      },
+      {
+        "c": "Utilize EMR to collect the inbound sensor data, analyze the data from EMR with Amazon Kinesis and save the results to DynamoDB",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon Kinesis is designed for real-time processing of streaming data, making it ideal for collecting biometric data from pet collars every 2 seconds. It provides durability through data replication and can elastically scale to handle varying data volumes. Kinesis clients can process the data in parallel for real-time analytics. Amazon EMR can then consume the processed data from Kinesis and load it into Amazon Redshift, which is optimized for data warehousing and analytics queries. Redshift provides the persistence needed for data mining and historical analysis, while supporting the web portal's querying requirements for health trending information."
+  },
+  {
+    "id": 1387,
+    "q": "Which of the following approaches provides the lowest cost for Amazon Elastic Block Store snapshots while giving you the ability to fully restore data?",
+    "o": [
+      {
+        "c": "Maintain two snapshots: the original snapshot and the latest incremental snapshot",
+        "a": "no"
+      },
+      {
+        "c": "Maintain a volume snapshot; subsequent snapshots will overwrite one another",
+        "a": "no"
+      },
+      {
+        "c": "Maintain a single snapshot the latest snapshot is both Incremental and complete",
+        "a": "yes"
+      },
+      {
+        "c": "Maintain the most current snapshot, archive the original and incremental to Amazon Glacier",
+        "a": "no"
+      }
+    ],
+    "nt": "EBS snapshots are incremental but each snapshot contains all the information needed to restore the entire volume as it existed at the snapshot time. When you delete previous snapshots, AWS consolidates the data so that the remaining snapshots still contain all necessary blocks for complete restoration. Maintaining only the latest snapshot is the most cost-effective approach because you only pay for the unique data blocks that have changed since the previous snapshot was deleted. Each new snapshot only stores the blocks that have changed, but when older snapshots are removed, the cost optimization occurs as AWS manages the block references efficiently."
+  },
+  {
+    "id": 1388,
+    "q": "You have a video transcoding application running on Amazon EC2. Each instance polls a queue to find out which video should be transcoded, and then runs a transcoding process. If this process is interrupted, the video will be transcoded by another instance based on the queuing system. You have a large backlog of videos which need to be transcoded and would like to reduce this backlog by adding more instances. You will need these instances only until the backlog is reduced. Which type of Amazon EC2 instances should you use to reduce the backlog in the most cost efficient way?",
+    "o": [
+      {
+        "c": "Reserved instances",
+        "a": "no"
+      },
+      {
+        "c": "Spot instances",
+        "a": "yes"
+      },
+      {
+        "c": "Dedicated instances",
+        "a": "no"
+      },
+      {
+        "c": "On-demand instances",
+        "a": "no"
+      }
+    ],
+    "nt": "Spot Instances are ideal for this workload because they can be up to 90% cheaper than On-Demand Instances, providing significant cost savings for processing the backlog. Since the transcoding application is fault-tolerant (interrupted processes can be handled by other instances via the queueing system), it can withstand Spot Instance interruptions. The temporary nature of the backlog reduction aligns perfectly with Spot Instances, which are designed for flexible, short-term workloads. When the backlog is cleared, the Spot Instances can be terminated without long-term commitment, making this the most cost-efficient approach for temporary capacity needs."
+  },
+  {
+    "id": 1389,
+    "q": "What does the AWS Storage Gateway provide?",
+    "o": [
+      {
+        "c": "It allows to integrate on-premises IT environments with Cloud Storage",
+        "a": "yes"
+      },
+      {
+        "c": "A direct encrypted connection to Amazon S3",
+        "a": "no"
+      },
+      {
+        "c": "It's a backup solution that provides an on-premises Cloud storage",
+        "a": "no"
+      },
+      {
+        "c": "It provides an encrypted SSL endpoint for backups in the Cloud",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS Storage Gateway is a hybrid cloud storage service that connects your on-premises environments with AWS cloud storage. It provides seamless integration through three types of gateways: File Gateway for storing files as objects in S3, Volume Gateway for block storage using iSCSI with either cached volumes (primary data in S3, frequently accessed data cached locally) or stored volumes (primary data locally, asynchronously backed up to S3), and Tape Gateway for backing up data to virtual tapes in AWS. This enables organizations to extend their on-premises storage infrastructure to the cloud while maintaining low-latency access to frequently used data and leveraging AWS cloud storage for durability, scalability, and cost efficiency."
+  },
+  {
+    "id": 1390,
+    "q": "You have recently joined a startup company building sensors to measure street noise and air quality in urban areas. The company has been running a pilot deployment of around 100 sensors for 3 months. Each sensor uploads 1KB of sensor data every minute to a backend hosted on AWS. During the pilot, you measured a peak of 10 IOPS on the database, and you stored an average of 3GB of sensor data per month in the database. The current deployment consists of a load-balanced auto scaled Ingestion layer using EC2 instances and a PostgreSQL RDS database with 500GB standard storage. The pilot is considered a success and your CEO has managed to get the attention of some potential investors. The business plan requires a deployment of at least 100K sensors which needs to be supported by the backend. You also need to store sensor data for at least two years to be able to compare year over year improvements. To secure funding, you have to make sure that the platform meets these requirements and leaves room for further scaling. Which setup will meet the requirements?",
+    "o": [
+      {
+        "c": "Add an SQS queue to the ingestion layer to buffer writes to the RDS instance",
+        "a": "no"
+      },
+      {
+        "c": "Ingest data into a DynamoDB table and move old data to a Redshift cluster",
+        "a": "no"
+      },
+      {
+        "c": "Replace the RDS instance with a 6 node Redshift cluster with 96TB of storage",
+        "a": "yes"
+      },
+      {
+        "c": "Keep the current architecture but upgrade RDS storage to 3TB and 10K provisioned IOPS",
+        "a": "no"
+      }
+    ],
+    "nt": "Scaling from 100 sensors to 100,000 sensors represents a 1000x increase in data volume. With 100K sensors each sending 1KB per minute, the system would handle approximately 1.44 GB per day (100,000 * 1KB * 1440 minutes) or over 500 GB per month, growing to 12+ TB over two years. Redshift is designed for petabyte-scale data warehousing and can handle the massive data volume and analytical queries needed for year-over-year comparisons. A 6-node cluster with 96TB storage provides both the capacity for long-term data retention and the parallel processing power for complex analytics. Redshift's columnar storage and compression are ideal for time-series sensor data analytics, making it suitable for the scaling requirements and analytical use cases."
+  },
+  {
+    "id": 1391,
+    "q": "After a major security breach your manager has requested a report of all users and their credentials in AWS. You discover that in IAM you can generate and download a credential report that lists all users in your account and the status of their various credentials, including passwords, access keys, MFA devices, and signing certificates. Which following statement is incorrect in regards to the use of credential reports?",
+    "o": [
+      {
+        "c": "Credential reports are downloaded XML files",
+        "a": "yes"
+      },
+      {
+        "c": "You can get a credential report using the AWS Management Console, the AWS CLI, or the IAM API",
+        "a": "no"
+      },
+      {
+        "c": "You can use the report to audit the effects of credential lifecycle requirements, such as password rotation",
+        "a": "no"
+      },
+      {
+        "c": "You can generate a credential report as often as once every four hours",
+        "a": "no"
+      }
+    ],
+    "nt": "IAM credential reports are downloaded as CSV (comma-separated values) files, not XML files. The CSV format contains columns for each user with information about their password status (enabled, last changed, next rotation), access keys (active, last used, last rotated), MFA devices, and certificates. This tabular format is ideal for importing into spreadsheet applications or processing with scripts for security auditing and compliance reporting. The other statements are correct: credential reports can be generated through multiple interfaces, are useful for auditing credential lifecycle compliance, and have a minimum generation interval of four hours between reports."
+  },
+  {
+    "id": 1392,
+    "q": "What is the maximum response time for a Business level Premium Support case?",
+    "o": [
+      {
+        "c": "30 minutes",
+        "a": "no"
+      },
+      {
+        "c": "1 hour",
+        "a": "yes"
+      },
+      {
+        "c": "12 hours",
+        "a": "no"
+      },
+      {
+        "c": "10 minutes",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS Business Support provides a maximum response time of 1 hour for production system impaired cases. This service level agreement ensures that when you have an issue where your production system is impaired but still functioning, AWS support will respond within 60 minutes. Business Support includes 24/7 access to Cloud Support Engineers via email, phone, and chat, with faster response times for more critical issues (15 minutes for production system down, and 5 minutes for business-critical system down). The 1-hour response time applies to the impaired production system severity level, which is the third-highest priority level."
+  },
+  {
+    "id": 1393,
+    "q": "Per the AWS Acceptable Use Policy, penetration testing of EC2 instances",
+    "o": [
+      {
+        "c": "May be performed by AWS, and will be performed by AWS upon customer request",
+        "a": "no"
+      },
+      {
+        "c": "May be performed by AWS, and is periodically performed by AWS",
+        "a": "no"
+      },
+      {
+        "c": "Are expressly prohibited under all circumstances",
+        "a": "no"
+      },
+      {
+        "c": "May be performed by the customer on their own instances with prior authorization from AWS",
+        "a": "yes"
+      },
+      {
+        "c": "May be performed by the customer on their own instances, only if performed from EC2 instances",
+        "a": "no"
+      }
+    ],
+    "nt": "AWS allows customers to conduct penetration testing on their own EC2 instances and other AWS resources that they own, but requires prior authorization to ensure the testing doesn't violate the Acceptable Use Policy or impact other AWS customers. Customers must submit a penetration testing request form through the AWS Support Center describing the scope, duration, and methods of the planned testing. Once approved, customers can test their own resources, including EC2 instances, RDS databases, CloudFront distributions, and other services they control. This policy enables security testing while maintaining the overall security and stability of the AWS environment for all customers."
+  },
+  {
+    "id": 1394,
+    "q": "Which of the following features are provided by Amazon EC2?",
+    "o": [
+      {
+        "c": "Exadata Database Machine, Optimized Storage Management, Flashback Technology, and Data Warehousing",
+        "a": "no"
+      },
+      {
+        "c": "Instances, Amazon Machine Images (AMIs), Key Pairs, Amazon EBS Volumes, Firewall, Elastic IP address, Tags, and Virtual Private Clouds (VPCs)",
+        "a": "yes"
+      },
+      {
+        "c": "Real Application Clusters (RAC), Elasticache Machine Images (EMIs), Data Warehousing, Flashback Technology, Dynamic IP address",
+        "a": "no"
+      },
+      {
+        "c": "Exadata Database Machine, Real Application Clusters (RAC), Data Guard, Table and Index Partitioning, and Data Pump Compression",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon EC2 provides virtual computing environments known as instances, which can be launched from Amazon Machine Images (AMIs) containing the operating system and applications. Key pairs enable secure SSH/RDP access to instances. EBS volumes provide persistent block storage. Security groups act as virtual firewalls controlling inbound and outbound traffic. Elastic IP addresses are static IPv4 addresses for dynamic cloud computing. Tags help organize and identify resources. VPCs enable launching AWS resources into a virtual network. These core features form the foundation of EC2's infrastructure-as-a-service offering, providing flexible, scalable computing capacity in the cloud."
+  },
+  {
+    "id": 1395,
+    "q": "True or False: If you add a tag that has the same key as an existing tag on a DB Instance, the new value overwrites the old value.",
+    "o": [
+      {
+        "c": "True",
+        "a": "yes"
+      },
+      {
+        "c": "False",
+        "a": "no"
+      }
+    ],
+    "nt": "In AWS services including RDS, each resource can have only one tag with a specific key. If you add a new tag with the same key as an existing tag, the new value will overwrite the old value. This behavior ensures that each tag key remains unique per resource, maintaining consistency in your tagging strategy. Tag keys are case-sensitive, so 'Environment' and 'environment' would be treated as different keys. This overwrite behavior allows you to update tag values without having to first remove the existing tag, simplifying tag management operations."
+  },
+  {
+    "id": 1396,
+    "q": "You decide that you need to create a number of Auto Scaling groups to try and save some money as you have noticed that at certain times most of your EC2 instances are not being used. By default, what is the maximum number of Auto Scaling groups that AWS will allow you to create?",
+    "o": [
+      {
+        "c": "12",
+        "a": "no"
+      },
+      {
+        "c": "Unlimited",
+        "a": "no"
+      },
+      {
+        "c": "20",
+        "a": "yes"
+      },
+      {
+        "c": "2",
+        "a": "no"
+      }
+    ],
+    "nt": "By default, AWS imposes a limit of 20 Auto Scaling groups per region for each AWS account. This limit helps prevent accidental creation of excessive resources and manages capacity across the AWS infrastructure. However, this is a soft limit that can be increased by submitting a limit increase request to AWS Support. Each Auto Scaling group can contain multiple EC2 instances and can be configured with scaling policies to automatically adjust capacity based on demand, helping optimize costs by ensuring you only pay for the compute resources you actually need."
+  },
+  {
+    "id": 1397,
+    "q": "After moving an E-Commerce website for a client from a dedicated server to AWS you have also set up auto scaling to perform health checks on the instances in your group and replace instances that fail these checks. Your client has come to you with his own health check system that he wants you to use as it has proved to be very useful prior to his site running on AWS. What do you think would be an appropriate response to this given all that you know about auto scaling?",
+    "o": [
+      {
+        "c": "It is not possible to implement your own health check system. You need to use AWSs health check system",
+        "a": "no"
+      },
+      {
+        "c": "It is not possible to implement your own health check system due to compatibility issues",
+        "a": "no"
+      },
+      {
+        "c": "It is possible to implement your own health check system and then send the instance's health information directly from your system to Cloud Watch",
+        "a": "yes"
+      },
+      {
+        "c": "It is possible to implement your own health check system and then send the instance's health information directly from your system to Cloud Watch but only in the US East (Virginia) region",
+        "a": "no"
+      }
+    ],
+    "nt": "Auto Scaling can use custom health checks through Amazon CloudWatch. You can implement your own health check system that monitors application-specific metrics and then publish custom metrics to CloudWatch using the PutMetricData API. These custom metrics can then be used in Auto Scaling policies to trigger scaling actions or instance replacements. This approach allows you to leverage existing health check systems while benefiting from Auto Scaling's automation capabilities. The custom health checks can be more sophisticated than the basic EC2 status checks, monitoring application-level functionality, database connectivity, or other business-specific health indicators."
+  },
+  {
+    "id": 1398,
+    "q": "You've been brought in as solutions architect to assist an enterprise customer with their migration of an e-commerce platform to Amazon Virtual Private Cloud (VPC) The previous architect has already deployed a 3-tier VPC, The configuration is as follows. VPC: vpc-2f8bc447. IGW: igw-2d8bc445. NACL: ad-208bc448. 5ubnets and Route Tables: Web servers: subnet-258bc44d. Application servers: subnet-248bc44c. Database servers: subnet-9189c6f9. Route Tables: rrb-218bc449, rtb-238bc44b. Associations: subnet-258bc44d: rtb-218bc449, subnet-248bc44c: rtb-238bc44b, subnet-9189c6f9: rtb-238bc44b. You are now ready to begin deploying EC2 instances into the VPC Web servers must have direct access to the internet Application and database servers cannot have direct access to the internet. Which configuration below will allow you the ability to remotely administer your application and database servers, as well as allow these servers to retrieve updates from the Internet?",
+    "o": [
+      {
+        "c": "Create a bastion and NAT instance in subnet-258bc44d, and add a route from rtb- 238bc44b to the NAT instance",
+        "a": "yes"
+      },
+      {
+        "c": "Add a route from rtb-238bc44b to igw-2d8bc445 and add a bastion and NAT instance within subnet-248bc44c",
+        "a": "no"
+      },
+      {
+        "c": "Create a bastion and NAT instance in subnet-248bc44c, and add a route from rtb- 238bc44b to subnet-258bc44d",
+        "a": "no"
+      },
+      {
+        "c": "Create a bastion and NAT instance in subnet-258bc44d, add a route from rtb-238bc44b to lgw- 2d8bc445, and a new NACL that allows access between subnet-258bc44d and subnet -248bc44c",
+        "a": "no"
+      }
+    ],
+    "nt": "Placing both the bastion host (for administrative access) and NAT instance (for outbound internet access) in the public web server subnet (subnet-258bc44d) follows AWS best practices. The bastion host provides secure SSH/RDP access to the private application and database servers without exposing them directly to the internet. The NAT instance enables instances in the private subnets to initiate outbound connections to the internet for updates while preventing inbound connections from the internet. Adding a route from the private route table (rtb-238bc44b) to the NAT instance allows traffic from the application and database subnets to reach the internet through the NAT instance in the public subnet."
+  },
+  {
+    "id": 1399,
+    "q": "After deciding that EMR will be useful in analysing vast amounts of data for a gaming website that you are architecting you have just deployed an Amazon EMR Cluster and wish to monitor the cluster performance. Which of the following tools cannot be used to monitor the cluster performance?",
+    "o": [
+      {
+        "c": "Kinesis",
+        "a": "yes"
+      },
+      {
+        "c": "Ganglia",
+        "a": "no"
+      },
+      {
+        "c": "CloudWatch Metrics",
+        "a": "no"
+      },
+      {
+        "c": "Hadoop Web Interfaces",
+        "a": "no"
+      }
+    ],
+    "nt": "Amazon Kinesis is a service for real-time data streaming and processing, not for monitoring EMR cluster performance. It's used for collecting, processing, and analyzing real-time streaming data, not for monitoring infrastructure metrics. Ganglia is an open-source distributed monitoring system that can be installed on EMR clusters to collect and visualize metrics. CloudWatch Metrics provides native AWS monitoring for EMR clusters, including HDFS utilization, cluster health, and node performance. Hadoop Web Interfaces (like ResourceManager and NameNode UIs) are built into EMR and provide detailed insights into Hadoop-specific metrics and job performance."
+  },
+  {
+    "id": 1400,
+    "q": "A/An [...] is the concept of allowing (or disallowing) an entity such as a user, group, or role some type of access to one or more resources.",
+    "o": [
+      {
+        "c": "user",
+        "a": "no"
+      },
+      {
+        "c": "AWS Account",
+        "a": "no"
+      },
+      {
+        "c": "resource",
+        "a": "no"
+      },
+      {
+        "c": "permission",
+        "a": "yes"
+      }
+    ],
+    "nt": "In AWS IAM, a permission is the formal authorization that allows or denies access to specific AWS resources and actions. Permissions are defined through policies (JSON documents) that specify what actions are allowed or denied on which resources under what conditions. These policies can be attached to IAM users, groups, or roles to grant them the appropriate level of access. Permissions implement the principle of least privilege by ensuring entities only have access to the resources and actions necessary for their intended functions."
+  }
+]

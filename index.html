@@ -1,200 +1,222 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>AWS SAA LEARNING BY Q&A</title>
-<style>
-  :root{--maxw:1200px;--bg:#ffffff;--fg:#000000;--accent:#0b0b0b;--green:#1a8f3a}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--fg)}
-  .wrap{max-width:var(--maxw);margin:18px auto;padding:18px;box-sizing:border-box}
-  header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #eee;padding-bottom:12px}
-  .title{font-weight:700;font-size:20px;color:var(--accent)}
-  .menu{font-size:14px;color:var(--accent);opacity:.9}
-  main{margin-top:18px}
-  .panel{display:flex;flex-direction:column;gap:14px}
-  .meta{display:flex;flex-direction:row;align-items:center;gap:12px}
-  .qcount{font-weight:600}
-  .question{font-size:18px;line-height:1.4;margin-top:6px}
-  .choices{display:flex;flex-direction:column;gap:10px;margin-top:6px}
-  /* custom square checkbox sized to text */
-  .choice{display:flex;align-items:center;gap:10px}
-  .chk{
-    -webkit-appearance:none;appearance:none;
-    width:1.1em;height:1.1em;border:2px solid #666;border-radius:3px;
-    display:inline-block;vertical-align:middle;flex:0 0 auto;position:relative;
-    outline:none;cursor:pointer;background:white;
-  }
-  .chk:checked{background:var(--accent);border-color:var(--accent)}
-  .chk:checked::after{content:"";position:absolute;left:.2em;top:.06em;width:.18em;height:.5em;border:2px solid white;border-left:0;border-top:0;transform:rotate(30deg)}
-  .optlabel{user-select:none;display:inline-flex;flex-direction:row;align-items:center;gap:8px}
-  .opttext{font-size:16px}
-  .answer-state{min-width:60px;font-weight:600}
-  .answer-yes{color:var(--green);font-weight:700}
-  .answer-noo{color:#777;font-weight:600}
-  .controls{display:flex;gap:12px;align-items:center;margin-top:14px}
-  .btn{padding:10px 16px;font-size:15px;background:#f3f3f3;border:1px solid #ddd;border-radius:8px;cursor:pointer;min-width:90px;text-align:center}
-  .btn:active{transform:translateY(1px)}
-  /* Buttons always aligned left */
-  .controls{justify-content:flex-start}
-  /* small screen tweaks */
-  @media (max-width:700px){
-    .wrap{padding:12px}
-    .title{font-size:18px}
-    .question{font-size:16px}
-    .opttext{font-size:15px}
-    header{flex-direction:row;gap:8px}
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AWS SAA Learning</title>
+  <style>
+    :root {
+      --maxw: 1200px;
+      --bg: #ffffff;
+      --fg: #000000;
+      --accent: #0b5;
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 16px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    button {
+      cursor: pointer;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+
+    button:hover {
+      background: #eee;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      margin: 6px 0;
+    }
+
+    label span {
+      margin-left: 6px;
+    }
+
+    .correct {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .question-box {
+      margin-bottom: 16px;
+    }
+  </style>
 </head>
+
 <body>
-<div class="wrap" role="application" aria-label="AWS SAA Learning by Q&A">
-  <header>
-    <div class="title">AWS SAA LEARNING BY Q&amp;A</div>
-    <nav class="menu" aria-label="menu">MENU</nav>
-  </header>
+  <div class="wrap">
+    <header>
+      <h1>AWS SAA LEARNING BY Q&A</h1>
+      <div id="btnMenu" style="cursor:pointer;">MENU</div>
+    </header>
+    <div id="home" class="screen show"><button id="btnLearn">Learning (>= 1200 Question)</button> <button
+        id="btnPractice">Practice Exam (130 Questions)</button></div>
+    <div id="learn" class="screen">
+      <div id="qnum"></div>
+      <div id="qtext" class="question-box"></div>
+      <div id="options"></div><button id="actionBtn">CHECK</button>
+    </div>
+    <script>
+      // Load questions from multiple JSON files
+      let data = [];
+      const jsonFiles = [
+        "1_50.json",
+        "51_100.json",
+        "101_150.json",
+        "151_200.json",
+        "201_250.json"
+      ];
 
-  <main>
-    <section class="panel" id="app">
-      <div class="meta">
-        <div class="learning-part" style="font-weight:700">LEARNING PART</div>
-      </div>
+      Promise.all(jsonFiles.map(f => fetch(f).then(r => r.json())))
+        .then(all => {
+          data = all.flat();
+          startApp();
+        });
 
-      <div>
-        <div class="qcount" id="qcount">QUESTION 1/10</div>
-        <div class="question" id="questionText">Loading question…</div>
-        <div class="choices" id="choices"></div>
-      </div>
+      // Elements
+      let current = Number(localStorage.getItem("learnCurrent") || 0);
+      const home = document.getElementById("home");
+      const learn = document.getElementById("learn");
+      const qnum = document.getElementById("qnum");
+      const qtext = document.getElementById("qtext");
+      const options = document.getElementById("options");
+      const actionBtn = document.getElementById("actionBtn");
 
-      <div class="controls">
-        <button class="btn" id="actionBtn">CHECK</button>
-        <!-- left-only controls per requirement; extra buttons could be added but not needed -->
-      </div>
-    </section>
-  </main>
-</div>
+      // Home buttons
+      const btnLearn = document.getElementById("btnLearn");
+      const btnPractice = document.getElementById("btnPractice");
 
-<script>
-/* Minimal JSON (no spaces/newlines) containing 10 questions.
-   Each question object = {"q":"...","o":[{"c":"option","a":"yes"/"no"},...]}
-   IMPORTANT: the JSON string below must not contain spaces/newlines - kept compact.
-*/
-const QUESTIONS='[{"q":"Which service provides object storage for AWS?","o":[{"c":"Block storage","a":"no"},{"c":"Object storage (S3)","a":"yes"},{"c":"Relational database","a":"no"},{"c":"In-memory cache","a":"no"}]},{"q":"Which service is best for serverless function execution?","o":[{"c":"Amazon EC2","a":"no"},{"c":"AWS Lambda","a":"yes"},{"c":"Amazon RDS","a":"no"},{"c":"Amazon S3","a":"no"}]},{"q":"Which storage is ideal for shared file access across EC2 instances?","o":[{"c":"EBS","a":"no"},{"c":"EFS","a":"yes"},{"c":"S3 Glacier","a":"no"},{"c":"Instance store","a":"no"}]},{"q":"Which database is serverless and key-value?","o":[{"c":"Amazon Aurora","a":"no"},{"c":"Amazon DynamoDB","a":"yes"},{"c":"Amazon RDS MySQL","a":"no"},{"c":"Amazon Redshift","a":"no"}]},{"q":"Which service is used for content delivery and caching at edge locations?","o":[{"c":"Amazon VPC","a":"no"},{"c":"AWS CloudFront","a":"yes"},{"c":"AWS IAM","a":"no"},{"c":"AWS Config","a":"no"}]},{"q":"Which service lets you run containers without managing servers?","o":[{"c":"Amazon ECS/Fargate","a":"yes"},{"c":"Amazon S3","a":"no"},{"c":"AWS Lambda Layers","a":"no"},{"c":"Amazon RDS","a":"no"}]},{"q":"Which service would you use for long-term cold storage with lowest cost?","o":[{"c":"S3 Standard","a":"no"},{"c":"S3 Glacier Deep Archive","a":"yes"},{"c":"EBS gp3","a":"no"},{"c":"EFS Standard","a":"no"}]},{"q":"Which AWS feature provides centralized identity and single sign-on across accounts?","o":[{"c":"AWS Organizations","a":"no"},{"c":"AWS IAM Roles","a":"no"},{"c":"AWS Single Sign-On (IAM Identity Center)","a":"yes"},{"c":"AWS WAF","a":"no"}]},{"q":"Which service captures API activity and delivers audit logs?","o":[{"c":"Amazon CloudWatch Metrics","a":"no"},{"c":"AWS CloudTrail","a":"yes"},{"c":"AWS Config","a":"no"},{"c":"AWS X-Ray","a":"no"}]},{"q":"Which service offers a managed NoSQL document and key-value database with single-digit millisecond latency?","o":[{"c":"Amazon RDS","a":"no"},{"c":"Amazon DynamoDB","a":"yes"},{"c":"Amazon Redshift","a":"no"},{"c":"Amazon S3","a":"no"}]}]';
+      btnLearn.onclick = () => {
+        home.classList.remove("show");
+        learn.classList.add("show");
+        startApp();
+      };
 
-/* parse */
-const quiz = JSON.parse(QUESTIONS);
-const total = quiz.length;
+      btnPractice.onclick = () => {
+        alert("Practice exam not implemented.");
+      };
 
-/* state */
-let idx = 0;
-const userSelections = Array(total).fill(null).map(()=>[]); // arrays of selected option indices
-const checkedRevealed = Array(total).fill(false); // whether answer was checked for each q
-
-/* DOM refs */
-const qcountEl = document.getElementById('qcount');
-const questionTextEl = document.getElementById('questionText');
-const choicesEl = document.getElementById('choices');
-const actionBtn = document.getElementById('actionBtn');
-
-/* helper to render current question */
-function renderQuestion() {
-  const q = quiz[idx];
-  qcountEl.textContent = `QUESTION ${idx+1}/${total}`;
-  questionTextEl.textContent = q.q;
-  choicesEl.innerHTML = '';
-  const revealed = checkedRevealed[idx];
-
-  q.o.forEach((opt, i) => {
-    const row = document.createElement('div');
-    row.className = 'choice';
-    // checkbox
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.className = 'chk';
-    cb.id = `cb-${idx}-${i}`;
-    cb.checked = userSelections[idx].includes(i);
-    cb.setAttribute('aria-label', `Option ${String.fromCharCode(65+i)}`);
-    cb.addEventListener('change', (e)=>{
-      const arr = userSelections[idx];
-      if(e.target.checked){
-        if(!arr.includes(i)) arr.push(i);
-      } else {
-        const p = arr.indexOf(i); if(p>-1) arr.splice(p,1);
+      // Initialize
+      function startApp() {
+        renderQuestion();
       }
-    });
 
-    const labelWrap = document.createElement('label');
-    labelWrap.className = 'optlabel';
-    labelWrap.htmlFor = cb.id;
+      // Render question
+      function renderQuestion() {
+        const q = data[current];
+        if (!q) return;
 
-    // when revealed we must show "noo"/"Yes" prefix and style
-    if(revealed){
-      const stateSpan = document.createElement('span');
-      stateSpan.className = 'answer-state ' + (opt.a==='yes' ? 'answer-yes' : 'answer-noo');
-      stateSpan.textContent = (opt.a==='yes') ? 'Yes' : 'noo';
-      labelWrap.appendChild(stateSpan);
-    }
+        qnum.textContent = `QUESTION ${current + 1}/${data.length}`;
+        qtext.textContent = q.q;
+        options.innerHTML = "";
 
-    labelWrap.appendChild(cb);
+        q.o.forEach((op, i) => {
+          const id = `chk${i}`;
+          const label = document.createElement("label");
+          label.innerHTML = `<input type='checkbox' id='${id}' /> <span>${String.fromCharCode(65 + i)}. ${op.c}</span>`;
+          options.appendChild(label);
+        });
 
-    const letterSpan = document.createElement('span');
-    letterSpan.className = 'opttext';
-    // Format: "A. option text"
-    letterSpan.innerHTML = `<strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt.c)}`;
-    // if revealed and correct, color green and bold
-    if(revealed && opt.a==='yes'){
-      letterSpan.style.color = 'var(--green)';
-      letterSpan.style.fontWeight = '700';
-    }
-    labelWrap.appendChild(letterSpan);
-    row.appendChild(labelWrap);
-    choicesEl.appendChild(row);
-  });
+        actionBtn.textContent = "CHECK";
+      }
 
-  // set button label depending on state
-  const isLast = (idx === total-1);
-  actionBtn.textContent = revealed ? (isLast ? 'RESET' : 'NEXT') : 'CHECK';
-}
+      // Show answers & lock options
+      function lockAndShow() {
+        const q = data[current];
 
-/* escape helper */
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]});
-}
+        q.o.forEach((op, i) => {
+          const el = document.getElementById(`chk${i}`);
+          const label = el.parentElement;
 
-/* action button behaviour */
-actionBtn.addEventListener('click', ()=>{
-  const revealed = checkedRevealed[idx];
-  if(!revealed){
-    // CHECK pressed: require at least one selection
-    if(userSelections[idx].length === 0){
-      alert('You must select at least one answer before checking.');
-      return;
-    }
-    // reveal answers and keep checkbox states
-    checkedRevealed[idx] = true;
-    renderQuestion();
-    return;
-  }
-  // if already revealed:
-  const isLast = (idx === total-1);
-  if(isLast){
-    // RESET: ask confirmation
-    const ok = confirm('Do you want to reset the quiz?');
-    if(!ok) return;
-    // reset state
-    for(let i=0;i<total;i++){ userSelections[i]=[]; checkedRevealed[i]=false; }
-    idx = 0;
-    renderQuestion();
-    return;
-  } else {
-    // NEXT: advance to next question, do not clear selections
-    idx++;
-    renderQuestion();
-  }
-});
+          el.disabled = true;
+          const mark = op.a === "yes" ? "Yes" : "noo";
 
-/* initial render */
-renderQuestion();
-</script>
+          label.innerHTML = `<input type='checkbox' disabled ${el.checked ? "checked" : ""} /> <span>${mark} ${String.fromCharCode(65 + i)}. ${op.c}</span>`;
+
+          if (op.a === "yes") label.classList.add("correct");
+        });
+      }
+
+      // Button logic
+      actionBtn.onclick = () => {
+        const mode = actionBtn.textContent;
+
+        if (mode === "CHECK") {
+          const picked = [...document.querySelectorAll("#options input")].filter(x => x.checked);
+          if (picked.length === 0) {
+            alert("Please select at least one option.");
+            return;
+          }
+
+          lockAndShow();
+          actionBtn.textContent = current === data.length - 1 ? "RESET" : "NEXT";
+        }
+
+        else if (mode === "NEXT") {
+          current++;
+          localStorage.setItem("learnCurrent", current);
+          renderQuestion();
+        }
+
+        else if (mode === "RESET") {
+          if (confirm("Do you want to reset?")) {
+            current = 0;
+            localStorage.setItem("learnCurrent", 0);
+            renderQuestion();
+          }
+        }
+      };
+
+      const btnMenu = document.getElementById("btnMenu");
+
+      btnMenu.onclick = () => {
+        const ok = confirm("Do you want to return to HOME?");
+
+        if (!ok) return;  // User chọn NO → đứng yên
+
+        // User chọn YES → quay lại home
+        learn.classList.remove("show");
+        home.classList.add("show");
+        actionBtn.textContent = "CHECK";
+        window.scrollTo(0, 0);
+      };
+
+    </script>
+  </div>
 </body>
+
 </html>

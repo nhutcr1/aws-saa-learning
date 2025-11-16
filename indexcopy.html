@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS SAA Learning: Practice Q&A</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --aws-blue: #232f3e;
+            --aws-orange: #ff9900;
+            --note-bg: #fffbe6;
+            --note-border: #fcd34d;
+        }
+
+        /* Set default font and background */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .show-flex {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Custom styles for option feedback */
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            margin: 8px 0;
+            padding: 10px; /* Reduced padding for compact size */
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            border: 1px solid #e5e7eb;
+            font-size: 0.875rem; /* text-sm equivalent for options */
+        }
+
+        .option-label:hover:not(.correct-answer):not(.incorrect-selection) {
+            background-color: #f9fafb;
+        }
+
+        .correct-answer {
+            background-color: #ecfdf5;
+            border-color: #34d399;
+            font-weight: 600;
+            color: #059669;
+        }
+
+        .incorrect-selection {
+            background-color: #fee2e2;
+            border-color: #f87171;
+            color: #b91c1c;
+        }
+
+        .option-label input[type="checkbox"] {
+            margin-top: 2px;
+            min-width: 0.8rem; /* Slightly smaller checkbox */
+            min-height: 0.8rem;
+        }
+
+        .option-label span {
+            margin-left: 10px; /* Reduced margin */
+        }
+        
+        /* Style for the Explanation box */
+        #explanation {
+            display: none;
+            margin-top: 20px; /* Reduced margin */
+            padding: 12px; /* Reduced padding */
+            border-radius: 0.75rem;
+            background-color: var(--note-bg);
+            border-left: 5px solid var(--note-border);
+            color: #78350f;
+            line-height: 1.5; /* Slightly tighter line height */
+            font-size: 0.875rem; /* text-sm equivalent */
+        }
+        #explanation h4 {
+            font-weight: 700;
+            margin-bottom: 6px; /* Reduced margin */
+            color: #b45309;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Content Wrapper -->
+    <div class="wrap">
+        <!-- Header (Smaller) -->
+        <header class="flex justify-between items-center py-3 border-b border-gray-300 mb-5"> <!-- py-4 to py-3, mb-6 to mb-5 -->
+            <h1 class="text-xl font-extrabold text-aws-blue"> <!-- text-2xl to text-xl -->
+                AWS SAA Study Kit
+            </h1>
+            <div class="flex items-center space-x-3"> <!-- space-x-4 to space-x-3 -->
+                <!-- Timer Display -->
+                <div id="timerDisplay" class="text-lg font-bold text-red-600 hidden"> <!-- text-xl to text-lg -->
+                    00:00:00
+                </div>
+                <!-- Menu Button (Smaller) -->
+                <button id="btnMenu"
+                    class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-1.5 px-3 rounded-lg shadow-md transition duration-200"> <!-- Smaller padding and font -->
+                    MENU
+                </button>
+            </div>
+        </header>
+
+        <!-- Home Screen (Smaller) -->
+        <div id="home" class="screen show-flex p-4 bg-white rounded-xl shadow-lg">
+            <h2 class="text-lg font-semibold mb-3 text-gray-800">Welcome to the AWS SAA Practice</h2> <!-- text-xl to text-lg, mb-4 to mb-3 -->
+            <p class="mb-5 text-gray-600 text-sm">Select a mode to begin your journey to certification.</p> <!-- Added text-sm, mb-6 to mb-5 -->
+            <div class="space-y-3"> <!-- space-y-4 to space-y-3 -->
+                <button id="btnLearn"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-3 rounded-xl transition duration-200 shadow-lg text-sm"> <!-- Smaller padding/font/weight -->
+                    Learning Mode (Từng câu, có giải thích)
+                </button>
+                <button id="btnPractice"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl shadow-lg transition duration-200 text-sm"> <!-- Smaller padding/font/weight -->
+                    Practice Exam (5 Câu - Tính điểm cuối cùng - 150 Phút)
+                </button>
+            </div>
+        </div>
+
+        <!-- Learning Screen -->
+        <div id="learn" class="screen">
+            <!-- Practice Mode Result View (Smaller) -->
+            <div id="resultView" class="hidden bg-white p-5 rounded-xl shadow-lg mb-5"> <!-- p-6 to p-5, mb-6 to mb-5 -->
+                <h2 class="text-xl font-bold mb-3 text-gray-800">Kết Quả Luyện Thi</h2> <!-- text-2xl to text-xl, mb-4 to mb-3 -->
+                <div id="scoreDisplay" class="text-3xl font-extrabold text-center py-6"></div> <!-- text-4xl to text-3xl, py-8 to py-6 -->
+                <button id="btnReview" 
+                    class="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 px-3 rounded-xl shadow-md transition duration-200 text-sm"> <!-- Smaller padding/font/weight -->
+                    Xem Lại Đáp Án
+                </button>
+            </div>
+            
+            <!-- Question View (Smaller) -->
+            <div id="questionView">
+                <div id="qnum" class="text-base font-medium text-gray-600 mb-3"></div> <!-- text-lg to text-base, mb-4 to mb-3 -->
+                <div class="bg-white p-5 rounded-xl shadow-lg"> <!-- p-6 to p-5 -->
+                    <div id="qtext" class="question-box text-lg font-semibold mb-5 text-gray-800"></div> <!-- text-xl to text-lg, mb-6 to mb-5 -->
+                    <div id="options" class="space-y-2"> <!-- space-y-3 to space-y-2 -->
+                        <!-- Options will be rendered here -->
+                    </div>
+                    
+                    <!-- Explanation Area -->
+                    <div id="explanation">
+                        <h4>Giải thích:</h4>
+                        <p id="noteText"></p>
+                    </div>
+                    
+                    <!-- Navigation for Review Mode (Smaller) -->
+                    <div id="reviewNavigation" class="mt-5 flex justify-between space-x-3 hidden"> <!-- mt-6 to mt-5, space-x-4 to space-x-3 -->
+                        <!-- Buttons will be injected here during review mode -->
+                    </div>
+
+                    <button id="actionBtn"
+                        class="mt-5 w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2.5 px-3 rounded-xl shadow-md transition duration-200 text-sm"> <!-- Smaller padding/font/weight -->
+                        CHECK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Message/Confirmation Modal (Smaller) -->
+    <div id="messageModal" class="fixed inset-0 bg-gray-900 bg-opacity-70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white p-5 rounded-xl shadow-2xl w-full max-w-sm"> <!-- p-6 to p-5 -->
+            <h3 id="modalTitle" class="text-lg font-bold mb-3 text-gray-800"></h3> <!-- text-xl to text-lg, mb-3 -->
+            <p id="modalMessage" class="text-gray-600 mb-5 text-sm"></p> <!-- mb-6 to mb-5, added text-sm -->
+            <div id="modalActions" class="flex justify-end space-x-2"> <!-- space-x-3 to space-x-2 -->
+                <!-- Buttons go here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- EMBEDDED QUESTION DATA ---
+        const initialData = [
+            {
+                q: "A company runs an application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application must be highly available and auto-scale based on demand. Which AWS service should be used to automatically adjust the number of EC2 instances?",
+                o: [
+                    { c: "Amazon CloudWatch", a: "no" },
+                    { c: "AWS Auto Scaling", a: "yes" },
+                    { c: "AWS CloudFormation", a: "no" },
+                    { c: "Amazon ECS", a: "no" }
+                ],
+                nt: "AWS Auto Scaling automatically adjusts the number of EC2 instances in an Auto Scaling group to meet demand, ensuring high availability and cost efficiency. CloudWatch is used for monitoring and triggers the scaling policies, but Auto Scaling performs the scaling action itself."
+            },
+            {
+                q: "A Solutions Architect needs to store frequently accessed, non-relational data with millisecond latency. The solution must support key-value and document data models and scale massively without operational overhead. Which service is the most appropriate choice?",
+                o: [
+                    { c: "Amazon Aurora", a: "no" },
+                    { c: "Amazon DynamoDB", a: "yes" },
+                    { c: "Amazon RDS", a: "no" },
+                    { c: "Amazon Redshift", a: "no" }
+                ],
+                nt: "Amazon DynamoDB is a fast, flexible NoSQL database service for all applications that need single-digit millisecond latency at any scale. It supports key-value and document data models and is fully managed, eliminating operational overhead."
+            },
+            {
+                q: "Which S3 storage class is suitable for data that is rarely accessed, but must be retrieved quickly when needed, and incurs a retrieval fee?",
+                o: [
+                    { c: "S3 Standard", a: "no" },
+                    { c: "S3 Glacier Deep Archive", a: "no" },
+                    { c: "S3 Standard-Infrequent Access (S3 Standard-IA)", a: "yes" },
+                    { c: "S3 One Zone-Infrequent Access", a: "no" }
+                ],
+                nt: "S3 Standard-Infrequent Access (S3 Standard-IA) is for data that is less frequently accessed, but requires rapid access when needed. It offers high durability (across multiple AZs) and availability, but charges a retrieval fee."
+            },
+            {
+                q: "A web application running on EC2 needs to securely access a DynamoDB table. What is the most secure way to grant this permission without embedding credentials in the application code?",
+                o: [
+                    { c: "Store IAM user credentials in AWS Secrets Manager.", a: "no" },
+                    { c: "Use an IAM access key and secret key.", a: "no" },
+                    { c: "Assign an IAM role to the EC2 instance.", a: "yes" },
+                    { c: "Create a separate IAM user for the application.", a: "no" }
+                ],
+                nt: "The most secure and recommended practice is to use an IAM Role for the EC2 instance. This provides temporary credentials that the application can use, eliminating the need to store static, long-lived access keys on the instance or in the code."
+            },
+            {
+                q: "An Architect is designing a disaster recovery solution. Which AWS service can be used to provide low-latency, private connectivity between an on-premises data center and the AWS Cloud?",
+                o: [
+                    { c: "AWS VPN", a: "no" },
+                    { c: "AWS Direct Connect", a: "yes" },
+                    { c: "Amazon Connect", a: "no" },
+                    { c: "Internet Gateway", a: "no" }
+                ],
+                nt: "AWS Direct Connect provides a dedicated, private network connection from your on-premises data center to AWS, offering consistently high bandwidth and lower network costs than using the public internet (VPN). This is ideal for hybrid environments and large-scale data transfer."
+            }
+        ];
+        let data = initialData;
+        
+        // --- GLOBAL STATE ---
+        const appState = {
+            mode: 'learn', // 'learn', 'practice', or 'review'
+            current: Number(localStorage.getItem("learnCurrent") || 0),
+            practiceAnswers: [], // Stores { qIndex: 0, selections: [0, 2] }
+            isReviewing: false,
+            // New state for timer
+            timerInterval: null,
+            timeRemaining: 9000, // 150 minutes * 60 seconds = 9000 seconds
+        };
+
+        // --- MODAL UTILITIES (Replacing alert/confirm) ---
+        const messageModal = document.getElementById("messageModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalMessage = document.getElementById("modalMessage");
+        const modalActions = document.getElementById("modalActions");
+
+        function closeModal() {
+            messageModal.classList.add("hidden");
+            messageModal.classList.remove("flex");
+        }
+
+        function showAlert(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalActions.innerHTML = `
+                <button onclick="closeModal()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1.5 px-3 rounded-lg transition duration-200 text-sm">
+                    OK
+                </button>
+            `;
+            messageModal.classList.remove("hidden");
+            messageModal.classList.add("flex");
+        }
+
+        function showConfirm(title, message, onConfirm) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            
+            modalActions.innerHTML = '';
+            
+            const noBtn = document.createElement('button');
+            noBtn.textContent = 'Hủy';
+            noBtn.onclick = closeModal;
+            noBtn.className = 'bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-1.5 px-3 rounded-lg transition duration-200 text-sm';
+            modalActions.appendChild(noBtn);
+
+            const yesBtn = document.createElement('button');
+            yesBtn.textContent = 'Đồng ý';
+            yesBtn.onclick = () => {
+                closeModal();
+                if (onConfirm) onConfirm();
+            };
+            yesBtn.className = 'bg-red-500 hover:bg-red-600 text-white font-medium py-1.5 px-3 rounded-lg transition duration-200 text-sm';
+            modalActions.appendChild(yesBtn);
+            
+            messageModal.classList.remove("hidden");
+            messageModal.classList.add("flex");
+        }
+
+
+        // --- ELEMENTS ---
+        const home = document.getElementById("home");
+        const learn = document.getElementById("learn");
+        const qnum = document.getElementById("qnum");
+        const qtext = document.getElementById("qtext");
+        const options = document.getElementById("options");
+        const actionBtn = document.getElementById("actionBtn");
+        const btnMenu = document.getElementById("btnMenu");
+        const timerDisplay = document.getElementById("timerDisplay");
+        const reviewNavigation = document.getElementById("reviewNavigation"); // New element
+        
+        const explanationDiv = document.getElementById("explanation");
+        const noteText = document.getElementById("noteText");
+        const resultView = document.getElementById("resultView");
+        const questionView = document.getElementById("questionView");
+        const scoreDisplay = document.getElementById("scoreDisplay");
+        const btnReview = document.getElementById("btnReview");
+
+
+        // --- TIMER LOGIC ---
+
+        function formatTime(totalSeconds) {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            const pad = (num) => String(num).padStart(2, '0');
+            return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        }
+
+        function startTimer() {
+            stopTimer(); // Clear any existing timer
+            timerDisplay.classList.remove("hidden");
+            
+            // Initial display
+            timerDisplay.textContent = formatTime(appState.timeRemaining);
+            // Initial color check
+            if (appState.timeRemaining <= 300) { 
+                timerDisplay.classList.add("text-red-600");
+            } else {
+                 timerDisplay.classList.remove("text-red-600");
+            }
+
+
+            appState.timerInterval = setInterval(() => {
+                appState.timeRemaining--;
+                timerDisplay.textContent = formatTime(appState.timeRemaining);
+
+                if (appState.timeRemaining === 300) { // 5 minutes remaining
+                    timerDisplay.classList.add("text-red-600");
+                    showAlert("Cảnh Báo Thời Gian", "Chỉ còn 5 phút cho bài luyện thi!");
+                } 
+
+                if (appState.timeRemaining <= 0) {
+                    stopTimer();
+                    endPracticeMode(true); // true means time ran out
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (appState.timerInterval) {
+                clearInterval(appState.timerInterval);
+                appState.timerInterval = null;
+            }
+            timerDisplay.classList.add("hidden");
+        }
+
+
+        // --- MODE SWITCHING ---
+        const btnLearn = document.getElementById("btnLearn");
+        const btnPractice = document.getElementById("btnPractice");
+
+        function setupQuizMode(mode) {
+            appState.mode = mode;
+            appState.current = 0;
+
+            if (mode === 'practice') {
+                appState.practiceAnswers = [];
+                localStorage.removeItem("learnCurrent"); 
+                appState.timeRemaining = 9000; // 150 minutes
+                startTimer();
+            } else {
+                appState.current = Number(localStorage.getItem("learnCurrent") || 0);
+                stopTimer(); // Ensure timer is stopped if switching to learning mode
+            }
+            appState.isReviewing = false;
+            
+            home.classList.remove("show-flex");
+            learn.classList.add("show-flex");
+            resultView.classList.add("hidden");
+            questionView.classList.remove("hidden");
+            renderQuestion();
+            window.scrollTo(0, 0);
+        }
+
+        btnLearn.onclick = () => setupQuizMode('learn');
+        btnPractice.onclick = () => setupQuizMode('practice');
+
+
+        // --- RENDERING ---
+        function renderQuestion(qIndex = appState.current) {
+            if (qIndex >= data.length) {
+                 appState.current = 0;
+                 return;
+            }
+            
+            const q = data[qIndex];
+            
+            qnum.textContent = `CÂU HỎI ${qIndex + 1} / ${data.length}`;
+            qtext.textContent = q.q;
+            options.innerHTML = "";
+            
+            // Hide explanation and clear text
+            explanationDiv.style.display = 'none';
+            noteText.textContent = '';
+            qtext.classList.remove("text-green-600", "text-red-600"); // Clear feedback coloring
+            
+            // Control visibility of actionBtn and reviewNavigation
+            actionBtn.style.display = appState.isReviewing ? 'none' : 'block';
+            reviewNavigation.classList.toggle('hidden', !appState.isReviewing);
+
+            // Determine button text for actionBtn
+            actionBtn.textContent = appState.mode === 'learn' ? "CHECK" : 
+                                     (appState.current === data.length - 1 ? "FINISH" : "NEXT");
+            
+            // Set action button color: always green for CHECK/NEXT/FINISH in learning/practice mode
+            actionBtn.classList.remove("bg-aws-orange", "hover:bg-yellow-600", "bg-gray-500", "bg-red-500", "bg-indigo-600", "hover:bg-indigo-700");
+            actionBtn.classList.add("bg-green-500", "hover:bg-green-600"); 
+
+            const currentAnswer = appState.practiceAnswers.find(a => a.qIndex === qIndex);
+            
+            q.o.forEach((op, i) => {
+                const id = `chk${i}`;
+                const label = document.createElement("label");
+                label.className = "option-label";
+                
+                const isChecked = currentAnswer ? currentAnswer.selections.includes(i) : false;
+                
+                label.innerHTML = `
+                    <input type='checkbox' name='option' id='${id}' value='${i}' ${isChecked && appState.isReviewing ? 'checked' : ''} />
+                    <span>${String.fromCharCode(65 + i)}. ${op.c}</span>
+                `;
+                options.appendChild(label);
+                
+                // If reviewing, lock and show feedback
+                if (appState.isReviewing) {
+                    label.querySelector('input').disabled = true;
+                    lockAndShowFeedback(label, i, q, isChecked);
+                } else if (appState.mode === 'practice' && currentAnswer) {
+                    // For practice mode, show user's previous selection if navigating back/forth
+                    if (isChecked) label.querySelector('input').checked = true;
+                }
+            });
+            
+            // Review Navigation setup
+            if (appState.isReviewing) {
+                if (q.nt) {
+                    noteText.textContent = q.nt;
+                    explanationDiv.style.display = 'block';
+                }
+                renderReviewNavigation();
+            }
+        }
+        
+        function renderReviewNavigation() {
+            reviewNavigation.innerHTML = '';
+
+            // BACK button
+            const backBtn = document.createElement('button');
+            backBtn.textContent = 'TRƯỚC';
+            backBtn.onclick = handleReviewBack;
+            backBtn.disabled = appState.current === 0;
+            backBtn.className = `py-2.5 px-4 rounded-xl text-sm font-semibold transition duration-200 ${ /* Smaller button */
+                appState.current === 0
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-blue-500 hover:bg-blue-600 text-white shadow-md'
+            }`;
+            reviewNavigation.appendChild(backBtn);
+
+            // NEXT button
+            const nextBtn = document.createElement('button');
+            const isLastQuestion = appState.current === data.length - 1;
+            nextBtn.textContent = isLastQuestion ? 'KẾT THÚC REVIEW' : 'TIẾP THEO';
+            nextBtn.onclick = handleReviewNext;
+            nextBtn.className = `py-2.5 px-4 rounded-xl text-sm font-semibold transition duration-200 shadow-md w-full sm:w-auto ${ /* Smaller button */
+                isLastQuestion 
+                ? 'bg-red-500 hover:bg-red-600 text-white' 
+                : 'bg-green-500 hover:bg-green-600 text-white'
+            }`;
+            reviewNavigation.appendChild(nextBtn);
+        }
+
+        function handleReviewBack() {
+             if (appState.current > 0) {
+                appState.current--;
+                renderQuestion(appState.current);
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function handleReviewNext() {
+            if (appState.current < data.length - 1) {
+                appState.current++;
+                renderQuestion(appState.current);
+                window.scrollTo(0, 0);
+            } else {
+                // End of review, return to home
+                 showConfirm("Kết thúc Review", "Bạn muốn quay lại Trang chủ chứ?", () => {
+                    appState.mode = 'learn'; // Reset state to learn mode
+                    appState.isReviewing = false;
+                    
+                    learn.classList.remove("show-flex");
+                    home.classList.add("show-flex");
+                    questionView.classList.remove("hidden");
+                    resultView.classList.add("hidden");
+                    // Note: actionBtn.onclick is automatically set to default actionBtn.onclick (which handles 'learn' and 'practice')
+                 });
+                 window.scrollTo(0, 0);
+            }
+        }
+        
+        function lockAndShowFeedback(label, i, q, isUserChecked) {
+            const op = q.o[i];
+            const isAnswerCorrect = op.a === "yes";
+
+            label.classList.remove("option-label", "cursor-pointer");
+            label.classList.add("option-label", "cursor-default");
+
+            // Check if user's selection was correct or incorrect
+            let feedbackIcon = '';
+            if (isAnswerCorrect) {
+                label.classList.add("correct-answer");
+                feedbackIcon = '✅';
+            } else if (isUserChecked && !isAnswerCorrect) {
+                label.classList.add("incorrect-selection");
+                feedbackIcon = '❌';
+            }
+            
+            // Add feedback icon and keep original text
+            label.querySelector('span').innerHTML = `${feedbackIcon} ${String.fromCharCode(65 + i)}. ${op.c}`;
+        }
+        
+
+        // --- CORE LOGIC ---
+        
+        function lockAndShowLearningMode() {
+            const q = data[appState.current];
+            let isCorrect = true;
+
+            q.o.forEach((op, i) => {
+                const el = document.getElementById(`chk${i}`);
+                const label = el.parentElement;
+                
+                el.disabled = true; 
+
+                const isUserChecked = el.checked;
+                const isAnswerCorrect = op.a === "yes";
+                
+                if (isAnswerCorrect && !isUserChecked) isCorrect = false;
+                if (!isAnswerCorrect && isUserChecked) isCorrect = false;
+
+                lockAndShowFeedback(label, i, q, isUserChecked);
+            });
+            
+            if (isCorrect) {
+                qtext.textContent = `✅ CORRECT! ${q.q}`;
+                qtext.classList.add("text-green-600");
+            } else {
+                qtext.textContent = `❌ INCORRECT. ${q.q}`;
+                qtext.classList.add("text-red-600");
+            }
+            
+            if (q.nt) {
+                noteText.textContent = q.nt;
+                explanationDiv.style.display = 'block';
+            }
+        }
+        
+        function savePracticeAnswer() {
+            const pickedIndices = [...document.querySelectorAll("#options input")]
+                                    .map((el, index) => el.checked ? index : -1)
+                                    .filter(index => index !== -1);
+
+            const existingIndex = appState.practiceAnswers.findIndex(a => a.qIndex === appState.current);
+            
+            const newAnswer = {
+                qIndex: appState.current,
+                selections: pickedIndices
+            };
+            
+            if (existingIndex > -1) {
+                appState.practiceAnswers[existingIndex] = newAnswer;
+            } else {
+                appState.practiceAnswers.push(newAnswer);
+            }
+        }
+
+        function endPracticeMode(isTimeout = false) {
+            stopTimer();
+            
+            // Calculate score
+            let correctCount = 0;
+            appState.practiceAnswers.forEach(userAnswer => {
+                const q = data[userAnswer.qIndex];
+                let isCorrect = true;
+                
+                // Get the number of correct options
+                const correctOptions = q.o.filter(o => o.a === 'yes').length;
+                
+                // 1. Check if the number of selections matches the number of correct answers
+                if (userAnswer.selections.length !== correctOptions) {
+                    isCorrect = false;
+                } else {
+                     // 2. Check if the selected indices match the correct indices
+                     q.o.forEach((op, i) => {
+                        const isAnswerCorrect = op.a === "yes";
+                        const isUserSelected = userAnswer.selections.includes(i);
+                        
+                        // If an option is correct but not selected, OR is incorrect but selected
+                        if ((isAnswerCorrect && !isUserSelected) || (!isAnswerCorrect && isUserSelected)) {
+                            isCorrect = false;
+                        }
+                    });
+                }
+                
+                
+                if (isCorrect) {
+                    correctCount++;
+                }
+            });
+            
+            const scorePercentage = ((correctCount / data.length) * 100).toFixed(0);
+            
+            scoreDisplay.innerHTML = `<span class="text-aws-blue">${correctCount} / ${data.length}</span><br>
+                                      <span class="text-2xl text-aws-orange font-normal">${scorePercentage}%</span>`; // Changed text-3xl to text-2xl
+            
+            if (isTimeout) {
+                 showAlert("Hết Giờ!", "Thời gian 150 phút đã hết. Bài kiểm tra của bạn đã được nộp tự động.");
+            } else {
+                 showAlert("Hoàn Thành", "Bạn đã hoàn thành bài luyện thi. Nhấn 'Xem Lại Đáp Án' để xem kết quả chi tiết.");
+            }
+            
+            // Show result view
+            questionView.classList.add("hidden");
+            resultView.classList.remove("hidden");
+            window.scrollTo(0, 0);
+        }
+        
+        // --- ACTION BUTTON LOGIC ---
+        actionBtn.onclick = () => {
+            const mode = actionBtn.textContent;
+            
+            // Check if user needs to select an option, except for "RESET"
+            if (mode !== "RESET") {
+                 const picked = [...document.querySelectorAll("#options input")].filter(x => x.checked);
+                 if (picked.length === 0) {
+                      showAlert("Yêu Cầu Hành Động", "Vui lòng chọn ít nhất một tùy chọn.");
+                      return;
+                 }
+            }
+
+
+            if (appState.mode === 'learn') {
+                if (mode === "CHECK") {
+                    lockAndShowLearningMode();
+                    actionBtn.textContent = appState.current === data.length - 1 ? "RESET" : "NEXT";
+                    // Giữ nguyên màu xanh lá cây
+                    actionBtn.classList.remove("bg-aws-orange", "hover:bg-yellow-600");
+                    actionBtn.classList.add("bg-green-500", "hover:bg-green-600"); 
+                } else if (mode === "NEXT") {
+                    appState.current++;
+                    localStorage.setItem("learnCurrent", appState.current);
+                    renderQuestion();
+                } else if (mode === "RESET") {
+                    showConfirm("Xác nhận Reset", `Thao tác này sẽ đặt lại tiến độ về Câu hỏi 1 (trong tổng số ${data.length}). Bạn có chắc không?`, () => {
+                        appState.current = 0;
+                        localStorage.setItem("learnCurrent", 0);
+                        renderQuestion();
+                    });
+                }
+            } else if (appState.mode === 'practice') {
+                 if (mode === "NEXT" || mode === "FINISH") {
+                    savePracticeAnswer();
+                    
+                    if (appState.current === data.length - 1) {
+                        endPracticeMode();
+                    } else {
+                        appState.current++;
+                        renderQuestion();
+                    }
+                 }
+            }
+            window.scrollTo(0, 0);
+        };
+        
+        // --- REVIEW BUTTON LOGIC ---
+        btnReview.onclick = () => {
+            appState.mode = 'review';
+            appState.isReviewing = true;
+            appState.current = 0;
+            
+            resultView.classList.add("hidden");
+            questionView.classList.remove("hidden");
+            
+            // In review mode, we use the dedicated reviewNavigation div, so no need to hijack actionBtn.
+            renderQuestion(appState.current);
+            window.scrollTo(0, 0);
+        };
+        
+        // --- MENU BUTTON LOGIC ---
+        btnMenu.onclick = () => {
+            showConfirm("Xác nhận Quay về Trang chủ", "Tiến độ câu hỏi hiện tại của bạn sẽ được lưu. Bạn có muốn quay lại Trang chủ không?", () => {
+                
+                stopTimer(); // Stop timer if it was running
+                
+                // If exiting practice without finishing, ensure answers are saved
+                if (appState.mode === 'practice' && appState.current < data.length - 1) {
+                    savePracticeAnswer();
+                }
+                
+                appState.mode = 'learn'; // Default back to learn mode for continuity
+                appState.isReviewing = false;
+                
+                learn.classList.remove("show-flex");
+                home.classList.add("show-flex");
+                
+                // Ensure the view is cleaned up
+                resultView.classList.add("hidden");
+                questionView.classList.remove("hidden");
+                
+                // Clear feedback coloring and hide explanation
+                qtext.classList.remove("text-green-600", "text-red-600");
+                explanationDiv.style.display = 'none';
+                noteText.textContent = '';
+                
+                // Re-attach the default actionBtn handler (redundant but safe practice)
+                actionBtn.onclick = actionBtn.onclick; 
+                
+                window.scrollTo(0, 0);
+            });
+        };
+
+        // Initial setup
+        window.onload = () => {
+             // Check if user was in a learning session and return them there, otherwise show home.
+             if (localStorage.getItem("learnCurrent") && data.length > 0) {
+                 setupQuizMode('learn');
+             } else {
+                 home.classList.add("show-flex");
+             }
+        };
+
+    </script>
+</body>
+
+</html>
