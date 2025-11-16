@@ -104,7 +104,6 @@
       Promise.all(jsonFiles.map(f => fetch(f).then(r => r.json())))
         .then(all => {
           data = all.flat();
-          startApp();
         });
 
       // Elements
