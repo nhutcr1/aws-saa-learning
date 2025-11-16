@@ -512,10 +512,10 @@ QUESTION (thứ tự câu hiện tại)/(tổng số câu hỏi)
 
 
 viết json cho câu hỏi trong file đính kèm theo dạng sau, 
-phải giữ toàn bộ nội dung câu hỏi và đáp án, id bắt đầu từ 1651, 
+phải giữ toàn bộ nội dung câu hỏi và đáp án, id bắt đầu từ 1701, 
 một mảng JSON duy nhất, json này loại bỏ dấu tab, xuống dòng... : 
 {
-  "id": 1651,
+  "id": 1701,
   "q": "Which set of Amazon S3 features helps to prevent and recover from accidental data loss?",
   "o": [
     {
@@ -537,5 +537,5 @@ một mảng JSON duy nhất, json này loại bỏ dấu tab, xuống dòng... 
   ],
   "nt": ""
 }
-bắt đầu từ câu "### A company wants to configure its Amazon CloudFront distribution to use SSL/TLS certificates. The company does not want to use the default domain name for the distribution. Instead, the company wants to use a different domain name for the distribution. Which solution will deploy the certificate without incurring any additional costs?" và 49 câu sau đó, viết thành 1 file json để tải về.
+bắt đầu từ câu "### A development team needs to host a website that will be accessed by other teams. The website contents consist of HTML, CSS, client-side JavaScript, and images. Which method is the MOST cost-effective for hosting the website?" và các câu còn lại sau đó, viết thành 1 file json để tải về.
 mục "nt", AI sẽ giải thích bằng tiếng Anh lý do tại sao các đáp án đó lại đúng, càng chi tiết càng tốt, chỉ giải thích các đáp án đúng và không giải thích các đáp án sai, không cần ghi lại đáp án trong mục "nt", chỉ cần giải thích lý do thôi.

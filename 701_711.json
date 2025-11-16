@@ -1,0 +1,271 @@
+[
+{
+  "id": 1701,
+  "q": "A development team needs to host a website that will be accessed by other teams. The website contents consist of HTML, CSS, client-side JavaScript, and images. Which method is the MOST cost-effective for hosting the website?",
+  "o": [
+    {
+      "c": "Containerize the website and host it in AWS Fargate.",
+      "a": "no"
+    },
+    {
+      "c": "Create an Amazon S3 bucket and host the website there.",
+      "a": "yes"
+    },
+    {
+      "c": "Deploy a web server on an Amazon EC2 instance to host the website.",
+      "a": "no"
+    },
+    {
+      "c": "Configure an Application Load Balancer with an AWS Lambda target that uses the Express.js framework.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon S3 is designed specifically for hosting static websites (HTML, CSS, JS, images) and is a highly cost-effective solution. You only pay for storage and requests, with no charges for compute resources (unlike Fargate, EC2, or Lambda) which would be unnecessary for serving static content. It eliminates the operational overhead of managing servers, containers, or application runtimes."
+},
+{
+  "id": 1702,
+  "q": "A company has a production workload that runs on 1,000 Amazon EC2 Linux instances. The workload is powered by third-party software. The company needs to patch the third-party software on all EC2 instances as quickly as possible to remediate a critical security vulnerability. What should a solutions architect do to meet these requirements?",
+  "o": [
+    {
+      "c": "Create an AWS Lambda function to apply the patch to all EC2 instances.",
+      "a": "no"
+    },
+    {
+      "c": "Configure AWS Systems Manager Patch Manager to apply the patch to all EC2 instances.",
+      "a": "no"
+    },
+    {
+      "c": "Schedule an AWS Systems Manager maintenance window to apply the patch to all EC2 instances.",
+      "a": "no"
+    },
+    {
+      "c": "Use AWS Systems Manager Run Command to run a custom command that applies the patch to all EC2 instances.",
+      "a": "yes"
+    }
+  ],
+  "nt": "AWS Systems Manager Run Command allows you to remotely and securely run commands or scripts on a large number of EC2 instances (like 1,000) simultaneously and at scale. It's the fastest way to execute a one-time task, such as applying a critical security patch, without the need for scheduling a maintenance window (which introduces delay) or the complexity of writing and managing a custom Lambda function for command execution."
+},
+{
+  "id": 1703,
+  "q": "A company uses Amazon RDS for PostgreSQL databases for its data tier. The company must implement password rotation for the databases. Which solution meets this requirement with the LEAST operational overhead?",
+  "o": [
+    {
+      "c": "Store the password in AWS Secrets Manager. Enable automatic rotation on the secret.",
+      "a": "yes"
+    },
+    {
+      "c": "Store the password in AWS Systems Manager Parameter Store. Enable automatic rotation on the parameter.",
+      "a": "no"
+    },
+    {
+      "c": "Store the password in AWS Systems Manager Parameter Store. Write an AWS Lambda function that rotates the password.",
+      "a": "no"
+    },
+    {
+      "c": "Store the password in AWS Key Management Service (AWS KMS). Enable automatic rotation on the customer master key (CMK).",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS Secrets Manager is specifically designed for managing and rotating secrets like database credentials. It natively supports automatic rotation for RDS databases using an integrated Lambda function, eliminating the need for custom code. When enabled, it automatically updates the password in the database and the secret value according to a schedule you define, providing the least operational overhead compared to manual processes or building a custom rotation solution."
+},
+{
+  "id": 1704,
+  "q": "A company runs its application on Oracle Database Enterprise Edition. The company needs to migrate the application and the database to AWS. The company can use the Bring Your Own License (BYOL) model while migrating to AWS. The application uses third-party database features that require privileged access. A solutions architect must design a solution for the database migration. Which solution will meet these requirements MOST cost-effectively?",
+  "o": [
+    {
+      "c": "Migrate the database to Amazon RDS for Oracle by using native tools. Replace the third-party features with AWS Lambda.",
+      "a": "no"
+    },
+    {
+      "c": "Migrate the database to Amazon RDS Custom for Oracle by using native tools. Customize the new database settings to support the third-party features.",
+      "a": "yes"
+    },
+    {
+      "c": "Migrate the database to Amazon DynamoDB by using AWS Database Migration Service (AWS DMS). Customize the new database settings to support the third-party features.",
+      "a": "no"
+    },
+    {
+      "c": "Migrate the database to Amazon RDS for PostgreSQL by using AWS Database Migration Service (AWS DMS). Rewrite the application code to remove the dependency on third-party features.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon RDS Custom for Oracle is designed for applications that require access to the underlying OS and database environment for customization, which is necessary for supporting third-party features requiring privileged access. It allows BYOL, making it cost-effective. Standard RDS for Oracle does not grant the necessary OS access, and migrating to a different database engine (like DynamoDB or PostgreSQL) would require significant, costly application rewrites to replace the third-party features."
+},
+{
+  "id": 1705,
+  "q": "A company has deployed a multi-account strategy on AWS by using AWS Control Tower. The company has provided individual AWS accounts to each of its developers. The company wants to implement controls to limit AWS resource costs that the developers incur. Which solution will meet these requirements with the LEAST operational overhead?",
+  "o": [
+    {
+      "c": "Instruct each developer to tag all their resources with a tag that has a key of CostCenter and a value of the developer's name. Use the required-tags AWS Config managed rule to check for the tag. Create an AWS Lambda function to terminate resources that do not have the tag. Configure AWS Cost Explorer to send a daily report to each developer to monitor their spending.",
+      "a": "no"
+    },
+    {
+      "c": "Use AWS Budgets to establish budgets for each developer account. Set up budget alerts for actual and forecast values to notify developers when they exceed or expect to exceed their assigned budget. Use AWS Budgets actions to apply a DenyAll policy to the developer's IAM role to prevent additional resources from being launched when the assigned budget is reached.",
+      "a": "yes"
+    },
+    {
+      "c": "Use AWS Cost Explorer to monitor and report on costs for each developer account. Configure Cost Explorer to send a daily report to each developer to monitor their spending. Use AWS Cost Anomaly Detection to detect anomalous spending and provide alerts.",
+      "a": "no"
+    },
+    {
+      "c": "Use AWS Service Catalog to allow developers to launch resources within a limited cost range. Create AWS Lambda functions in each AWS account to stop running resources at the end of each work day. Configure the Lambda functions to resume the resources at the start of each work day.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS Budgets provides a centralized, automated, and proactive way to manage costs across multiple accounts. Budgets Actions can automatically trigger an IAM policy (like a 'DenyAll' policy) to be applied to users/roles when their budget threshold is exceeded, effectively preventing further resource creation and controlling costs. This is a low-overhead, preventative control that scales well within a multi-account structure managed by AWS Control Tower, unlike reactive monitoring with Cost Explorer or complex, custom automation with Lambda and tagging."
+},
+{
+  "id": 1706,
+  "q": "A solutions architect is designing an application that will allow business users to upload objects to Amazon S3. The solution needs to maximize object durability. Objects also must be readily available at any time and for any length of time. Users will access objects frequently within the first 30 days after the objects are uploaded, but users are much less likely to access objects that are older than 30 days. Which solution meets these requirements MOST cost-effectively?",
+  "o": [
+    {
+      "c": "Store all the objects in S3 Standard with an S3 Lifecycle rule to transition the objects to S3 Glacier after 30 days.",
+      "a": "no"
+    },
+    {
+      "c": "Store all the objects in S3 Standard with an S3 Lifecycle rule to transition the objects to S3 Standard-Infrequent Access (S3 Standard-IA) after 30 days.",
+      "a": "yes"
+    },
+    {
+      "c": "Store all the objects in S3 Standard with an S3 Lifecycle rule to transition the objects to S3 One Zone-Infrequent Access (S3 One Zone-IA) after 30 days.",
+      "a": "no"
+    },
+    {
+      "c": "Store all the objects in S3 Intelligent-Tiering with an S3 Lifecycle rule to transition the objects to S3 Standard-Infrequent Access (S3 Standard-IA) after 30 days.",
+      "a": "no"
+    }
+  ],
+  "nt": "S3 Standard offers high durability (99.999999999%) and low-latency access, perfect for frequently accessed new objects. After 30 days, when access patterns become infrequent, transitioning to S3 Standard-IA provides the same high durability but at a lower storage cost, while still maintaining millisecond access times (unlike S3 Glacier, which has retrieval delays). This combination optimizes cost for the access pattern without compromising on durability or immediate availability. S3 One Zone-IA has lower durability as it stores data in only one AZ, and Intelligent-Tiering incurs a monitoring and automation cost which is unnecessary when the access pattern shift (30 days) is predictable."
+},
+{
+  "id": 1707,
+  "q": "A solutions architect is designing a three-tier web application. The architecture consists of an internet-facing Application Load Balancer (ALB) and a web tier that is hosted on Amazon EC2 instances in private subnets. The application tier with the business logic runs on EC2 instances in private subnets. The database tier consists of Microsoft SQL Server that runs on EC2 instances in private subnets. Security is a high priority for the company. Which combination of security group configurations should the solutions architect use? (Choose three.)",
+  "o": [
+    {
+      "c": "Configure the security group for the web tier to allow inbound HTTPS traffic from the security group for the ALB.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the security group for the web tier to allow outbound HTTPS traffic to 0.0.0.0/0.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the security group for the database tier to allow inbound Microsoft SQL Server traffic from the security group for the application tier.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the security group for the database tier to allow outbound HTTPS traffic and Microsoft SQL Server trac to the security group for the web tier.",
+      "a": "no"
+    },
+    {
+      "c": "Configure the security group for the application tier to allow inbound HTTPS traffic from the security group for the web tier.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure the security group for the application tier to allow outbound HTTPS traffic and Microsoft SQL Server traffic to the security group for the web tier.",
+      "a": "no"
+    }
+  ],
+  "nt": "1.  **Web Tier SG allows inbound HTTPS from ALB SG:** This is a fundamental security best practice. It ensures only the ALB can communicate with the web servers on the required port (443/HTTPS), blocking direct internet access to the instances. 2.  **Database Tier SG allows inbound SQL Server traffic from Application Tier SG:** This follows the principle of least privilege by restricting database access solely to the application tier instances. Authorizing by security group (rather than IP range) is more secure and dynamic. 3.  **Application Tier SG allows inbound HTTPS from Web Tier SG:** This ensures that only the web tier can initiate communication with the application tier on the expected port (443/HTTPS), creating a secure chain of communication between tiers."
+},
+{
+  "id": 1708,
+  "q": "A company has released a new version of its production application. The company's workload uses Amazon EC2, AWS Lambda, AWS Fargate, and Amazon SageMaker. The company wants to cost optimize the workload now that usage is at a steady state. The company wants to cover the most services with the fewest savings plans. Which combination of savings plans will meet these requirements? (Choose two.)",
+  "o": [
+    {
+      "c": "Purchase an EC2 Instance Savings Plan for Amazon EC2 and SageMaker.",
+      "a": "no"
+    },
+    {
+      "c": "Purchase a Compute Savings Plan for Amazon EC2, Lambda, and SageMaker.",
+      "a": "no"
+    },
+    {
+      "c": "Purchase a SageMaker Savings Plan.",
+      "a": "yes"
+    },
+    {
+      "c": "Purchase a Compute Savings Plan for Lambda, Fargate, and Amazon EC2.",
+      "a": "yes"
+    },
+    {
+      "c": "Purchase an EC2 Instance Savings Plan for Amazon EC2 and Fargate.",
+      "a": "no"
+    }
+  ],
+  "nt": "1.  **Compute Savings Plan for Lambda, Fargate, and Amazon EC2:** This plan offers the most flexibility, applying to usage across EC2, Fargate, and Lambda, regardless of instance family, size, AZ, region, or OS. It covers three of the four services listed with a single plan. 2.  **SageMaker Savings Plan:** SageMaker is not covered by Compute or EC2 Instance Savings Plans. To get savings on SageMaker, a dedicated SageMaker Savings Plan is required. Therefore, the combination of a Compute Savings Plan (for EC2, Fargate, Lambda) and a SageMaker Savings Plan covers all four services with just two plans, which is the goal of covering the most services with the fewest plans."
+},
+{
+  "id": 1709,
+  "q": "A company uses a Microsoft SQL Server database. The company's applications are connected to the database. The company wants to migrate to an Amazon Aurora PostgreSQL database with minimal changes to the application code. Which combination of steps will meet these requirements? (Choose two.)",
+  "o": [
+    {
+      "c": "Use the AWS Schema Conversion Tool (AWS SCT) to rewrite the SQL queries in the applications.",
+      "a": "no"
+    },
+    {
+      "c": "Enable Babelfish on Aurora PostgreSQL to run the SQL queries from the applications.",
+      "a": "yes"
+    },
+    {
+      "c": "Migrate the database schema and data by using the AWS Schema Conversion Tool (AWS SCT) and AWS Database Migration Service (AWS DMS).",
+      "a": "yes"
+    },
+    {
+      "c": "Use Amazon RDS Proxy to connect the applications to Aurora PostgreSQL.",
+      "a": "no"
+    },
+    {
+      "c": "Use AWS Database Migration Service (AWS DMS) to rewrite the SQL queries in the applications.",
+      "a": "no"
+    }
+  ],
+  "nt": "1.  **Enable Babelfish on Aurora PostgreSQL:** Babelfish for Aurora PostgreSQL allows the database to understand commands from applications written for Microsoft SQL Server. This means the application's T-SQL code and communication protocols can often run unchanged against Aurora, dramatically reducing the need for application code changes. 2.  **Migrate the database schema and data using AWS SCT and AWS DMS:** AWS SCT automatically converts the source database schema and a majority of the custom code to a format compatible with the target database (PostgreSQL). AWS DMS then handles the continuous data replication from the source to the target with minimal downtime. This combination is the standard, effective method for heterogeneous database migration."
+},
+{
+  "id": 1710,
+  "q": "A company plans to rehost an application to Amazon EC2 instances that use Amazon Elastic Block Store (Amazon EBS) as the attached storage. A solutions architect must design a solution to ensure that all newly created Amazon EBS volumes are encrypted by default. The solution must also prevent the creation of unencrypted EBS volumes. Which solution will meet these requirements?",
+  "o": [
+    {
+      "c": "Configure the EC2 account attributes to always encrypt new EBS volumes.",
+      "a": "no"
+    },
+    {
+      "c": "Use AWS Config. Configure the encrypted-volumes identifier. Apply the default AWS Key Management Service (AWS KMS) key.",
+      "a": "yes"
+    },
+    {
+      "c": "Configure AWS Systems Manager to create encrypted copies of the EBS volumes. Reconfigure the EC2 instances to use the encrypted volumes.",
+      "a": "no"
+    },
+    {
+      "c": "Create a customer managed key in AWS Key Management Service (AWS KMS). Configure AWS Migration Hub to use the key when the company migrates workloads.",
+      "a": "no"
+    }
+  ],
+  "nt": "AWS Config allows you to define rules that check if resources comply with your desired configuration. The 'encrypted-volumes' managed rule can be used to check that all EBS volumes are encrypted. To *prevent* the creation of non-compliant resources, you can set up a remediation action. When AWS Config detects an unencrypted EBS volume (non-compliant), it can automatically trigger an action (e.g., via AWS Lambda) to encrypt the volume or even delete it, thus enforcing the encryption policy. While account-level default encryption is a good baseline, it doesn't actively *prevent* the creation of unencrypted volumes if explicitly requested; AWS Config provides the enforcement mechanism."
+},
+{
+  "id": 1711,
+  "q": "An ecommerce company wants to collect user clickstream data from the company's website for real-time analysis. The website experiences fluctuating traffic patterns throughout the day. The company needs a scalable solution that can adapt to varying levels of traffic. Which solution will meet these requirements?",
+  "o": [
+    {
+      "c": "Use a data stream in Amazon Kinesis Data Streams in on-demand mode to capture the clickstream data. Use AWS Lambda to process the data in real time.",
+      "a": "yes"
+    },
+    {
+      "c": "Use Amazon Kinesis Data Firehose to capture the clickstream data. Use AWS Glue to process the data in real time.",
+      "a": "no"
+    },
+    {
+      "c": "Use Amazon Kinesis Video Streams to capture the clickstream data. Use AWS Glue to process the data in real time.",
+      "a": "no"
+    },
+    {
+      "c": "Use Amazon Managed Service for Apache Flink (previously known as Amazon Kinesis Data Analytics) to capture the clickstream data. Use AWS Lambda to process the data in real time.",
+      "a": "no"
+    }
+  ],
+  "nt": "Amazon Kinesis Data Streams is designed for real-time ingestion and processing of streaming data at scale. Its on-demand capacity mode automatically scales the shards (the base throughput units) up and down in response to changing data flow rates, making it perfectly suited for workloads with fluctuating traffic patterns like a website's clickstream. Integrating it with AWS Lambda for processing provides a serverless, highly scalable architecture where Lambda can be triggered by the incoming data stream to perform real-time analysis."
+}
+]
