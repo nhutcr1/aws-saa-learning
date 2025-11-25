@@ -172,10 +172,14 @@
             <!-- Buttons will be injected here during review mode -->
           </div>
 
-          <button id="actionBtn"
-            class="mt-5 w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2.5 px-3 shadow-md transition duration-200 text-sm">
-            CHECK
-          </button>
+          <div id="mainActions" class="mt-5 flex space-x-3">
+            <button id="actionBtn"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2.5 px-3 shadow-md transition duration-200 text-sm">
+              CHECK
+            </button>
+            <button id="resetBtn"
+              class="w-auto bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2.5 px-3 shadow-md transition duration-200 text-sm">RESET</button>
+          </div>
         </div>
       </div>
     </div>
@@ -198,6 +202,7 @@
     const LS_KEY_PRACTICE_ANSWERS = "aws_practice_answers";
     const LS_KEY_PRACTICE_TIME = "aws_practice_time";
 
+    var masterData = [];
     var data = []; // Initialize with master data for learning mode access
     const NUMBER_OF_PRACTICE_QUESTIONS = 130;
 
@@ -220,7 +225,7 @@
      */
     function getPracticeQuestions() {
       // Simple Fisher-Yates shuffle implementation
-      const shuffled = [...data];
+      const shuffled = [...masterData];
       for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -287,6 +292,7 @@
     const options = document.getElementById("options");
     const actionBtn = document.getElementById("actionBtn");
     const btnMenu = document.getElementById("btnMenu");
+    const resetBtn = document.getElementById("resetBtn");
     const timerDisplay = document.getElementById("timerDisplay");
     const reviewNavigation = document.getElementById("reviewNavigation");
 
@@ -295,6 +301,7 @@
     const resultView = document.getElementById("resultView");
     const questionView = document.getElementById("questionView");
     const scoreDisplay = document.getElementById("scoreDisplay");
+    const mainActions = document.getElementById("mainActions");
     const btnReview = document.getElementById("btnReview");
 
 
@@ -358,8 +365,10 @@
 
     function setupLearnMode() {
       appState.mode = 'learn';
+      data = masterData; 
       // Load current index from LocalStorage
-      appState.current = Number(localStorage.getItem(LS_KEY_LEARN_INDEX) || 0);
+      let indexLearning = localStorage.getItem(LS_KEY_LEARN_INDEX);
+      appState.current = !indexLearning || indexLearning < 0 ? 0 : Number(localStorage.getItem(LS_KEY_LEARN_INDEX));
       stopTimer();
       appState.isReviewing = false;
       switchScreen(false);
@@ -451,7 +460,7 @@
       qtext.classList.remove("text-green-600", "text-red-600"); // Clear feedback coloring
 
       // Control visibility of actionBtn and reviewNavigation
-      actionBtn.style.display = appState.isReviewing ? 'none' : 'block';
+      mainActions.style.display = appState.isReviewing ? 'none' : 'flex';
       reviewNavigation.classList.toggle('hidden', !appState.isReviewing);
 
       // Determine button text for actionBtn
@@ -817,6 +826,7 @@
     btnPractice.onclick = handlePracticeClick;
     actionBtn.onclick = handleActionClick;
     btnReview.onclick = handleReviewClick;
+    resetBtn.onclick = handleResetClick;
     btnMenu.onclick = handleMenuClick;
 
 
@@ -840,9 +850,15 @@
         "701_711.json"
       ];
 
-      Promise.all(jsonFiles.map(f => fetch(f).then(r => r.json())))
-        .then(all => {
-          data = all.flat();
+      const promises = [];
+      jsonFiles.forEach(f => {
+        promises.push(fetch(f).then(r => r.json()));
+      });
+
+      Promise.all(promises)
+        .then(allDataArrays => {
+          masterData = allDataArrays.flat();
+          data = masterData;
           const learnIndex = localStorage.getItem(LS_KEY_LEARN_INDEX);
           const practiceAnswers = localStorage.getItem(LS_KEY_PRACTICE_ANSWERS);
 
@@ -859,6 +875,20 @@
         });
     };
 
+    function handleResetClick() {
+      if (appState.mode === 'learn') {
+        showConfirm("Confirm Reset", `This action will reset progress to Question 1 (out of ${data.length} total). Are you sure?`, () => {
+          appState.current = 0;
+          saveLearnProgress();
+          renderQuestion();
+        });
+      } else if (appState.mode === 'practice') {
+        showConfirm("Confirm Reset", "This will end the current practice exam and start a new one. Your progress will be lost. Are you sure?", () => {
+          clearPracticeLocalStorage();
+          setupPracticeMode(false);
+        });
+      }
+    }
   </script>
 </body>
 
